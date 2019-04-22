@@ -5,10 +5,11 @@ package countries
 // CountryCode - код страны (238 стран)
 type CountryCode int16
 
-const Unknown = "UN"
+const unknownMsg = "Unknown"
 
 // Digit ISO 3166-1
 const (
+	Unknown                                CountryCode = 0
 	Albania                                CountryCode = 8
 	Algeria                                CountryCode = 12
 	AmericanSamoa                          CountryCode = 16
@@ -1221,12 +1222,13 @@ func (c *CountryCode) String() string {
 	case 4:
 		return "Afghanistan"
 	}
-	return Unknown
+	return unknownMsg
 }
 
 // StringRus - returns a russian name of country
 func (c *CountryCode) StringRus() string {
 	switch *c {
+
 	case 8:
 		return "Албания"
 	case 12:
@@ -1704,7 +1706,7 @@ func (c *CountryCode) StringRus() string {
 	case 4:
 		return "Афганистан"
 	}
-	return "ERROR: Unknown CountryCode"
+	return unknownMsg
 }
 
 // ISO2 - returns a ISO2 name (2 chars) of country
@@ -2187,7 +2189,7 @@ func (c *CountryCode) ISO2() string {
 	case 4:
 		return "AF"
 	}
-	return Unknown
+	return unknownMsg
 }
 
 // ISO2 - returns a ISO3 name (3 chars) of country
@@ -2670,5 +2672,5 @@ func (c *CountryCode) ISO3() string {
 	case 4:
 		return "AFG"
 	}
-	return Unknown
+	return unknownMsg
 }
