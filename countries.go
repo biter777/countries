@@ -1,8 +1,8 @@
 // Package countries - ISO 3166 (3166-1) countries codes and countries names (on eng and rus), very light and quick, NO maps[], NO slices[], NO any external packages, NO init() func, Databases compatible
 package countries
 
-// CountryCode - country code (238 countries)
-// CountryCode - код страны (238 стран)
+// CountryCode - country code (239 countries)
+// CountryCode - код страны (239 стран)
 type CountryCode int16
 
 const unknownMsg = "Unknown"
@@ -63,6 +63,7 @@ const (
 	CookIslands                            CountryCode = 184
 	CostaRica                              CountryCode = 188
 	CoteDIvoire                            CountryCode = 384
+	IvoryCoast                             CountryCode = 384
 	Croatia                                CountryCode = 191
 	Cuba                                   CountryCode = 192
 	Cyprus                                 CountryCode = 196
@@ -135,6 +136,7 @@ const (
 	Lithuania                              CountryCode = 440
 	Luxembourg                             CountryCode = 442
 	Macau                                  CountryCode = 446
+	Macao                                  CountryCode = 446
 	Macedonia                              CountryCode = 807
 	Madagascar                             CountryCode = 450
 	Malawi                                 CountryCode = 454
@@ -206,6 +208,7 @@ const (
 	SolomonIslands                         CountryCode = 90
 	Somalia                                CountryCode = 706
 	SouthAfrica                            CountryCode = 710
+	UAR                                    CountryCode = 710
 	SouthGeorgiaandTheSouthSandwichIslands CountryCode = 239
 	Spain                                  CountryCode = 724
 	SriLanka                               CountryCode = 144
@@ -251,6 +254,7 @@ const (
 	Zambia                                 CountryCode = 894
 	Zimbabwe                               CountryCode = 716
 	Afghanistan                            CountryCode = 4
+	Serbia                                 CountryCode = 688
 )
 
 // Alpha-2 digit ISO 3166-1
@@ -493,6 +497,7 @@ const (
 	ZM CountryCode = 894
 	ZW CountryCode = 716
 	AF CountryCode = 4
+	RS CountryCode = 688
 )
 
 // Alpha-3 digit ISO 3166-1
@@ -735,11 +740,12 @@ const (
 	ZMB CountryCode = 894
 	ZWE CountryCode = 716
 	AFG CountryCode = 4
+	SRB CountryCode = 688
 )
 
 // Total - returns number of countries in the package
 func Total() int {
-	return 238
+	return 239
 }
 
 // String - returns a english name of country
@@ -848,7 +854,7 @@ func (c *CountryCode) String() string {
 	case 188:
 		return "Costa Rica"
 	case 384:
-		return "Cote d'Ivoire"
+		return "Cote d'Ivoire" // Ivory Coast
 	case 191:
 		return "Croatia"
 	case 192:
@@ -1221,6 +1227,9 @@ func (c *CountryCode) String() string {
 		return "Zimbabwe"
 	case 4:
 		return "Afghanistan"
+	case 688:
+		return "Serbia"
+
 	}
 	return unknownMsg
 }
@@ -1452,7 +1461,7 @@ func (c *CountryCode) StringRus() string {
 	case 414:
 		return "Кувейт"
 	case 417:
-		return "Кыргызстан"
+		return "Кыргызстан" // Киргизия
 	case 418:
 		return "Лаос"
 	case 428:
@@ -1705,6 +1714,8 @@ func (c *CountryCode) StringRus() string {
 		return "Зимбабве"
 	case 4:
 		return "Афганистан"
+	case 688:
+		return "Сербия"
 	}
 	return unknownMsg
 }
@@ -2188,6 +2199,8 @@ func (c *CountryCode) ISO2() string {
 		return "ZW"
 	case 4:
 		return "AF"
+	case 688:
+		return "RS"
 	}
 	return unknownMsg
 }
@@ -2671,6 +2684,8 @@ func (c *CountryCode) ISO3() string {
 		return "ZWE"
 	case 4:
 		return "AFG"
+	case 688:
+		return "SRB"
 	}
 	return unknownMsg
 }
