@@ -1,4 +1,4 @@
-// Package countries - ISO 3166 (3166-1) countries codes and countries names (on eng and rus), very light and quick, NO maps[], NO slices[], NO any external packages, NO init() func, Databases compatible
+// Package countries - ISO 3166 (3166-1, ISO3166, Alpha-2, Alpha-3) countries codes and countries names (on eng and rus), very light and quick, NO maps[], NO slices[], NO any external packages, NO init() func, Databases compatible.
 package countries
 
 // CountryCode - country code (239 countries)
