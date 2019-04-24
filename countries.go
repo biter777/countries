@@ -1,12 +1,12 @@
 // Package countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 (ISO4217:2015) countries codes, countries names (on eng and rus) and currency designators. Very light and super fast, NO maps[], NO slices[], NO any external packages, NO init() func, Databases compatible, Emoji countries flags and currencies support.
 package countries
 
-// CountryCode - country code (250 countries)
+// CountryCode - country code (250 countries). Three codes present, for example Russia == RU == RUS == 643.
 type CountryCode uint16
 
 const unknownMsg = "Unknown"
 
-// Digit ISO 3166-1. Three codes present, for example Russia == RU == RUS.
+// Digit ISO 3166-1. Three codes present, for example Russia == RU == RUS == 643.
 const (
 	Unknown                                CountryCode = 0
 	Albania                                CountryCode = 8
