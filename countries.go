@@ -1,13 +1,12 @@
-// Package countries - ISO 3166 (3166-1, ISO3166, Alpha-2, Alpha-3) countries codes and countries names (on eng and rus), very light and quick, NO maps[], NO slices[], NO any external packages, NO init() func, Databases compatible.
+// Package countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 (ISO4217:2015) countries codes, countries names (on eng and rus) and currency designators. Very light and super fast, NO maps[], NO slices[], NO any external packages, NO init() func, Databases compatible, Emoji countries flags and currencies support.
 package countries
 
-// CountryCode - country code (239 countries)
-// CountryCode - код страны (239 стран)
-type CountryCode int16
+// CountryCode - country code (250 countries)
+type CountryCode uint16
 
 const unknownMsg = "Unknown"
 
-// Digit ISO 3166-1
+// Digit ISO 3166-1. Three codes present, for example Russia == RU == RUS.
 const (
 	Unknown                                CountryCode = 0
 	Albania                                CountryCode = 8
@@ -48,6 +47,7 @@ const (
 	Cameroon                               CountryCode = 120
 	Canada                                 CountryCode = 124
 	CapeVerde                              CountryCode = 132
+	CaboVerde                              CountryCode = 132
 	CaymanIslands                          CountryCode = 136
 	CentralAfricanRepublic                 CountryCode = 140
 	Chad                                   CountryCode = 148
@@ -113,7 +113,7 @@ const (
 	Iran                                   CountryCode = 364
 	Iraq                                   CountryCode = 368
 	Ireland                                CountryCode = 372
-	IsleofMan                              CountryCode = 833
+	IsleOfMan                              CountryCode = 833
 	Israel                                 CountryCode = 376
 	Italy                                  CountryCode = 380
 	Jamaica                                CountryCode = 388
@@ -217,6 +217,7 @@ const (
 	SvalbardandJanMayenIslands             CountryCode = 744
 	Swaziland                              CountryCode = 748
 	Sweden                                 CountryCode = 752
+	Scotland                               CountryCode = 826
 	Switzerland                            CountryCode = 756
 	Syria                                  CountryCode = 760
 	Taiwan                                 CountryCode = 158
@@ -240,6 +241,7 @@ const (
 	UnitedStatesOfAmerica                  CountryCode = 840
 	UnitedStatesMinorOutlyingIslands       CountryCode = 581
 	Uruguay                                CountryCode = 858
+	Wales                                  CountryCode = 826
 	Uzbekistan                             CountryCode = 860
 	Vanuatu                                CountryCode = 548
 	HolySee                                CountryCode = 336
@@ -255,9 +257,19 @@ const (
 	Zimbabwe                               CountryCode = 716
 	Afghanistan                            CountryCode = 4
 	Serbia                                 CountryCode = 688
+	AlandIslands                           CountryCode = 248
+	BonaireSintEustatiusAndSaba            CountryCode = 535
+	Guernsey                               CountryCode = 831
+	Jersey                                 CountryCode = 832
+	Curacao                                CountryCode = 531
+	SaintBarthelemy                        CountryCode = 652
+	SaintMartinFrench                      CountryCode = 663
+	SintMaartenDutch                       CountryCode = 534
+	Montenegro                             CountryCode = 499
+	SouthSudan                             CountryCode = 728
 )
 
-// Alpha-2 digit ISO 3166-1
+// Alpha-2 digit ISO 3166-1. Three codes present, for example Russia == RU == RUS.
 const (
 	AL CountryCode = 8
 	DZ CountryCode = 12
@@ -326,6 +338,7 @@ const (
 	ER CountryCode = 232
 	EE CountryCode = 233
 	ET CountryCode = 231
+	FO CountryCode = 234
 	FK CountryCode = 238
 	FJ CountryCode = 242
 	FI CountryCode = 246
@@ -460,6 +473,7 @@ const (
 	SJ CountryCode = 744
 	SZ CountryCode = 748
 	SE CountryCode = 752
+	XS CountryCode = 826
 	CH CountryCode = 756
 	SY CountryCode = 760
 	TW CountryCode = 158
@@ -498,9 +512,20 @@ const (
 	ZW CountryCode = 716
 	AF CountryCode = 4
 	RS CountryCode = 688
+	AX CountryCode = 248
+	BQ CountryCode = 535
+	GG CountryCode = 831
+	JE CountryCode = 832
+	CW CountryCode = 531
+	IM CountryCode = 833
+	BL CountryCode = 652
+	MF CountryCode = 663
+	SX CountryCode = 534
+	ME CountryCode = 499
+	SS CountryCode = 728
 )
 
-// Alpha-3 digit ISO 3166-1
+// Alpha-3 digit ISO 3166-1. Three codes present, for example Russia == RU == RUS.
 const (
 	ALB CountryCode = 8
 	DZA CountryCode = 12
@@ -569,6 +594,7 @@ const (
 	ERI CountryCode = 232
 	EST CountryCode = 233
 	ETH CountryCode = 231
+	FRO CountryCode = 234
 	FLK CountryCode = 238
 	FJI CountryCode = 242
 	FIN CountryCode = 246
@@ -703,6 +729,7 @@ const (
 	SJM CountryCode = 744
 	SWZ CountryCode = 748
 	SWE CountryCode = 752
+	XSC CountryCode = 826
 	CHE CountryCode = 756
 	SYR CountryCode = 760
 	TWN CountryCode = 158
@@ -726,6 +753,7 @@ const (
 	USA CountryCode = 840
 	UMI CountryCode = 581
 	URY CountryCode = 858
+	XWA CountryCode = 826
 	UZB CountryCode = 860
 	VUT CountryCode = 548
 	VAT CountryCode = 336
@@ -741,16 +769,46 @@ const (
 	ZWE CountryCode = 716
 	AFG CountryCode = 4
 	SRB CountryCode = 688
+	BES CountryCode = 535
+	ALA CountryCode = 248
+	JEY CountryCode = 832
+	GGY CountryCode = 831
+	CUW CountryCode = 531
+	IMN CountryCode = 833
+	BLM CountryCode = 652
+	MAF CountryCode = 663
+	SXM CountryCode = 534
+	MNE CountryCode = 499
+	SSD CountryCode = 728
 )
 
-// Total - returns number of countries in the package
-func Total() int {
-	return 239
+// TotalCountries - returns number of countries in the package
+func TotalCountries() int {
+	return 250
+}
+
+// Emoji - return a country Alpha-2 (ISO2) as Emoji flag (example "RU" as "🇷🇺")
+func (c CountryCode) Emoji() string {
+	iso2 := c.Alpha3()
+	buf := [...]byte{240, 159, 135, 0, 240, 159, 135, 0}
+	buf[3] = iso2[0] + (166 - 'A')
+	buf[7] = iso2[1] + (166 - 'A')
+	return string(buf[:])
+}
+
+// Emoji3 - return a country Alpha-3 (ISO3) as Emoji (example "RUS" as "🇷🇺🇸")
+func (c CountryCode) Emoji3() string {
+	iso3 := c.Alpha3()
+	buf := [...]byte{240, 159, 135, 0, 240, 159, 135, 0, 240, 159, 135, 0}
+	buf[3] = iso3[0] + (166 - 'A')
+	buf[7] = iso3[1] + (166 - 'A')
+	buf[11] = iso3[2] + (166 - 'A')
+	return string(buf[:])
 }
 
 // String - returns a english name of country
-func (c *CountryCode) String() string {
-	switch *c {
+func (c CountryCode) String() string {
+	switch c {
 	case 8:
 		return "Albania"
 	case 12:
@@ -885,6 +943,8 @@ func (c *CountryCode) String() string {
 		return "Estonia"
 	case 231:
 		return "Ethiopia"
+	case 234:
+		return "Faroe Islands"
 	case 238:
 		return "Falkland Islands (Malvinas)"
 	case 242:
@@ -1229,15 +1289,35 @@ func (c *CountryCode) String() string {
 		return "Afghanistan"
 	case 688:
 		return "Serbia"
-
+	case 248:
+		return "Aland Islands"
+	case 535:
+		return "Bonaire, Sint Eustatius And Saba"
+	case 831:
+		return "Guernsey"
+	case 832:
+		return "Jersey"
+	case 531:
+		return "Curacao"
+	case 833:
+		return "Isle Of Man"
+	case 652:
+		return "Saint Barthelemy"
+	case 663:
+		return "Saint Martin (French)"
+	case 534:
+		return "Sint Maarten (Dutch)"
+	case 499:
+		return "Montenegro"
+	case 728:
+		return "South Sudan"
 	}
 	return unknownMsg
 }
 
 // StringRus - returns a russian name of country
-func (c *CountryCode) StringRus() string {
-	switch *c {
-
+func (c CountryCode) StringRus() string {
+	switch c {
 	case 8:
 		return "Албания"
 	case 12:
@@ -1372,6 +1452,8 @@ func (c *CountryCode) StringRus() string {
 		return "Эстония"
 	case 231:
 		return "Эфиопия"
+	case 234:
+		return "Фарерские острова"
 	case 238:
 		return "Фолклендские (Мальвинские) острова"
 	case 242:
@@ -1716,13 +1798,35 @@ func (c *CountryCode) StringRus() string {
 		return "Афганистан"
 	case 688:
 		return "Сербия"
+	case 248:
+		return "Аландские острова"
+	case 535:
+		return "Бонэйр, Синт-Эстатиус и Саба"
+	case 831:
+		return "Гернси"
+	case 832:
+		return "Джерси"
+	case 531:
+		return "Кюрасао"
+	case 833:
+		return "Остров Мэн"
+	case 652:
+		return "Сен-Бартелеми"
+	case 663:
+		return "Сен-Мартен"
+	case 534:
+		return "Синт-Мартен"
+	case 499:
+		return "Черногория"
+	case 728:
+		return "Южный Судан"
 	}
 	return unknownMsg
 }
 
-// ISO2 - returns a ISO2 name (2 chars) of country
-func (c *CountryCode) ISO2() string {
-	switch *c {
+// Alpha - returns a default Alpha (Alpha-2/ISO2, 2 chars) code of country
+func (c CountryCode) Alpha() string {
+	switch c {
 	case 8:
 		return "AL"
 	case 12:
@@ -2201,13 +2305,35 @@ func (c *CountryCode) ISO2() string {
 		return "AF"
 	case 688:
 		return "RS"
+	case 248:
+		return "AX"
+	case 535:
+		return "BQ"
+	case 831:
+		return "GG"
+	case 832:
+		return "JE"
+	case 531:
+		return "CW"
+	case 833:
+		return "IM"
+	case 652:
+		return "BL"
+	case 663:
+		return "MF"
+	case 534:
+		return "SX"
+	case 499:
+		return "ME"
+	case 728:
+		return "SS"
 	}
 	return unknownMsg
 }
 
-// ISO2 - returns a ISO3 name (3 chars) of country
-func (c *CountryCode) ISO3() string {
-	switch *c {
+// Alpha3 - returns a Alpha-3 (ISO3, 3 chars) code of country
+func (c CountryCode) Alpha3() string {
+	switch c {
 	case 8:
 		return "ALB"
 	case 12:
@@ -2686,6 +2812,519 @@ func (c *CountryCode) ISO3() string {
 		return "AFG"
 	case 688:
 		return "SRB"
+	case 248:
+		return "ALA"
+	case 535:
+		return "BES"
+	case 831:
+		return "GGY"
+	case 832:
+		return "JEY"
+	case 531:
+		return "CUW"
+	case 833:
+		return "IMN"
+	case 652:
+		return "BLM"
+	case 663:
+		return "MAF"
+	case 534:
+		return "SXM"
+	case 499:
+		return "MNE"
+	case 728:
+		return "SSD"
 	}
 	return unknownMsg
+}
+
+// Currency - returns a currency of the country
+func (c CountryCode) Currency() CurrencyCode {
+	switch c {
+	case AUS:
+		return CurrencyAUD
+	case AUT, AND, MAF:
+		return CurrencyEUR
+	case AZE:
+		return CurrencyAZN
+	case ALB:
+		return CurrencyALL
+	case DZA:
+		return CurrencyDZD
+	case ASM, BES:
+		return CurrencyUSD
+	case AIA:
+		return CurrencyXCD
+	case AGO:
+		return CurrencyAOA
+	case ATG:
+		return CurrencyXCD
+	case ANT, CUW:
+		return CurrencyANG
+	case ARE:
+		return CurrencyAED
+	case ARG:
+		return CurrencyARS
+	case ARM:
+		return CurrencyAMD
+	case ABW:
+		return CurrencyAWG
+	case AFG:
+		return CurrencyAFN
+	case BHS:
+		return CurrencyBSD
+	case BGD:
+		return CurrencyBDT
+	case BRB:
+		return CurrencyBBD
+	case BHR:
+		return CurrencyBHD
+	case BLR:
+		return CurrencyBYR
+	case BLZ:
+		return CurrencyBZD
+	case BEL:
+		return CurrencyEUR
+	case BEN:
+		return CurrencyXOF
+	case BMU:
+		return CurrencyBMD
+	case BGR:
+		return CurrencyBGN
+	case BOL:
+		return CurrencyBOB
+	case BIH:
+		return CurrencyBAM
+	case BWA:
+		return CurrencyBWP
+	case BRA:
+		return CurrencyBRL
+	case IOT:
+		return CurrencyUSD
+	case BRN:
+		return CurrencyBND
+	case BFA:
+		return CurrencyXOF
+	case BDI:
+		return CurrencyBIF
+	case BTN:
+		return CurrencyBTN
+	case VUT:
+		return CurrencyVUV
+	case VAT:
+		return CurrencyEUR
+	case GBR, GGY, JEY, IMN:
+		return CurrencyGBP
+	case HUN:
+		return CurrencyHUF
+	case VEN:
+		return CurrencyVEF
+	case VGB:
+		return CurrencyUSD
+	case VIR:
+		return CurrencyUSD
+	case TLS:
+		return CurrencyUSD
+	case VNM:
+		return CurrencyVND
+	case GAB:
+		return CurrencyXAF
+	case HTI:
+		return CurrencyHTG
+	case GUY:
+		return CurrencyGYD
+	case GMB:
+		return CurrencyGMD
+	case GHA:
+		return CurrencyGHS
+	case GLP:
+		return CurrencyEUR
+	case GTM:
+		return CurrencyGTQ
+	case GIN:
+		return CurrencyGNF
+	case GNB:
+		return CurrencyXOF
+	case DEU:
+		return CurrencyEUR
+	case GIB:
+		return CurrencyGIP
+	case HND:
+		return CurrencyHNL
+	case HKG:
+		return CurrencyHKD
+	case GRD:
+		return CurrencyXCD
+	case GRL:
+		return CurrencyDKK
+	case GRC:
+		return CurrencyEUR
+	case GEO:
+		return CurrencyGEL
+	case GUM:
+		return CurrencyUSD
+	case DNK:
+		return CurrencyDKK
+	case COD:
+		return CurrencyCDF
+	case DJI:
+		return CurrencyDJF
+	case DMA:
+		return CurrencyXCD
+	case DOM:
+		return CurrencyDOP
+	case EGY:
+		return CurrencyEGP
+	case ZMB:
+		return CurrencyZMW
+	case ESH:
+		return CurrencyMAD
+	case ZWE:
+		return CurrencyZWL
+	case ISR:
+		return CurrencyILS
+	case IND:
+		return CurrencyINR
+	case IDN:
+		return CurrencyIDR
+	case JOR:
+		return CurrencyJOD
+	case IRQ:
+		return CurrencyIQD
+	case IRN:
+		return CurrencyIRR
+	case IRL:
+		return CurrencyEUR
+	case ISL:
+		return CurrencyISK
+	case ESP:
+		return CurrencyEUR
+	case ITA:
+		return CurrencyEUR
+	case YEM:
+		return CurrencyYER
+	case KAZ:
+		return CurrencyKZT
+	case CYM:
+		return CurrencyKYD
+	case KHM:
+		return CurrencyKHR
+	case CMR:
+		return CurrencyXAF
+	case CAN:
+		return CurrencyCAD
+	case QAT:
+		return CurrencyQAR
+	case KEN:
+		return CurrencyKES
+	case CYP:
+		return CurrencyEUR
+	case KIR:
+		return CurrencyAUD
+	case CHN:
+		return CurrencyCNY
+	case CCK:
+		return CurrencyAUD
+	case COL:
+		return CurrencyCOP
+	case COM:
+		return CurrencyKMF
+	case COG:
+		return CurrencyXAF
+	case PRK:
+		return CurrencyKPW
+	case KOR:
+		return CurrencyKRW
+	case CRI:
+		return CurrencyCRC
+	case CIV:
+		return CurrencyXOF
+	case CUB:
+		return CurrencyCUC
+	case KWT:
+		return CurrencyKWD
+	case KGZ:
+		return CurrencyKGS
+	case LAO:
+		return CurrencyLAK
+	case LVA:
+		return CurrencyEUR
+	case LSO:
+		return CurrencyLSL
+	case LBR:
+		return CurrencyLRD
+	case LBN:
+		return CurrencyLBP
+	case LBY:
+		return CurrencyLYD
+	case LTU:
+		return CurrencyEUR
+	case LIE:
+		return CurrencyCHF
+	case LUX:
+		return CurrencyEUR
+	case MUS:
+		return CurrencyMUR
+	case MRT:
+		return CurrencyMRU
+	case MDG:
+		return CurrencyMGA
+	case MYT:
+		return CurrencyEUR
+	case MAC:
+		return CurrencyMOP
+	case MKD:
+		return CurrencyMKD
+	case MWI:
+		return CurrencyMWK
+	case MYS:
+		return CurrencyMYR
+	case MLI:
+		return CurrencyXOF
+	case MDV:
+		return CurrencyMVR
+	case MLT:
+		return CurrencyEUR
+	case MNP:
+		return CurrencyUSD
+	case MAR:
+		return CurrencyMAD
+	case MTQ:
+		return CurrencyEUR
+	case MHL:
+		return CurrencyUSD
+	case MEX:
+		return CurrencyMXN
+	case FSM:
+		return CurrencyUSD
+	case MOZ:
+		return CurrencyMZN
+	case MDA:
+		return CurrencyMDL
+	case MCO:
+		return CurrencyEUR
+	case MNG:
+		return CurrencyMNT
+	case MSR:
+		return CurrencyXCD
+	case MMR:
+		return CurrencyMMK
+	case NAM:
+		return CurrencyNAD
+	case NRU:
+		return CurrencyAUD
+	case NPL:
+		return CurrencyNPR
+	case NER:
+		return CurrencyXOF
+	case NGA:
+		return CurrencyNGN
+	case NLD:
+		return CurrencyEUR
+	case NIC:
+		return CurrencyNIO
+	case NIU:
+		return CurrencyNZD
+	case NZL:
+		return CurrencyNZD
+	case NCL:
+		return CurrencyXPF
+	case NOR:
+		return CurrencyNOK
+	case ChannelIslands:
+		return CurrencyEUR
+	case OMN:
+		return CurrencyOMR
+	case BVT:
+		return CurrencyNOK
+	case NFK:
+		return CurrencyAUD
+	case PCN:
+		return CurrencyNZD
+	case CXR:
+		return CurrencyAUD
+	case SHN:
+		return CurrencySHP
+	case WLF:
+		return CurrencyXPF
+	case HMD:
+		return CurrencyAUD
+	case CPV:
+		return CurrencyCVE
+	case COK:
+		return CurrencyNZD
+	case WSM:
+		return CurrencyWST
+	case SJM:
+		return CurrencyNOK
+	case TCA:
+		return CurrencyUSD
+	case UMI:
+		return CurrencyUSD
+	case PAK:
+		return CurrencyPKR
+	case PLW:
+		return CurrencyUSD
+	case PSE:
+		return CurrencyILS
+	case PAN:
+		return CurrencyPAB
+	case PNG:
+		return CurrencyPGK
+	case PRY:
+		return CurrencyPYG
+	case PER:
+		return CurrencyPEN
+	case POL:
+		return CurrencyPLN
+	case PRT:
+		return CurrencyEUR
+	case PRI:
+		return CurrencyUSD
+	case REU:
+		return CurrencyEUR
+	case RUS:
+		return CurrencyRUB
+	case RWA:
+		return CurrencyRWF
+	case ROU:
+		return CurrencyRON
+	case SLV:
+		return CurrencySVC
+	case SMR:
+		return CurrencyEUR
+	case STP:
+		return CurrencySTN
+	case SAU:
+		return CurrencySAR
+	case SWZ:
+		return CurrencySZL
+	case SYC:
+		return CurrencySCR
+	case SEN:
+		return CurrencyXOF
+	case SPM:
+		return CurrencyEUR
+	case VCT:
+		return CurrencyXCD
+	case KNA:
+		return CurrencyXCD
+	case LCA:
+		return CurrencyXCD
+	case SGP:
+		return CurrencySGD
+	case SYR:
+		return CurrencySYP
+	case SVK:
+		return CurrencyEUR
+	case SVN:
+		return CurrencyEUR
+	case USA:
+		return CurrencyUSN
+	case SLB:
+		return CurrencySBD
+	case SOM:
+		return CurrencySOS
+	case SDN:
+		return CurrencySDG
+	case SUR:
+		return CurrencySRD
+	case SLE:
+		return CurrencySLL
+	case TJK:
+		return CurrencyTJS
+	case TWN:
+		return CurrencyTWD
+	case THA:
+		return CurrencyTHB
+	case TZA:
+		return CurrencyTZS
+	case TGO:
+		return CurrencyXOF
+	case TKL:
+		return CurrencyNZD
+	case TON:
+		return CurrencyTOP
+	case TTO:
+		return CurrencyTTD
+	case TUV:
+		return CurrencyAUD
+	case TUN:
+		return CurrencyTND
+	case TKM:
+		return CurrencyTMT
+	case TUR:
+		return CurrencyTRY
+	case UGA:
+		return CurrencyUGX
+	case UZB:
+		return CurrencyUZS
+	case UKR:
+		return CurrencyUAH
+	case URY:
+		return CurrencyUYI
+	case FRO:
+		return CurrencyDKK
+	case FJI:
+		return CurrencyFJD
+	case PHL:
+		return CurrencyPHP
+	case FIN:
+		return CurrencyEUR
+	case FLK:
+		return CurrencyFKP
+	case FRA:
+		return CurrencyEUR
+	case GUF:
+		return CurrencyEUR
+	case PYF:
+		return CurrencyXPF
+	case ATF:
+		return CurrencyEUR
+	case HRV:
+		return CurrencyHRK
+	case CAF:
+		return CurrencyXAF
+	case TCD:
+		return CurrencyXAF
+	case CZE:
+		return CurrencyCZK
+	case CHL:
+		return CurrencyCLF
+	case CHE:
+		return CurrencyCHE
+	case SWE:
+		return CurrencySEK
+	case LKA:
+		return CurrencyLKR
+	case ECU:
+		return CurrencyUSD
+	case GNQ:
+		return CurrencyXAF
+	case ERI:
+		return CurrencyERN
+	case EST:
+		return CurrencyEUR
+	case ETH:
+		return CurrencyETB
+	case ZAF:
+		return CurrencyZAR
+	case YUG:
+		return CurrencyYUD
+	case SGS:
+		return CurrencyGBP
+	case JAM:
+		return CurrencyJMD
+	case JPN:
+		return CurrencyJPY
+	case BLM, MNE, ALA:
+		return CurrencyEUR
+	case SXM:
+		return CurrencyANG
+	case SRB:
+		return CurrencyRSD
+	case SSD:
+		return CurrencySSP
+	}
+	return CurrencyUnknown
 }
