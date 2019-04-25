@@ -1988,3 +1988,5 @@ func (currency *Currency) Scan(src interface{}) error {
 	}
 	return nil
 }
+
+//

@@ -5188,3 +5188,5 @@ func (country *Country) Scan(src interface{}) error {
 	}
 	return nil
 }
+
+//
