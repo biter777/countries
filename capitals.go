@@ -1300,6 +1300,11 @@ func (c CapitalCode) Country() CountryCode {
 	return Unknown
 }
 
+// IsCorrect - returns true, if code is correct
+func (c CapitalCode) IsCorrect() bool {
+	return c.String() != UnknownMsg
+}
+
 // Type implements Typer interface
 func (c CapitalCode) Info() *Capital {
 	return &Capital{

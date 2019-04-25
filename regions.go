@@ -89,6 +89,11 @@ func (c RegionCode) StringRus() string {
 	return UnknownMsg
 }
 
+// IsCorrect - returns true, if code is correct
+func (c RegionCode) IsCorrect() bool {
+	return c.String() != UnknownMsg
+}
+
 // TotalRegions - returns number of Regions codes in the package
 func TotalRegions() int {
 	return 7

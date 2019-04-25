@@ -1084,6 +1084,11 @@ func (c CurrencyCode) Alpha() string {
 	return UnknownMsg
 }
 
+// IsCorrect - returns true, if code is correct
+func (c CurrencyCode) IsCorrect() bool {
+	return c.Alpha() != UnknownMsg
+}
+
 // Countries - returns a country codes of currency using
 func (c CurrencyCode) Countries() []CountryCode {
 	switch c {
@@ -1996,3 +2001,4 @@ func AllCurrenciesInfo() []*Currency {
 	}
 	return currencies
 }
+

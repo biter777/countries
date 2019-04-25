@@ -1,4 +1,4 @@
-// Countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 countries codes and names (on eng and rus), currency designators, calling phone codes, countries capitals and regions (UN M.49 code), Very light and super FAST, NO maps[], NO slices[], NO init() func, NO external files and data, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1 and ISO-4217.
+// Countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 countries codes and names (on eng and rus), currency designators, calling phone codes, countries capitals and regions (UN M.49 code), Very light and super FAST, NO maps[], NO slices[], NO init() func, NO external files and data, NO interface{}, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1 and ISO-4217.
 
 /*********************** E X A M P L E ***********************\
 func main() {
@@ -41,6 +41,7 @@ import (
 	"database/sql/driver"
 	"encoding/json"
 	"fmt"
+	"strings"
 )
 
 // CountryCode - country code (250 countries). Three codes present, for example Russia == RU == RUS == 643.
@@ -78,7 +79,7 @@ const (
 	Angola                                 CountryCode = 24
 	Anguilla                               CountryCode = 660
 	Antarctica                             CountryCode = 10
-	AntiguaandBarbuda                      CountryCode = 28
+	AntiguaAndBarbuda                      CountryCode = 28
 	Argentina                              CountryCode = 32
 	Armenia                                CountryCode = 51
 	Aruba                                  CountryCode = 533
@@ -96,7 +97,7 @@ const (
 	Bermuda                                CountryCode = 60
 	Bhutan                                 CountryCode = 64
 	Bolivia                                CountryCode = 68
-	BosniaandHerzegovina                   CountryCode = 70
+	BosniaAndHerzegovina                   CountryCode = 70
 	Botswana                               CountryCode = 72
 	Bouvet                                 CountryCode = 74
 	Brazil                                 CountryCode = 76
@@ -239,7 +240,7 @@ const (
 	Palau                                  CountryCode = 585
 	Palestine                              CountryCode = 275
 	Panama                                 CountryCode = 591
-	PapuanewGuinea                         CountryCode = 598
+	PapuaNewGuinea                         CountryCode = 598
 	Paraguay                               CountryCode = 600
 	Peru                                   CountryCode = 604
 	Philippines                            CountryCode = 608
@@ -253,13 +254,13 @@ const (
 	Russia                                 CountryCode = 643
 	Rwanda                                 CountryCode = 646
 	SaintHelena                            CountryCode = 654
-	SaintKittsandNevis                     CountryCode = 659
+	SaintKittsAndNevis                     CountryCode = 659
 	SaintLucia                             CountryCode = 662
-	SaintPierreandMiquelon                 CountryCode = 666
-	SaintVincentandTheGrenadines           CountryCode = 670
+	SaintPierreAndMiquelon                 CountryCode = 666
+	SaintVincentAndTheGrenadines           CountryCode = 670
 	Samoa                                  CountryCode = 882
 	SanMarino                              CountryCode = 674
-	SaoTomeandPrincipe                     CountryCode = 678
+	SaoTomeAndPrincipe                     CountryCode = 678
 	SaudiArabia                            CountryCode = 682
 	Senegal                                CountryCode = 686
 	Seychelles                             CountryCode = 690
@@ -271,12 +272,12 @@ const (
 	Somalia                                CountryCode = 706
 	SouthAfrica                            CountryCode = 710
 	UAR                                    CountryCode = 710
-	SouthGeorgiaandTheSouthSandwichIslands CountryCode = 239
+	SouthGeorgiaAndTheSouthSandwichIslands CountryCode = 239
 	Spain                                  CountryCode = 724
 	SriLanka                               CountryCode = 144
 	Sudan                                  CountryCode = 736
 	Suriname                               CountryCode = 740
-	SvalbardandJanMayenIslands             CountryCode = 744
+	SvalbardAndJanMayenIslands             CountryCode = 744
 	Swaziland                              CountryCode = 748
 	Sweden                                 CountryCode = 752
 	Scotland                               CountryCode = 826
@@ -294,7 +295,7 @@ const (
 	Tunisia                                CountryCode = 788
 	Turkey                                 CountryCode = 792
 	Turkmenistan                           CountryCode = 795
-	TurksandCaicosIslands                  CountryCode = 796
+	TurksAndCaicosIslands                  CountryCode = 796
 	Tuvalu                                 CountryCode = 798
 	Uganda                                 CountryCode = 800
 	Ukraine                                CountryCode = 804
@@ -5234,4 +5235,544 @@ func AllInfo() []*Country {
 		countries = append(countries, v.Info())
 	}
 	return countries
+}
+
+func textPrepare(text string) string {
+	text = strings.Replace(text, " ", "", -1)
+	text = strings.Replace(text, "-", "", -1)
+	text = strings.Replace(text, "‐", "", -1)
+	text = strings.Replace(text, "‑", "", -1)
+	text = strings.Replace(text, "‒", "", -1)
+	text = strings.Replace(text, "―", "", -1)
+	text = strings.Replace(text, "—", "", -1)
+	text = strings.Replace(text, "–", "", -1)
+	text = strings.Replace(text, "_", "", -1)
+	text = strings.Replace(text, ".", "", -1)
+	text = strings.Replace(text, ",", "", -1)
+	text = strings.Replace(text, "'", "", -1)
+	text = strings.Replace(text, "(", "", -1)
+	text = strings.Replace(text, ")", "", -1)
+	text = strings.Replace(text, "[", "", -1)
+	text = strings.Replace(text, "]", "", -1)
+	return strings.ToUpper(text)
+}
+
+// ByName - return CountryCode by country Alpha-2 / Alpha-2 / name, case-insensitive, example: rus := ByName("Ru") OR rus := ByName("russia")
+func ByName(name string) CountryCode {
+	switch textPrepare(name) {
+	case "AU", "AUS", "AUSTRALIA":
+		return AUS
+	case "AT", "AUT", "AUSTRIA":
+		return AUT
+	case "AZ", "AZE", "AZERBAIJAN":
+		return AZE
+	case "AL", "ALB", "ALBANIA":
+		return ALB
+	case "DZ", "DZA", "ALGERIA":
+		return DZA
+	case "AS", "ASM", "AMERICANSAMOA":
+		return ASM
+	case "AI", "AIA", "ANGUILLA":
+		return AIA
+	case "XEN", "ENGLAND":
+		return GBR
+	case "AO", "AGO", "ANGOLA":
+		return AGO
+	case "AD", "AND", "ANDORRA":
+		return AND
+	case "AQ", "ATA", "ANTARCTICA":
+		return ATA
+	case "AG", "ATG", "ANTIGUAANDBARBUDA", "ANTIGUA":
+		return ATG
+	case "AN", "ANT", "NETHERLANDSANTILLES":
+		return ANT
+	case "AE", "ARE", "UNITEDARABEMIRATES", "ARABEMIRATES":
+		return ARE
+	case "AR", "ARG", "ARGENTINA":
+		return ARG
+	case "AM", "ARM", "ARMENIA":
+		return ARM
+	case "AW", "ABW", "ARUBA":
+		return ABW
+	case "AF", "AFG", "AFGHANISTAN":
+		return AFG
+	case "BS", "BHS", "BAHAMAS":
+		return BHS
+	case "BD", "BGD", "BANGLADESH":
+		return BGD
+	case "BB", "BRB", "BARBADOS":
+		return BRB
+	case "BH", "BHR", "BAHRAIN":
+		return BHR
+	case "BY", "BLR", "BELARUS":
+		return BLR
+	case "BZ", "BLZ", "BELIZE":
+		return BLZ
+	case "BE", "BEL", "BELGIUM":
+		return BEL
+	case "BJ", "BEN", "BENIN":
+		return BEN
+	case "BM", "BMU", "BERMUDA":
+		return BMU
+	case "BG", "BGR", "BULGARIA":
+		return BGR
+	case "BO", "BOL", "BOLIVIA":
+		return BOL
+	case "BA", "BIH", "BOSNIAANDHERZEGOVINA", "BOSNIA":
+		return BIH
+	case "BW", "BWA", "BOTSWANA":
+		return BWA
+	case "BR", "BRA", "BRAZIL":
+		return BRA
+	case "IO", "IOT", "BRITISHINDIANOCEANTERRITORY":
+		return IOT
+	case "BN", "BRN", "BRUNEI":
+		return BRN
+	case "BF", "BFA", "BURKINAFASO":
+		return BFA
+	case "BI", "BDI", "BURUNDI":
+		return BDI
+	case "BT", "BTN", "BHUTAN":
+		return BTN
+	case "VU", "VUT", "VANUATU":
+		return VUT
+	case "VA", "VAT", "HOLYSEEVATICAN", "HOLYSEE", "VATICAN":
+		return VAT
+	case "GB", "GBR", "UNITEDKINGDOM", "UK", "GREATBRITAN", "GREATBRITAIN":
+		return GBR
+	case "HU", "HUN", "HUNGARY":
+		return HUN
+	case "VE", "VEN", "VENEZUELA":
+		return VEN
+	case "VG", "VGB", "VIRGINISLANDSBRITISH", "VIRGINISLANDSGB":
+		return VGB
+	case "VI", "VIR", "VIRGINISLANDSUS":
+		return VIR
+	case "TL", "TLS", "TIMORLESTE":
+		return TLS
+	case "VN", "VNM", "VIETNAM":
+		return VNM
+	case "GA", "GAB", "GABON":
+		return GAB
+	case "HT", "HTI", "HAITI":
+		return HTI
+	case "GY", "GUY", "GUYANA":
+		return GUY
+	case "GM", "GMB", "GAMBIA":
+		return GMB
+	case "GH", "GHA", "GHANA":
+		return GHA
+	case "GP", "GLP", "GUADELOUPE":
+		return GLP
+	case "GT", "GTM", "GUATEMALA":
+		return GTM
+	case "GN", "GIN", "GUINEA":
+		return GIN
+	case "GW", "GNB", "GUINEABISSAU":
+		return GNB
+	case "DE", "DEU", "GERMANY", "DEUTSCHLAND":
+		return DEU
+	case "GI", "GIB", "GIBRALTAR", "HIBRALTAR":
+		return GIB
+	case "HN", "HND", "HONDURAS":
+		return HND
+	case "HK", "HKG", "HONGKONG":
+		return HKG
+	case "GD", "GRD", "GRENADA":
+		return GRD
+	case "GL", "GRL", "GREENLAND":
+		return GRL
+	case "GR", "GRC", "GREECE":
+		return GRC
+	case "GE", "GEO", "GEORGIA":
+		return GEO
+	case "GU", "GUM", "GUAM":
+		return GUM
+	case "DK", "DNK", "DENMARK":
+		return DNK
+	case "CD", "COD", "CONGODEMOCRACTICREPUBLIC", "CONGODEMOCRACTIC":
+		return COD
+	case "DJ", "DJI", "DJIBOUTI":
+		return DJI
+	case "DM", "DMA", "DOMINICA":
+		return DMA
+	case "DO", "DOM", "DOMINICANREPUBLIC", "DOMINICANA":
+		return DOM
+	case "EG", "EGY", "EGYPT":
+		return EGY
+	case "ZM", "ZMB", "ZAMBIA":
+		return ZMB
+	case "EH", "ESH", "WESTERNSAHARA":
+		return ESH
+	case "ZW", "ZWE", "ZIMBABWE":
+		return ZWE
+	case "IL", "ISR", "ISRAEL":
+		return ISR
+	case "IN", "IND", "INDIA":
+		return IND
+	case "ID", "IDN", "INDONESIA":
+		return IDN
+	case "JO", "JOR", "JORDAN":
+		return JOR
+	case "IQ", "IRQ", "IRAQ":
+		return IRQ
+	case "IR", "IRN", "IRAN":
+		return IRN
+	case "IE", "IRL", "IRELAND":
+		return IRL
+	case "IS", "ISL", "ICELAND":
+		return ISL
+	case "ES", "ESP", "SPAIN", "SPANIEN", "ISPANIA":
+		return ESP
+	case "IT", "ITA", "ITALY":
+		return ITA
+	case "YE", "YEM", "YEMEN":
+		return YEM
+	case "KZ", "KAZ", "KAZAKHSTAN", "KAZAHSTAN":
+		return KAZ
+	case "KY", "CYM", "CAYMANISLANDS":
+		return CYM
+	case "KH", "KHM", "CAMBODIA":
+		return KHM
+	case "CM", "CMR", "CAMEROON":
+		return CMR
+	case "CA", "CAN", "CANADA":
+		return CAN
+	case "QA", "QAT", "QATAR":
+		return QAT
+	case "KE", "KEN", "KENYA":
+		return KEN
+	case "CY", "CYP", "CYPRUS":
+		return CYP
+	case "KI", "KIR", "KIRIBATI":
+		return KIR
+	case "CN", "CHN", "CHINA":
+		return CHN
+	case "CC", "CCK", "KEELING", "COCOSKEELINGISLANDS", "COCOSISLANDS":
+		return CCK
+	case "CO", "COL", "COLOMBIA":
+		return COL
+	case "KM", "COM", "COMOROS":
+		return COM
+	case "CG", "COG", "CONGO":
+		return COG
+	case "KP", "PRK", "KOREANORTH", "NORTHKOREA":
+		return PRK
+	case "KR", "KOR", "KOREA":
+		return KOR
+	case "CR", "CRI", "COSTARICA":
+		return CRI
+	case "CI", "CIV", "COTEDIVOIRE":
+		return CIV
+	case "CU", "CUB", "CUBA":
+		return CUB
+	case "KW", "KWT", "KUWAIT":
+		return KWT
+	case "KG", "KGZ", "KYRGYZSTAN", "KIRGISISTAN":
+		return KGZ
+	case "LA", "LAO", "LAOS":
+		return LAO
+	case "LV", "LVA", "LATVIA", "LATVIYA", "LETTLAND":
+		return LVA
+	case "LS", "LSO", "LESOTHO":
+		return LSO
+	case "LR", "LBR", "LIBERIA":
+		return LBR
+	case "LB", "LBN", "LEBANON":
+		return LBN
+	case "LY", "LBY", "LIBYA":
+		return LBY
+	case "LT", "LTU", "LITHUANIA", "LITAUEN", "LITVA":
+		return LTU
+	case "LI", "LIE", "LIECHTENSTEIN":
+		return LIE
+	case "LU", "LUX", "LUXEMBOURG":
+		return LUX
+	case "MU", "MUS", "MAURITIUS":
+		return MUS
+	case "MR", "MRT", "MAURITANIA":
+		return MRT
+	case "MG", "MDG", "MADAGASCAR":
+		return MDG
+	case "YT", "MYT", "MAYOTTE":
+		return MYT
+	case "MO", "MAC", "MACAUCHINA", "MACAU", "MACAO":
+		return MAC
+	case "MK", "MKD", "MACEDONIA":
+		return MKD
+	case "MW", "MWI", "MALAWI":
+		return MWI
+	case "MY", "MYS", "MALAYSIA":
+		return MYS
+	case "ML", "MLI", "MALI":
+		return MLI
+	case "MV", "MDV", "MALDIVES":
+		return MDV
+	case "MT", "MLT", "MALTA":
+		return MLT
+	case "MP", "MNP", "NORTHERNMARIANAISLANDS", "MARIANAISLANDS":
+		return MNP
+	case "MA", "MAR", "MOROCCO", "MOROCO":
+		return MAR
+	case "MQ", "MTQ", "MARTINIQUE":
+		return MTQ
+	case "MH", "MHL", "MARSHALLISLANDS", "MARSHALL":
+		return MHL
+	case "MX", "MEX", "MEXICO":
+		return MEX
+	case "FM", "FSM", "MICRONESIA":
+		return FSM
+	case "MZ", "MOZ", "MOZAMBIQUE":
+		return MOZ
+	case "MD", "MDA", "MOLDOVA":
+		return MDA
+	case "MC", "MCO", "MONACO":
+		return MCO
+	case "MN", "MNG", "MONGOLIA":
+		return MNG
+	case "MS", "MSR", "MONTSERRAT":
+		return MSR
+	case "MM", "MMR", "MYANMAR":
+		return MMR
+	case "NA", "NAM", "NAMIBIA":
+		return NAM
+	case "NR", "NRU", "NAURU":
+		return NRU
+	case "NP", "NPL", "NEPAL":
+		return NPL
+	case "NE", "NER", "NIGER":
+		return NER
+	case "NG", "NGA", "NIGERIA":
+		return NGA
+	case "NL", "NLD", "NETHERLANDS", "HOLLAND", "HOLLANDIA":
+		return NLD
+	case "NI", "NIC", "NICARAGUA":
+		return NIC
+	case "NU", "NIU", "NIUE":
+		return NIU
+	case "NZ", "NZL", "NEWZEALAND", "NEWZELANDIA", "NEWZELAND":
+		return NZL
+	case "NC", "NCL", "NEWCALEDONIA":
+		return NCL
+	case "NO", "NOR", "NORWAY":
+		return NOR
+	case "OM", "OMN", "OMAN":
+		return OMN
+	case "BV", "BVT", "BOUVET":
+		return BVT
+	case "IM", "IMN", "ISLEOFMAN":
+		return IMN
+	case "NF", "NFK", "NORFOLKISLAND", "NORFOLK":
+		return NFK
+	case "PN", "PCN", "PITCAIRN":
+		return PCN
+	case "CX", "CXR", "CHRISTMASISLAND":
+		return CXR
+	case "SH", "SHN", "SAINTHELENA", "SAINTELENA":
+		return SHN
+	case "WF", "WLF", "WALLISANDFUTUNAISLANDS":
+		return WLF
+	case "HM", "HMD", "HEARDISLANDANDMCDONALDISLANDS", "HEARDISLAND":
+		return HMD
+	case "CV", "CPV", "CAPEVERDE":
+		return CPV
+	case "CK", "COK", "COOKISLANDS":
+		return COK
+	case "WS", "WSM", "SAMOA":
+		return WSM
+	case "SJ", "SJM", "SVALBARDANDJANMAYENISLANDS", "SVALBARD":
+		return SJM
+	case "TC", "TCA", "TURKSANDCAICOSISLANDS", "CAICOSISLANDS", "CACOSISLANDS":
+		return TCA
+	case "UM", "UMI", "UNITEDSTATESMINOROUTLYINGISLANDS", "MINOROUTLYINGISLANDS", "MINOROUTLYING", "USMI":
+		return UMI
+	case "PK", "PAK", "PAKISTAN":
+		return PAK
+	case "PW", "PLW", "PALAU":
+		return PLW
+	case "PS", "PSE", "PALESTINE":
+		return PSE
+	case "PA", "PAN", "PANAMA":
+		return PAN
+	case "PG", "PNG", "PAPUANEWGUINEA", "PAPUA":
+		return PNG
+	case "PY", "PRY", "PARAGUAY":
+		return PRY
+	case "PE", "PER", "PERU":
+		return PER
+	case "PL", "POL", "POLAND":
+		return POL
+	case "PT", "PRT", "PORTUGAL":
+		return PRT
+	case "PR", "PRI", "PUERTORICO":
+		return PRI
+	case "RE", "REU", "REUNION":
+		return REU
+	case "RU", "RUS", "RUSSIA", "RUSSO", "RUSSISH", "RUSSLAND", "RUSIA", "ROSSIA", "RUSSIAN", "RUSSIANFEDERATION":
+		return RUS
+	case "RW", "RWA", "RWANDA", "RUANDA":
+		return RWA
+	case "RO", "ROU", "ROMANIA", "RUMINIA":
+		return ROU
+	case "SV", "SLV", "ELSALVADOR":
+		return SLV
+	case "SM", "SMR", "SANMARINO":
+		return SMR
+	case "ST", "STP", "SAOTOMEANDPRINCIPE", "SAOTOME":
+		return STP
+	case "SA", "SAU", "SAUDIARABIA", "SAUDI":
+		return SAU
+	case "SZ", "SWZ", "SWAZILAND":
+		return SWZ
+	case "SC", "SYC", "SEYCHELLES":
+		return SYC
+	case "SN", "SEN", "SENEGAL":
+		return SEN
+	case "PM", "SPM", "SAINTPIERREANDMIQUELON", "SAINTPIERRE":
+		return SPM
+	case "VC", "VCT", "SAINTVINCENTANDTHEGRENADINES", "SAINTVINCENT":
+		return VCT
+	case "KN", "KNA", "SAINTKITTSANDNEVIS", "SAINTKITTS":
+		return KNA
+	case "LC", "LCA", "SAINTLUCIA", "LUCIA":
+		return LCA
+	case "SG", "SGP", "SINGAPORE":
+		return SGP
+	case "SY", "SYR", "SYRIA":
+		return SYR
+	case "SK", "SVK", "SLOVAKIA":
+		return SVK
+	case "SI", "SVN", "SLOVENIA":
+		return SVN
+	case "US", "USA", "UNITEDSTATES", "UNITEDSTATESOFAMERICA":
+		return USA
+	case "SB", "SLB", "SOLOMONISLANDS", "SOLOMON":
+		return SLB
+	case "SO", "SOM", "SOMALIA":
+		return SOM
+	case "SD", "SDN", "SUDAN":
+		return SDN
+	case "SR", "SUR", "SURINAME":
+		return SUR
+	case "SL", "SLE", "SIERRALEONE":
+		return SLE
+	case "TJ", "TJK", "TAJIKISTAN", "TADJIKISTAN":
+		return TJK
+	case "TW", "TWN", "TAIWAN":
+		return TWN
+	case "TH", "THA", "THAILAND", "THAI":
+		return THA
+	case "TZ", "TZA", "TANZANIA":
+		return TZA
+	case "TG", "TGO", "TOGO":
+		return TGO
+	case "TK", "TKL", "TOKELAU":
+		return TKL
+	case "TO", "TON", "TONGA":
+		return TON
+	case "TT", "TTO", "TRINIDADANDTOBAGO", "TRINIDAD":
+		return TTO
+	case "TV", "TUV", "TUVALU":
+		return TUV
+	case "TN", "TUN", "TUNISIA":
+		return TUN
+	case "TM", "TKM", "TURKMENISTAN", "TURKMENISTON":
+		return TKM
+	case "TR", "TUR", "TURKEY", "TURCIA":
+		return TUR
+	case "UG", "UGA", "UGANDA":
+		return UGA
+	case "UZ", "UZB", "UZBEKISTAN", "UZBEKISTON":
+		return UZB
+	case "UA", "UKR", "UKRAINE", "UKRAINA":
+		return UKR
+	case "UY", "URY", "URUGUAY":
+		return URY
+	case "XW", "XWA", "WALES":
+		return XWA
+	case "FO", "FRO", "FAROEISLANDS", "FAROE":
+		return FRO
+	case "FJ", "FJI", "FIJI":
+		return FJI
+	case "PH", "PHL", "PHILIPPINES", "PHILIPINES":
+		return PHL
+	case "FI", "FIN", "FINLAND", "FINNISH":
+		return FIN
+	case "FK", "FLK", "FALKLANDISLANDSMALVINAS", "MALVINAS", "FALKLANDISLANDS", "FALKLAND":
+		return FLK
+	case "FR", "FRA", "FRANCE":
+		return FRA
+	case "GF", "GUF", "FRENCHGUIANA", "GUIANA":
+		return GUF
+	case "PF", "PYF", "FRENCHPOLYNESIA", "POLYNESIA":
+		return PYF
+	case "TF", "ATF", "FRENCHSOUTHERNTERRITORIES", "SOUTHERNTERRITORIESFRENCH":
+		return ATF
+	case "HR", "HRV", "CROATIA":
+		return HRV
+	case "CF", "CAF", "CENTRALAFRICANREPUBLIC", "CENTRALAFRICAN":
+		return CAF
+	case "TD", "TCD", "CHAD":
+		return TCD
+	case "CZ", "CZE", "CZECHREPUBLIC", "CZECH":
+		return CZE
+	case "CL", "CHL", "CHILE":
+		return CHL
+	case "CH", "CHE", "SWITZERLAND", "SWISS":
+		return CHE
+	case "SE", "SWE", "SWEDEN":
+		return SWE
+	case "XS", "XSC", "SCOTLAND":
+		return XSC
+	case "LK", "LKA", "SRILANKA":
+		return LKA
+	case "EC", "ECU", "ECUADOR":
+		return ECU
+	case "GQ", "GNQ", "EQUATORIALGUINEA":
+		return GNQ
+	case "ER", "ERI", "ERITREA":
+		return ERI
+	case "EE", "EST", "ESTONIA":
+		return EST
+	case "ET", "ETH", "ETHIOPIA":
+		return ETH
+	case "ZA", "ZAF", "SOUTHAFRICA":
+		return ZAF
+	case "YU", "YUG", "YUGOSLAVIA":
+		return YUG
+	case "GS", "SGS", "SOUTHGEORGIAANDTHESOUTHSANDWICHISLANDS", "SOUTHGEORGIA":
+		return SGS
+	case "JM", "JAM", "JAMAICA":
+		return JAM
+	case "ME", "MNE", "MONTENEGRO":
+		return MNE
+	case "BL", "BLM", "SAINTBARTHELEMY":
+		return BLM
+	case "SX", "SXM", "SINTMAARTENDUTCH":
+		return SXM
+	case "RS", "SRB", "SERBIA":
+		return SRB
+	case "AX", "ALA", "ALANDISLANDS":
+		return ALA
+	case "BQ", "BES", "BONAIRE":
+		return BES
+	case "GG", "GGY", "GUERNSEY":
+		return GGY
+	case "JE", "JEY", "JERSEY":
+		return JEY
+	case "CW", "CUW", "CURACAO":
+		return CUW
+	case "MF", "MAF", "SAINTMARTINFRENCH":
+		return MAF
+	case "SS", "SSD", "SOUTHSUDAN":
+		return SSD
+	case "JP", "JPN", "JAPAN":
+		return JPN
+	}
+	return Unknown
+}
+
+// IsCorrect - returns true, if code is correct
+func (c CountryCode) IsCorrect() bool {
+	return c.Alpha2() != UnknownMsg
 }

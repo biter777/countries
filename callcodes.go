@@ -987,6 +987,11 @@ func (c CallCode) Countries() []CountryCode {
 	return []CountryCode{Unknown}
 }
 
+// IsCorrect - returns true, if code is correct
+func (c CallCode) IsCorrect() bool {
+	return c.Countries()[0] != Unknown
+}
+
 // Type implements Typer interface
 func (c *CallCodeInfo) Type() string {
 	return TypeCallCodeInfo
