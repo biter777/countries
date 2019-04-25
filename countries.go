@@ -1,4 +1,4 @@
-// Package countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 (ISO4217:2015) countries codes, countries names (on eng and rus), currency designators, calling phone codes, countries capitals and regions (UN M.49 code), Very light and super FAST, NO maps[], NO slices[], NO init() func, NO external files and data, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1 and ISO-4217.
+// Countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 countries codes and names (on eng and rus), currency designators, calling phone codes, countries capitals and regions (UN M.49 code), Very light and super FAST, NO maps[], NO slices[], NO init() func, NO external files and data, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1 and ISO-4217.
 package countries
 
 import (
