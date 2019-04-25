@@ -3,7 +3,6 @@ package countries
 import (
 	"database/sql/driver"
 	"encoding/json"
-	"errors"
 	"fmt"
 )
 
@@ -1973,7 +1972,7 @@ func (currency Currency) Value() (driver.Value, error) {
 // Scan implements database/sql.Scanner
 func (currency *Currency) Scan(src interface{}) error {
 	if currency == nil {
-		return errors.New(fmt.Sprintf("countries::Scan: Currency scan err: currency == nil"))
+		return fmt.Errorf("countries::Scan: Currency scan err: currency == nil")
 	}
 	switch src := src.(type) {
 	case *Currency:
@@ -1983,9 +1982,17 @@ func (currency *Currency) Scan(src interface{}) error {
 	case nil:
 		currency = nil
 	default:
-		return errors.New(fmt.Sprintf("countries::Scan: Currency scan err: unexpected value of type %T for %T", src, *currency))
+		return fmt.Errorf("countries::Scan: Currency scan err: unexpected value of type %T for %T", src, *currency)
 	}
 	return nil
 }
 
-//
+// AllCurrenciesInfo - return all currencies as []Currency
+func AllCurrenciesInfo() []*Currency {
+	all := AllCurrencies()
+	currencies := make([]*Currency, 0, len(all))
+	for _, v := range all {
+		currencies = append(currencies, v.Info())
+	}
+	return currencies
+}

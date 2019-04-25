@@ -1,10 +1,25 @@
 package countries
 
+import (
+	"database/sql/driver"
+	"encoding/json"
+	"fmt"
+)
+
 // RegionCode - Region code (UN M.49 code standart)
 type RegionCode int64 // int64 for database/sql/driver.Valuer compatibility
 
+// Region - all info about region
+type Region struct {
+	Name string
+	Code RegionCode
+}
+
 // TypeRegionCode for Typer interface
 const TypeRegionCode = "countries.RegionCode"
+
+// TypeRegion for Typer interface
+const TypeRegion = "countries.Region"
 
 const (
 	RegionUnknown RegionCode = 0
@@ -79,6 +94,41 @@ func TotalRegions() int {
 	return 7
 }
 
+func (c RegionCode) Info() *Region {
+	return &Region{
+		Name: c.String(),
+		Code: c,
+	}
+}
+
+// Type implements Typer interface
+func (r *Region) Type() string {
+	return TypeRegion
+}
+
+// Value implements database/sql/driver.Valuer
+func (r Region) Value() (driver.Value, error) {
+	return json.Marshal(r)
+}
+
+// Scan implements database/sql.Scanner
+func (r *Region) Scan(src interface{}) error {
+	if r == nil {
+		return fmt.Errorf("countries::Scan: Region scan err: region == nil")
+	}
+	switch src := src.(type) {
+	case *Region:
+		*r = *src
+	case Region:
+		*r = src
+	case nil:
+		r = nil
+	default:
+		return fmt.Errorf("countries::Scan: Region scan err: unexpected value of type %T for %T", src, *r)
+	}
+	return nil
+}
+
 // AllRegions - returns all Regions
 func AllRegions() []RegionCode {
 	return []RegionCode{
@@ -92,4 +142,12 @@ func AllRegions() []RegionCode {
 	}
 }
 
-//
+// AllRegions - return all currencies as []Region
+func AllRegionsInfo() []*Region {
+	all := AllRegions()
+	regions := make([]*Region, 0, len(all))
+	for _, v := range all {
+		regions = append(regions, v.Info())
+	}
+	return regions
+}

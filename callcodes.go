@@ -1,12 +1,26 @@
 package countries
 
-import "strconv"
+import (
+	"database/sql/driver"
+	"encoding/json"
+	"fmt"
+	"strconv"
+)
 
 // CallCode - calling code of country
 type CallCode int64 // int64 for database/sql/driver.Valuer compatibility
 
+// CallCodeInfo - all info about CallCode
+type CallCodeInfo struct {
+	Code      CallCode
+	Countries []CountryCode
+}
+
 // TypeCallCode for Typer interface
 const TypeCallCode = "countries.CallCode"
+
+// TypeCallCodeInfo for Typer interface
+const TypeCallCodeInfo = "countries.CallCodeInfo"
 
 const (
 	CallCodeUnknown CallCode = 0
@@ -251,6 +265,14 @@ func (c CallCode) Type() string {
 	return TypeCallCode
 }
 
+// Type implements Typer interface
+func (c CallCode) Info() *CallCodeInfo {
+	return &CallCodeInfo{
+		Code:      c,
+		Countries: c.Countries(),
+	}
+}
+
 // TotalCallCodes - returns number of call codes in the package, countries.TotalCallCodes() == len(countries.AllCallCodes()) but static value for perfomance
 func TotalCallCodes() int {
 	return 230
@@ -490,6 +512,16 @@ func AllCallCodes() []CallCode {
 		CallCode1876,
 		CallCode7370,
 	}
+}
+
+// AllCallCodesInfo - return all countries call phone codes as []CallCodeInfo
+func AllCallCodesInfo() []*CallCodeInfo {
+	all := AllCallCodes()
+	codes := make([]*CallCodeInfo, 0, len(all))
+	for _, v := range all {
+		codes = append(codes, v.Info())
+	}
+	return codes
 }
 
 // String - implements fmt.Stringer, returns a calling phone code in string, example for UK: "+44"
@@ -955,4 +987,30 @@ func (c CallCode) Countries() []CountryCode {
 	return []CountryCode{Unknown}
 }
 
-//
+// Type implements Typer interface
+func (c *CallCodeInfo) Type() string {
+	return TypeCallCodeInfo
+}
+
+// Value implements database/sql/driver.Valuer
+func (c CallCodeInfo) Value() (driver.Value, error) {
+	return json.Marshal(c)
+}
+
+// Scan implements database/sql.Scanner
+func (c *CallCodeInfo) Scan(src interface{}) error {
+	if c == nil {
+		return fmt.Errorf("countries::Scan: CallCodeInfo scan err: callCodeInfo == nil")
+	}
+	switch src := src.(type) {
+	case *CallCodeInfo:
+		*c = *src
+	case CallCodeInfo:
+		*c = src
+	case nil:
+		c = nil
+	default:
+		return fmt.Errorf("countries::Scan: CallCodeInfo scan err: unexpected value of type %T for %T", src, *c)
+	}
+	return nil
+}

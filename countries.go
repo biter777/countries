@@ -331,7 +331,7 @@ const (
 	SouthSudan                             CountryCode = 728
 )
 
-// Alpha-2 digit ISO 3166-1. Three codes present, for example Russia == RU == RUS.
+// Alpha-2 digit ISO 3166-1. Three codes present, for example Russia == RU == RUS == 643.
 const (
 	AL CountryCode = 8
 	DZ CountryCode = 12
@@ -587,7 +587,7 @@ const (
 	SS CountryCode = 728
 )
 
-// Alpha-3 digit ISO 3166-1. Three codes present, for example Russia == RU == RUS.
+// Alpha-3 digit ISO 3166-1. Three codes present, for example Russia == RU == RUS == 643.
 const (
 	ALB CountryCode = 8
 	DZA CountryCode = 12
@@ -5226,3 +5226,12 @@ func (country *Country) Scan(src interface{}) error {
 }
 
 //
+// AllInfo - return all currencies as []Currency
+func AllInfo() []*Country {
+	all := All()
+	countries := make([]*Country, 0, len(all))
+	for _, v := range all {
+		countries = append(countries, v.Info())
+	}
+	return countries
+}

@@ -3,8 +3,17 @@ package countries
 // CapitalCode - Capital code
 type CapitalCode int64 // int64 for database/sql/driver.Valuer compatibility
 
+type Capital struct {
+	Name    string
+	Code    CapitalCode
+	Country CountryCode
+}
+
 // TypeCapitalCode for Typer interface
 const TypeCapitalCode = "countries.CapitalCode"
+
+// TypeCapital for Typer interface
+const TypeCapital = "countries.Capital"
 
 const (
 	CapitalUnknown CapitalCode = 0
@@ -1285,6 +1294,20 @@ func (c CapitalCode) Country() CountryCode {
 	return Unknown
 }
 
+// Type implements Typer interface
+func (c CapitalCode) Info() *Capital {
+	return &Capital{
+		Name:    c.String(),
+		Code:    c,
+		Country: c.Country(),
+	}
+}
+
+// Type implements Typer interface
+func (c Capital) Type() string {
+	return TypeCapital
+}
+
 // AllCapitals - return all capital codes
 func AllCapitals() []CapitalCode {
 	return []CapitalCode{
@@ -1543,4 +1566,12 @@ func AllCapitals() []CapitalCode {
 	}
 }
 
-//
+// AllCapitalsInfo - return all capital codes as []Capital
+func AllCapitalsInfo() []*Capital {
+	all := AllCapitals()
+	capitals := make([]*Capital, 0, len(all))
+	for _, v := range all {
+		capitals = append(capitals, v.Info())
+	}
+	return capitals
+}
