@@ -1,10 +1,33 @@
-// Package countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 (ISO4217:2015) countries codes, countries names (on eng and rus) and currency designators, Very light and super FAST, NO maps[], NO slices[], NO any external packages, NO init() func, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1 and ISO-4217.
+// Package countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 (ISO4217:2015) countries codes, countries names (on eng and rus), currency designators, calling phone codes, countries capitals and regions (UN M.49 code), Very light and super FAST, NO maps[], NO slices[], NO init() func, NO external files and data, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1 and ISO-4217.
 package countries
 
-// CurrencyCode - currency code of country
-type CurrencyCode uint16
+import (
+	"database/sql/driver"
+	"encoding/json"
+	"errors"
+	"fmt"
+)
 
-// Currencies. Two codes present, for example CurrencyUSDollar == CurrencyUSD.
+// CurrencyCode - currency code of country
+type CurrencyCode int64 // int64 for database/sql/driver.Valuer compatibility
+
+// Currency - all info about currency
+type Currency struct {
+	NickelRounding bool
+	Name           string
+	Alpha          string
+	Digits         int
+	Code           CurrencyCode
+	Countries      []CountryCode
+}
+
+// TypeCurrencyCode for Typer interface
+const TypeCurrencyCode = "countries.CurrencyCode"
+
+// TypeCurrency for Typer interface
+const TypeCurrency = "countries.Currency"
+
+// Currencies. Two codes present, for example CurrencyUSDollar == CurrencyUSD == 840.
 const (
 	CurrencyUnknown                        CurrencyCode = 0
 	CurrencyAfghani                        CurrencyCode = 971
@@ -180,7 +203,7 @@ const (
 	CurrencyYugoslavianDinar               CurrencyCode = 891
 )
 
-// Currencies by ISO 4217. Two codes present, for example CurrencyUSDollar == CurrencyUSD.
+// Currencies by ISO 4217. Two codes present, for example CurrencyUSDollar == CurrencyUSD == 840.
 const (
 	CurrencyAFN CurrencyCode = 971
 	CurrencyALL CurrencyCode = 8
@@ -367,12 +390,17 @@ func (c CurrencyCode) Emoji() string {
 	return c.Alpha()
 }
 
-// TotalCurrencies - returns number of currencies in the package
+// TotalCurrencies - returns number of currencies in the package, countries.TotalCurrencies() == len(countries.AllCurrencies()) but static value for perfomance
 func TotalCurrencies() int {
 	return 168
 }
 
-// String - returns a english name of currency
+// Type implements Typer interface
+func (c CurrencyCode) Type() string {
+	return TypeCurrencyCode
+}
+
+// String - implements fmt.Stringer, returns a english name of currency
 func (c CurrencyCode) String() string {
 	switch c {
 	case 840:
@@ -712,7 +740,7 @@ func (c CurrencyCode) String() string {
 	case 891:
 		return "Yugoslavian Dinar"
 	}
-	return unknownMsg
+	return UnknownMsg
 }
 
 // Alpha - returns a default Alpha (3 chars) code of currency
@@ -1055,7 +1083,7 @@ func (c CurrencyCode) Alpha() string {
 	case 891:
 		return "YUD"
 	}
-	return unknownMsg
+	return UnknownMsg
 }
 
 // Countries - returns a country codes of currency using
@@ -1393,4 +1421,570 @@ func (c CurrencyCode) Countries() []CountryCode {
 		return []CountryCode{POL}
 	}
 	return []CountryCode{Unknown}
+}
+
+// AllCurrencies - return all currencies codes
+func AllCurrencies() []CurrencyCode {
+	return []CurrencyCode{
+		CurrencyAFN,
+		CurrencyALL,
+		CurrencyDZD,
+		CurrencyUSD,
+		CurrencyEUR,
+		CurrencyAOA,
+		CurrencyXCD,
+		CurrencyARS,
+		CurrencyAMD,
+		CurrencyAWG,
+		CurrencyAUD,
+		CurrencyAZN,
+		CurrencyBSD,
+		CurrencyBHD,
+		CurrencyBDT,
+		CurrencyBBD,
+		CurrencyBYR,
+		CurrencyBZD,
+		CurrencyXOF,
+		CurrencyBMD,
+		CurrencyBTN,
+		CurrencyINR,
+		CurrencyBOB,
+		CurrencyBAM,
+		CurrencyBWP,
+		CurrencyNOK,
+		CurrencyBRL,
+		CurrencyBND,
+		CurrencyBGN,
+		CurrencyBIF,
+		CurrencyCVE,
+		CurrencyKHR,
+		CurrencyXAF,
+		CurrencyCAD,
+		CurrencyKYD,
+		CurrencyCLF,
+		CurrencyCLP,
+		CurrencyCNY,
+		CurrencyCOP,
+		CurrencyCOU,
+		CurrencyKMF,
+		CurrencyCDF,
+		CurrencyNZD,
+		CurrencyCRC,
+		CurrencyHRK,
+		CurrencyCUC,
+		CurrencyCUP,
+		CurrencyANG,
+		CurrencyCZK,
+		CurrencyDKK,
+		CurrencyDJF,
+		CurrencyDOP,
+		CurrencyEGP,
+		CurrencySVC,
+		CurrencyERN,
+		CurrencyETB,
+		CurrencyFKP,
+		CurrencyFJD,
+		CurrencyXPF,
+		CurrencyGMD,
+		CurrencyGEL,
+		CurrencyGHS,
+		CurrencyGIP,
+		CurrencyGTQ,
+		CurrencyGBP,
+		CurrencyGNF,
+		CurrencyGYD,
+		CurrencyHTG,
+		CurrencyHNL,
+		CurrencyHKD,
+		CurrencyHUF,
+		CurrencyISK,
+		CurrencyIDR,
+		CurrencyXDR,
+		CurrencyIRR,
+		CurrencyIQD,
+		CurrencyILS,
+		CurrencyJMD,
+		CurrencyJPY,
+		CurrencyJOD,
+		CurrencyKZT,
+		CurrencyKES,
+		CurrencyKPW,
+		CurrencyKRW,
+		CurrencyKWD,
+		CurrencyKGS,
+		CurrencyLAK,
+		CurrencyLBP,
+		CurrencyLSL,
+		CurrencyZAR,
+		CurrencyLRD,
+		CurrencyLYD,
+		CurrencyCHF,
+		CurrencyMOP,
+		CurrencyMKD,
+		CurrencyMGA,
+		CurrencyMWK,
+		CurrencyMYR,
+		CurrencyMVR,
+		CurrencyMRU,
+		CurrencyMUR,
+		CurrencyXUA,
+		CurrencyMXN,
+		CurrencyMXV,
+		CurrencyMDL,
+		CurrencyMNT,
+		CurrencyMAD,
+		CurrencyMZN,
+		CurrencyMMK,
+		CurrencyNAD,
+		CurrencyNPR,
+		CurrencyNIO,
+		CurrencyNGN,
+		CurrencyOMR,
+		CurrencyPKR,
+		CurrencyPAB,
+		CurrencyPGK,
+		CurrencyPYG,
+		CurrencyPEN,
+		CurrencyPHP,
+		CurrencyPLN,
+		CurrencyQAR,
+		CurrencyRON,
+		CurrencyRUB,
+		CurrencyRWF,
+		CurrencySHP,
+		CurrencyWST,
+		CurrencySTN,
+		CurrencySAR,
+		CurrencyRSD,
+		CurrencySCR,
+		CurrencySLL,
+		CurrencySGD,
+		CurrencyXSU,
+		CurrencySBD,
+		CurrencySOS,
+		CurrencySSP,
+		CurrencyLKR,
+		CurrencySDG,
+		CurrencySRD,
+		CurrencySZL,
+		CurrencySEK,
+		CurrencyCHE,
+		CurrencyCHW,
+		CurrencySYP,
+		CurrencyTWD,
+		CurrencyTJS,
+		CurrencyTZS,
+		CurrencyTHB,
+		CurrencyTOP,
+		CurrencyTTD,
+		CurrencyTND,
+		CurrencyTRY,
+		CurrencyTMT,
+		CurrencyUGX,
+		CurrencyUAH,
+		CurrencyAED,
+		CurrencyUSN,
+		CurrencyUYI,
+		CurrencyUYU,
+		CurrencyUZS,
+		CurrencyVUV,
+		CurrencyVEF,
+		CurrencyVND,
+		CurrencyYER,
+		CurrencyZMW,
+		CurrencyYUD,
+		CurrencyZWL,
+	}
+}
+
+// Digits - returns a number of digits used for each currency
+func (c CurrencyCode) Digits() int {
+	switch c {
+	case CurrencyAFN:
+		return 0
+	case CurrencyALL:
+		return 0
+	case CurrencyDZD:
+		return 2
+	case CurrencyUSD:
+		return 2
+	case CurrencyEUR:
+		return 2
+	case CurrencyAOA:
+		return 2
+	case CurrencyXCD:
+		return 2
+	case CurrencyARS:
+		return 2
+	case CurrencyAMD:
+		return 0
+	case CurrencyAWG:
+		return 2
+	case CurrencyAUD:
+		return 2
+	case CurrencyAZN:
+		return 2
+	case CurrencyBSD:
+		return 2
+	case CurrencyBHD:
+		return 3
+	case CurrencyBDT:
+		return 2
+	case CurrencyBBD:
+		return 2
+	case CurrencyBYR:
+		return 0
+	case CurrencyBZD:
+		return 2
+	case CurrencyXOF:
+		return 0
+	case CurrencyBMD:
+		return 2
+	case CurrencyBTN:
+		return 2
+	case CurrencyINR:
+		return 2
+	case CurrencyBOB:
+		return 2
+	case CurrencyBAM:
+		return 2
+	case CurrencyBWP:
+		return 2
+	case CurrencyNOK:
+		return 2
+	case CurrencyBRL:
+		return 2
+	case CurrencyBND:
+		return 2
+	case CurrencyBGN:
+		return 2
+	case CurrencyBIF:
+		return 0
+	case CurrencyCVE:
+		return 2
+	case CurrencyKHR:
+		return 2
+	case CurrencyXAF:
+		return 0
+	case CurrencyCAD:
+		return 2
+	case CurrencyKYD:
+		return 2
+	case CurrencyCLF:
+		return 4
+	case CurrencyCLP:
+		return 0
+	case CurrencyCNY:
+		return 2
+	case CurrencyCOP:
+		return 0
+	case CurrencyCOU:
+		return 2
+	case CurrencyKMF:
+		return 0
+	case CurrencyCDF:
+		return 2
+	case CurrencyNZD:
+		return 2
+	case CurrencyCRC:
+		return 2
+	case CurrencyHRK:
+		return 2
+	case CurrencyCUC:
+		return 2
+	case CurrencyCUP:
+		return 2
+	case CurrencyANG:
+		return 2
+	case CurrencyCZK:
+		return 2
+	case CurrencyDKK:
+		return 2
+	case CurrencyDJF:
+		return 0
+	case CurrencyDOP:
+		return 2
+	case CurrencyEGP:
+		return 2
+	case CurrencySVC:
+		return 2
+	case CurrencyERN:
+		return 2
+	case CurrencyETB:
+		return 2
+	case CurrencyFKP:
+		return 2
+	case CurrencyFJD:
+		return 2
+	case CurrencyXPF:
+		return 0
+	case CurrencyGMD:
+		return 2
+	case CurrencyGEL:
+		return 2
+	case CurrencyGHS:
+		return 2
+	case CurrencyGIP:
+		return 2
+	case CurrencyGTQ:
+		return 2
+	case CurrencyGBP:
+		return 2
+	case CurrencyGNF:
+		return 0
+	case CurrencyGYD:
+		return 0
+	case CurrencyHTG:
+		return 2
+	case CurrencyHNL:
+		return 2
+	case CurrencyHKD:
+		return 2
+	case CurrencyHUF:
+		return 2
+	case CurrencyISK:
+		return 0
+	case CurrencyIDR:
+		return 0
+	case CurrencyXDR:
+		return 2
+	case CurrencyIRR:
+		return 0
+	case CurrencyIQD:
+		return 0
+	case CurrencyILS:
+		return 2
+	case CurrencyJMD:
+		return 2
+	case CurrencyJPY:
+		return 0
+	case CurrencyJOD:
+		return 3
+	case CurrencyKZT:
+		return 2
+	case CurrencyKES:
+		return 2
+	case CurrencyKPW:
+		return 0
+	case CurrencyKRW:
+		return 0
+	case CurrencyKWD:
+		return 3
+	case CurrencyKGS:
+		return 2
+	case CurrencyLAK:
+		return 0
+	case CurrencyLBP:
+		return 0
+	case CurrencyLSL:
+		return 2
+	case CurrencyZAR:
+		return 2
+	case CurrencyLRD:
+		return 2
+	case CurrencyLYD:
+		return 3
+	case CurrencyCHF:
+		return 2
+	case CurrencyMOP:
+		return 2
+	case CurrencyMKD:
+		return 2
+	case CurrencyMGA:
+		return 0
+	case CurrencyMWK:
+		return 2
+	case CurrencyMYR:
+		return 2
+	case CurrencyMVR:
+		return 2
+	case CurrencyMRU:
+		return 2
+	case CurrencyMUR:
+		return 0
+	case CurrencyXUA:
+		return 2
+	case CurrencyMXN:
+		return 2
+	case CurrencyMXV:
+		return 2
+	case CurrencyMDL:
+		return 2
+	case CurrencyMNT:
+		return 0
+	case CurrencyMAD:
+		return 2
+	case CurrencyMZN:
+		return 2
+	case CurrencyMMK:
+		return 0
+	case CurrencyNAD:
+		return 2
+	case CurrencyNPR:
+		return 2
+	case CurrencyNIO:
+		return 2
+	case CurrencyNGN:
+		return 2
+	case CurrencyOMR:
+		return 3
+	case CurrencyPKR:
+		return 0
+	case CurrencyPAB:
+		return 2
+	case CurrencyPGK:
+		return 2
+	case CurrencyPYG:
+		return 0
+	case CurrencyPEN:
+		return 2
+	case CurrencyPHP:
+		return 2
+	case CurrencyPLN:
+		return 2
+	case CurrencyQAR:
+		return 2
+	case CurrencyRON:
+		return 2
+	case CurrencyRUB:
+		return 2
+	case CurrencyRWF:
+		return 0
+	case CurrencySHP:
+		return 2
+	case CurrencyWST:
+		return 2
+	case CurrencySTN:
+		return 2
+	case CurrencySAR:
+		return 2
+	case CurrencyRSD:
+		return 0
+	case CurrencySCR:
+		return 2
+	case CurrencySLL:
+		return 0
+	case CurrencySGD:
+		return 2
+	case CurrencyXSU:
+		return 2
+	case CurrencySBD:
+		return 2
+	case CurrencySOS:
+		return 0
+	case CurrencySSP:
+		return 2
+	case CurrencyLKR:
+		return 2
+	case CurrencySDG:
+		return 2
+	case CurrencySRD:
+		return 2
+	case CurrencySZL:
+		return 2
+	case CurrencySEK:
+		return 2
+	case CurrencyCHE:
+		return 2
+	case CurrencyCHW:
+		return 2
+	case CurrencySYP:
+		return 0
+	case CurrencyTWD:
+		return 2
+	case CurrencyTJS:
+		return 2
+	case CurrencyTZS:
+		return 0
+	case CurrencyTHB:
+		return 2
+	case CurrencyTOP:
+		return 2
+	case CurrencyTTD:
+		return 2
+	case CurrencyTND:
+		return 3
+	case CurrencyTRY:
+		return 2
+	case CurrencyTMT:
+		return 2
+	case CurrencyUGX:
+		return 0
+	case CurrencyUAH:
+		return 2
+	case CurrencyAED:
+		return 2
+	case CurrencyUSN:
+		return 2
+	case CurrencyUYI:
+		return 0
+	case CurrencyUYU:
+		return 2
+	case CurrencyUZS:
+		return 0
+	case CurrencyVUV:
+		return 0
+	case CurrencyVEF:
+		return 2
+	case CurrencyVND:
+		return 0
+	case CurrencyYER:
+		return 0
+	case CurrencyZMW:
+		return 2
+	case CurrencyYUD:
+		return 2
+	case CurrencyZWL:
+		return 2
+	}
+	return -1 // never gone here
+}
+
+// NickelRounding - returns true, if the currency uses ‘nickel rounding’ in transactions
+func (c CurrencyCode) NickelRounding() bool {
+	switch c {
+	case CurrencyCAD, CurrencyDKK, CurrencyCHF:
+		return true
+	}
+	return false
+}
+
+// Info - return all info about currency as Currency struct
+func (c CurrencyCode) Info() *Currency {
+	return &Currency{
+		NickelRounding: c.NickelRounding(),
+		Name:           c.String(),
+		Alpha:          c.Alpha(),
+		Digits:         c.Digits(),
+		Code:           c,
+		Countries:      c.Countries(),
+	}
+}
+
+// Type implements Typer interface.
+func (country *Currency) Type() string {
+	return TypeCurrency
+}
+
+// Value implements database/sql/driver.Valuer
+func (currency Currency) Value() (driver.Value, error) {
+	return json.Marshal(currency)
+}
+
+// Scan implements database/sql.Scanner
+func (currency *Currency) Scan(src interface{}) error {
+	if currency == nil {
+		return errors.New(fmt.Sprintf("countries::Scan: Currency scan err: currency == nil"))
+	}
+	switch src := src.(type) {
+	case *Currency:
+		*currency = *src
+	case Currency:
+		*currency = src
+	case nil:
+		currency = nil
+	default:
+		return errors.New(fmt.Sprintf("countries::Scan: Currency scan err: unexpected value of type %T for %T", src, *currency))
+	}
+	return nil
 }

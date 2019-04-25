@@ -1,10 +1,36 @@
-// Package countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 (ISO4217:2015) countries codes, countries names (on eng and rus) and currency designators, Very light and super FAST, NO maps[], NO slices[], NO any external packages, NO init() func, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1 and ISO-4217.
+// Package countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 (ISO4217:2015) countries codes, countries names (on eng and rus), currency designators, calling phone codes, countries capitals and regions (UN M.49 code), Very light and super FAST, NO maps[], NO slices[], NO init() func, NO external files and data, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1 and ISO-4217.
 package countries
 
-// CountryCode - country code (250 countries). Three codes present, for example Russia == RU == RUS == 643.
-type CountryCode uint16
+import (
+	"database/sql/driver"
+	"encoding/json"
+	"fmt"
+)
 
-const unknownMsg = "Unknown"
+// CountryCode - country code (250 countries). Three codes present, for example Russia == RU == RUS == 643.
+type CountryCode int64 // int64 for database/sql/driver.Valuer compatibility
+
+// Country - all info about country
+type Country struct {
+	Name     string       `json:"name"`
+	Alpha2   string       `json:"cca2"`
+	Alpha3   string       `json:"cca3"`
+	Emoji    string       `json:"emoji"`
+	Code     CountryCode  `json:"code"`
+	Currency CurrencyCode `json:"currency"`
+	Capital  CapitalCode  `json:"capital"`
+	CallCode CallCode     `json:"callingCode"`
+	Region   RegionCode   `json:"region"`
+}
+
+// TypeCountryCode for Typer interface
+const TypeCountryCode = "countries.CountryCode"
+
+// TypeCountry for Typer interface
+const TypeCountry = "countries.Country"
+
+// UnknownMsg - unknown return message
+const UnknownMsg = "Unknown"
 
 // Digit ISO 3166-1. Three codes present, for example Russia == RU == RUS == 643.
 const (
@@ -36,7 +62,7 @@ const (
 	Bolivia                                CountryCode = 68
 	BosniaandHerzegovina                   CountryCode = 70
 	Botswana                               CountryCode = 72
-	BouvetIsland                           CountryCode = 74
+	Bouvet                                 CountryCode = 74
 	Brazil                                 CountryCode = 76
 	BritishIndianOceanTerritory            CountryCode = 86
 	Brunei                                 CountryCode = 96
@@ -258,7 +284,7 @@ const (
 	Afghanistan                            CountryCode = 4
 	Serbia                                 CountryCode = 688
 	AlandIslands                           CountryCode = 248
-	BonaireSintEustatiusAndSaba            CountryCode = 535
+	Bonaire                                CountryCode = 535
 	Guernsey                               CountryCode = 831
 	Jersey                                 CountryCode = 832
 	Curacao                                CountryCode = 531
@@ -782,9 +808,9 @@ const (
 	SSD CountryCode = 728
 )
 
-// TotalCountries - returns number of countries in the package
-func TotalCountries() int {
-	return 250
+// Total - returns number of codes in the package, countries.Total() == len(countries.All()) but static value for perfomance
+func Total() int {
+	return 253
 }
 
 // Emoji - return a country Alpha-2 (ISO2) as Emoji flag (example "RU" as "🇷🇺")
@@ -806,7 +832,12 @@ func (c CountryCode) Emoji3() string {
 	return string(buf[:])
 }
 
-// String - returns a english name of country
+// Type implements Typer interface.
+func (c CountryCode) Type() string {
+	return TypeCountryCode
+}
+
+// String - implements fmt.Stringer, returns a english name of country
 func (c CountryCode) String() string {
 	switch c {
 	case 8:
@@ -1312,7 +1343,7 @@ func (c CountryCode) String() string {
 	case 728:
 		return "South Sudan"
 	}
-	return unknownMsg
+	return UnknownMsg
 }
 
 // StringRus - returns a russian name of country
@@ -1821,11 +1852,11 @@ func (c CountryCode) StringRus() string {
 	case 728:
 		return "Южный Судан"
 	}
-	return unknownMsg
+	return UnknownMsg
 }
 
 // Alpha - returns a default Alpha (Alpha-2/ISO2, 2 chars) code of country
-func (c CountryCode) Alpha() string {
+func (c CountryCode) Alpha2() string {
 	switch c {
 	case 8:
 		return "AL"
@@ -2328,7 +2359,7 @@ func (c CountryCode) Alpha() string {
 	case 728:
 		return "SS"
 	}
-	return unknownMsg
+	return UnknownMsg
 }
 
 // Alpha3 - returns a Alpha-3 (ISO3, 3 chars) code of country
@@ -2835,7 +2866,7 @@ func (c CountryCode) Alpha3() string {
 	case 728:
 		return "SSD"
 	}
-	return unknownMsg
+	return UnknownMsg
 }
 
 // Currency - returns a currency of the country
@@ -3327,4 +3358,1833 @@ func (c CountryCode) Currency() CurrencyCode {
 		return CurrencySSP
 	}
 	return CurrencyUnknown
+}
+
+// All - return all country codes
+func All() []CountryCode {
+	return []CountryCode{
+		AUS,
+		AUT,
+		AZE,
+		ALB,
+		DZA,
+		ASM,
+		AIA,
+		AGO,
+		AND,
+		ATA,
+		ATG,
+		ANT,
+		ARE,
+		ARG,
+		ARM,
+		ABW,
+		AFG,
+		BHS,
+		BGD,
+		BRB,
+		BHR,
+		BLR,
+		BLZ,
+		BEL,
+		BEN,
+		BMU,
+		BGR,
+		BOL,
+		BIH,
+		BWA,
+		BRA,
+		IOT,
+		BRN,
+		BFA,
+		BDI,
+		BTN,
+		VUT,
+		VAT,
+		GBR,
+		HUN,
+		VEN,
+		VGB,
+		VIR,
+		TLS,
+		VNM,
+		GAB,
+		HTI,
+		GUY,
+		GMB,
+		GHA,
+		GLP,
+		GTM,
+		GIN,
+		GNB,
+		DEU,
+		GIB,
+		HND,
+		HKG,
+		GRD,
+		GRL,
+		GRC,
+		GEO,
+		GUM,
+		DNK,
+		COD,
+		DJI,
+		DMA,
+		DOM,
+		EGY,
+		ZMB,
+		ESH,
+		ZWE,
+		ISR,
+		IND,
+		IDN,
+		JOR,
+		IRQ,
+		IRN,
+		IRL,
+		ISL,
+		ESP,
+		ITA,
+		YEM,
+		KAZ,
+		CYM,
+		KHM,
+		CMR,
+		CAN,
+		QAT,
+		KEN,
+		CYP,
+		KIR,
+		CHN,
+		CCK,
+		COL,
+		COM,
+		COG,
+		PRK,
+		KOR,
+		CRI,
+		CIV,
+		CUB,
+		KWT,
+		KGZ,
+		LAO,
+		LVA,
+		LSO,
+		LBR,
+		LBN,
+		LBY,
+		LTU,
+		LIE,
+		LUX,
+		MUS,
+		MRT,
+		MDG,
+		MYT,
+		MAC,
+		MKD,
+		MWI,
+		MYS,
+		MLI,
+		MDV,
+		MLT,
+		MNP,
+		MAR,
+		MTQ,
+		MHL,
+		MEX,
+		FSM,
+		MOZ,
+		MDA,
+		MCO,
+		MNG,
+		MSR,
+		MMR,
+		NAM,
+		NRU,
+		NPL,
+		NER,
+		NGA,
+		NLD,
+		NIC,
+		NIU,
+		NZL,
+		NCL,
+		NOR,
+		OMN,
+		BVT,
+		IMN,
+		NFK,
+		PCN,
+		CXR,
+		SHN,
+		WLF,
+		HMD,
+		CPV,
+		COK,
+		WSM,
+		SJM,
+		TCA,
+		UMI,
+		PAK,
+		PLW,
+		PSE,
+		PAN,
+		PNG,
+		PRY,
+		PER,
+		POL,
+		PRT,
+		PRI,
+		REU,
+		RUS,
+		RWA,
+		ROU,
+		SLV,
+		SMR,
+		STP,
+		SAU,
+		SWZ,
+		SYC,
+		SEN,
+		SPM,
+		VCT,
+		KNA,
+		LCA,
+		SGP,
+		SYR,
+		SVK,
+		SVN,
+		USA,
+		SLB,
+		SOM,
+		SDN,
+		SUR,
+		SLE,
+		TJK,
+		TWN,
+		THA,
+		TZA,
+		TGO,
+		TKL,
+		TON,
+		TTO,
+		TUV,
+		TUN,
+		TKM,
+		TUR,
+		UGA,
+		UZB,
+		UKR,
+		URY,
+		XWA,
+		FRO,
+		FJI,
+		PHL,
+		FIN,
+		FLK,
+		FRA,
+		GUF,
+		PYF,
+		ATF,
+		HRV,
+		CAF,
+		TCD,
+		CZE,
+		CHL,
+		CHE,
+		SWE,
+		XSC,
+		LKA,
+		ECU,
+		GNQ,
+		ERI,
+		EST,
+		ETH,
+		ZAF,
+		YUG,
+		SGS,
+		JAM,
+		MNE,
+		BLM,
+		SXM,
+		SRB,
+		ALA,
+		BES,
+		GGY,
+		JEY,
+		CUW,
+		MAF,
+		SSD,
+		JPN,
+	}
+}
+
+// CallCode - return calling code of country
+func (c CountryCode) CallCode() CallCode {
+	switch c {
+	case AUS:
+		return CallCode(61)
+	case AUT:
+		return CallCode(43)
+	case AZE:
+		return CallCode(994)
+	case ALB:
+		return CallCode(355)
+	case DZA:
+		return CallCode(213)
+	case ASM:
+		return CallCode(1684)
+	case AIA:
+		return CallCode(1264)
+	case AGO:
+		return CallCode(244)
+	case AND:
+		return CallCode(376)
+	case ATA:
+		return CallCode(672)
+	case ATG:
+		return CallCode(1268)
+	case ANT:
+		return CallCode(599)
+	case ARE:
+		return CallCode(971)
+	case ARG:
+		return CallCode(54)
+	case ARM:
+		return CallCode(374)
+	case ABW:
+		return CallCode(297)
+	case AFG:
+		return CallCode(93)
+	case BHS:
+		return CallCode(1242)
+	case BGD:
+		return CallCode(880)
+	case BRB:
+		return CallCode(1246)
+	case BHR:
+		return CallCode(973)
+	case BLR:
+		return CallCode(375)
+	case BLZ:
+		return CallCode(501)
+	case BEL:
+		return CallCode(32)
+	case BEN:
+		return CallCode(229)
+	case BMU:
+		return CallCode(1441)
+	case BGR:
+		return CallCode(359)
+	case BOL:
+		return CallCode(591)
+	case BIH:
+		return CallCode(387)
+	case BWA:
+		return CallCode(267)
+	case BRA:
+		return CallCode(55)
+	case IOT:
+		return CallCode(246)
+	case BRN:
+		return CallCode(673)
+	case BFA:
+		return CallCode(226)
+	case BDI:
+		return CallCode(257)
+	case BTN:
+		return CallCode(975)
+	case VUT:
+		return CallCode(678)
+	case VAT:
+		return CallCode(39)
+	case GBR:
+		return CallCode(44)
+	case HUN:
+		return CallCode(36)
+	case VEN:
+		return CallCode(58)
+	case VGB:
+		return CallCode(1284)
+	case VIR:
+		return CallCode(1340)
+	case TLS:
+		return CallCode(670)
+	case VNM:
+		return CallCode(84)
+	case GAB:
+		return CallCode(241)
+	case HTI:
+		return CallCode(509)
+	case GUY:
+		return CallCode(592)
+	case GMB:
+		return CallCode(220)
+	case GHA:
+		return CallCode(233)
+	case GLP:
+		return CallCode(590)
+	case GTM:
+		return CallCode(502)
+	case GIN:
+		return CallCode(224)
+	case GNB:
+		return CallCode(245)
+	case DEU:
+		return CallCode(49)
+	case GIB:
+		return CallCode(350)
+	case HND:
+		return CallCode(504)
+	case HKG:
+		return CallCode(852)
+	case GRD:
+		return CallCode(1473)
+	case GRL:
+		return CallCode(299)
+	case GRC:
+		return CallCode(30)
+	case GEO:
+		return CallCode(995)
+	case GUM:
+		return CallCode(1671)
+	case DNK:
+		return CallCode(45)
+	case COD:
+		return CallCode(243)
+	case DJI:
+		return CallCode(253)
+	case DMA:
+		return CallCode(1767)
+	case DOM:
+		return CallCode(1809)
+	case EGY:
+		return CallCode(20)
+	case ZMB:
+		return CallCode(260)
+	case ESH:
+		return CallCode(212)
+	case ZWE:
+		return CallCode(263)
+	case ISR:
+		return CallCode(972)
+	case IND:
+		return CallCode(91)
+	case IDN:
+		return CallCode(62)
+	case JOR:
+		return CallCode(962)
+	case IRQ:
+		return CallCode(964)
+	case IRN:
+		return CallCode(98)
+	case IRL:
+		return CallCode(353)
+	case ISL:
+		return CallCode(354)
+	case ESP:
+		return CallCode(34)
+	case ITA:
+		return CallCode(39)
+	case YEM:
+		return CallCode(967)
+	case KAZ:
+		return CallCode(7)
+	case CYM:
+		return CallCode(1345)
+	case KHM:
+		return CallCode(855)
+	case CMR:
+		return CallCode(237)
+	case CAN:
+		return CallCode(1)
+	case QAT:
+		return CallCode(974)
+	case KEN:
+		return CallCode(254)
+	case CYP:
+		return CallCode(357)
+	case KIR:
+		return CallCode(686)
+	case CHN:
+		return CallCode(86)
+	case CCK:
+		return CallCode(672)
+	case COL:
+		return CallCode(57)
+	case COM:
+		return CallCode(269)
+	case COG:
+		return CallCode(242)
+	case PRK:
+		return CallCode(850)
+	case KOR:
+		return CallCode(82)
+	case CRI:
+		return CallCode(506)
+	case CIV:
+		return CallCode(225)
+	case CUB:
+		return CallCode(53)
+	case KWT:
+		return CallCode(965)
+	case KGZ:
+		return CallCode(996)
+	case LAO:
+		return CallCode(856)
+	case LVA:
+		return CallCode(371)
+	case LSO:
+		return CallCode(266)
+	case LBR:
+		return CallCode(231)
+	case LBN:
+		return CallCode(961)
+	case LBY:
+		return CallCode(218)
+	case LTU:
+		return CallCode(370)
+	case LIE:
+		return CallCode(423)
+	case LUX:
+		return CallCode(352)
+	case MUS:
+		return CallCode(230)
+	case MRT:
+		return CallCode(222)
+	case MDG:
+		return CallCode(261)
+	case MYT:
+		return CallCode(262)
+	case MAC:
+		return CallCode(853)
+	case MKD:
+		return CallCode(389)
+	case MWI:
+		return CallCode(265)
+	case MYS:
+		return CallCode(60)
+	case MLI:
+		return CallCode(223)
+	case MDV:
+		return CallCode(960)
+	case MLT:
+		return CallCode(356)
+	case MNP:
+		return CallCode(1670)
+	case MAR:
+		return CallCode(212)
+	case MTQ:
+		return CallCode(596)
+	case MHL:
+		return CallCode(692)
+	case MEX:
+		return CallCode(52)
+	case FSM:
+		return CallCode(691)
+	case MOZ:
+		return CallCode(258)
+	case MDA:
+		return CallCode(373)
+	case MCO:
+		return CallCode(377)
+	case MNG:
+		return CallCode(976)
+	case MSR:
+		return CallCode(1664)
+	case MMR:
+		return CallCode(95)
+	case NAM:
+		return CallCode(264)
+	case NRU:
+		return CallCode(674)
+	case NPL:
+		return CallCode(977)
+	case NER:
+		return CallCode(227)
+	case NGA:
+		return CallCode(234)
+	case NLD:
+		return CallCode(31)
+	case NIC:
+		return CallCode(505)
+	case NIU:
+		return CallCode(683)
+	case NZL:
+		return CallCode(64)
+	case NCL:
+		return CallCode(687)
+	case NOR:
+		return CallCode(47)
+	case OMN:
+		return CallCode(968)
+	case BVT:
+		return CallCode(47)
+	case IMN:
+		return CallCode(44)
+	case NFK:
+		return CallCode(672)
+	case PCN:
+		return CallCode(870)
+	case CXR:
+		return CallCode(61)
+	case SHN:
+		return CallCode(290)
+	case WLF:
+		return CallCode(681)
+	case HMD:
+		return CallCode(0)
+	case CPV:
+		return CallCode(238)
+	case COK:
+		return CallCode(682)
+	case WSM:
+		return CallCode(684)
+	case SJM:
+		return CallCode(47)
+	case TCA:
+		return CallCode(1649)
+	case UMI:
+		return CallCode(1)
+	case PAK:
+		return CallCode(92)
+	case PLW:
+		return CallCode(680)
+	case PSE:
+		return CallCode(972)
+	case PAN:
+		return CallCode(507)
+	case PNG:
+		return CallCode(675)
+	case PRY:
+		return CallCode(595)
+	case PER:
+		return CallCode(51)
+	case POL:
+		return CallCode(48)
+	case PRT:
+		return CallCode(351)
+	case PRI:
+		return CallCode(1787)
+	case REU:
+		return CallCode(262)
+	case RUS:
+		return CallCode(7)
+	case RWA:
+		return CallCode(250)
+	case ROU:
+		return CallCode(40)
+	case SLV:
+		return CallCode(503)
+	case SMR:
+		return CallCode(378)
+	case STP:
+		return CallCode(239)
+	case SAU:
+		return CallCode(966)
+	case SWZ:
+		return CallCode(268)
+	case SYC:
+		return CallCode(248)
+	case SEN:
+		return CallCode(221)
+	case SPM:
+		return CallCode(508)
+	case VCT:
+		return CallCode(1784)
+	case KNA:
+		return CallCode(1869)
+	case LCA:
+		return CallCode(1758)
+	case SGP:
+		return CallCode(65)
+	case SYR:
+		return CallCode(963)
+	case SVK:
+		return CallCode(421)
+	case SVN:
+		return CallCode(386)
+	case USA:
+		return CallCode(1)
+	case SLB:
+		return CallCode(677)
+	case SOM:
+		return CallCode(252)
+	case SDN:
+		return CallCode(249)
+	case SUR:
+		return CallCode(597)
+	case SLE:
+		return CallCode(232)
+	case TJK:
+		return CallCode(992)
+	case TWN:
+		return CallCode(886)
+	case THA:
+		return CallCode(66)
+	case TZA:
+		return CallCode(255)
+	case TGO:
+		return CallCode(228)
+	case TKL:
+		return CallCode(690)
+	case TON:
+		return CallCode(676)
+	case TTO:
+		return CallCode(1868)
+	case TUV:
+		return CallCode(688)
+	case TUN:
+		return CallCode(216)
+	case TKM:
+		return CallCode(7370)
+	case TUR:
+		return CallCode(90)
+	case UGA:
+		return CallCode(256)
+	case UZB:
+		return CallCode(998)
+	case UKR:
+		return CallCode(380)
+	case URY:
+		return CallCode(598)
+	case FRO:
+		return CallCode(298)
+	case FJI:
+		return CallCode(679)
+	case PHL:
+		return CallCode(63)
+	case FIN:
+		return CallCode(358)
+	case FLK:
+		return CallCode(500)
+	case FRA:
+		return CallCode(33)
+	case GUF:
+		return CallCode(594)
+	case PYF:
+		return CallCode(689)
+	case ATF:
+		return CallCode(1)
+	case HRV:
+		return CallCode(385)
+	case CAF:
+		return CallCode(236)
+	case TCD:
+		return CallCode(235)
+	case CZE:
+		return CallCode(420)
+	case CHL:
+		return CallCode(56)
+	case CHE:
+		return CallCode(41)
+	case SWE:
+		return CallCode(46)
+	case LKA:
+		return CallCode(94)
+	case ECU:
+		return CallCode(593)
+	case GNQ:
+		return CallCode(240)
+	case ERI:
+		return CallCode(291)
+	case EST:
+		return CallCode(372)
+	case ETH:
+		return CallCode(251)
+	case ZAF:
+		return CallCode(27)
+	case YUG:
+		return CallCode(38)
+	case SGS:
+		return CallCode(500)
+	case JAM:
+		return CallCode(1876)
+	case MNE:
+		return CallCode(382)
+	case BLM:
+		return CallCode(590)
+	case SXM:
+		return CallCode(721)
+	case SRB:
+		return CallCode(381)
+	case ALA:
+		return CallCode(358)
+	case BES:
+		return CallCode(599)
+	case GGY:
+		return CallCode(44)
+	case JEY:
+		return CallCode(44)
+	case CUW:
+		return CallCode(599)
+	case MAF:
+		return CallCode(590)
+	case SSD:
+		return CallCode(211)
+	case JPN:
+		return CallCode(81)
+	}
+	return 0
+}
+
+// Region - return Region code ot the country
+func (c CountryCode) Region() RegionCode {
+	switch c {
+	case AUS:
+		return RegionOC
+	case AUT:
+		return RegionEU
+	case AZE:
+		return RegionAS
+	case ALB:
+		return RegionEU
+	case DZA:
+		return RegionAF
+	case ASM:
+		return RegionOC
+	case AIA:
+		return RegionNA
+	case AGO:
+		return RegionAF
+	case AND:
+		return RegionEU
+	case ATA:
+		return RegionAN
+	case ATG:
+		return RegionNA
+	case ANT:
+		return RegionNA
+	case ARE:
+		return RegionAS
+	case ARG:
+		return RegionSA
+	case ARM:
+		return RegionAS
+	case ABW:
+		return RegionNA
+	case AFG:
+		return RegionAS
+	case BHS:
+		return RegionNA
+	case BGD:
+		return RegionAS
+	case BRB:
+		return RegionNA
+	case BHR:
+		return RegionAS
+	case BLR:
+		return RegionEU
+	case BLZ:
+		return RegionNA
+	case BEL:
+		return RegionEU
+	case BEN:
+		return RegionAF
+	case BMU:
+		return RegionNA
+	case BGR:
+		return RegionEU
+	case BOL:
+		return RegionSA
+	case BIH:
+		return RegionEU
+	case BWA:
+		return RegionAF
+	case BRA:
+		return RegionSA
+	case IOT:
+		return RegionAS
+	case BRN:
+		return RegionAS
+	case BFA:
+		return RegionAF
+	case BDI:
+		return RegionAF
+	case BTN:
+		return RegionAS
+	case VUT:
+		return RegionOC
+	case VAT:
+		return RegionEU
+	case GBR:
+		return RegionEU
+	case HUN:
+		return RegionEU
+	case VEN:
+		return RegionSA
+	case VGB:
+		return RegionNA
+	case VIR:
+		return RegionNA
+	case TLS:
+		return RegionAS
+	case VNM:
+		return RegionAS
+	case GAB:
+		return RegionAF
+	case HTI:
+		return RegionNA
+	case GUY:
+		return RegionSA
+	case GMB:
+		return RegionAF
+	case GHA:
+		return RegionAF
+	case GLP:
+		return RegionNA
+	case GTM:
+		return RegionNA
+	case GIN:
+		return RegionAF
+	case GNB:
+		return RegionAF
+	case DEU:
+		return RegionEU
+	case GIB:
+		return RegionEU
+	case HND:
+		return RegionNA
+	case HKG:
+		return RegionAS
+	case GRD:
+		return RegionNA
+	case GRL:
+		return RegionNA
+	case GRC:
+		return RegionEU
+	case GEO:
+		return RegionAS
+	case GUM:
+		return RegionOC
+	case DNK:
+		return RegionEU
+	case COD:
+		return RegionAF
+	case DJI:
+		return RegionAF
+	case DMA:
+		return RegionNA
+	case DOM:
+		return RegionNA
+	case EGY:
+		return RegionAF
+	case ZMB:
+		return RegionAF
+	case ESH:
+		return RegionAF
+	case ZWE:
+		return RegionAF
+	case ISR:
+		return RegionAS
+	case IND:
+		return RegionAS
+	case IDN:
+		return RegionAS
+	case JOR:
+		return RegionAS
+	case IRQ:
+		return RegionAS
+	case IRN:
+		return RegionAS
+	case IRL:
+		return RegionEU
+	case ISL:
+		return RegionEU
+	case ESP:
+		return RegionEU
+	case ITA:
+		return RegionEU
+	case YEM:
+		return RegionAS
+	case KAZ:
+		return RegionAS
+	case CYM:
+		return RegionNA
+	case KHM:
+		return RegionAS
+	case CMR:
+		return RegionAF
+	case CAN:
+		return RegionNA
+	case QAT:
+		return RegionAS
+	case KEN:
+		return RegionAF
+	case CYP:
+		return RegionAS
+	case KIR:
+		return RegionOC
+	case CHN:
+		return RegionAS
+	case CCK:
+		return RegionAS
+	case COL:
+		return RegionSA
+	case COM:
+		return RegionAF
+	case COG:
+		return RegionAF
+	case PRK:
+		return RegionAS
+	case KOR:
+		return RegionAS
+	case CRI:
+		return RegionNA
+	case CIV:
+		return RegionAF
+	case CUB:
+		return RegionNA
+	case KWT:
+		return RegionAS
+	case KGZ:
+		return RegionAS
+	case LAO:
+		return RegionAS
+	case LVA:
+		return RegionEU
+	case LSO:
+		return RegionAF
+	case LBR:
+		return RegionAF
+	case LBN:
+		return RegionAS
+	case LBY:
+		return RegionAF
+	case LTU:
+		return RegionEU
+	case LIE:
+		return RegionEU
+	case LUX:
+		return RegionEU
+	case MUS:
+		return RegionAF
+	case MRT:
+		return RegionAF
+	case MDG:
+		return RegionAF
+	case MYT:
+		return RegionAF
+	case MAC:
+		return RegionAS
+	case MKD:
+		return RegionEU
+	case MWI:
+		return RegionAF
+	case MYS:
+		return RegionAS
+	case MLI:
+		return RegionAF
+	case MDV:
+		return RegionAS
+	case MLT:
+		return RegionEU
+	case MNP:
+		return RegionOC
+	case MAR:
+		return RegionAF
+	case MTQ:
+		return RegionNA
+	case MHL:
+		return RegionOC
+	case MEX:
+		return RegionNA
+	case FSM:
+		return RegionOC
+	case MOZ:
+		return RegionAF
+	case MDA:
+		return RegionEU
+	case MCO:
+		return RegionEU
+	case MNG:
+		return RegionAS
+	case MSR:
+		return RegionNA
+	case MMR:
+		return RegionAS
+	case NAM:
+		return RegionAF
+	case NRU:
+		return RegionOC
+	case NPL:
+		return RegionAS
+	case NER:
+		return RegionAF
+	case NGA:
+		return RegionAF
+	case NLD:
+		return RegionEU
+	case NIC:
+		return RegionNA
+	case NIU:
+		return RegionOC
+	case NZL:
+		return RegionOC
+	case NCL:
+		return RegionOC
+	case NOR:
+		return RegionEU
+	case OMN:
+		return RegionAS
+	case BVT:
+		return RegionAN
+	case IMN:
+		return RegionEU
+	case NFK:
+		return RegionOC
+	case PCN:
+		return RegionOC
+	case CXR:
+		return RegionAS
+	case SHN:
+		return RegionAF
+	case WLF:
+		return RegionOC
+	case HMD:
+		return RegionAN
+	case CPV:
+		return RegionAF
+	case COK:
+		return RegionOC
+	case WSM:
+		return RegionOC
+	case SJM:
+		return RegionEU
+	case TCA:
+		return RegionNA
+	case UMI:
+		return RegionOC
+	case PAK:
+		return RegionAS
+	case PLW:
+		return RegionOC
+	case PSE:
+		return RegionAS
+	case PAN:
+		return RegionNA
+	case PNG:
+		return RegionOC
+	case PRY:
+		return RegionSA
+	case PER:
+		return RegionSA
+	case POL:
+		return RegionEU
+	case PRT:
+		return RegionEU
+	case PRI:
+		return RegionNA
+	case REU:
+		return RegionAF
+	case RUS:
+		return RegionEU
+	case RWA:
+		return RegionAF
+	case ROU:
+		return RegionEU
+	case SLV:
+		return RegionNA
+	case SMR:
+		return RegionEU
+	case STP:
+		return RegionAF
+	case SAU:
+		return RegionAS
+	case SWZ:
+		return RegionAF
+	case SYC:
+		return RegionAF
+	case SEN:
+		return RegionAF
+	case SPM:
+		return RegionNA
+	case VCT:
+		return RegionNA
+	case KNA:
+		return RegionNA
+	case LCA:
+		return RegionNA
+	case SGP:
+		return RegionAS
+	case SYR:
+		return RegionAS
+	case SVK:
+		return RegionEU
+	case SVN:
+		return RegionEU
+	case USA:
+		return RegionNA
+	case SLB:
+		return RegionOC
+	case SOM:
+		return RegionAF
+	case SDN:
+		return RegionAF
+	case SUR:
+		return RegionSA
+	case SLE:
+		return RegionAF
+	case TJK:
+		return RegionAS
+	case TWN:
+		return RegionAS
+	case THA:
+		return RegionAS
+	case TZA:
+		return RegionAF
+	case TGO:
+		return RegionAF
+	case TKL:
+		return RegionOC
+	case TON:
+		return RegionOC
+	case TTO:
+		return RegionNA
+	case TUV:
+		return RegionOC
+	case TUN:
+		return RegionAF
+	case TKM:
+		return RegionAS
+	case TUR:
+		return RegionEU
+	case UGA:
+		return RegionAF
+	case UZB:
+		return RegionAS
+	case UKR:
+		return RegionEU
+	case URY:
+		return RegionSA
+	case FRO:
+		return RegionEU
+	case FJI:
+		return RegionOC
+	case PHL:
+		return RegionAS
+	case FIN:
+		return RegionEU
+	case FLK:
+		return RegionSA
+	case FRA:
+		return RegionEU
+	case GUF:
+		return RegionSA
+	case PYF:
+		return RegionOC
+	case ATF:
+		return RegionAN
+	case HRV:
+		return RegionEU
+	case CAF:
+		return RegionAF
+	case TCD:
+		return RegionAF
+	case CZE:
+		return RegionEU
+	case CHL:
+		return RegionSA
+	case CHE:
+		return RegionEU
+	case SWE:
+		return RegionEU
+	case LKA:
+		return RegionAS
+	case ECU:
+		return RegionSA
+	case GNQ:
+		return RegionAF
+	case ERI:
+		return RegionAF
+	case EST:
+		return RegionEU
+	case ETH:
+		return RegionAF
+	case ZAF:
+		return RegionAF
+	case YUG:
+		return RegionEU
+	case SGS:
+		return RegionAN
+	case JAM:
+		return RegionNA
+	case MNE:
+		return RegionEU
+	case BLM:
+		return RegionNA
+	case SXM:
+		return RegionNA
+	case SRB:
+		return RegionEU
+	case ALA:
+		return RegionEU
+	case BES:
+		return RegionNA
+	case GGY:
+		return RegionEU
+	case JEY:
+		return RegionEU
+	case CUW:
+		return RegionOC
+	case MAF:
+		return RegionNA
+	case SSD:
+		return RegionAF
+	case JPN:
+		return RegionAS
+	}
+	return RegionUnknown
+}
+
+// Capital - return a capital of country
+func (c CountryCode) Capital() CapitalCode {
+	switch c {
+	case AUS:
+		return CapitalAU
+	case AUT:
+		return CapitalAT
+	case AZE:
+		return CapitalAZ
+	case ALB:
+		return CapitalAL
+	case DZA:
+		return CapitalDZ
+	case ASM:
+		return CapitalAS
+	case AIA:
+		return CapitalAI
+	case AGO:
+		return CapitalAO
+	case AND:
+		return CapitalAD
+	case ATA:
+		return CapitalAQ
+	case ATG:
+		return CapitalAG
+	case ANT:
+		return CapitalAN
+	case ARE:
+		return CapitalAE
+	case ARG:
+		return CapitalAR
+	case ARM:
+		return CapitalAM
+	case ABW:
+		return CapitalAW
+	case AFG:
+		return CapitalAF
+	case BHS:
+		return CapitalBS
+	case BGD:
+		return CapitalBD
+	case BRB:
+		return CapitalBB
+	case BHR:
+		return CapitalBH
+	case BLR:
+		return CapitalBY
+	case BLZ:
+		return CapitalBZ
+	case BEL:
+		return CapitalBE
+	case BEN:
+		return CapitalBJ
+	case BMU:
+		return CapitalBM
+	case BGR:
+		return CapitalBG
+	case BOL:
+		return CapitalBO
+	case BIH:
+		return CapitalBA
+	case BWA:
+		return CapitalBW
+	case BRA:
+		return CapitalBR
+	case IOT:
+		return CapitalIO
+	case BRN:
+		return CapitalBN
+	case BFA:
+		return CapitalBF
+	case BDI:
+		return CapitalBI
+	case BTN:
+		return CapitalBT
+	case VUT:
+		return CapitalVU
+	case VAT:
+		return CapitalVA
+	case GBR:
+		return CapitalGB
+	case HUN:
+		return CapitalHU
+	case VEN:
+		return CapitalVE
+	case VGB:
+		return CapitalVG
+	case VIR:
+		return CapitalVI
+	case TLS:
+		return CapitalTL
+	case VNM:
+		return CapitalVN
+	case GAB:
+		return CapitalGA
+	case HTI:
+		return CapitalHT
+	case GUY:
+		return CapitalGY
+	case GMB:
+		return CapitalGM
+	case GHA:
+		return CapitalGH
+	case GLP:
+		return CapitalGP
+	case GTM:
+		return CapitalGT
+	case GIN:
+		return CapitalGN
+	case GNB:
+		return CapitalGW
+	case DEU:
+		return CapitalDE
+	case GIB:
+		return CapitalGI
+	case HND:
+		return CapitalHN
+	case HKG:
+		return CapitalHK
+	case GRD:
+		return CapitalGD
+	case GRL:
+		return CapitalGL
+	case GRC:
+		return CapitalGR
+	case GEO:
+		return CapitalGE
+	case GUM:
+		return CapitalGU
+	case DNK:
+		return CapitalDK
+	case COD:
+		return CapitalCD
+	case DJI:
+		return CapitalDJ
+	case DMA:
+		return CapitalDM
+	case DOM:
+		return CapitalDO
+	case EGY:
+		return CapitalEG
+	case ZMB:
+		return CapitalZM
+	case ESH:
+		return CapitalEH
+	case ZWE:
+		return CapitalZW
+	case ISR:
+		return CapitalIL
+	case IND:
+		return CapitalIN
+	case IDN:
+		return CapitalID
+	case JOR:
+		return CapitalJO
+	case IRQ:
+		return CapitalIQ
+	case IRN:
+		return CapitalIR
+	case IRL:
+		return CapitalIE
+	case ISL:
+		return CapitalIS
+	case ESP:
+		return CapitalES
+	case ITA:
+		return CapitalIT
+	case YEM:
+		return CapitalYE
+	case KAZ:
+		return CapitalKZ
+	case CYM:
+		return CapitalKY
+	case KHM:
+		return CapitalKH
+	case CMR:
+		return CapitalCM
+	case CAN:
+		return CapitalCA
+	case QAT:
+		return CapitalQA
+	case KEN:
+		return CapitalKE
+	case CYP:
+		return CapitalCY
+	case KIR:
+		return CapitalKI
+	case CHN:
+		return CapitalCN
+	case CCK:
+		return CapitalCC
+	case COL:
+		return CapitalCO
+	case COM:
+		return CapitalKM
+	case COG:
+		return CapitalCG
+	case PRK:
+		return CapitalKP
+	case KOR:
+		return CapitalKR
+	case CRI:
+		return CapitalCR
+	case CIV:
+		return CapitalCI
+	case CUB:
+		return CapitalCU
+	case KWT:
+		return CapitalKW
+	case KGZ:
+		return CapitalKG
+	case LAO:
+		return CapitalLA
+	case LVA:
+		return CapitalLV
+	case LSO:
+		return CapitalLS
+	case LBR:
+		return CapitalLR
+	case LBN:
+		return CapitalLB
+	case LBY:
+		return CapitalLY
+	case LTU:
+		return CapitalLT
+	case LIE:
+		return CapitalLI
+	case LUX:
+		return CapitalLU
+	case MUS:
+		return CapitalMU
+	case MRT:
+		return CapitalMR
+	case MDG:
+		return CapitalMG
+	case MYT:
+		return CapitalYT
+	case MAC:
+		return CapitalMO
+	case MKD:
+		return CapitalMK
+	case MWI:
+		return CapitalMW
+	case MYS:
+		return CapitalMY
+	case MLI:
+		return CapitalML
+	case MDV:
+		return CapitalMV
+	case MLT:
+		return CapitalMT
+	case MNP:
+		return CapitalMP
+	case MAR:
+		return CapitalMA
+	case MTQ:
+		return CapitalMQ
+	case MHL:
+		return CapitalMH
+	case MEX:
+		return CapitalMX
+	case FSM:
+		return CapitalFM
+	case MOZ:
+		return CapitalMZ
+	case MDA:
+		return CapitalMD
+	case MCO:
+		return CapitalMC
+	case MNG:
+		return CapitalMN
+	case MSR:
+		return CapitalMS
+	case MMR:
+		return CapitalMM
+	case NAM:
+		return CapitalNA
+	case NRU:
+		return CapitalNR
+	case NPL:
+		return CapitalNP
+	case NER:
+		return CapitalNE
+	case NGA:
+		return CapitalNG
+	case NLD:
+		return CapitalNL
+	case NIC:
+		return CapitalNI
+	case NIU:
+		return CapitalNU
+	case NZL:
+		return CapitalNZ
+	case NCL:
+		return CapitalNC
+	case NOR:
+		return CapitalNO
+	case OMN:
+		return CapitalOM
+	case BVT:
+		return CapitalBV
+	case IMN:
+		return CapitalIM
+	case NFK:
+		return CapitalNF
+	case PCN:
+		return CapitalPN
+	case CXR:
+		return CapitalCX
+	case SHN:
+		return CapitalSH
+	case WLF:
+		return CapitalWF
+	case HMD:
+		return CapitalHM
+	case CPV:
+		return CapitalCV
+	case COK:
+		return CapitalCK
+	case WSM:
+		return CapitalWS
+	case SJM:
+		return CapitalSJ
+	case TCA:
+		return CapitalTC
+	case UMI:
+		return CapitalUM
+	case PAK:
+		return CapitalPK
+	case PLW:
+		return CapitalPW
+	case PSE:
+		return CapitalPS
+	case PAN:
+		return CapitalPA
+	case PNG:
+		return CapitalPG
+	case PRY:
+		return CapitalPY
+	case PER:
+		return CapitalPE
+	case POL:
+		return CapitalPL
+	case PRT:
+		return CapitalPT
+	case PRI:
+		return CapitalPR
+	case REU:
+		return CapitalRE
+	case RUS:
+		return CapitalRU
+	case RWA:
+		return CapitalRW
+	case ROU:
+		return CapitalRO
+	case SLV:
+		return CapitalSV
+	case SMR:
+		return CapitalSM
+	case STP:
+		return CapitalST
+	case SAU:
+		return CapitalSA
+	case SWZ:
+		return CapitalSZ
+	case SYC:
+		return CapitalSC
+	case SEN:
+		return CapitalSN
+	case SPM:
+		return CapitalPM
+	case VCT:
+		return CapitalVC
+	case KNA:
+		return CapitalKN
+	case LCA:
+		return CapitalLC
+	case SGP:
+		return CapitalSG
+	case SYR:
+		return CapitalSY
+	case SVK:
+		return CapitalSK
+	case SVN:
+		return CapitalSI
+	case USA:
+		return CapitalUS
+	case SLB:
+		return CapitalSB
+	case SOM:
+		return CapitalSO
+	case SDN:
+		return CapitalSD
+	case SUR:
+		return CapitalSR
+	case SLE:
+		return CapitalSL
+	case TJK:
+		return CapitalTJ
+	case TWN:
+		return CapitalTW
+	case THA:
+		return CapitalTH
+	case TZA:
+		return CapitalTZ
+	case TGO:
+		return CapitalTG
+	case TKL:
+		return CapitalTK
+	case TON:
+		return CapitalTO
+	case TTO:
+		return CapitalTT
+	case TUV:
+		return CapitalTV
+	case TUN:
+		return CapitalTN
+	case TKM:
+		return CapitalTM
+	case TUR:
+		return CapitalTR
+	case UGA:
+		return CapitalUG
+	case UZB:
+		return CapitalUZ
+	case UKR:
+		return CapitalUA
+	case URY:
+		return CapitalUY
+	case FRO:
+		return CapitalFO
+	case FJI:
+		return CapitalFJ
+	case PHL:
+		return CapitalPH
+	case FIN:
+		return CapitalFI
+	case FLK:
+		return CapitalFK
+	case FRA:
+		return CapitalFR
+	case GUF:
+		return CapitalGF
+	case PYF:
+		return CapitalPF
+	case ATF:
+		return CapitalTF
+	case HRV:
+		return CapitalHR
+	case CAF:
+		return CapitalCF
+	case TCD:
+		return CapitalTD
+	case CZE:
+		return CapitalCZ
+	case CHL:
+		return CapitalCL
+	case CHE:
+		return CapitalCH
+	case SWE:
+		return CapitalSE
+	case LKA:
+		return CapitalLK
+	case ECU:
+		return CapitalEC
+	case GNQ:
+		return CapitalGQ
+	case ERI:
+		return CapitalER
+	case EST:
+		return CapitalEE
+	case ETH:
+		return CapitalET
+	case ZAF:
+		return CapitalZA
+	case YUG:
+		return CapitalYU
+	case SGS:
+		return CapitalGS
+	case JAM:
+		return CapitalJM
+	case MNE:
+		return CapitalME
+	case BLM:
+		return CapitalBL
+	case SXM:
+		return CapitalSX
+	case SRB:
+		return CapitalRS
+	case ALA:
+		return CapitalAX
+	case BES:
+		return CapitalBQ
+	case GGY:
+		return CapitalGG
+	case JEY:
+		return CapitalJE
+	case CUW:
+		return CapitalCW
+	case MAF:
+		return CapitalMF
+	case SSD:
+		return CapitalSS
+	case JPN:
+		return CapitalJP
+	}
+	return CapitalUnknown
+}
+
+// Info - return all info about country as Country struct
+func (c CountryCode) Info() *Country {
+	return &Country{
+		Name:     c.String(),
+		Alpha2:   c.Alpha2(),
+		Alpha3:   c.Alpha3(),
+		Emoji:    c.Emoji(),
+		Code:     c,
+		Capital:  c.Capital(),
+		Currency: c.Currency(),
+		CallCode: c.CallCode(),
+		Region:   c.Region(),
+	}
+}
+
+// Type implements Typer interface.
+func (country *Country) Type() string {
+	return TypeCountry
+}
+
+// Value implements database/sql/driver.Valuer
+func (country Country) Value() (driver.Value, error) {
+	return json.Marshal(country)
+}
+
+// Scan implements database/sql.Scanner
+func (country *Country) Scan(src interface{}) error {
+	if country == nil {
+		return fmt.Errorf("countries::Scan: Country scan err: country == nil")
+	}
+	switch src := src.(type) {
+	case *Country:
+		*country = *src
+	case Country:
+		*country = src
+	case nil:
+		country = nil
+	default:
+		return fmt.Errorf("countries::Scan: Country scan err: unexpected value of type %T for %T", src, *country)
+	}
+	return nil
 }
