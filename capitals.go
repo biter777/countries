@@ -1,5 +1,11 @@
 package countries
 
+import (
+	"database/sql/driver"
+	"encoding/json"
+	"fmt"
+)
+
 // CapitalCode - Capital code
 type CapitalCode int64 // int64 for database/sql/driver.Valuer compatibility
 
@@ -1306,6 +1312,29 @@ func (c CapitalCode) Info() *Capital {
 // Type implements Typer interface
 func (c Capital) Type() string {
 	return TypeCapital
+}
+
+// Value implements database/sql/driver.Valuer
+func (c Capital) Value() (driver.Value, error) {
+	return json.Marshal(c)
+}
+
+// Scan implements database/sql.Scanner
+func (c *Capital) Scan(src interface{}) error {
+	if c == nil {
+		return fmt.Errorf("countries::Scan: Capital scan err: capital == nil")
+	}
+	switch src := src.(type) {
+	case *Capital:
+		*c = *src
+	case Capital:
+		*c = src
+	case nil:
+		c = nil
+	default:
+		return fmt.Errorf("countries::Scan: Capital scan err: unexpected value of type %T for %T", src, *c)
+	}
+	return nil
 }
 
 // AllCapitals - return all capital codes
