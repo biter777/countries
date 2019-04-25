@@ -1,11 +1,4 @@
 // Countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 countries codes and names (on eng and rus), currency designators, calling phone codes, countries capitals and regions (UN M.49 code), Very light and super FAST, NO maps[], NO slices[], NO init() func, NO external files and data, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1 and ISO-4217.
-package countries
-
-import (
-	"database/sql/driver"
-	"encoding/json"
-	"fmt"
-)
 
 /*********************** E X A M P L E ***********************\
 func main() {
@@ -39,6 +32,14 @@ func main() {
 	fmt.Printf("Country emoji: %v\n", japanInfo.Emoji)
 }
 \************************* E N J O Y ***********************/
+
+package countries
+
+import (
+	"database/sql/driver"
+	"encoding/json"
+	"fmt"
+)
 
 // CountryCode - country code (250 countries). Three codes present, for example Russia == RU == RUS == 643.
 type CountryCode int64 // int64 for database/sql/driver.Valuer compatibility
