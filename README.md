@@ -42,7 +42,7 @@ func main() {
 	fmt.Printf("Country name in english: %v\n", japanInfo.Name)
 	fmt.Printf("Country digit code: %d\n", japanInfo.Code)
 	fmt.Printf("Country Alpha-2 code: %v\n", japanInfo.Alpha2)
-	fmt.Printf("Country Alpha-3 code: %v\n", japanInfo.Alpha3)
+	fmt.Printf("Country Alpha-3 code: %v\n", japanInfo.Alpha3) 
 	fmt.Printf("Country Capital: %v\n", japanInfo.Capital)
 	fmt.Printf("Country region name: %v\n", japanInfo.Region)
 	fmt.Printf("Country region code: %d\n", japanInfo.Region)
