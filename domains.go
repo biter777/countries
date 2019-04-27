@@ -656,3 +656,8 @@ func AllDomainsInfo() []*Domain {
 	}
 	return domains
 }
+
+// TotalDomains - returns number of domains in the package, countries.TotalDomains() == len(countries.AllDomains()) but static value for perfomance
+func TotalDomains() int {
+	return 263
+}
