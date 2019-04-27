@@ -987,8 +987,8 @@ func (c CallCode) Countries() []CountryCode {
 	return []CountryCode{Unknown}
 }
 
-// IsCorrect - returns true, if code is correct
-func (c CallCode) IsCorrect() bool {
+// IsValid - returns true, if code is correct
+func (c CallCode) IsValid() bool {
 	return c.Countries()[0] != Unknown
 }
 

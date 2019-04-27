@@ -89,8 +89,8 @@ func (c RegionCode) StringRus() string {
 	return UnknownMsg
 }
 
-// IsCorrect - returns true, if code is correct
-func (c RegionCode) IsCorrect() bool {
+// IsValid - returns true, if code is correct
+func (c RegionCode) IsValid() bool {
 	return c.String() != UnknownMsg
 }
 
@@ -134,7 +134,7 @@ func (r *Region) Scan(src interface{}) error {
 	return nil
 }
 
-// AllRegions - returns all Regions
+// AllRegions - returns all regions codes
 func AllRegions() []RegionCode {
 	return []RegionCode{
 		RegionAF,
@@ -147,7 +147,7 @@ func AllRegions() []RegionCode {
 	}
 }
 
-// AllRegions - return all currencies as []Region
+// AllRegionsInfo - return all regions as []*Region
 func AllRegionsInfo() []*Region {
 	all := AllRegions()
 	regions := make([]*Region, 0, len(all))

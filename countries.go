@@ -5802,7 +5802,7 @@ func ByName(name string) CountryCode {
 	return Unknown
 }
 
-// IsCorrect - returns true, if code is correct
-func (c CountryCode) IsCorrect() bool {
+// IsValid - returns true, if code is correct
+func (c CountryCode) IsValid() bool {
 	return c.Alpha2() != UnknownMsg
 }

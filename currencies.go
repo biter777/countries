@@ -1084,8 +1084,8 @@ func (c CurrencyCode) Alpha() string {
 	return UnknownMsg
 }
 
-// IsCorrect - returns true, if code is correct
-func (c CurrencyCode) IsCorrect() bool {
+// IsValid - returns true, if code is correct
+func (c CurrencyCode) IsValid() bool {
 	return c.Alpha() != UnknownMsg
 }
 
@@ -2346,3 +2346,4 @@ func CurrencyCodeByName(name string) CurrencyCode {
 	}
 	return CurrencyUnknown
 }
+

@@ -1301,8 +1301,8 @@ func (c CapitalCode) Country() CountryCode {
 	return Unknown
 }
 
-// IsCorrect - returns true, if code is correct
-func (c CapitalCode) IsCorrect() bool {
+// IsValid - returns true, if code is correct
+func (c CapitalCode) IsValid() bool {
 	return c.String() != UnknownMsg
 }
 
