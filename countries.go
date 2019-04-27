@@ -95,6 +95,7 @@ const UnknownMsg = "Unknown"
 // Digit ISO 3166-1. Three codes present, for example Russia == RU == RUS == 643.
 const (
 	Unknown                                CountryCode = 0
+	Internation                            CountryCode = 999
 	Albania                                CountryCode = 8
 	Algeria                                CountryCode = 12
 	AmericanSamoa                          CountryCode = 16
@@ -1911,6 +1912,8 @@ func (c CountryCode) StringRus() string {
 		return "Черногория"
 	case 728:
 		return "Южный Судан"
+	case Internation:
+		return "Internation"
 	}
 	return UnknownMsg
 }

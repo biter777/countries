@@ -23,8 +23,20 @@ const TypeDomain = "countries.Domain"
 // TypeDomainCode for Typer interface
 const TypeDomainCode = "countries.DomainCode"
 
+// Domains codes
 const (
 	DomainUnknown DomainCode = 0
+	DomainArpa    DomainCode = DomainCode(Internation)
+	DomainCom     DomainCode = DomainCode(Internation + 1)
+	DomainOrg     DomainCode = DomainCode(Internation + 2)
+	DomainNet     DomainCode = DomainCode(Internation + 3)
+	DomainEdu     DomainCode = DomainCode(Internation + 3)
+	DomainGov     DomainCode = DomainCode(Internation + 4)
+	DomainMil     DomainCode = DomainCode(Internation + 5)
+	DomainTest    DomainCode = DomainCode(Internation + 6)
+	DomainBiz     DomainCode = DomainCode(Internation + 7)
+	DomainInfo    DomainCode = DomainCode(Internation + 8)
+	DomainName    DomainCode = DomainCode(Internation + 9)
 	DomainAU      DomainCode = DomainCode(AU)
 	DomainAT      DomainCode = DomainCode(AT)
 	DomainAZ      DomainCode = DomainCode(AZ)
@@ -293,6 +305,10 @@ func (c DomainCode) String() string {
 		return ".uk"
 	case DomainEG:
 		return UnknownMsg
+	}
+
+	if c >= 999 {
+		c = DomainCode(999)
 	}
 
 	a2 := CountryCode(c).Alpha2()
