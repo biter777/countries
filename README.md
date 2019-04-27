@@ -67,6 +67,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer db.Close()
 	err = db.Create(user).Error
 	if err != nil {
 		panic(err)

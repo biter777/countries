@@ -56,6 +56,7 @@ Database usage
 	if err != nil {
 		panic(err)
 	}
+	defer db.Close()
 	db.Create(user)
 
 Contributing

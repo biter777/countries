@@ -50,6 +50,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer db.Close()
 	err = db.Create(user).Error
 	if err != nil {
 		panic(err)
@@ -5271,6 +5272,9 @@ func textPrepare(text string) string {
 	text = strings.Replace(text, "_", "", -1)
 	text = strings.Replace(text, ".", "", -1)
 	text = strings.Replace(text, ",", "", -1)
+	text = strings.Replace(text, ":", "", -1)
+	text = strings.Replace(text, ";", "", -1)
+	text = strings.Replace(text, "+", "", -1)
 	text = strings.Replace(text, "'", "", -1)
 	text = strings.Replace(text, "(", "", -1)
 	text = strings.Replace(text, ")", "", -1)
