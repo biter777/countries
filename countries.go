@@ -81,6 +81,7 @@ type Country struct {
 	Currency CurrencyCode `json:"currency"`
 	Capital  CapitalCode  `json:"capital"`
 	CallCode CallCode     `json:"callingCode"`
+	Domain   DomainCode   `json:"domain"`
 	Region   RegionCode   `json:"region"`
 }
 
@@ -4192,6 +4193,15 @@ func (c CountryCode) CallCode() CallCode {
 	return 0
 }
 
+// Domain - return domain code of country
+func (c CountryCode) Domain() DomainCode {
+	domain := DomainCode(c)
+	if domain.IsValid() {
+		return domain
+	}
+	return DomainUnknown
+}
+
 // Region - return Region code ot the country
 func (c CountryCode) Region() RegionCode {
 	switch c {
@@ -5221,6 +5231,7 @@ func (c CountryCode) Info() *Country {
 		Capital:  c.Capital(),
 		Currency: c.Currency(),
 		CallCode: c.CallCode(),
+		Domain:   c.Domain(),
 		Region:   c.Region(),
 	}
 }
