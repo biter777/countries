@@ -86,6 +86,11 @@ type Country struct {
 	Region   RegionCode   `json:"region"`
 }
 
+// Typer - typer interface, provide a name of type
+type Typer interface {
+	Type() string
+}
+
 // TypeCountryCode for Typer interface
 const TypeCountryCode = "countries.CountryCode"
 
