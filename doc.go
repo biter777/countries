@@ -12,6 +12,7 @@ Usage
 	fmt.Printf("Country Alpha-3 code: %v\n", countryJapan.Alpha3())
 	fmt.Printf("Country Capital: %v\n", countryJapan.Capital())
 	fmt.Printf("Country call code: %v\n", countryJapan.CallCode())
+	fmt.Printf("Country domain: %v\n", countryJapan.Domain())
 	fmt.Printf("Country region name: %v\n", countryJapan.Region())
 	fmt.Printf("Country region code: %d\n", countryJapan.Region())
 	fmt.Printf("Country emoji: %v\n\n", countryJapan.Emoji())
