@@ -1,4 +1,4 @@
-// Countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 countries codes and names (on eng and rus), currency designators, calling phone codes, countries capitals and regions (UN M.49 code), Very light and super FAST, NO maps[], NO slices[], NO init() func, NO external files and data, NO interface{}, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1 and ISO-4217.
+// Countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 countries codes and names (on eng and rus), currency designators, calling phone codes, countries capitals and regions (UN M.49 code), countries domains (ccTLD), Very FAST, NO maps[], NO slices[], NO init() func, NO external files and data, NO interface{}, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1 and ISO-4217.
 
 /*********************** E X A M P L E ***********************\
 func main() {
@@ -32,6 +32,28 @@ func main() {
 	fmt.Printf("Country region name: %v\n", japanInfo.Region)
 	fmt.Printf("Country region code: %d\n", japanInfo.Region)
 	fmt.Printf("Country emoji: %v\n", japanInfo.Emoji)
+
+	// Detect by name
+	country := countries.ByName("angola")
+	fmt.Printf("Country digit code: %d\n", country)
+	fmt.Printf("Country Alpha-2 code: %v\n", country.Alpha2())
+	fmt.Printf("Country Alpha-3 code: %v\n", country.Alpha3())
+
+	// Database usage
+	type User struct {
+		gorm.Model
+		Name    string
+		Country countries.CountryCode
+	}
+	user := &User{Name: "Helen", Country: countries.Slovenia}
+	db, err := gorm.Open("postgres", 500, "host=127.0.0.2 port=5432 user=usr password=1234567 dbname=db")
+	if err != nil {
+		panic(err)
+	}
+	err = db.Create(user).Error
+	if err != nil {
+		panic(err)
+	}
 }
 \************************* E N J O Y ***********************/
 
@@ -5257,7 +5279,7 @@ func textPrepare(text string) string {
 	return strings.ToUpper(text)
 }
 
-// ByName - return CountryCode by country Alpha-2 / Alpha-2 / name, case-insensitive, example: rus := ByName("Ru") OR rus := ByName("russia")
+// ByName - return CountryCode by country Alpha-2 / Alpha-3 / name, case-insensitive, example: rus := ByName("Ru") OR rus := ByName("russia")
 func ByName(name string) CountryCode {
 	switch textPrepare(name) {
 	case "AU", "AUS", "AUSTRALIA":
@@ -5430,7 +5452,7 @@ func ByName(name string) CountryCode {
 		return YEM
 	case "KZ", "KAZ", "KAZAKHSTAN", "KAZAHSTAN":
 		return KAZ
-	case "KY", "CYM", "CAYMANISLANDS":
+	case "KY", "CYM", "CAYMANISLANDS", "KAYMANISLANDS":
 		return CYM
 	case "KH", "KHM", "CAMBODIA":
 		return KHM
@@ -5742,7 +5764,7 @@ func ByName(name string) CountryCode {
 		return YUG
 	case "GS", "SGS", "SOUTHGEORGIAANDTHESOUTHSANDWICHISLANDS", "SOUTHGEORGIA":
 		return SGS
-	case "JM", "JAM", "JAMAICA":
+	case "JM", "JAM", "JAMAICA", "JAMAIKA", "YAMAICA", "YAMAIKA":
 		return JAM
 	case "ME", "MNE", "MONTENEGRO":
 		return MNE
@@ -5760,7 +5782,7 @@ func ByName(name string) CountryCode {
 		return GGY
 	case "JE", "JEY", "JERSEY":
 		return JEY
-	case "CW", "CUW", "CURACAO":
+	case "CW", "CUW", "CURACAO", "CURAKAO", "KURACAO", "KURAKAO":
 		return CUW
 	case "MF", "MAF", "SAINTMARTINFRENCH":
 		return MAF

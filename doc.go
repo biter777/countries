@@ -1,5 +1,5 @@
 /*
-Countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 countries codes and names (on eng and rus), currency designators, calling phone codes, countries capitals and regions (UN M.49 code), Very light and super FAST, NO maps[], NO slices[], NO init() func, NO external files and data, NO interface{}, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1 and ISO-4217.
+Countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 countries codes and names (on eng and rus), currency designators, calling phone codes, countries capitals and regions (UN M.49 code), countries domains (ccTLD), Very FAST, NO maps[], NO slices[], NO init() func, NO external files and data, NO interface{}, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1 and ISO-4217.
 
 Usage
 
@@ -35,6 +35,28 @@ Usage
 	fmt.Printf("Country region code: %d\n", japanInfo.Region)
 	fmt.Printf("Country emoji: %v\n", japanInfo.Emoji)
 	}
+
+Detection usage
+
+	// Detect by name
+	country := countries.ByName("angola")
+	fmt.Printf("Country digit code: %d\n", country)
+	fmt.Printf("Country Alpha-2 code: %v\n", country.Alpha2())
+	fmt.Printf("Country Alpha-3 code: %v\n", country.Alpha3())
+
+Database usage
+
+	type User struct {
+		gorm.Model
+		Name    string
+		Country countries.CountryCode
+	}
+	user := &User{Name: "Helen", Country: countries.Slovenia}
+	db, err := gorm.Open("postgres", 500, "host=127.0.0.2 port=5432 user=usr password=1234567 dbname=db")
+	if err != nil {
+		panic(err)
+	}
+	db.Create(user)
 
 Contributing
 

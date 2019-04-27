@@ -156,3 +156,24 @@ func AllRegionsInfo() []*Region {
 	}
 	return regions
 }
+
+// RegionCodeByName - return RegionCode by region name, case-insensitive, example: regionEU := RegionCodeByName("eu") OR regionEU := RegionCodeByName("europe")
+func RegionCodeByName(name string) RegionCode {
+	switch textPrepare(name) {
+	case "AF", "AFRICA", "AFRIKA":
+		return RegionAF
+	case "NA", "NORTHAMERICA", "NORTHAMERIC":
+		return RegionNA
+	case "SA", "SOUTHAMERICA", "SOUTHAMERIC":
+		return RegionSA
+	case "OC", "OCEANIA", "OKEANIA", "OCEANIYA", "OKEANIYA":
+		return RegionOC
+	case "AN", "ANTARCTICA", "ANTARCTIC", "ANTARKTICA", "ANTARKTIC":
+		return RegionAN
+	case "AS", "ASIA":
+		return RegionAS
+	case "EU", "EUROPE", "EUROPA", "EVROPA":
+		return RegionEU
+	}
+	return RegionUnknown
+}

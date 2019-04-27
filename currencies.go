@@ -2002,3 +2002,347 @@ func AllCurrenciesInfo() []*Currency {
 	return currencies
 }
 
+// CurrencyCodeByName - return CurrencyCode by currencyCode Alph name, case-insensitive, example: currencyUSD := CurrencyCodeByName("usd") OR currencyUSD := CurrencyCodeByName("USD")
+func CurrencyCodeByName(name string) CurrencyCode {
+	switch textPrepare(name) {
+	case "AFN", "AFGHANI":
+		return CurrencyAFN
+	case "ALL", "LEK":
+		return CurrencyALL
+	case "DZD", "ALGERIANDINAR":
+		return CurrencyDZD
+	case "USD", "USDOLLAR":
+		return CurrencyUSD
+	case "EUR", "EURO":
+		return CurrencyEUR
+	case "AOA", "KWANZA":
+		return CurrencyAOA
+	case "XCD", "EASTCARIBBEANDOLLAR":
+		return CurrencyXCD
+	case "ARS", "ARGENTINEPESO":
+		return CurrencyARS
+	case "AMD", "ARMENIANDRAM":
+		return CurrencyAMD
+	case "AWG", "ARUBANFLORIN":
+		return CurrencyAWG
+	case "AUD", "AUSTRALIANDOLLAR":
+		return CurrencyAUD
+	case "AZN", "AZERBAIJANIANMANAT":
+		return CurrencyAZN
+	case "BSD", "BAHAMIANDOLLAR":
+		return CurrencyBSD
+	case "BHD", "BAHRAINIDINAR":
+		return CurrencyBHD
+	case "BDT", "TAKA":
+		return CurrencyBDT
+	case "BBD", "BARBADOSDOLLAR":
+		return CurrencyBBD
+	case "BYR", "BELARUSSIANRUBLE":
+		return CurrencyBYR
+	case "BZD", "BELIZEDOLLAR":
+		return CurrencyBZD
+	case "XOF", "CFAFRANCBCEAO":
+		return CurrencyXOF
+	case "BMD", "BERMUDIANDOLLAR":
+		return CurrencyBMD
+	case "BTN", "NGULTRUM":
+		return CurrencyBTN
+	case "INR", "INDIANRUPEE":
+		return CurrencyINR
+	case "BOB", "BOLIVIANO":
+		return CurrencyBOB
+	case "BAM", "CONVERTIBLEMARK":
+		return CurrencyBAM
+	case "BWP", "PULA":
+		return CurrencyBWP
+	case "NOK", "NORWEGIANKRONE":
+		return CurrencyNOK
+	case "BRL", "BRAZILIANREAL":
+		return CurrencyBRL
+	case "BND", "BRUNEIDOLLAR":
+		return CurrencyBND
+	case "BGN", "BULGARIANLEV":
+		return CurrencyBGN
+	case "BIF", "BURUNDIFRANC":
+		return CurrencyBIF
+	case "CVE", "CABOVERDEESCUDO":
+		return CurrencyCVE
+	case "KHR", "RIEL":
+		return CurrencyKHR
+	case "XAF", "CFAFRANCBEAC":
+		return CurrencyXAF
+	case "CAD", "CANADIANDOLLAR":
+		return CurrencyCAD
+	case "KYD", "CAYMANISLANDSDOLLAR":
+		return CurrencyKYD
+	case "CLF", "UNIDADDEFOMENTO":
+		return CurrencyCLF
+	case "CLP", "CHILEANPESO":
+		return CurrencyCLP
+	case "CNY", "YUANRENMINBI":
+		return CurrencyCNY
+	case "COP", "COLOMBIANPESO":
+		return CurrencyCOP
+	case "COU", "UNIDADDEVALORREAL":
+		return CurrencyCOU
+	case "KMF", "COMOROFRANC":
+		return CurrencyKMF
+	case "CDF", "CONGOLESEFRANC":
+		return CurrencyCDF
+	case "NZD", "NEWZEALANDDOLLAR":
+		return CurrencyNZD
+	case "CRC", "COSTARICANCOLON":
+		return CurrencyCRC
+	case "HRK", "KUNA":
+		return CurrencyHRK
+	case "CUC", "PESOCONVERTIBLE":
+		return CurrencyCUC
+	case "CUP", "CUBANPESO":
+		return CurrencyCUP
+	case "ANG", "NETHERLANDSANTILLEANGUILDER":
+		return CurrencyANG
+	case "CZK", "CZECHKORUNA":
+		return CurrencyCZK
+	case "DKK", "DANISHKRONE":
+		return CurrencyDKK
+	case "DJF", "DJIBOUTIFRANC":
+		return CurrencyDJF
+	case "DOP", "DOMINICANPESO":
+		return CurrencyDOP
+	case "EGP", "EGYPTIANPOUND":
+		return CurrencyEGP
+	case "SVC", "ELSALVADORCOLON":
+		return CurrencySVC
+	case "ERN", "NAKFA":
+		return CurrencyERN
+	case "ETB", "ETHIOPIANBIRR":
+		return CurrencyETB
+	case "FKP", "FALKLANDISLANDSPOUND":
+		return CurrencyFKP
+	case "FJD", "FIJIDOLLAR":
+		return CurrencyFJD
+	case "XPF", "CFPFRANC":
+		return CurrencyXPF
+	case "GMD", "DALASI":
+		return CurrencyGMD
+	case "GEL", "LARI":
+		return CurrencyGEL
+	case "GHS", "GHANACEDI":
+		return CurrencyGHS
+	case "GIP", "GIBRALTARPOUND":
+		return CurrencyGIP
+	case "GTQ", "QUETZAL":
+		return CurrencyGTQ
+	case "GBP", "POUNDSTERLING":
+		return CurrencyGBP
+	case "GNF", "GUINEAFRANC":
+		return CurrencyGNF
+	case "GYD", "GUYANADOLLAR":
+		return CurrencyGYD
+	case "HTG", "GOURDE":
+		return CurrencyHTG
+	case "HNL", "LEMPIRA":
+		return CurrencyHNL
+	case "HKD", "HONGKONGDOLLAR":
+		return CurrencyHKD
+	case "HUF", "FORINT":
+		return CurrencyHUF
+	case "ISK", "ICELANDKRONA":
+		return CurrencyISK
+	case "IDR", "RUPIAH":
+		return CurrencyIDR
+	case "XDR", "SDR(SPECIALDRAWINGRIGHT)":
+		return CurrencyXDR
+	case "IRR", "IRANIANRIAL":
+		return CurrencyIRR
+	case "IQD", "IRAQIDINAR":
+		return CurrencyIQD
+	case "ILS", "NEWISRAELISHEQEL":
+		return CurrencyILS
+	case "PALESTINE":
+		return CurrencyILS
+	case "JMD", "JAMAICANDOLLAR":
+		return CurrencyJMD
+	case "JPY", "YEN":
+		return CurrencyJPY
+	case "JOD", "JORDANIANDINAR":
+		return CurrencyJOD
+	case "KZT", "TENGE":
+		return CurrencyKZT
+	case "KES", "KENYANSHILLING":
+		return CurrencyKES
+	case "KPW", "NORTHKOREANWON":
+		return CurrencyKPW
+	case "KRW", "WON":
+		return CurrencyKRW
+	case "KWD", "KUWAITIDINAR":
+		return CurrencyKWD
+	case "KGS", "SOM":
+		return CurrencyKGS
+	case "LAK", "KIP":
+		return CurrencyLAK
+	case "LBP", "LEBANESEPOUND":
+		return CurrencyLBP
+	case "LSL", "LOTI":
+		return CurrencyLSL
+	case "ZAR", "RAND":
+		return CurrencyZAR
+	case "LRD", "LIBERIANDOLLAR":
+		return CurrencyLRD
+	case "LYD", "LIBYANDINAR":
+		return CurrencyLYD
+	case "CHF", "SWISSFRANC":
+		return CurrencyCHF
+	case "MOP", "PATACA":
+		return CurrencyMOP
+	case "MKD", "DENAR":
+		return CurrencyMKD
+	case "MGA", "MALAGASYARIARY":
+		return CurrencyMGA
+	case "MWK", "KWACHA":
+		return CurrencyMWK
+	case "MYR", "MALAYSIANRINGGIT":
+		return CurrencyMYR
+	case "MVR", "RUFIYAA":
+		return CurrencyMVR
+	case "MRU", "OUGUIYA":
+		return CurrencyMRU
+	case "MUR", "MAURITIUSRUPEE":
+		return CurrencyMUR
+	case "XUA", "ADBUNITOFACCOUNT":
+		return CurrencyXUA
+	case "MXN", "MEXICANPESO":
+		return CurrencyMXN
+	case "MXV", "MEXICANUNIDADDEINVERSION(UDI)":
+		return CurrencyMXV
+	case "MDL", "MOLDOVANLEU":
+		return CurrencyMDL
+	case "MNT", "TUGRIK":
+		return CurrencyMNT
+	case "MAD", "MOROCCANDIRHAM":
+		return CurrencyMAD
+	case "MZN", "MOZAMBIQUEMETICAL":
+		return CurrencyMZN
+	case "MMK", "KYAT":
+		return CurrencyMMK
+	case "NAD", "NAMIBIADOLLAR":
+		return CurrencyNAD
+	case "NPR", "NEPALESERUPEE":
+		return CurrencyNPR
+	case "NIO", "CORDOBAORO":
+		return CurrencyNIO
+	case "NGN", "NAIRA":
+		return CurrencyNGN
+	case "OMR", "RIALOMANI":
+		return CurrencyOMR
+	case "PKR", "PAKISTANRUPEE":
+		return CurrencyPKR
+	case "PAB", "BALBOA":
+		return CurrencyPAB
+	case "PGK", "KINA":
+		return CurrencyPGK
+	case "PYG", "GUARANI":
+		return CurrencyPYG
+	case "PEN", "NUEVOSOL":
+		return CurrencyPEN
+	case "PHP", "PHILIPPINEPESO":
+		return CurrencyPHP
+	case "PLN", "ZLOTY":
+		return CurrencyPLN
+	case "QAR", "QATARIRIAL":
+		return CurrencyQAR
+	case "RON", "ROMANIANLEU":
+		return CurrencyRON
+	case "RUB", "RUSSIANRUBLE":
+		return CurrencyRUB
+	case "RWF", "RWANDAFRANC":
+		return CurrencyRWF
+	case "SHP", "SAINTHELENAPOUND":
+		return CurrencySHP
+	case "WST", "TALA":
+		return CurrencyWST
+	case "STN", "DOBRA":
+		return CurrencySTN
+	case "SAR", "SAUDIRIYAL":
+		return CurrencySAR
+	case "RSD", "SERBIANDINAR":
+		return CurrencyRSD
+	case "SCR", "SEYCHELLESRUPEE":
+		return CurrencySCR
+	case "SLL", "LEONE":
+		return CurrencySLL
+	case "SGD", "SINGAPOREDOLLAR":
+		return CurrencySGD
+	case "XSU", "SUCRE":
+		return CurrencyXSU
+	case "SBD", "SOLOMONISLANDSDOLLAR":
+		return CurrencySBD
+	case "SOS", "SOMALISHILLING":
+		return CurrencySOS
+	case "SSP", "SOUTHSUDANESEPOUND":
+		return CurrencySSP
+	case "LKR", "SRILANKARUPEE":
+		return CurrencyLKR
+	case "SDG", "SUDANESEPOUND":
+		return CurrencySDG
+	case "SRD", "SURINAMDOLLAR":
+		return CurrencySRD
+	case "SZL", "LILANGENI":
+		return CurrencySZL
+	case "SEK", "SWEDISHKRONA":
+		return CurrencySEK
+	case "CHE", "WIREURO":
+		return CurrencyCHE
+	case "CHW", "WIRFRANC":
+		return CurrencyCHW
+	case "SYP", "SYRIANPOUND":
+		return CurrencySYP
+	case "TWD", "NEWTAIWANDOLLAR":
+		return CurrencyTWD
+	case "TJS", "SOMONI":
+		return CurrencyTJS
+	case "TZS", "TANZANIANSHILLING":
+		return CurrencyTZS
+	case "THB", "BAHT":
+		return CurrencyTHB
+	case "TOP", "PA’ANGA":
+		return CurrencyTOP
+	case "TTD", "TRINIDADANDTOBAGODOLLAR":
+		return CurrencyTTD
+	case "TND", "TUNISIANDINAR":
+		return CurrencyTND
+	case "TRY", "TURKISHLIRA":
+		return CurrencyTRY
+	case "TMT", "TURKMENISTANNEWMANAT":
+		return CurrencyTMT
+	case "UGX", "UGANDASHILLING":
+		return CurrencyUGX
+	case "UAH", "HRYVNIA":
+		return CurrencyUAH
+	case "AED", "UAEDIRHAM":
+		return CurrencyAED
+	case "USN", "USDOLLAR(NEXTDAY)":
+		return CurrencyUSN
+	case "UYI", "URUGUAYPESOENUNIDADESINDEXADAS(URUIURUI)":
+		return CurrencyUYI
+	case "UYU", "PESOURUGUAYO":
+		return CurrencyUYU
+	case "UZS", "UZBEKISTANSUM":
+		return CurrencyUZS
+	case "VUV", "VATU":
+		return CurrencyVUV
+	case "VEF", "BOLIVAR":
+		return CurrencyVEF
+	case "VND", "DONG":
+		return CurrencyVND
+	case "YER", "YEMENIRIAL":
+		return CurrencyYER
+	case "ZMW", "ZAMBIANKWACHA":
+		return CurrencyZMW
+	case "YUD", "YUGOSLAVIANDINAR":
+		return CurrencyYUD
+	case "ZWL", "ZIMBABWEDOLLAR":
+		return CurrencyZWL
+	}
+	return CurrencyUnknown
+}
