@@ -1,7 +1,9 @@
-// Countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 countries codes and names (on eng and rus), currency designators, calling phone codes, countries capitals and regions (UN M.49 code), countries domains (ccTLD), Very FAST, NO maps[], NO slices[], NO init() func, NO external files and data, NO interface{}, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1 and ISO-4217.
+/*
+Package countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 countries codes and names (on eng and rus), currency designators, calling phone codes, countries capitals and regions (UN M.49 code), countries domains (ccTLD), Very FAST, NO maps[], NO slices[], NO init() func, NO external files and data, NO interface{}, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1, ISO-4217, Unicode CLDR and ccTLD standarts.
 
-/*********************** E X A M P L E ***********************\
-func main() {
+Usage
+
+	func main() {
 	countryJapan := countries.Japan
 	fmt.Printf("Country name in english: %v\n", countryJapan)
 	fmt.Printf("Country name in russian: %v\n", countryJapan.StringRus())
@@ -33,6 +35,9 @@ func main() {
 	fmt.Printf("Country region name: %v\n", japanInfo.Region)
 	fmt.Printf("Country region code: %d\n", japanInfo.Region)
 	fmt.Printf("Country emoji: %v\n", japanInfo.Emoji)
+	}
+
+Detection usage
 
 	// Detect by name
 	country := countries.ByName("angola")
@@ -40,7 +45,8 @@ func main() {
 	fmt.Printf("Country Alpha-2 code: %v\n", country.Alpha2())
 	fmt.Printf("Country Alpha-3 code: %v\n", country.Alpha3())
 
-	// Database usage
+Database usage
+
 	type User struct {
 		gorm.Model
 		Name     string
@@ -53,13 +59,12 @@ func main() {
 		panic(err)
 	}
 	defer db.Close()
-	err = db.Create(user).Error
-	if err != nil {
-		panic(err)
-	}
-}
-\************************* E N J O Y ***********************/
+	db.Create(user)
 
+Contributing
+
+ Welcome pull requests, bug fixes and issue reports.
+ Before proposing a change, please discuss it first by raising an issue. */
 package countries
 
 import (
