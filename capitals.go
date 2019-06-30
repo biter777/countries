@@ -1306,7 +1306,7 @@ func (c CapitalCode) IsValid() bool {
 	return c.String() != UnknownMsg
 }
 
-// Type implements Typer interface
+// Info - return CapitalCode as Capital info
 func (c CapitalCode) Info() *Capital {
 	return &Capital{
 		Name:    c.String(),

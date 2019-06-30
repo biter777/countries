@@ -68,7 +68,7 @@ func (c RegionCode) String() string {
 	return UnknownMsg
 }
 
-// String - implements fmt.Stringer, returns a Region name in russian
+// StringRus - returns a Region name in russian
 func (c RegionCode) StringRus() string {
 	switch c {
 	case RegionAF:
@@ -99,6 +99,7 @@ func TotalRegions() int {
 	return 7
 }
 
+// Info - return a RegionCode as Region info
 func (c RegionCode) Info() *Region {
 	return &Region{
 		Name: c.String(),

@@ -1965,7 +1965,7 @@ func (c CurrencyCode) Info() *Currency {
 }
 
 // Type implements Typer interface.
-func (country *Currency) Type() string {
+func (currency *Currency) Type() string {
 	return TypeCurrency
 }
 

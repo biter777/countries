@@ -265,7 +265,7 @@ func (c CallCode) Type() string {
 	return TypeCallCode
 }
 
-// Type implements Typer interface
+// Info - returns CallCodeInfo
 func (c CallCode) Info() *CallCodeInfo {
 	return &CallCodeInfo{
 		Code:      c,
@@ -524,7 +524,7 @@ func AllCallCodesInfo() []*CallCodeInfo {
 	return codes
 }
 
-// String - implements fmt.Stringer, returns a calling phone code in string, example for UK: "+44"
+// Countries - returns CountryCodes of CallCode
 func (c CallCode) Countries() []CountryCode {
 	switch c {
 	case CallCode1:

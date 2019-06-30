@@ -647,7 +647,7 @@ func AllDomains() []DomainCode {
 	}
 }
 
-// AllRegionsInfo - return all domains as []*Domain
+// AllDomainsInfo - return all domains as []*Domain
 func AllDomainsInfo() []*Domain {
 	all := AllDomains()
 	domains := make([]*Domain, 0, len(all))

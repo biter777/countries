@@ -1926,7 +1926,7 @@ func (c CountryCode) StringRus() string {
 	return UnknownMsg
 }
 
-// Alpha - returns a default Alpha (Alpha-2/ISO2, 2 chars) code of country
+// Alpha2 - returns a default Alpha (Alpha-2/ISO2, 2 chars) code of country
 func (c CountryCode) Alpha2() string {
 	switch c {
 	case 8:
