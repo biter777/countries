@@ -2074,6 +2074,8 @@ func (c CountryCode) Alpha2() string {
 		return "FJ"
 	case 246:
 		return "FI"
+	case 234:
+		return "FO"
 	case 250:
 		return "FR"
 	case 254:
@@ -2583,6 +2585,8 @@ func (c CountryCode) Alpha3() string {
 		return "FIN"
 	case 250:
 		return "FRA"
+	case 234:
+		return "FRO"
 	case 254:
 		return "GUF"
 	case 258:
