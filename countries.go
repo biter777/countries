@@ -5291,6 +5291,7 @@ func AllInfo() []*Country {
 }
 
 func textPrepare(text string) string {
+	text = strings.Replace(text, " & ", "AND", -1)
 	text = strings.Replace(text, " ", "", -1)
 	text = strings.Replace(text, "-", "", -1)
 	text = strings.Replace(text, "‐", "", -1)
