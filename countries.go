@@ -71,6 +71,7 @@ import (
 	"database/sql/driver"
 	"encoding/json"
 	"fmt"
+	"regexp"
 	"strings"
 )
 
@@ -5292,132 +5293,120 @@ func AllInfo() []*Country {
 
 func textPrepare(text string) string {
 	text = strings.Replace(text, " & ", "AND", -1)
-	text = strings.Replace(text, " ", "", -1)
-	text = strings.Replace(text, "-", "", -1)
-	text = strings.Replace(text, "‐", "", -1)
-	text = strings.Replace(text, "‑", "", -1)
-	text = strings.Replace(text, "‒", "", -1)
-	text = strings.Replace(text, "―", "", -1)
-	text = strings.Replace(text, "—", "", -1)
-	text = strings.Replace(text, "–", "", -1)
-	text = strings.Replace(text, "_", "", -1)
-	text = strings.Replace(text, ".", "", -1)
-	text = strings.Replace(text, ",", "", -1)
-	text = strings.Replace(text, ":", "", -1)
-	text = strings.Replace(text, ";", "", -1)
-	text = strings.Replace(text, "+", "", -1)
-	text = strings.Replace(text, "'", "", -1)
+	re := regexp.MustCompile("\n|\t|\r|\f|\v|!|[|]|{|}|\\|'|`|;|:|,|«|»| |-|‐|‑|‒|―|—|–|_|+|\"")
+	text = re.ReplaceAllString(text, "")
 	text = strings.Replace(text, "(", "", -1)
 	text = strings.Replace(text, ")", "", -1)
-	text = strings.Replace(text, "[", "", -1)
-	text = strings.Replace(text, "]", "", -1)
+	text = strings.Replace(text, "?", "", -1)
+	text = strings.Replace(text, ".", "", -1)
+	text = strings.Replace(text, "|", "", -1)
 	return strings.ToUpper(text)
 }
 
 // ByName - return CountryCode by country Alpha-2 / Alpha-3 / name, case-insensitive, example: rus := ByName("Ru") OR rus := ByName("russia")
 func ByName(name string) CountryCode {
 	switch textPrepare(name) {
-	case "AU", "AUS", "AUSTRALIA":
+	case "AU", "AUS", "AUSTRALIA", "AVSTRALIA", "AVSTRALIYA", "AUSTRALIYA":
 		return AUS
-	case "AT", "AUT", "AUSTRIA":
+	case "AT", "AUT", "AUSTRIA", "AVSTRIA", "AUSTRIYA", "AVSTRIYA":
 		return AUT
-	case "AZ", "AZE", "AZERBAIJAN":
+	case "AZ", "AZE", "AZERBAIJAN", "AYZERBAIJAN", "AZERBAIDJAN", "AYZERBAIDJAN":
 		return AZE
-	case "AL", "ALB", "ALBANIA":
+	case "AL", "ALB", "ALBANIA", "ALBANIYA":
 		return ALB
-	case "DZ", "DZA", "ALGERIA":
+	case "DZ", "DZA", "ALGERIA", "ALGERIYA":
 		return DZA
-	case "AS", "ASM", "AMERICANSAMOA", "SAMOAAMERICAN":
+	case "AS", "ASM", "AMERICANSAMOA", "AMERICASAMOA", "SAMOAAMERICAN", "SAMOAMERICAN", "SAMOAMERICA":
 		return ASM
-	case "AI", "AIA", "ANGUILLA":
+	case "AI", "AIA", "ANGUILLA", "ANGUILA":
 		return AIA
-	case "XEN", "ENGLAND":
+	case "XEN", "ENGLAND", "INGLAND":
 		return GBR
-	case "AO", "AGO", "ANGOLA":
+	case "AO", "AGO", "ANGOLA", "ANGOLIA":
 		return AGO
-	case "AD", "AND", "ANDORRA":
+	case "AD", "AND", "ANDORRA", "ANDORA":
 		return AND
-	case "AQ", "ATA", "ANTARCTICA":
+	case "AQ", "ATA", "ANTARCTICA", "ANTARKTICA", "ANTARCTIKA", "ANTARKTIKA", "ANTARCTIC", "ANTARKTIC", "ANTARCTIK", "ANTARKTIK":
 		return ATA
-	case "AG", "ATG", "ANTIGUAANDBARBUDA", "ANTIGUA":
+	case "AG", "ATG", "ANTIGUAANDBARBUDA", "ANTIGUABARBUDA", "ANTIGUA":
 		return ATG
-	case "AN", "ANT", "NETHERLANDSANTILLES":
+	case "AN", "ANT", "NETHERLANDSANTILLES", "NETHERLSANTILLES", "NETHERLANDSANTILES", "NETHERLSANTILES":
 		return ANT
-	case "AE", "ARE", "UNITEDARABEMIRATES", "ARABEMIRATES":
+	case "AE", "ARE", "UNITEDARABEMIRATES", "ARABEMIRATES", "UNITEDEMIRATES":
 		return ARE
-	case "AR", "ARG", "ARGENTINA":
+	case "AR", "ARG", "ARGENTINA", "ARGENTIN":
 		return ARG
-	case "AM", "ARM", "ARMENIA":
+	case "AM", "ARM", "ARMENIA", "ARMENIYA", "ARMENIAN":
 		return ARM
 	case "AW", "ABW", "ARUBA":
 		return ABW
-	case "AF", "AFG", "AFGHANISTAN":
+	case "AF", "AFG", "AFGHANISTAN", "AFHANISTAN", "AFGANISTAN", "AFGHANIAN", "AFGANIAN", "AFGHAN", "AFGHANI":
 		return AFG
-	case "BS", "BHS", "BAHAMAS":
+	case "BS", "BHS", "BAHAMAS", "BAGHAMAS", "BAGAMAS", "BAHAMIAN", "BAGAMIAN":
 		return BHS
-	case "BD", "BGD", "BANGLADESH":
+	case "BD", "BGD", "BANGLADESH", "BANGLADEH", "BANHGLADESH", "BANHLADESH", "BANHLADEH":
 		return BGD
-	case "BB", "BRB", "BARBADOS":
+	case "BB", "BRB", "BARBADOS", "BARBODOS":
 		return BRB
-	case "BH", "BHR", "BAHRAIN":
+	case "BH", "BHR", "BAHRAIN", "BAGHRAIN":
 		return BHR
-	case "BY", "BLR", "BELARUS":
+	case "BY", "BLR", "BELARUS", "BELORUS", "BELLARUSSIA", "BELARUSSIA", "BELLORUSSIA", "BELORUSSIA", "BELLARUSSIAN", "BELARUSSIAN", "BELLORUSSIAN", "BELORUSSIAN":
 		return BLR
 	case "BZ", "BLZ", "BELIZE":
 		return BLZ
-	case "BE", "BEL", "BELGIUM":
+	case "BE", "BEL", "BELGIUM", "BELGUM":
 		return BEL
 	case "BJ", "BEN", "BENIN":
 		return BEN
-	case "BM", "BMU", "BERMUDA":
+	case "BM", "BMU", "BERMUDA", "BERMUDS", "BERMUD":
 		return BMU
-	case "BG", "BGR", "BULGARIA":
+	case "BG", "BGR", "BULGARIA", "BULGARIYA", "BULGARY", "BOLGARIA", "BOLGARIYA":
 		return BGR
-	case "BO", "BOL", "BOLIVIA", "BOLIVIAPLURINATIONALSTATEOF":
+	case "BO", "BOL", "BOLIVIA", "BOLIVIYA", "BOLIVIAN", "BOLIVIAPLURINATIONALSTATEOF", "BOLIVIAPLURINATIONALSTATE":
 		return BOL
 	case "BA", "BIH", "BOSNIAANDHERZEGOVINA", "BOSNIAHERZEGOVINA", "BOSNIA":
 		return BIH
-	case "BW", "BWA", "BOTSWANA":
+	case "BW", "BWA", "BOTSWANA", "BOTSWANNA", "BOTSVANA", "BOTSVANNA":
 		return BWA
-	case "BR", "BRA", "BRAZIL":
+	case "BR", "BRA", "BRAZIL", "BRAZILIA", "BRAZILIAN":
 		return BRA
-	case "IO", "IOT", "BRITISHINDIANOCEANTERRITORY":
+	case "IO", "IOT", "BRITISHINDIANOCEANTERRITORY", "BRITISHINDIANTERRITORY":
 		return IOT
-	case "BN", "BRN", "BRUNEI":
+	case "BN", "BRN", "BRUNEI", "BRUNEY":
 		return BRN
-	case "BF", "BFA", "BURKINAFASO":
+	case "BF", "BFA", "BURKINAFASO", "BURKINAANDFASO", "BURCINAFASO", "BURCINAANDFASO":
 		return BFA
 	case "BI", "BDI", "BURUNDI":
 		return BDI
-	case "BT", "BTN", "BHUTAN":
+	case "BT", "BTN", "BHUTAN", "BGHUTAN":
 		return BTN
 	case "VU", "VUT", "VANUATU":
 		return VUT
-	case "VA", "VAT", "HOLYSEEVATICAN", "HOLYSEE", "VATICAN", "VATICANCITYSTATE":
+	case "VA", "VAT", "HOLYSEEVATICAN", "HOLYSEE", "VATICAN", "VATICANCITYSTATE", "VATICANSTATE", "HOLYSEEVATIKAN", "VATIKAN", "VATIKANCITYSTATE", "VATIKANSTATE":
 		return VAT
-	case "GB", "GBR", "UNITEDKINGDOM", "UK", "GREATBRITAN", "GREATBRITAIN", "NORTHERNIRELAND":
+	case "GB", "GBR", "UNITEDKINGDOM", "UNITEDKINDOM", "UK", "GREATBRITAN", "GREATBRITAIN", "NORTHERNIRELAND", "BRITAN", "BRITAIN":
 		return GBR
-	case "HU", "HUN", "HUNGARY":
+	case "HU", "HUN", "HUNGARY", "HUNGAR", "HUNGARI", "VENGRIYA", "VENGRIA":
 		return HUN
-	case "VE", "VEN", "VENEZUELA":
+	case "VE", "VEN", "VENEZUELA", "VENEZUELLA", "VENECUELA", "VENECUELLA":
 		return VEN
-	case "VG", "VGB", "VIRGINISLANDSBRITISH", "VIRGINISLANDSGB", "VIRGINISLANDSUK":
+	case "VG", "VGB", "VIRGINISLANDSBRITISH", "VIRGINISLANDSBRITIH", "VIRGINISLSBRITIH", "VIRGINISLSBRITISH", "VIRGINISLANDSGB", "VIRGINISLANDSUK":
 		return VGB
 	case "VI", "VIR", "VIRGINISLANDSUS", "USVIRGINISLANDS", "USVI":
 		return VIR
 	case "TL", "TLS", "TIMORLESTE", "EASTTIMOR":
 		return TLS
-	case "VN", "VNM", "VIETNAM":
+	case "VN", "VNM", "VIETNAM", "VETNAM":
 		return VNM
 	case "GA", "GAB", "GABON":
 		return GAB
-	case "HT", "HTI", "HAITI":
+	case "HT", "HTI", "HAITI", "GAITI":
 		return HTI
 	case "GY", "GUY", "GUYANA":
 		return GUY
-	case "GM", "GMB", "GAMBIA":
+	case "GM", "GMB", "GAMBIA", "GAMBIYA":
 		return GMB
-	case "GH", "GHA", "GHANA":
+	case "GH", "GHA", "GHANA", "HANA":
 		return GHA
 	case "GP", "GLP", "GUADELOUPE":
 		return GLP
@@ -5427,19 +5416,19 @@ func ByName(name string) CountryCode {
 		return GIN
 	case "GW", "GNB", "GUINEABISSAU":
 		return GNB
-	case "DE", "DEU", "GERMANY", "DEUTSCHLAND":
+	case "DE", "DEU", "GERMANY", "DEUTSCHLAND", "DEUTSCH":
 		return DEU
 	case "GI", "GIB", "GIBRALTAR", "HIBRALTAR":
 		return GIB
-	case "HN", "HND", "HONDURAS":
+	case "HN", "HND", "HONDURAS", "GONDURAS":
 		return HND
-	case "HK", "HKG", "HONGKONG":
+	case "HK", "HKG", "HONGKONG", "HONKONG":
 		return HKG
-	case "GD", "GRD", "GRENADA":
+	case "GD", "GRD", "GRENADA", "GRINADA":
 		return GRD
 	case "GL", "GRL", "GREENLAND":
 		return GRL
-	case "GR", "GRC", "GREECE":
+	case "GR", "GRC", "GREECE", "GRECE":
 		return GRC
 	case "GE", "GEO", "GEORGIA":
 		return GEO
@@ -5451,7 +5440,7 @@ func ByName(name string) CountryCode {
 		return COD
 	case "DJ", "DJI", "DJIBOUTI":
 		return DJI
-	case "DM", "DMA", "DOMINICA":
+	case "DM", "DMA", "DOMINICA", "DOMINIKA":
 		return DMA
 	case "DO", "DOM", "DOMINICANREPUBLIC", "DOMINICANA":
 		return DOM
@@ -5461,7 +5450,7 @@ func ByName(name string) CountryCode {
 		return ZMB
 	case "EH", "ESH", "WESTERNSAHARA":
 		return ESH
-	case "ZW", "ZWE", "ZIMBABWE":
+	case "ZW", "ZWE", "ZIMBABWE", "ZIMBABVE":
 		return ZWE
 	case "IL", "ISR", "ISRAEL":
 		return ISR
@@ -5481,7 +5470,7 @@ func ByName(name string) CountryCode {
 		return ISL
 	case "ES", "ESP", "SPAIN", "SPANIEN", "ISPANIA":
 		return ESP
-	case "IT", "ITA", "ITALY":
+	case "IT", "ITA", "ITALY", "ITALIYA":
 		return ITA
 	case "YE", "YEM", "YEMEN":
 		return YEM
@@ -5495,11 +5484,11 @@ func ByName(name string) CountryCode {
 		return CMR
 	case "CA", "CAN", "CANADA":
 		return CAN
-	case "QA", "QAT", "QATAR":
+	case "QA", "QAT", "QATAR", "KATAR":
 		return QAT
 	case "KE", "KEN", "KENYA":
 		return KEN
-	case "CY", "CYP", "CYPRUS":
+	case "CY", "CYP", "CYPRUS", "CIPRUS":
 		return CYP
 	case "KI", "KIR", "KIRIBATI":
 		return KIR
@@ -5511,17 +5500,17 @@ func ByName(name string) CountryCode {
 		return COL
 	case "KM", "COM", "COMOROS":
 		return COM
-	case "CG", "COG", "CONGO":
+	case "CG", "COG", "CONGO", "KONGO":
 		return COG
 	case "KP", "PRK", "KOREADEMOCRATICPEOPLESREPUBLICOF", "KOREANORTH", "NORTHKOREA":
 		return PRK
 	case "KR", "KOR", "KOREA", "SOUTHKOREA", "KOREAREPUBLICOF", "KOREAREPOF":
 		return KOR
-	case "CR", "CRI", "COSTARICA":
+	case "CR", "CRI", "COSTARICA", "KOSTARIKA", "KOSTARICA", "COSTARIKA":
 		return CRI
 	case "CI", "CIV", "COTEDIVOIRE", "CÔTEDIVOIRE", "IVORYCOAST":
 		return CIV
-	case "CU", "CUB", "CUBA":
+	case "CU", "CUB", "CUBA", "CUBAREPUBLIC", "REPUBLICCUBA":
 		return CUB
 	case "KW", "KWT", "KUWAIT":
 		return KWT
@@ -5541,9 +5530,9 @@ func ByName(name string) CountryCode {
 		return LBY
 	case "LT", "LTU", "LITHUANIA", "LITAUEN", "LITVA":
 		return LTU
-	case "LI", "LIE", "LIECHTENSTEIN":
+	case "LI", "LIE", "LIECHTENSTEIN", "LIEHTENSTEIN":
 		return LIE
-	case "LU", "LUX", "LUXEMBOURG":
+	case "LU", "LUX", "LUXEMBOURG", "LUXEMBURG":
 		return LUX
 	case "MU", "MUS", "MAURITIUS":
 		return MUS
@@ -5557,9 +5546,9 @@ func ByName(name string) CountryCode {
 		return MAC
 	case "MK", "MKD", "MACEDONIA", "MACEDONIAFYRO", "MACEDONIATHEFORMERYUGOSLAVREPUBLICOF":
 		return MKD
-	case "MW", "MWI", "MALAWI":
+	case "MW", "MWI", "MALAWI", "MALAVI":
 		return MWI
-	case "MY", "MYS", "MALAYSIA":
+	case "MY", "MYS", "MALAYSIA", "MALAYSIYA":
 		return MYS
 	case "ML", "MLI", "MALI":
 		return MLI
@@ -5569,7 +5558,7 @@ func ByName(name string) CountryCode {
 		return MLT
 	case "MP", "MNP", "NORTHERNMARIANAISLANDS", "NORTHERNMARIANAIS", "MARIANAISLANDS":
 		return MNP
-	case "MA", "MAR", "MOROCCO", "MOROCO":
+	case "MA", "MAR", "MOROCCO", "MOROCO", "MOROKO":
 		return MAR
 	case "MQ", "MTQ", "MARTINIQUE":
 		return MTQ
@@ -5579,11 +5568,11 @@ func ByName(name string) CountryCode {
 		return MEX
 	case "FM", "FSM", "MICRONESIA", "MICRONESIAFEDERATEDSTATESOF", "MICRONESIAFEDST":
 		return FSM
-	case "MZ", "MOZ", "MOZAMBIQUE":
+	case "MZ", "MOZ", "MOZAMBIQUE", "MOZAMBIQ":
 		return MOZ
-	case "MD", "MDA", "MOLDOVA":
+	case "MD", "MDA", "MOLDOVA", "MOLDAVIA":
 		return MDA
-	case "MC", "MCO", "MONACO":
+	case "MC", "MCO", "MONACO", "MONAKO":
 		return MCO
 	case "MN", "MNG", "MONGOLIA":
 		return MNG
@@ -5595,13 +5584,13 @@ func ByName(name string) CountryCode {
 		return NAM
 	case "NR", "NRU", "NAURU":
 		return NRU
-	case "NP", "NPL", "NEPAL":
+	case "NP", "NPL", "NEPAL", "NEPALI":
 		return NPL
-	case "NE", "NER", "NIGER":
+	case "NE", "NER", "NIGER", "NIGGER":
 		return NER
-	case "NG", "NGA", "NIGERIA":
+	case "NG", "NGA", "NIGERIA", "NIGERIYA":
 		return NGA
-	case "NL", "NLD", "NETHERLANDS", "HOLLAND", "HOLLANDIA":
+	case "NL", "NLD", "NETHERLANDS", "NETHERLAND", "HOLLAND", "HOLLANDIA", "HOLLANDIYA":
 		return NLD
 	case "NI", "NIC", "NICARAGUA":
 		return NIC
@@ -5609,7 +5598,7 @@ func ByName(name string) CountryCode {
 		return NIU
 	case "NZ", "NZL", "NEWZEALAND", "NEWZELANDIA", "NEWZELAND":
 		return NZL
-	case "NC", "NCL", "NEWCALEDONIA":
+	case "NC", "NCL", "NEWCALEDONIA", "NEWCALEDONIYA":
 		return NCL
 	case "NO", "NOR", "NORWAY":
 		return NOR
@@ -5619,7 +5608,7 @@ func ByName(name string) CountryCode {
 		return BVT
 	case "IM", "IMN", "ISLEOFMAN":
 		return IMN
-	case "NF", "NFK", "NORFOLKISLAND", "NORFOLK":
+	case "NF", "NFK", "NORFOLKISLAND", "NORFOLK", "NORFOLCISLAND", "NORFOLC":
 		return NFK
 	case "PN", "PCN", "PITCAIRN":
 		return PCN
@@ -5627,7 +5616,7 @@ func ByName(name string) CountryCode {
 		return CXR
 	case "SH", "SHN", "SAINTHELENA", "SAINTELENA", "STHELENA", "STELENA":
 		return SHN
-	case "WF", "WLF", "WALLISANDFUTUNAISLANDS":
+	case "WF", "WLF", "WALLISANDFUTUNAISLANDS", "WALLISFUTUNAISLANDS", "WALLISANDFUTUNA", "WALLISFUTUNA":
 		return WLF
 	case "HM", "HMD", "HEARDISLANDANDMCDONALDISLANDS", "HEARDISLAND":
 		return HMD
@@ -5643,13 +5632,13 @@ func ByName(name string) CountryCode {
 		return TCA
 	case "UM", "UMI", "UNITEDSTATESMINOROUTLYINGISLANDS", "MINOROUTLYINGISLANDS", "MINOROUTLYING", "USMI":
 		return UMI
-	case "PK", "PAK", "PAKISTAN":
+	case "PK", "PAK", "PAKISTAN", "PACISTAN":
 		return PAK
 	case "PW", "PLW", "PALAU":
 		return PLW
 	case "PS", "PSE", "PALESTINE":
 		return PSE
-	case "PA", "PAN", "PANAMA":
+	case "PA", "PAN", "PANAMA", "PANAMIAN", "PANAM":
 		return PAN
 	case "PG", "PNG", "PAPUANEWGUINEA", "PAPUA":
 		return PNG
@@ -5657,7 +5646,7 @@ func ByName(name string) CountryCode {
 		return PRY
 	case "PE", "PER", "PERU":
 		return PER
-	case "PL", "POL", "POLAND":
+	case "PL", "POL", "POLAND", "POLSKI", "POLSHA":
 		return POL
 	case "PT", "PRT", "PORTUGAL":
 		return PRT
@@ -5697,7 +5686,7 @@ func ByName(name string) CountryCode {
 		return SGP
 	case "SY", "SYR", "SYRIA":
 		return SYR
-	case "SK", "SVK", "SLOVAKIA":
+	case "SK", "SVK", "SLOVAKIA", "SLOVAK", "SLOVAKIYA", "SLOVACIA", "SLOVAC", "SLOVACIYA":
 		return SVK
 	case "SI", "SVN", "SLOVENIA":
 		return SVN
@@ -5705,7 +5694,7 @@ func ByName(name string) CountryCode {
 		return USA
 	case "SB", "SLB", "SOLOMONISLANDS", "SOLOMON":
 		return SLB
-	case "SO", "SOM", "SOMALIA":
+	case "SO", "SOM", "SOMALIA", "SOMALI":
 		return SOM
 	case "SD", "SDN", "SUDAN":
 		return SDN
@@ -5717,9 +5706,9 @@ func ByName(name string) CountryCode {
 		return TJK
 	case "TW", "TWN", "TAIWAN":
 		return TWN
-	case "TH", "THA", "THAILAND", "THAI":
+	case "TH", "THA", "THAILAND", "TAILAND", "THAI":
 		return THA
-	case "TZ", "TZA", "TANZANIA":
+	case "TZ", "TZA", "TANZANIA", "TANZANIYA":
 		return TZA
 	case "TG", "TGO", "TOGO":
 		return TGO
@@ -5735,7 +5724,7 @@ func ByName(name string) CountryCode {
 		return TUN
 	case "TM", "TKM", "TURKMENISTAN", "TURKMENISTON":
 		return TKM
-	case "TR", "TUR", "TURKEY", "TURCIA":
+	case "TR", "TUR", "TURKEY", "TURCIA", "TURKISH":
 		return TUR
 	case "UG", "UGA", "UGANDA":
 		return UGA
@@ -5757,7 +5746,7 @@ func ByName(name string) CountryCode {
 		return FIN
 	case "FK", "FLK", "FALKLANDISLANDSMALVINAS", "MALVINAS", "FALKLANDISLANDS", "FALKLAND":
 		return FLK
-	case "FR", "FRA", "FRANCE":
+	case "FR", "FRA", "FRANCE", "FRENCH":
 		return FRA
 	case "GF", "GUF", "FRENCHGUIANA", "GUIANA":
 		return GUF
@@ -5795,9 +5784,9 @@ func ByName(name string) CountryCode {
 		return ETH
 	case "ZA", "ZAF", "SOUTHAFRICA":
 		return ZAF
-	case "YU", "YUG", "YUGOSLAVIA":
+	case "YU", "YUG", "YUGOSLAVIA", "UGOSLAVIA", "YUGOSLAVIYA", "UGOSLAVIYA":
 		return YUG
-	case "GS", "SGS", "SOUTHGEORGIAANDTHESOUTHSANDWICHISLANDS", "SOUTHGEORGIA":
+	case "GS", "SGS", "SOUTHGEORGIAANDTHESOUTHSANDWICHISLANDS", "SOUTHGEORGIAANDTHESOUTHSANDWICH", "SOUTHGEORGIATHESOUTHSWICHISLANDS", "SOUTHGEORGIA":
 		return SGS
 	case "JM", "JAM", "JAMAICA", "JAMAIKA", "YAMAICA", "YAMAIKA":
 		return JAM
@@ -5807,15 +5796,15 @@ func ByName(name string) CountryCode {
 		return BLM
 	case "SX", "SXM", "SINTMAARTENDUTCH", "SAINTMAARTEN", "SINTMAARTEN", "STMAARTEN":
 		return SXM
-	case "RS", "SRB", "SERBIA":
+	case "RS", "SRB", "SERBIA", "SERBIYA":
 		return SRB
-	case "AX", "ALA", "ALANDISLANDS":
+	case "AX", "ALA", "ALANDISLANDS", "ALAND":
 		return ALA
 	case "BQ", "BES", "BONAIRE", "BONAIRESINTEUSTATIUSANDSABA", "BONAIRESINTEUSTATIUSSABA", "BONAIRESTEUSTANDSABA", "BONAIRESTEUSTSABA":
 		return BES
 	case "GG", "GGY", "GUERNSEY":
 		return GGY
-	case "JE", "JEY", "JERSEY":
+	case "JE", "JEY", "JERSEY", "JERSIEY":
 		return JEY
 	case "CW", "CUW", "CURACAO", "CURAÇAO", "CURAKAO", "KURACAO", "KURAKAO":
 		return CUW
