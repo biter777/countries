@@ -96,3 +96,6 @@ contributing
 
 Welcome pull requests, bug fixes and issue reports.
 Before proposing a change, please discuss it first by raising an issue.
+
+Contributors list:
+@gavincarr (https://github.com/gavincarr)
