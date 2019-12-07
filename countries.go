@@ -5303,7 +5303,8 @@ func textPrepare(text string) string {
 	return strings.ToUpper(text)
 }
 
-// ByName - return CountryCode by country Alpha-2 / Alpha-3 / name, case-insensitive, example: rus := ByName("Ru") OR rus := ByName("russia")
+// ByName - return CountryCode by country Alpha-2 / Alpha-3 / name, case-insensitive, example: rus := ByName("Ru") OR rus := ByName("russia"),
+// returns countries.Unknown, if country name not found or not valid
 func ByName(name string) CountryCode {
 	switch textPrepare(name) {
 	case "AU", "AUS", "AUSTRALIA", "AVSTRALIA", "AVSTRALIYA", "AUSTRALIYA":
@@ -5814,6 +5815,15 @@ func ByName(name string) CountryCode {
 		return SSD
 	case "JP", "JPN", "JAPAN":
 		return JPN
+	}
+	return Unknown
+}
+
+// ByNumeric - return CountryCode by country Alpha-2 / Alpha-3 / numeric code, case-insensitive, example: rus := ByName("Ru") OR rus := ByName("russia"),
+// returns countries.Unknown, if country code not found or not valid
+func ByNumeric(numeric int) CountryCode {
+	if code := CountryCode(numeric); code.IsValid() {
+		return code
 	}
 	return Unknown
 }
