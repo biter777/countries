@@ -5819,7 +5819,7 @@ func ByName(name string) CountryCode {
 	return Unknown
 }
 
-// ByNumeric - return CountryCode by country Alpha-2 / Alpha-3 / numeric code, case-insensitive, example: rus := ByName("Ru") OR rus := ByName("russia"),
+// ByNumeric - return CountryCode by country Alpha-2 / Alpha-3 / numeric code, example: rus := ByNumeric(643),
 // returns countries.Unknown, if country code not found or not valid
 func ByNumeric(numeric int) CountryCode {
 	if code := CountryCode(numeric); code.IsValid() {
