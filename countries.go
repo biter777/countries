@@ -5293,11 +5293,12 @@ func AllInfo() []*Country {
 
 func textPrepare(text string) string {
 	text = strings.Replace(text, " & ", "AND", -1)
-	re := regexp.MustCompile("\n|\t|\r|\f|\v|!|[|]|{|}|\\|'|`|;|:|,|«|»| |-|‐|‑|‒|―|—|–|_|+|\"")
+	re := regexp.MustCompile("\n|\t|\r|\f|\v|!|[|]|{|}|\\|'|`|;|:|,|«|»| |-|‐|‑|‒|―|—|–|_|\"")
 	text = re.ReplaceAllString(text, "")
 	text = strings.Replace(text, "(", "", -1)
 	text = strings.Replace(text, ")", "", -1)
 	text = strings.Replace(text, "?", "", -1)
+	text = strings.Replace(text, "+", "", -1)
 	text = strings.Replace(text, ".", "", -1)
 	text = strings.Replace(text, "|", "", -1)
 	return strings.ToUpper(text)
