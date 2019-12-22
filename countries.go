@@ -225,6 +225,7 @@ const (
 	Kiribati                               CountryCode = 296
 	Korea                                  CountryCode = 410
 	KoreaNorth                             CountryCode = 408
+	Kosovo                                 CountryCode = 900
 	Kuwait                                 CountryCode = 414
 	Kyrgyzstan                             CountryCode = 417
 	Laos                                   CountryCode = 418
@@ -483,6 +484,7 @@ const (
 	KI CountryCode = 296
 	KR CountryCode = 410
 	KP CountryCode = 408
+	XK CountryCode = 900
 	KW CountryCode = 414
 	KG CountryCode = 417
 	LA CountryCode = 418
@@ -739,6 +741,7 @@ const (
 	KIR CountryCode = 296
 	KOR CountryCode = 410
 	PRK CountryCode = 408
+	XKX CountryCode = 900
 	KWT CountryCode = 414
 	KGZ CountryCode = 417
 	LAO CountryCode = 418
@@ -885,7 +888,7 @@ const (
 
 // Total - returns number of codes in the package, countries.Total() == len(countries.All()) but static value for perfomance
 func Total() int {
-	return 253
+	return 254
 }
 
 // Emoji - return a country Alpha-2 (ISO2) as Emoji flag (example "RU" as "🇷🇺")
@@ -1137,6 +1140,8 @@ func (c CountryCode) String() string {
 		return "Korea (Republic of)"
 	case 408:
 		return "Korea (Democratic People's Republic of)"
+	case 900:
+		return "Kosovo"
 	case 414:
 		return "Kuwait"
 	case 417:
@@ -1646,6 +1651,8 @@ func (c CountryCode) StringRus() string {
 		return "Корея"
 	case 408:
 		return "Корейская Народная Демократическая республика"
+	case 900:
+		return "Косово"
 	case 414:
 		return "Кувейт"
 	case 417:
@@ -2157,6 +2164,8 @@ func (c CountryCode) Alpha2() string {
 		return "KR"
 	case 408:
 		return "KP"
+	case 900:
+		return "XK"
 	case 414:
 		return "KW"
 	case 417:
@@ -2666,6 +2675,8 @@ func (c CountryCode) Alpha3() string {
 		return "KOR"
 	case 408:
 		return "PRK"
+	case 900:
+		return "XKX"
 	case 414:
 		return "KWT"
 	case 417:
@@ -3153,6 +3164,8 @@ func (c CountryCode) Currency() CurrencyCode {
 		return CurrencyXOF
 	case CUB:
 		return CurrencyCUC
+	case XKX:
+		return CurrencyEUR
 	case KWT:
 		return CurrencyKWD
 	case KGZ:
@@ -4205,6 +4218,8 @@ func (c CountryCode) CallCode() CallCode {
 		return CallCode(211)
 	case JPN:
 		return CallCode(81)
+	case XKX:
+		return CallCode(383)
 	}
 	return 0
 }
@@ -4723,6 +4738,8 @@ func (c CountryCode) Region() RegionCode {
 		return RegionAF
 	case JPN:
 		return RegionAS
+	case XKX:
+		return RegionEU
 	}
 	return RegionUnknown
 }
@@ -5232,6 +5249,8 @@ func (c CountryCode) Capital() CapitalCode {
 		return CapitalSS
 	case JPN:
 		return CapitalJP
+	case XKX:
+		return CapitalXK
 	}
 	return CapitalUnknown
 }
@@ -5816,6 +5835,8 @@ func ByName(name string) CountryCode {
 		return SSD
 	case "JP", "JPN", "JAPAN":
 		return JPN
+	case "XK", "XKX", "KOSOVO":
+		return XK
 	}
 	return Unknown
 }

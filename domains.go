@@ -289,6 +289,7 @@ const (
 	DomainMF      DomainCode = DomainCode(MF)
 	DomainSS      DomainCode = DomainCode(SS)
 	DomainJP      DomainCode = DomainCode(JP)
+	DomainXK      DomainCode = DomainCode(XK)
 )
 
 // Type implements Typer interface
@@ -644,6 +645,7 @@ func AllDomains() []DomainCode {
 		DomainMF,
 		DomainSS,
 		DomainJP,
+		DomainXK,
 	}
 }
 
@@ -659,5 +661,5 @@ func AllDomainsInfo() []*Domain {
 
 // TotalDomains - returns number of domains in the package, countries.TotalDomains() == len(countries.AllDomains()) but static value for perfomance
 func TotalDomains() int {
-	return 263
+	return 264
 }

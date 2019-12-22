@@ -151,6 +151,7 @@ const (
 	CallCode380     CallCode = 380
 	CallCode381     CallCode = 381
 	CallCode382     CallCode = 382
+	CallCode383     CallCode = 383
 	CallCode385     CallCode = 385
 	CallCode386     CallCode = 386
 	CallCode387     CallCode = 387
@@ -275,7 +276,7 @@ func (c CallCode) Info() *CallCodeInfo {
 
 // TotalCallCodes - returns number of call codes in the package, countries.TotalCallCodes() == len(countries.AllCallCodes()) but static value for perfomance
 func TotalCallCodes() int {
-	return 230
+	return 231
 }
 
 // AllCallCodes - return all countries call phone codes
@@ -409,6 +410,7 @@ func AllCallCodes() []CallCode {
 		CallCode380,
 		CallCode381,
 		CallCode382,
+		CallCode383,
 		CallCode385,
 		CallCode386,
 		CallCode387,
@@ -751,6 +753,8 @@ func (c CallCode) Countries() []CountryCode {
 		return []CountryCode{SRB}
 	case CallCode382:
 		return []CountryCode{MNE}
+	case CallCode383:
+		return []CountryCode{XKX}
 	case CallCode385:
 		return []CountryCode{HRV}
 	case CallCode386:

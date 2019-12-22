@@ -276,6 +276,7 @@ const (
 	CapitalMF      CapitalCode = CapitalCode(MF)
 	CapitalSS      CapitalCode = CapitalCode(SS)
 	CapitalJP      CapitalCode = CapitalCode(JP)
+	CapitalXK      CapitalCode = CapitalCode(XK)
 )
 
 // Type implements Typer interface
@@ -788,6 +789,8 @@ func (c CapitalCode) String() string {
 		return "Juba"
 	case CapitalJP:
 		return "Tokyo"
+	case CapitalXK:
+		return "Pristina"
 	}
 	return UnknownMsg
 }
@@ -1297,6 +1300,8 @@ func (c CapitalCode) Country() CountryCode {
 		return SS
 	case CapitalJP:
 		return JP
+	case CapitalXK:
+		return XK
 	}
 	return Unknown
 }
@@ -1598,6 +1603,7 @@ func AllCapitals() []CapitalCode {
 		CapitalMF,
 		CapitalSS,
 		CapitalJP,
+		CapitalXK,
 	}
 }
 
@@ -2100,6 +2106,8 @@ func CapitalCodeByName(name string) CapitalCode {
 		return CapitalZM
 	case "HARARE":
 		return CapitalZW
+	case "PRISTINA":
+		return CapitalXK
 	}
 	return CapitalUnknown
 }
