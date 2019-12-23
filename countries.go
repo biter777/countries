@@ -915,7 +915,7 @@ func init() {
 
 // Total - returns number of codes in the package, countries.Total() == len(countries.All()) but static value for perfomance
 func Total() int {
-	return 253
+	return 254
 }
 
 // Emoji - return a country Alpha-2 (ISO2) as Emoji flag (example "RU" as "🇷🇺")
