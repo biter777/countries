@@ -1,7 +1,7 @@
 countries
 =======
 
-Countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 countries codes and names (on eng and rus), currency designators, calling phone codes, countries capitals and regions (UN M.49 code), countries domains (ccTLD), Very FAST, NO maps[], NO slices[], NO init() func, NO external files and data, NO interface{}, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1, ISO-4217, Unicode CLDR and ccTLD standarts.
+Countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 countries codes and names (on eng and rus), currency designators, calling phone codes, countries capitals and regions (UN M.49 code), countries domains (ccTLD), MOK and FIFA letters codes, Very FAST, NO maps[], NO slices[], NO external files and data, NO interface{}, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1, ISO-4217, Unicode CLDR and ccTLD standarts.
 
 Full support ISO-3166-1, ISO-4217, Unicode CLDR and ccTLD standarts.
 
@@ -27,8 +27,10 @@ func main() {
 	fmt.Printf("Country digit code: %d\n", countryJapan)
 	fmt.Printf("Country Alpha-2 code: %v\n", countryJapan.Alpha2())
 	fmt.Printf("Country Alpha-3 code: %v\n", countryJapan.Alpha3())
+	fmt.Printf("Country MOK code: %v\n", countryJapan.MOK())
+	fmt.Printf("Country FIFA code: %v\n", countryJapan.FIFA())
 	fmt.Printf("Country Capital: %v\n", countryJapan.Capital())
-	fmt.Printf("Country call code: %v\n", countryJapan.CallCode())
+	fmt.Printf("Country call code: %v\n", countryJapan.CallCodes())
 	fmt.Printf("Country domain: %v\n", countryJapan.Domain())
 	fmt.Printf("Country region name: %v\n", countryJapan.Region())
 	fmt.Printf("Country region code: %d\n", countryJapan.Region())
@@ -47,8 +49,10 @@ func main() {
 	fmt.Printf("Country digit code: %d\n", japanInfo.Code)
 	fmt.Printf("Country Alpha-2 code: %v\n", japanInfo.Alpha2)
 	fmt.Printf("Country Alpha-3 code: %v\n", japanInfo.Alpha3)
+	fmt.Printf("Country MOK code: %v\n", japanInfo.MOK)
+	fmt.Printf("Country FIFA code: %v\n", japanInfo.FIFA)
 	fmt.Printf("Country Capital: %v\n", japanInfo.Capital)
-	fmt.Printf("Country call code: %v\n", japanInfo.CallCode)
+	fmt.Printf("Country call code: %v\n", japanInfo.CallCodes)
 	fmt.Printf("Country region name: %v\n", japanInfo.Region)
 	fmt.Printf("Country region code: %d\n", japanInfo.Region)
 	fmt.Printf("Country emoji: %v\n", japanInfo.Emoji)
@@ -98,4 +102,6 @@ Welcome pull requests, bug fixes and issue reports.
 Before proposing a change, please discuss it first by raising an issue.
 
 Contributors list:
-@gavincarr (https://github.com/gavincarr)
+@biter777 (https://github.com/biter777) 
+@gavincarr (https://github.com/gavincarr) 
+@benja-M-1 (https://github.com/benja-M-1) 
