@@ -1447,6 +1447,8 @@ func (c CountryCode) String() string {
 		return "Montenegro"
 	case 728:
 		return "South Sudan"
+	case 900:
+		return "Kosovo"
 	case 999800:
 		return "International Freephone"
 	case 999870:
@@ -1976,6 +1978,8 @@ func (c CountryCode) StringRus() string {
 		return "Черногория"
 	case 728:
 		return "Южный Судан"
+	case 900:
+		return "Косово"
 	case Internation:
 		return "Internation"
 	case 999800:
@@ -2507,6 +2511,8 @@ func (c CountryCode) Alpha2() string {
 		return "ME"
 	case 728:
 		return "SS"
+	case 900:
+		return "XK"
 	case 999800:
 		return "International Freephone"
 	case 999870:
@@ -6164,6 +6170,8 @@ func ByName(name string) CountryCode {
 		return SSD
 	case "JP", "JPN", "JAPAN":
 		return JPN
+	case "XK", "XKX", "KOS", "KOSOVO":
+		return XKX
 	case "UIFN", "INTERNATIONALFREEPHONE", "TOLLFREEPHONE":
 		return NonCountryInternationalFreephone
 	case "INMARSAT":
