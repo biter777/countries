@@ -306,7 +306,7 @@ func (c CallCode) Info() *CallCodeInfo {
 
 // TotalCallCodes - returns number of call codes in the package, countries.TotalCallCodes() == len(countries.AllCallCodes()) but static value for perfomance
 func TotalCallCodes() int {
-	return 230
+	return 261
 }
 
 // AllCallCodes - return all countries call phone codes
