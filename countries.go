@@ -1,5 +1,5 @@
 /*
-Package countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 countries codes and names (on eng and rus), currency designators, calling phone codes, countries capitals and regions (UN M.49 code), countries domains (ccTLD), Very FAST, NO maps[], NO slices[], NO init() func, NO external files and data, NO interface{}, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1, ISO-4217, Unicode CLDR and ccTLD standarts.
+Package countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 countries codes and names (on eng and rus), currency designators, calling phone codes, countries capitals and regions (UN M.49 code), countries domains (ccTLD), MOK and FIFA letters codes, Very FAST, NO maps[], NO slices[], NO external files and data, NO interface{}, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1, ISO-4217, Unicode CLDR and ccTLD standarts.
 
 Usage
 
@@ -10,8 +10,10 @@ Usage
 	fmt.Printf("Country digit code: %d\n", countryJapan)
 	fmt.Printf("Country Alpha-2 code: %v\n", countryJapan.Alpha2())
 	fmt.Printf("Country Alpha-3 code: %v\n", countryJapan.Alpha3())
+	fmt.Printf("Country MOK code: %v\n", countryJapan.MOK())
+	fmt.Printf("Country FIFA code: %v\n", countryJapan.FIFA())
 	fmt.Printf("Country Capital: %v\n", countryJapan.Capital())
-	fmt.Printf("Country call code: %v\n", countryJapan.[]CallCode{CallCode())
+	fmt.Printf("Country call code: %v\n", countryJapan.CallCodes())
 	fmt.Printf("Country domain: %v\n", countryJapan.Domain())
 	fmt.Printf("Country region name: %v\n", countryJapan.Region())
 	fmt.Printf("Country region code: %d\n", countryJapan.Region())
@@ -83,6 +85,8 @@ type Country struct {
 	Name      string       `json:"name"`
 	Alpha2    string       `json:"cca2"`
 	Alpha3    string       `json:"cca3"`
+	MOK       string       `json:"mok"`
+	FIFA      string       `json:"fifa"`
 	Emoji     string       `json:"emoji"`
 	Code      CountryCode  `json:"code"`
 	Currency  CurrencyCode `json:"currency"`
@@ -5439,6 +5443,8 @@ func (c CountryCode) Info() *Country {
 		Name:      c.String(),
 		Alpha2:    c.Alpha2(),
 		Alpha3:    c.Alpha3(),
+		MOK:       c.MOK(),
+		FIFA:      c.FIFA(),
 		Emoji:     c.Emoji(),
 		Code:      c,
 		Capital:   c.Capital(),
