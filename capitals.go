@@ -22,8 +22,8 @@ const TypeCapitalCode = "countries.CapitalCode"
 // TypeCapital for Typer interface
 const TypeCapital = "countries.Capital"
 
-const (
-	CapitalUnknown CapitalCode = 0
+const ( 
+	CapitalUnknown CapitalCode = 0 
 	CapitalAU      CapitalCode = CapitalCode(AU)
 	CapitalAT      CapitalCode = CapitalCode(AT)
 	CapitalAZ      CapitalCode = CapitalCode(AZ)

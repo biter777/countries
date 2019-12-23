@@ -11,7 +11,7 @@ Usage
 	fmt.Printf("Country Alpha-2 code: %v\n", countryJapan.Alpha2())
 	fmt.Printf("Country Alpha-3 code: %v\n", countryJapan.Alpha3())
 	fmt.Printf("Country Capital: %v\n", countryJapan.Capital())
-	fmt.Printf("Country call code: %v\n", countryJapan.CallCode())
+	fmt.Printf("Country call code: %v\n", countryJapan.[]CallCode{CallCode())
 	fmt.Printf("Country domain: %v\n", countryJapan.Domain())
 	fmt.Printf("Country region name: %v\n", countryJapan.Region())
 	fmt.Printf("Country region code: %d\n", countryJapan.Region())
@@ -80,16 +80,16 @@ type CountryCode int64 // int64 for database/sql/driver.Valuer compatibility
 
 // Country - all info about country
 type Country struct {
-	Name     string       `json:"name"`
-	Alpha2   string       `json:"cca2"`
-	Alpha3   string       `json:"cca3"`
-	Emoji    string       `json:"emoji"`
-	Code     CountryCode  `json:"code"`
-	Currency CurrencyCode `json:"currency"`
-	Capital  CapitalCode  `json:"capital"`
-	CallCode CallCode     `json:"callingCode"`
-	Domain   DomainCode   `json:"domain"`
-	Region   RegionCode   `json:"region"`
+	Name      string       `json:"name"`
+	Alpha2    string       `json:"cca2"`
+	Alpha3    string       `json:"cca3"`
+	Emoji     string       `json:"emoji"`
+	Code      CountryCode  `json:"code"`
+	Currency  CurrencyCode `json:"currency"`
+	Capital   CapitalCode  `json:"capital"`
+	CallCodes []CallCode   `json:"callingCode"`
+	Domain    DomainCode   `json:"domain"`
+	Region    RegionCode   `json:"region"`
 }
 
 // Typer - typer interface, provide a name of type
@@ -368,6 +368,20 @@ const (
 	SintMaartenDutch                       CountryCode = 534
 	Montenegro                             CountryCode = 499
 	SouthSudan                             CountryCode = 728
+)
+
+// Non-countries codes
+const (
+	NonCountryInternationalFreephone                               CountryCode = 999800 // for callcode +800, International Freephone (UIFN)
+	NonCountryInmarsat                                             CountryCode = 999870 // for callcode +870, Inmarsat "SNAC" service
+	NonCountryMaritimeMobileService                                CountryCode = 999875 // for callcodes +875, +876, +877
+	NonCountryUniversalPersonalTelecommunicationsServices          CountryCode = 999878 // for callcode +878
+	NonCountryNationalNonCommercialPurposes                        CountryCode = 999879 // for callcode +879
+	NonCountryGlobalMobileSatelliteSystem                          CountryCode = 999881 // for callcode +881
+	NonCountryInternationalNetworks                                CountryCode = 999882 // for callcodes +882, +883
+	NonCountryDisasterRelief                                       CountryCode = 999888 // for callcode +888
+	NonCountryInternationalPremiumRateService                      CountryCode = 999979 // for callcode +979
+	NonCountryInternationalTelecommunicationsCorrespondenceService CountryCode = 999991 // for callcode +991
 )
 
 // Alpha-2 digit ISO 3166-1. Three codes present, for example Russia == RU == RUS == 643.
@@ -882,6 +896,13 @@ const (
 	MNE CountryCode = 499
 	SSD CountryCode = 728
 )
+
+// rePrepare - for func textPrepare()
+var rePrepare *regexp.Regexp
+
+func init() {
+	rePrepare = regexp.MustCompile("\n|\t|\r|\f|\v|!|[|]|{|}|\\|'|`|;|:|,|«|»| |-|‐|‑|‒|―|—|–| |_|\"")
+}
 
 // Total - returns number of codes in the package, countries.Total() == len(countries.All()) but static value for perfomance
 func Total() int {
@@ -1417,6 +1438,26 @@ func (c CountryCode) String() string {
 		return "Montenegro"
 	case 728:
 		return "South Sudan"
+	case 999800:
+		return "International Freephone"
+	case 999870:
+		return "Inmarsat"
+	case 999875:
+		return "Maritime Mobile service"
+	case 999878:
+		return "Universal Personal Telecommunications services"
+	case 999879:
+		return "National non-commercial purposes"
+	case 999881:
+		return "Global Mobile Satellite System"
+	case 999882:
+		return "International Networks"
+	case 999888:
+		return "Disaster Relief"
+	case 999979:
+		return "International Premium Rate Service"
+	case 999991:
+		return "International Telecommunications Public Correspondence Service"
 	}
 	return UnknownMsg
 }
@@ -1928,6 +1969,26 @@ func (c CountryCode) StringRus() string {
 		return "Южный Судан"
 	case Internation:
 		return "Internation"
+	case 999800:
+		return "Бесплатный номер"
+	case 999870:
+		return "Инмарсат"
+	case 999875:
+		return "Морская подвижная служба"
+	case 999878:
+		return "Универсальная персональная связь"
+	case 999879:
+		return "Некоммерческое использование"
+	case 999881:
+		return "Глобальная мобильная спутниковая система"
+	case 999882:
+		return "Глобальные телефонные номера"
+	case 999888:
+		return "Ликвидация последствий катастроф"
+	case 999979:
+		return "Международная услуга оплаты вызова по повышенному тарифу"
+	case 999991:
+		return "Служба международной телекоммуникационной корреспонденции"
 	}
 	return UnknownMsg
 }
@@ -2437,6 +2498,26 @@ func (c CountryCode) Alpha2() string {
 		return "ME"
 	case 728:
 		return "SS"
+	case 999800:
+		return "International Freephone"
+	case 999870:
+		return "Inmarsat"
+	case 999875:
+		return "Maritime Mobile service"
+	case 999878:
+		return "Universal Personal Telecommunications services"
+	case 999879:
+		return "National non-commercial purposes"
+	case 999881:
+		return "Global Mobile Satellite System"
+	case 999882:
+		return "International Networks"
+	case 999888:
+		return "Disaster Relief"
+	case 999979:
+		return "International Premium Rate Service"
+	case 999991:
+		return "International Telecommunications Public Correspondence Service"
 	}
 	return UnknownMsg
 }
@@ -2946,8 +3027,104 @@ func (c CountryCode) Alpha3() string {
 		return "MNE"
 	case 728:
 		return "SSD"
+	case 999800:
+		return "International Freephone"
+	case 999870:
+		return "Inmarsat"
+	case 999875:
+		return "Maritime Mobile service"
+	case 999878:
+		return "Universal Personal Telecommunications services"
+	case 999879:
+		return "National non-commercial purposes"
+	case 999881:
+		return "Global Mobile Satellite System"
+	case 999882:
+		return "International Networks"
+	case 999888:
+		return "Disaster Relief"
+	case 999979:
+		return "International Premium Rate Service"
+	case 999991:
+		return "International Telecommunications Public Correspondence Service"
 	}
 	return UnknownMsg
+}
+
+// FIFA - returns a FIFA (AFC, CAF, CONCACAF, CONMEBOL, OFC and UEFA) three-letter country code
+func (c CountryCode) FIFA() string {
+	switch c {
+	case VNM:
+		return "VIE"
+	case DEU:
+		return "GER"
+	case NLD:
+		return "NED"
+	case PSE:
+		return "PLE"
+	case TWN:
+		return "TPE"
+	case HRV:
+		return "CRO"
+	case CAF:
+		return "CTA"
+	}
+	return c.Alpha3()
+}
+
+// MOK - returns The International Olympic Committee (IOC) three-letter abbreviation country codes
+func (c CountryCode) MOK() string {
+	switch c {
+	case VIR:
+		return "ISV"
+	case ATG:
+		return "ANT"
+	case BRB:
+		return "BAR"
+	case BHR:
+		return "BRN"
+	case BLZ:
+		return "BIZ"
+	case VGB:
+		return "IVB"
+	case BFA:
+		return "BUR"
+	case VNM:
+		return "VIE"
+	case GNB:
+		return "GBS"
+	case DEU:
+		return "GER"
+	case IDN:
+		return "INA"
+	case IRN:
+		return "IRI"
+	case LVA:
+		return "LAT"
+	case LBY:
+		return "LBA"
+	case MWI:
+		return "MAW"
+	case NGA:
+		return "NGR"
+	case ANT:
+		return "AHO"
+	case NLD:
+		return "NED"
+	case PSE:
+		return "PLE"
+	case SLV:
+		return "ESA"
+	case SVN:
+		return "SLO"
+	case TWN:
+		return "TPE"
+	case HRV:
+		return "CRO"
+	case GNQ:
+		return "GEQ"
+	}
+	return c.Alpha3()
 }
 
 // Currency - returns a currency of the country
@@ -3700,513 +3877,533 @@ func All() []CountryCode {
 	}
 }
 
-// CallCode - return calling code of country
-func (c CountryCode) CallCode() CallCode {
+// CallCodes - return calling code of country
+func (c CountryCode) CallCodes() []CallCode {
 	switch c {
 	case AUS:
-		return CallCode(61)
+		return []CallCode{CallCode(61)}
 	case AUT:
-		return CallCode(43)
+		return []CallCode{CallCode(43)}
 	case AZE:
-		return CallCode(994)
+		return []CallCode{CallCode(994)}
 	case ALB:
-		return CallCode(355)
+		return []CallCode{CallCode(355)}
 	case DZA:
-		return CallCode(213)
+		return []CallCode{CallCode(213)}
 	case ASM:
-		return CallCode(1684)
+		return []CallCode{CallCode(1684)}
 	case AIA:
-		return CallCode(1264)
+		return []CallCode{CallCode(1264)}
 	case AGO:
-		return CallCode(244)
+		return []CallCode{CallCode(244)}
 	case AND:
-		return CallCode(376)
+		return []CallCode{CallCode(376)}
 	case ATA:
-		return CallCode(672)
+		return []CallCode{CallCode(672)}
 	case ATG:
-		return CallCode(1268)
+		return []CallCode{CallCode(1268)}
 	case ANT:
-		return CallCode(599)
+		return []CallCode{CallCode(599)}
 	case ARE:
-		return CallCode(971)
+		return []CallCode{CallCode(971)}
 	case ARG:
-		return CallCode(54)
+		return []CallCode{CallCode(54)}
 	case ARM:
-		return CallCode(374)
+		return []CallCode{CallCode(374)}
 	case ABW:
-		return CallCode(297)
+		return []CallCode{CallCode(297), CallCode(5998)}
 	case AFG:
-		return CallCode(93)
+		return []CallCode{CallCode(93)}
 	case BHS:
-		return CallCode(1242)
+		return []CallCode{CallCode(1242)}
 	case BGD:
-		return CallCode(880)
+		return []CallCode{CallCode(880)}
 	case BRB:
-		return CallCode(1246)
+		return []CallCode{CallCode(1246)}
 	case BHR:
-		return CallCode(973)
+		return []CallCode{CallCode(973)}
 	case BLR:
-		return CallCode(375)
+		return []CallCode{CallCode(375)}
 	case BLZ:
-		return CallCode(501)
+		return []CallCode{CallCode(501)}
 	case BEL:
-		return CallCode(32)
+		return []CallCode{CallCode(32)}
 	case BEN:
-		return CallCode(229)
+		return []CallCode{CallCode(229)}
 	case BMU:
-		return CallCode(1441)
+		return []CallCode{CallCode(1441)}
 	case BGR:
-		return CallCode(359)
+		return []CallCode{CallCode(359)}
 	case BOL:
-		return CallCode(591)
+		return []CallCode{CallCode(591)}
 	case BIH:
-		return CallCode(387)
+		return []CallCode{CallCode(387)}
 	case BWA:
-		return CallCode(267)
+		return []CallCode{CallCode(267)}
 	case BRA:
-		return CallCode(55)
+		return []CallCode{CallCode(55)}
 	case IOT:
-		return CallCode(246)
+		return []CallCode{CallCode(246)}
 	case BRN:
-		return CallCode(673)
+		return []CallCode{CallCode(673)}
 	case BFA:
-		return CallCode(226)
+		return []CallCode{CallCode(226)}
 	case BDI:
-		return CallCode(257)
+		return []CallCode{CallCode(257)}
 	case BTN:
-		return CallCode(975)
+		return []CallCode{CallCode(975)}
 	case VUT:
-		return CallCode(678)
+		return []CallCode{CallCode(678)}
 	case VAT:
-		return CallCode(39)
+		return []CallCode{CallCode(3906698)}
 	case GBR:
-		return CallCode(44)
+		return []CallCode{CallCode(44)}
 	case HUN:
-		return CallCode(36)
+		return []CallCode{CallCode(36)}
 	case VEN:
-		return CallCode(58)
+		return []CallCode{CallCode(58)}
 	case VGB:
-		return CallCode(1284)
+		return []CallCode{CallCode(1284)}
 	case VIR:
-		return CallCode(1340)
+		return []CallCode{CallCode(1340)}
 	case TLS:
-		return CallCode(670)
+		return []CallCode{CallCode(670)}
 	case VNM:
-		return CallCode(84)
+		return []CallCode{CallCode(84)}
 	case GAB:
-		return CallCode(241)
+		return []CallCode{CallCode(241)}
 	case HTI:
-		return CallCode(509)
+		return []CallCode{CallCode(509)}
 	case GUY:
-		return CallCode(592)
+		return []CallCode{CallCode(592)}
 	case GMB:
-		return CallCode(220)
+		return []CallCode{CallCode(220)}
 	case GHA:
-		return CallCode(233)
+		return []CallCode{CallCode(233)}
 	case GLP:
-		return CallCode(590)
+		return []CallCode{CallCode(590)}
 	case GTM:
-		return CallCode(502)
+		return []CallCode{CallCode(502)}
 	case GIN:
-		return CallCode(224)
+		return []CallCode{CallCode(224)}
 	case GNB:
-		return CallCode(245)
+		return []CallCode{CallCode(245)}
 	case DEU:
-		return CallCode(49)
+		return []CallCode{CallCode(49)}
 	case GIB:
-		return CallCode(350)
+		return []CallCode{CallCode(350)}
 	case HND:
-		return CallCode(504)
+		return []CallCode{CallCode(504)}
 	case HKG:
-		return CallCode(852)
+		return []CallCode{CallCode(852)}
 	case GRD:
-		return CallCode(1473)
+		return []CallCode{CallCode(1473)}
 	case GRL:
-		return CallCode(299)
+		return []CallCode{CallCode(299)}
 	case GRC:
-		return CallCode(30)
+		return []CallCode{CallCode(30)}
 	case GEO:
-		return CallCode(995)
+		return []CallCode{CallCode(995)}
 	case GUM:
-		return CallCode(1671)
+		return []CallCode{CallCode(1671)}
 	case DNK:
-		return CallCode(45)
+		return []CallCode{CallCode(45)}
 	case COD:
-		return CallCode(243)
+		return []CallCode{CallCode(243)}
 	case DJI:
-		return CallCode(253)
+		return []CallCode{CallCode(253)}
 	case DMA:
-		return CallCode(1767)
+		return []CallCode{CallCode(1767)}
 	case DOM:
-		return CallCode(1809)
+		return []CallCode{CallCode(1809), CallCode(1829), CallCode(1849)}
 	case EGY:
-		return CallCode(20)
+		return []CallCode{CallCode(20)}
 	case ZMB:
-		return CallCode(260)
+		return []CallCode{CallCode(260)}
 	case ESH:
-		return CallCode(212)
+		return []CallCode{CallCode(212)}
 	case ZWE:
-		return CallCode(263)
+		return []CallCode{CallCode(263)}
 	case ISR:
-		return CallCode(972)
+		return []CallCode{CallCode(972)}
 	case IND:
-		return CallCode(91)
+		return []CallCode{CallCode(91)}
 	case IDN:
-		return CallCode(62)
+		return []CallCode{CallCode(62)}
 	case JOR:
-		return CallCode(962)
+		return []CallCode{CallCode(962)}
 	case IRQ:
-		return CallCode(964)
+		return []CallCode{CallCode(964)}
 	case IRN:
-		return CallCode(98)
+		return []CallCode{CallCode(98)}
 	case IRL:
-		return CallCode(353)
+		return []CallCode{CallCode(353)}
 	case ISL:
-		return CallCode(354)
+		return []CallCode{CallCode(354)}
 	case ESP:
-		return CallCode(34)
+		return []CallCode{CallCode(34)}
 	case ITA:
-		return CallCode(39)
+		return []CallCode{CallCode(39)}
 	case YEM:
-		return CallCode(967)
+		return []CallCode{CallCode(967)}
 	case KAZ:
-		return CallCode(7)
+		return []CallCode{CallCode(7)}
 	case CYM:
-		return CallCode(1345)
+		return []CallCode{CallCode(1345)}
 	case KHM:
-		return CallCode(855)
+		return []CallCode{CallCode(855)}
 	case CMR:
-		return CallCode(237)
+		return []CallCode{CallCode(237)}
 	case CAN:
-		return CallCode(1)
+		return []CallCode{CallCode(1)}
 	case QAT:
-		return CallCode(974)
+		return []CallCode{CallCode(974)}
 	case KEN:
-		return CallCode(254)
+		return []CallCode{CallCode(254)}
 	case CYP:
-		return CallCode(357)
+		return []CallCode{CallCode(357)}
 	case KIR:
-		return CallCode(686)
+		return []CallCode{CallCode(686)}
 	case CHN:
-		return CallCode(86)
+		return []CallCode{CallCode(86)}
 	case CCK:
-		return CallCode(672)
+		return []CallCode{CallCode(672), CallCode(6189162)}
 	case COL:
-		return CallCode(57)
+		return []CallCode{CallCode(57)}
 	case COM:
-		return CallCode(269)
+		return []CallCode{CallCode(269)}
 	case COG:
-		return CallCode(242)
+		return []CallCode{CallCode(242)}
 	case PRK:
-		return CallCode(850)
+		return []CallCode{CallCode(850)}
 	case KOR:
-		return CallCode(82)
+		return []CallCode{CallCode(82)}
 	case CRI:
-		return CallCode(506)
+		return []CallCode{CallCode(506)}
 	case CIV:
-		return CallCode(225)
+		return []CallCode{CallCode(225)}
 	case CUB:
-		return CallCode(53)
+		return []CallCode{CallCode(53)}
 	case KWT:
-		return CallCode(965)
+		return []CallCode{CallCode(965)}
 	case KGZ:
-		return CallCode(996)
+		return []CallCode{CallCode(996)}
 	case LAO:
-		return CallCode(856)
+		return []CallCode{CallCode(856)}
 	case LVA:
-		return CallCode(371)
+		return []CallCode{CallCode(371)}
 	case LSO:
-		return CallCode(266)
+		return []CallCode{CallCode(266)}
 	case LBR:
-		return CallCode(231)
+		return []CallCode{CallCode(231)}
 	case LBN:
-		return CallCode(961)
+		return []CallCode{CallCode(961)}
 	case LBY:
-		return CallCode(218)
+		return []CallCode{CallCode(218)}
 	case LTU:
-		return CallCode(370)
+		return []CallCode{CallCode(370)}
 	case LIE:
-		return CallCode(423)
+		return []CallCode{CallCode(423)}
 	case LUX:
-		return CallCode(352)
+		return []CallCode{CallCode(352)}
 	case MUS:
-		return CallCode(230)
+		return []CallCode{CallCode(230)}
 	case MRT:
-		return CallCode(222)
+		return []CallCode{CallCode(222)}
 	case MDG:
-		return CallCode(261)
+		return []CallCode{CallCode(261)}
 	case MYT:
-		return CallCode(262)
+		return []CallCode{CallCode(CallCode262269), CallCode(CallCode262639)}
 	case MAC:
-		return CallCode(853)
+		return []CallCode{CallCode(853)}
 	case MKD:
-		return CallCode(389)
+		return []CallCode{CallCode(389)}
 	case MWI:
-		return CallCode(265)
+		return []CallCode{CallCode(265)}
 	case MYS:
-		return CallCode(60)
+		return []CallCode{CallCode(60)}
 	case MLI:
-		return CallCode(223)
+		return []CallCode{CallCode(223)}
 	case MDV:
-		return CallCode(960)
+		return []CallCode{CallCode(960)}
 	case MLT:
-		return CallCode(356)
+		return []CallCode{CallCode(356)}
 	case MNP:
-		return CallCode(1670)
+		return []CallCode{CallCode(1670)}
 	case MAR:
-		return CallCode(212)
+		return []CallCode{CallCode(212)}
 	case MTQ:
-		return CallCode(596)
+		return []CallCode{CallCode(596)}
 	case MHL:
-		return CallCode(692)
+		return []CallCode{CallCode(692)}
 	case MEX:
-		return CallCode(52)
+		return []CallCode{CallCode(52)}
 	case FSM:
-		return CallCode(691)
+		return []CallCode{CallCode(691)}
 	case MOZ:
-		return CallCode(258)
+		return []CallCode{CallCode(258)}
 	case MDA:
-		return CallCode(373)
+		return []CallCode{CallCode(373)}
 	case MCO:
-		return CallCode(377)
+		return []CallCode{CallCode(377)}
 	case MNG:
-		return CallCode(976)
+		return []CallCode{CallCode(976)}
 	case MSR:
-		return CallCode(1664)
+		return []CallCode{CallCode(1664)}
 	case MMR:
-		return CallCode(95)
+		return []CallCode{CallCode(95)}
 	case NAM:
-		return CallCode(264)
+		return []CallCode{CallCode(264)}
 	case NRU:
-		return CallCode(674)
+		return []CallCode{CallCode(674)}
 	case NPL:
-		return CallCode(977)
+		return []CallCode{CallCode(977)}
 	case NER:
-		return CallCode(227)
+		return []CallCode{CallCode(227)}
 	case NGA:
-		return CallCode(234)
+		return []CallCode{CallCode(234)}
 	case NLD:
-		return CallCode(31)
+		return []CallCode{CallCode(31)}
 	case NIC:
-		return CallCode(505)
+		return []CallCode{CallCode(505)}
 	case NIU:
-		return CallCode(683)
+		return []CallCode{CallCode(683)}
 	case NZL:
-		return CallCode(64)
+		return []CallCode{CallCode(64)}
 	case NCL:
-		return CallCode(687)
+		return []CallCode{CallCode(687)}
 	case NOR:
-		return CallCode(47)
+		return []CallCode{CallCode(47)}
 	case OMN:
-		return CallCode(968)
+		return []CallCode{CallCode(968)}
 	case BVT:
-		return CallCode(47)
+		return []CallCode{CallCode(47)}
 	case IMN:
-		return CallCode(44)
+		return []CallCode{CallCode(441624)}
 	case NFK:
-		return CallCode(672)
+		return []CallCode{CallCode(672)}
 	case PCN:
-		return CallCode(870)
+		return []CallCode{CallCode(64)}
 	case CXR:
-		return CallCode(61)
+		return []CallCode{CallCode(6189164)}
 	case SHN:
-		return CallCode(290)
+		return []CallCode{CallCode(290)}
 	case WLF:
-		return CallCode(681)
+		return []CallCode{CallCode(681)}
 	case HMD:
-		return CallCode(0)
+		return []CallCode{CallCode(0)}
 	case CPV:
-		return CallCode(238)
+		return []CallCode{CallCode(238)}
 	case COK:
-		return CallCode(682)
+		return []CallCode{CallCode(682)}
 	case WSM:
-		return CallCode(684)
+		return []CallCode{CallCode(684)}
 	case SJM:
-		return CallCode(47)
+		return []CallCode{CallCode(4779)}
 	case TCA:
-		return CallCode(1649)
+		return []CallCode{CallCode(1649)}
 	case UMI:
-		return CallCode(1)
+		return []CallCode{CallCode(1)}
 	case PAK:
-		return CallCode(92)
+		return []CallCode{CallCode(92)}
 	case PLW:
-		return CallCode(680)
+		return []CallCode{CallCode(680)}
 	case PSE:
-		return CallCode(972)
+		return []CallCode{CallCode(972)}
 	case PAN:
-		return CallCode(507)
+		return []CallCode{CallCode(507)}
 	case PNG:
-		return CallCode(675)
+		return []CallCode{CallCode(675)}
 	case PRY:
-		return CallCode(595)
+		return []CallCode{CallCode(595)}
 	case PER:
-		return CallCode(51)
+		return []CallCode{CallCode(51)}
 	case POL:
-		return CallCode(48)
+		return []CallCode{CallCode(48)}
 	case PRT:
-		return CallCode(351)
+		return []CallCode{CallCode(351)}
 	case PRI:
-		return CallCode(1787)
+		return []CallCode{CallCode(1787), CallCode(1939)}
 	case REU:
-		return CallCode(262)
+		return []CallCode{CallCode(262)}
 	case RUS:
-		return CallCode(7)
+		return []CallCode{CallCode(7)}
 	case RWA:
-		return CallCode(250)
+		return []CallCode{CallCode(250)}
 	case ROU:
-		return CallCode(40)
+		return []CallCode{CallCode(40)}
 	case SLV:
-		return CallCode(503)
+		return []CallCode{CallCode(503)}
 	case SMR:
-		return CallCode(378)
+		return []CallCode{CallCode(378)}
 	case STP:
-		return CallCode(239)
+		return []CallCode{CallCode(239)}
 	case SAU:
-		return CallCode(966)
+		return []CallCode{CallCode(966)}
 	case SWZ:
-		return CallCode(268)
+		return []CallCode{CallCode(268)}
 	case SYC:
-		return CallCode(248)
+		return []CallCode{CallCode(248)}
 	case SEN:
-		return CallCode(221)
+		return []CallCode{CallCode(221)}
 	case SPM:
-		return CallCode(508)
+		return []CallCode{CallCode(508)}
 	case VCT:
-		return CallCode(1784)
+		return []CallCode{CallCode(1784)}
 	case KNA:
-		return CallCode(1869)
+		return []CallCode{CallCode(1869)}
 	case LCA:
-		return CallCode(1758)
+		return []CallCode{CallCode(1758)}
 	case SGP:
-		return CallCode(65)
+		return []CallCode{CallCode(65)}
 	case SYR:
-		return CallCode(963)
+		return []CallCode{CallCode(963)}
 	case SVK:
-		return CallCode(421)
+		return []CallCode{CallCode(421)}
 	case SVN:
-		return CallCode(386)
+		return []CallCode{CallCode(386)}
 	case USA:
-		return CallCode(1)
+		return []CallCode{CallCode(1)}
 	case SLB:
-		return CallCode(677)
+		return []CallCode{CallCode(677)}
 	case SOM:
-		return CallCode(252)
+		return []CallCode{CallCode(252)}
 	case SDN:
-		return CallCode(249)
+		return []CallCode{CallCode(249)}
 	case SUR:
-		return CallCode(597)
+		return []CallCode{CallCode(597)}
 	case SLE:
-		return CallCode(232)
+		return []CallCode{CallCode(232)}
 	case TJK:
-		return CallCode(992)
+		return []CallCode{CallCode(992)}
 	case TWN:
-		return CallCode(886)
+		return []CallCode{CallCode(886)}
 	case THA:
-		return CallCode(66)
+		return []CallCode{CallCode(66)}
 	case TZA:
-		return CallCode(255)
+		return []CallCode{CallCode(255)}
 	case TGO:
-		return CallCode(228)
+		return []CallCode{CallCode(228)}
 	case TKL:
-		return CallCode(690)
+		return []CallCode{CallCode(690)}
 	case TON:
-		return CallCode(676)
+		return []CallCode{CallCode(676)}
 	case TTO:
-		return CallCode(1868)
+		return []CallCode{CallCode(1868)}
 	case TUV:
-		return CallCode(688)
+		return []CallCode{CallCode(688)}
 	case TUN:
-		return CallCode(216)
+		return []CallCode{CallCode(216)}
 	case TKM:
-		return CallCode(7370)
+		return []CallCode{CallCode(7370)}
 	case TUR:
-		return CallCode(90)
+		return []CallCode{CallCode(90)}
 	case UGA:
-		return CallCode(256)
+		return []CallCode{CallCode(256)}
 	case UZB:
-		return CallCode(998)
+		return []CallCode{CallCode(998)}
 	case UKR:
-		return CallCode(380)
+		return []CallCode{CallCode(380)}
 	case URY:
-		return CallCode(598)
+		return []CallCode{CallCode(598)}
 	case FRO:
-		return CallCode(298)
+		return []CallCode{CallCode(298)}
 	case FJI:
-		return CallCode(679)
+		return []CallCode{CallCode(679)}
 	case PHL:
-		return CallCode(63)
+		return []CallCode{CallCode(63)}
 	case FIN:
-		return CallCode(358)
+		return []CallCode{CallCode(358)}
 	case FLK:
-		return CallCode(500)
+		return []CallCode{CallCode(500)}
 	case FRA:
-		return CallCode(33)
+		return []CallCode{CallCode(33)}
 	case GUF:
-		return CallCode(594)
+		return []CallCode{CallCode(594)}
 	case PYF:
-		return CallCode(689)
+		return []CallCode{CallCode(689)}
 	case ATF:
-		return CallCode(1)
+		return []CallCode{CallCode(1)}
 	case HRV:
-		return CallCode(385)
+		return []CallCode{CallCode(385)}
 	case CAF:
-		return CallCode(236)
+		return []CallCode{CallCode(236)}
 	case TCD:
-		return CallCode(235)
+		return []CallCode{CallCode(235)}
 	case CZE:
-		return CallCode(420)
+		return []CallCode{CallCode(420)}
 	case CHL:
-		return CallCode(56)
+		return []CallCode{CallCode(56)}
 	case CHE:
-		return CallCode(41)
+		return []CallCode{CallCode(41)}
 	case SWE:
-		return CallCode(46)
+		return []CallCode{CallCode(46)}
 	case LKA:
-		return CallCode(94)
+		return []CallCode{CallCode(94)}
 	case ECU:
-		return CallCode(593)
+		return []CallCode{CallCode(593)}
 	case GNQ:
-		return CallCode(240)
+		return []CallCode{CallCode(240)}
 	case ERI:
-		return CallCode(291)
+		return []CallCode{CallCode(291)}
 	case EST:
-		return CallCode(372)
+		return []CallCode{CallCode(372)}
 	case ETH:
-		return CallCode(251)
+		return []CallCode{CallCode(251)}
 	case ZAF:
-		return CallCode(27)
+		return []CallCode{CallCode(27)}
 	case YUG:
-		return CallCode(38)
+		return []CallCode{CallCode(38)}
 	case SGS:
-		return CallCode(500)
+		return []CallCode{CallCode(500)}
 	case JAM:
-		return CallCode(1876)
+		return []CallCode{CallCode(1876), CallCode(1658)}
 	case MNE:
-		return CallCode(382)
+		return []CallCode{CallCode(382)}
 	case BLM:
-		return CallCode(590)
+		return []CallCode{CallCode(590)}
 	case SXM:
-		return CallCode(721)
+		return []CallCode{CallCode(1721)}
 	case SRB:
-		return CallCode(381)
+		return []CallCode{CallCode(381)}
 	case ALA:
-		return CallCode(358)
+		return []CallCode{CallCode(35818)}
 	case BES:
-		return CallCode(599)
+		return []CallCode{CallCode(5993), CallCode(5994)}
 	case GGY:
-		return CallCode(44)
+		return []CallCode{CallCode(441481)}
 	case JEY:
-		return CallCode(44)
+		return []CallCode{CallCode(441534)}
 	case CUW:
-		return CallCode(599)
+		return []CallCode{CallCode(5999)}
 	case MAF:
-		return CallCode(590)
+		return []CallCode{CallCode(590)}
 	case SSD:
-		return CallCode(211)
+		return []CallCode{CallCode(211)}
 	case JPN:
-		return CallCode(81)
+		return []CallCode{CallCode(81)}
+	case NonCountryInternationalFreephone:
+		return []CallCode{CallCode(800)}
+	case NonCountryInmarsat:
+		return []CallCode{CallCode(870)}
+	case NonCountryMaritimeMobileService:
+		return []CallCode{CallCode(875), CallCode(876), CallCode(877)}
+	case NonCountryUniversalPersonalTelecommunicationsServices:
+		return []CallCode{CallCode(878)}
+	case NonCountryNationalNonCommercialPurposes:
+		return []CallCode{CallCode(879)}
+	case NonCountryGlobalMobileSatelliteSystem:
+		return []CallCode{CallCode(881)}
+	case NonCountryInternationalNetworks:
+		return []CallCode{CallCode(882), CallCode(883)}
+	case NonCountryDisasterRelief:
+		return []CallCode{CallCode(888)}
+	case NonCountryInternationalPremiumRateService:
+		return []CallCode{CallCode(979)}
+	case NonCountryInternationalTelecommunicationsCorrespondenceService:
+		return []CallCode{CallCode(991)}
 	}
-	return 0
+	return []CallCode{CallCode(0)}
 }
 
 // Domain - return domain code of country
@@ -5239,16 +5436,16 @@ func (c CountryCode) Capital() CapitalCode {
 // Info - return all info about country as Country struct
 func (c CountryCode) Info() *Country {
 	return &Country{
-		Name:     c.String(),
-		Alpha2:   c.Alpha2(),
-		Alpha3:   c.Alpha3(),
-		Emoji:    c.Emoji(),
-		Code:     c,
-		Capital:  c.Capital(),
-		Currency: c.Currency(),
-		CallCode: c.CallCode(),
-		Domain:   c.Domain(),
-		Region:   c.Region(),
+		Name:      c.String(),
+		Alpha2:    c.Alpha2(),
+		Alpha3:    c.Alpha3(),
+		Emoji:     c.Emoji(),
+		Code:      c,
+		Capital:   c.Capital(),
+		Currency:  c.Currency(),
+		CallCodes: c.CallCodes(),
+		Domain:    c.Domain(),
+		Region:    c.Region(),
 	}
 }
 
@@ -5292,15 +5489,14 @@ func AllInfo() []*Country {
 }
 
 func textPrepare(text string) string {
-	text = strings.Replace(text, " & ", "AND", -1)
-	re := regexp.MustCompile("\n|\t|\r|\f|\v|!|[|]|{|}|\\|'|`|;|:|,|«|»| |-|‐|‑|‒|―|—|–|_|\"")
-	text = re.ReplaceAllString(text, "")
+	text = rePrepare.ReplaceAllString(text, "")
+	text = strings.Replace(text, "&", "AND", -1)
 	text = strings.Replace(text, "(", "", -1)
 	text = strings.Replace(text, ")", "", -1)
 	text = strings.Replace(text, "?", "", -1)
-	text = strings.Replace(text, "+", "", -1)
 	text = strings.Replace(text, ".", "", -1)
 	text = strings.Replace(text, "|", "", -1)
+	text = strings.Replace(text, "+", "", -1)
 	return strings.ToUpper(text)
 }
 
@@ -5328,15 +5524,15 @@ func ByName(name string) CountryCode {
 		return AGO
 	case "AD", "AND", "ANDORRA", "ANDORA":
 		return AND
-	case "AQ", "ATA", "ANTARCTICA", "ANTARKTICA", "ANTARCTIKA", "ANTARKTIKA", "ANTARCTIC", "ANTARKTIC", "ANTARCTIK", "ANTARKTIK":
+	case "AQ", "ATA", "NQ", "ATB", "ATN", "BQAQ", "NQAQ", "ANTARCTICA", "ANTARKTICA", "ANTARCTIKA", "ANTARKTIKA", "ANTARCTIC", "ANTARKTIC", "ANTARCTIK", "ANTARKTIK":
 		return ATA
 	case "AG", "ATG", "ANTIGUAANDBARBUDA", "ANTIGUABARBUDA", "ANTIGUA":
 		return ATG
-	case "AN", "ANT", "NETHERLANDSANTILLES", "NETHERLSANTILLES", "NETHERLANDSANTILES", "NETHERLSANTILES":
+	case "AN", "ANT", "AHO", "ANHH", "NETHERLANDSANTILLES", "NETHERLSANTILLES", "NETHERLANDSANTILES", "NETHERLSANTILES":
 		return ANT
-	case "AE", "ARE", "UNITEDARABEMIRATES", "ARABEMIRATES", "UNITEDEMIRATES":
+	case "AE", "ARE", "UAE", "UNITEDARABEMIRATES", "ARABEMIRATES", "UNITEDEMIRATES":
 		return ARE
-	case "AR", "ARG", "ARGENTINA", "ARGENTIN":
+	case "AR", "ARG", "ARGENTINA", "ARGENTIN", "RA":
 		return ARG
 	case "AM", "ARM", "ARMENIA", "ARMENIYA", "ARMENIAN":
 		return ARM
@@ -5348,17 +5544,17 @@ func ByName(name string) CountryCode {
 		return BHS
 	case "BD", "BGD", "BANGLADESH", "BANGLADEH", "BANHGLADESH", "BANHLADESH", "BANHLADEH":
 		return BGD
-	case "BB", "BRB", "BARBADOS", "BARBODOS":
+	case "BB", "BRB", "BAR", "BDS", "BARBADOS", "BARBODOS":
 		return BRB
 	case "BH", "BHR", "BAHRAIN", "BAGHRAIN":
 		return BHR
-	case "BY", "BLR", "BELARUS", "BELORUS", "BELLARUSSIA", "BELARUSSIA", "BELLORUSSIA", "BELORUSSIA", "BELLARUSSIAN", "BELARUSSIAN", "BELLORUSSIAN", "BELORUSSIAN":
+	case "BY", "BLR", "BYS", "BYAA", "BELARUS", "BELORUS", "BELLARUSSIA", "BELARUSSIA", "BELLORUSSIA", "BELORUSSIA", "BELLARUSSIAN", "BELARUSSIAN", "BELLORUSSIAN", "BELORUSSIAN", "BYELORUSSIAN", "BYELORUSSIA", "BYELORUSSIYA":
 		return BLR
-	case "BZ", "BLZ", "BELIZE":
+	case "BZ", "BLZ", "BIZ", "BELIZE":
 		return BLZ
 	case "BE", "BEL", "BELGIUM", "BELGUM":
 		return BEL
-	case "BJ", "BEN", "BENIN":
+	case "BJ", "BEN", "DHY", "BENIN", "DY", "DYBJ":
 		return BEN
 	case "BM", "BMU", "BERMUDA", "BERMUDS", "BERMUD":
 		return BMU
@@ -5374,31 +5570,31 @@ func ByName(name string) CountryCode {
 		return BRA
 	case "IO", "IOT", "BRITISHINDIANOCEANTERRITORY", "BRITISHINDIANTERRITORY":
 		return IOT
-	case "BN", "BRN", "BRUNEI", "BRUNEY":
+	case "BN", "BRN", "BRU", "BRUNEI", "BRUNEY":
 		return BRN
-	case "BF", "BFA", "BURKINAFASO", "BURKINAANDFASO", "BURCINAFASO", "BURCINAANDFASO":
+	case "BF", "BFA", "HV", "HVO", "BURKINAFASO", "BURKINAANDFASO", "BURCINAFASO", "BURCINAANDFASO", "HVBF":
 		return BFA
 	case "BI", "BDI", "BURUNDI":
 		return BDI
 	case "BT", "BTN", "BHUTAN", "BGHUTAN":
 		return BTN
-	case "VU", "VUT", "VANUATU":
+	case "VU", "VUT", "NHB", "VANUATU", "NH", "NHVU":
 		return VUT
 	case "VA", "VAT", "HOLYSEEVATICAN", "HOLYSEE", "VATICAN", "VATICANCITYSTATE", "VATICANSTATE", "HOLYSEEVATIKAN", "VATIKAN", "VATIKANCITYSTATE", "VATIKANSTATE":
 		return VAT
-	case "GB", "GBR", "UNITEDKINGDOM", "UNITEDKINDOM", "UK", "GREATBRITAN", "GREATBRITAIN", "NORTHERNIRELAND", "BRITAN", "BRITAIN":
+	case "GB", "DG", "GBR", "ADN", "DGA", "UNITEDKINGDOM", "UNITEDKINDOM", "UK", "GREATBRITAN", "GREATBRITAIN", "NORTHERNIRELAND", "BRITAN", "BRITAIN":
 		return GBR
 	case "HU", "HUN", "HUNGARY", "HUNGAR", "HUNGARI", "VENGRIYA", "VENGRIA":
 		return HUN
-	case "VE", "VEN", "VENEZUELA", "VENEZUELLA", "VENECUELA", "VENECUELLA":
+	case "VE", "VEN", "VENEZUELA", "VENEZUELLA", "VENECUELA", "VENECUELLA", "YV":
 		return VEN
-	case "VG", "VGB", "VIRGINISLANDSBRITISH", "VIRGINISLANDSBRITIH", "VIRGINISLSBRITIH", "VIRGINISLSBRITISH", "VIRGINISLANDSGB", "VIRGINISLANDSUK":
+	case "VG", "VGB", "IVB", "VIRGINISLANDSBRITISH", "VIRGINISLANDSBRITIH", "VIRGINISLSBRITIH", "VIRGINISLSBRITISH", "VIRGINISLANDSGB", "VIRGINISLANDSUK":
 		return VGB
-	case "VI", "VIR", "VIRGINISLANDSUS", "USVIRGINISLANDS", "USVI":
+	case "VI", "VIR", "ISV", "VIRGINISLANDSUS", "USVIRGINISLANDS", "USVI":
 		return VIR
-	case "TL", "TLS", "TIMORLESTE", "EASTTIMOR":
+	case "TL", "TP", "TLS", "TMP", "TPTL", "TIMORLESTE", "EASTTIMOR", "TIMOR", "TIMORELESTE", "EASTTIMORE", "TIMORE":
 		return TLS
-	case "VN", "VNM", "VIETNAM", "VETNAM":
+	case "VN", "VNM", "VIE", "VDR", "VD", "VIETNAM", "VETNAM", "VIETNAME", "VETNAME", "VDVN":
 		return VNM
 	case "GA", "GAB", "GABON":
 		return GAB
@@ -5406,27 +5602,27 @@ func ByName(name string) CountryCode {
 		return HTI
 	case "GY", "GUY", "GUYANA":
 		return GUY
-	case "GM", "GMB", "GAMBIA", "GAMBIYA":
+	case "GM", "GMB", "WAG", "GAMBIA", "GAMBIYA":
 		return GMB
 	case "GH", "GHA", "GHANA", "HANA":
 		return GHA
 	case "GP", "GLP", "GUADELOUPE":
 		return GLP
-	case "GT", "GTM", "GUATEMALA":
+	case "GT", "GTM", "GCA", "GUATEMALA":
 		return GTM
 	case "GN", "GIN", "GUINEA":
 		return GIN
-	case "GW", "GNB", "GUINEABISSAU":
+	case "GW", "GNB", "GBS", "GUINEABISSAU":
 		return GNB
-	case "DE", "DEU", "GERMANY", "DEUTSCHLAND", "DEUTSCH":
+	case "DE", "DEU", "DD", "DDR", "GER", "GERMANY", "DEUTSCHLAND", "DEUTSCH", "DDDE":
 		return DEU
-	case "GI", "GIB", "GIBRALTAR", "HIBRALTAR":
+	case "GI", "GIB", "GBZ", "GIBRALTAR", "HIBRALTAR":
 		return GIB
 	case "HN", "HND", "HONDURAS", "GONDURAS":
 		return HND
 	case "HK", "HKG", "HONGKONG", "HONKONG":
 		return HKG
-	case "GD", "GRD", "GRENADA", "GRINADA":
+	case "GD", "GRD", "GRENADA", "GRINADA", "WG":
 		return GRD
 	case "GL", "GRL", "GREENLAND":
 		return GRL
@@ -5438,9 +5634,9 @@ func ByName(name string) CountryCode {
 		return GUM
 	case "DK", "DNK", "DENMARK":
 		return DNK
-	case "CD", "COD", "CONGODEMOCRACTICREPUBLIC", "CONGODEMOCRATICREP", "CONGODEMOCRATIC", "CONGOTHEDEMOCRATICREPUBLICOF":
+	case "CD", "COD", "ZRE", "ZAR", "ZR", "ZRCD", "CONGODEMOCRACTICREPUBLIC", "CONGODEMOCRATICREP", "CONGODEMOCRATIC", "CONGOTHEDEMOCRATICREPUBLICOF", "KONGODEMOCRACTICREPUBLIC", "KONGODEMOCRATICREP", "KONGODEMOCRATIC", "KONGOTHEDEMOCRATICREPUBLICOF", "ZAIRE", "ZAIR":
 		return COD
-	case "DJ", "DJI", "DJIBOUTI":
+	case "DJ", "DJI", "AFI", "DJIBOUTI", "AIDJ":
 		return DJI
 	case "DM", "DMA", "DOMINICA", "DOMINIKA":
 		return DMA
@@ -5448,33 +5644,33 @@ func ByName(name string) CountryCode {
 		return DOM
 	case "EG", "EGY", "EGYPT":
 		return EGY
-	case "ZM", "ZMB", "ZAMBIA":
+	case "ZM", "ZMB", "RNR", "ZAMBIA":
 		return ZMB
 	case "EH", "ESH", "WESTERNSAHARA":
 		return ESH
-	case "ZW", "ZWE", "ZIMBABWE", "ZIMBABVE":
+	case "ZW", "ZWE", "ZIM", "RHO", "RSR", "ZIMBABWE", "ZIMBABVE", "RH", "RHZW":
 		return ZWE
 	case "IL", "ISR", "ISRAEL":
 		return ISR
-	case "IN", "IND", "INDIA":
+	case "IN", "IND", "INDIA", "INDIAN", "INDIYA", "SKM", "SKIN":
 		return IND
-	case "ID", "IDN", "INDONESIA", "REPUBLICOFINDONESIA":
+	case "ID", "IDN", "INA", "INDONESIA", "REPUBLICOFINDONESIA", "RI":
 		return IDN
-	case "JO", "JOR", "JORDAN":
+	case "JO", "JOR", "HKJ", "JORDAN":
 		return JOR
 	case "IQ", "IRQ", "IRAQ":
 		return IRQ
-	case "IR", "IRN", "IRAN":
+	case "IR", "IRN", "IRI", "IRAN":
 		return IRN
 	case "IE", "IRL", "IRELAND":
 		return IRL
 	case "IS", "ISL", "ICELAND":
 		return ISL
-	case "ES", "ESP", "SPAIN", "SPANIEN", "ISPANIA":
+	case "ES", "EA", "IC", "ESP", "SPAIN", "SPANIEN", "ISPANIA":
 		return ESP
 	case "IT", "ITA", "ITALY", "ITALIYA":
 		return ITA
-	case "YE", "YEM", "YEMEN":
+	case "YE", "YEM", "YMD", "YEMEN", "IEMEN", "YD", "YDYE":
 		return YEM
 	case "KZ", "KAZ", "KAZAKHSTAN", "KAZAHSTAN":
 		return KAZ
@@ -5484,29 +5680,29 @@ func ByName(name string) CountryCode {
 		return KHM
 	case "CM", "CMR", "CAMEROON":
 		return CMR
-	case "CA", "CAN", "CANADA":
+	case "CA", "CAN", "CDN", "CANADA":
 		return CAN
 	case "QA", "QAT", "QATAR", "KATAR":
 		return QAT
-	case "KE", "KEN", "KENYA":
+	case "KE", "KEN", "EAK", "KENYA":
 		return KEN
 	case "CY", "CYP", "CYPRUS", "CIPRUS":
 		return CYP
-	case "KI", "KIR", "KIRIBATI":
+	case "KI", "KIR", "CT", "CTE", "CTKI", "KIRIBATI", "CIRIBATI", "KIRIBATY", "CIRIBATY":
 		return KIR
-	case "CN", "CHN", "CHINA":
+	case "CN", "CHN", "CHINA", "CHINESE", "RC", "KITAY":
 		return CHN
-	case "CC", "CCK", "KEELING", "COCOSKEELINGISLANDS", "COCOSISLANDS":
+	case "CC", "CCK", "KEELING", "COCOSKEELINGISLANDS", "COCOSISLANDS", "KOKOSISLANDS":
 		return CCK
 	case "CO", "COL", "COLOMBIA":
 		return COL
 	case "KM", "COM", "COMOROS":
 		return COM
-	case "CG", "COG", "CONGO", "KONGO":
+	case "CG", "COG", "RCB", "CONGO", "KONGO":
 		return COG
 	case "KP", "PRK", "KOREADEMOCRATICPEOPLESREPUBLICOF", "KOREANORTH", "NORTHKOREA":
 		return PRK
-	case "KR", "KOR", "KOREA", "SOUTHKOREA", "KOREAREPUBLICOF", "KOREAREPOF":
+	case "KR", "KOR", "ROK", "KOREA", "KOREYA", "SOUTHKOREA", "KOREAREPUBLICOF", "KOREAREPOF":
 		return KOR
 	case "CR", "CRI", "COSTARICA", "KOSTARIKA", "KOSTARICA", "COSTARIKA":
 		return CRI
@@ -5520,19 +5716,19 @@ func ByName(name string) CountryCode {
 		return KGZ
 	case "LA", "LAO", "LAOS":
 		return LAO
-	case "LV", "LVA", "LATVIA", "LATVIYA", "LETTLAND":
+	case "LV", "LVA", "LAT", "LATVIA", "LATVIYA", "LETTLAND":
 		return LVA
 	case "LS", "LSO", "LESOTHO":
 		return LSO
 	case "LR", "LBR", "LIBERIA":
 		return LBR
-	case "LB", "LBN", "LEBANON":
+	case "LB", "LBN", "LEBANON", "RL":
 		return LBN
-	case "LY", "LBY", "LIBYA":
+	case "LY", "LBY", "LBA", "LIBYA", "LIVIA", "LIVIYA", "LF":
 		return LBY
 	case "LT", "LTU", "LITHUANIA", "LITAUEN", "LITVA":
 		return LTU
-	case "LI", "LIE", "LIECHTENSTEIN", "LIEHTENSTEIN":
+	case "LI", "LIE", "LIECHTENSTEIN", "LIEHTENSTEIN", "FL":
 		return LIE
 	case "LU", "LUX", "LUXEMBOURG", "LUXEMBURG":
 		return LUX
@@ -5540,7 +5736,7 @@ func ByName(name string) CountryCode {
 		return MUS
 	case "MR", "MRT", "MAURITANIA":
 		return MRT
-	case "MG", "MDG", "MADAGASCAR":
+	case "MG", "MDG", "MADAGASCAR", "RM":
 		return MDG
 	case "YT", "MYT", "MAYOTTE":
 		return MYT
@@ -5548,11 +5744,11 @@ func ByName(name string) CountryCode {
 		return MAC
 	case "MK", "MKD", "MACEDONIA", "MACEDONIAFYRO", "MACEDONIATHEFORMERYUGOSLAVREPUBLICOF":
 		return MKD
-	case "MW", "MWI", "MALAWI", "MALAVI":
+	case "MW", "MWI", "MAW", "MALAWI", "MALAVI":
 		return MWI
-	case "MY", "MYS", "MALAYSIA", "MALAYSIYA":
+	case "MY", "MYS", "MAL", "MALAYSIA", "MALAYSIYA":
 		return MYS
-	case "ML", "MLI", "MALI":
+	case "ML", "MLI", "RMM", "MALI":
 		return MLI
 	case "MV", "MDV", "MALDIVES":
 		return MDV
@@ -5580,7 +5776,7 @@ func ByName(name string) CountryCode {
 		return MNG
 	case "MS", "MSR", "MONTSERRAT":
 		return MSR
-	case "MM", "MMR", "MYANMAR":
+	case "MM", "BU", "MMR", "BUMM", "MYANMAR", "BURMA":
 		return MMR
 	case "NA", "NAM", "NAMIBIA", "NAMIBIE":
 		return NAM
@@ -5588,11 +5784,11 @@ func ByName(name string) CountryCode {
 		return NRU
 	case "NP", "NPL", "NEPAL", "NEPALI":
 		return NPL
-	case "NE", "NER", "NIGER", "NIGGER":
+	case "NE", "NER", "NIGER", "NIGGER", "RN":
 		return NER
-	case "NG", "NGA", "NIGERIA", "NIGERIYA":
+	case "NG", "NGA", "NGR", "WAN", "NIGERIA", "NIGERIYA", "NIGGERIA", "NIGGERIYA":
 		return NGA
-	case "NL", "NLD", "NETHERLANDS", "NETHERLAND", "HOLLAND", "HOLLANDIA", "HOLLANDIYA":
+	case "NL", "NLD", "NED", "NETHERLANDS", "NETHERLAND", "HOLLAND", "HOLLANDIA", "HOLLANDIYA":
 		return NLD
 	case "NI", "NIC", "NICARAGUA":
 		return NIC
@@ -5608,15 +5804,15 @@ func ByName(name string) CountryCode {
 		return OMN
 	case "BV", "BVT", "BOUVET":
 		return BVT
-	case "IM", "IMN", "ISLEOFMAN":
+	case "IM", "IMN", "GBM", "ISLEOFMAN":
 		return IMN
 	case "NF", "NFK", "NORFOLKISLAND", "NORFOLK", "NORFOLCISLAND", "NORFOLC":
 		return NFK
-	case "PN", "PCN", "PITCAIRN":
+	case "PN", "PCN", "PITCAIRN", "THEPITCAIRN", "PITCAIRNISLANDS", "THEPITCAIRNISLANDS", "DUCIEANDOENOISLANDS", "DUCIEANDOENO":
 		return PCN
-	case "CX", "CXR", "CHRISTMASISLAND":
+	case "CX", "CXR", "CHRISTMASISLAND", "TERRITORYOFCHRISTMASISLAND":
 		return CXR
-	case "SH", "SHN", "SAINTHELENA", "SAINTELENA", "STHELENA", "STELENA":
+	case "SH", "TA", "SHN", "TAA", "ASC", "SAINTHELENA", "SAINTELENA", "STHELENA", "STELENA", "TRISTAN", "ASCENSIONANDTRISTANDACUNHA", "ASCENSIONTRISTANDACUNHA", "TRISTANDACUNHA":
 		return SHN
 	case "WF", "WLF", "WALLISANDFUTUNAISLANDS", "WALLISFUTUNAISLANDS", "WALLISANDFUTUNA", "WALLISFUTUNA":
 		return WLF
@@ -5632,15 +5828,15 @@ func ByName(name string) CountryCode {
 		return SJM
 	case "TC", "TCA", "TURKSANDCAICOSISLANDS", "TURKSANDCAICOSIS", "CAICOSISLANDS", "CACOSISLANDS":
 		return TCA
-	case "UM", "UMI", "UNITEDSTATESMINOROUTLYINGISLANDS", "MINOROUTLYINGISLANDS", "MINOROUTLYING", "USMI":
+	case "UM", "UMI", "UNITEDSTATESMINOROUTLYINGISLANDS", "MINOROUTLYINGISLANDS", "MINOROUTLYING", "USMI", "JT", "JTN", "JTUM", "MI", "MID", "MIUM", "PU", "PUS", "PUUM", "WK", "WAK", "WKUM":
 		return UMI
 	case "PK", "PAK", "PAKISTAN", "PACISTAN":
 		return PAK
 	case "PW", "PLW", "PALAU":
 		return PLW
-	case "PS", "PSE", "PALESTINE":
+	case "PS", "PSE", "PLE", "PALESTINE":
 		return PSE
-	case "PA", "PAN", "PANAMA", "PANAMIAN", "PANAM":
+	case "PA", "PAN", "PCZ", "PANAMA", "PANAMIAN", "PANAM", "PZ", "PZPA":
 		return PAN
 	case "PG", "PNG", "PAPUANEWGUINEA", "PAPUA":
 		return PNG
@@ -5656,15 +5852,15 @@ func ByName(name string) CountryCode {
 		return PRI
 	case "RE", "REU", "REUNION", "RÉUNION":
 		return REU
-	case "RU", "RUS", "RUSSIA", "RUSSO", "RUSSISH", "RUSSLAND", "RUSIA", "ROSSIA", "RUSSIAN", "RUSSIANFEDERATION":
+	case "RU", "RUS", "SUN", "RUSSIA", "RUSSO", "RUSSISH", "RUSSLAND", "RUSIA", "ROSSIA", "RUSSIAN", "RUSSIANFEDERATION", "USSR":
 		return RUS
 	case "RW", "RWA", "RWANDA", "RUANDA":
 		return RWA
-	case "RO", "ROU", "ROMANIA", "RUMINIA":
+	case "RO", "ROU", "ROM", "ROMANIA", "RUMINIA":
 		return ROU
-	case "SV", "SLV", "ELSALVADOR":
+	case "SV", "SLV", "ESA", "ELSALVADOR":
 		return SLV
-	case "SM", "SMR", "SANMARINO":
+	case "SM", "SMR", "RSM", "SANMARINO":
 		return SMR
 	case "ST", "STP", "SAOTOMEANDPRINCIPE", "SAOTOME":
 		return STP
@@ -5678,21 +5874,21 @@ func ByName(name string) CountryCode {
 		return SEN
 	case "PM", "SPM", "SAINTPIERREANDMIQUELON", "SAINTPIERRE", "STPIERREANDMIQUELON", "STPIERRE":
 		return SPM
-	case "VC", "VCT", "SAINTVINCENTANDTHEGRENADINES", "SAINTVINCENT", "STVINCENTANDTHEGRENADINES", "STVINCENT":
+	case "VC", "VCT", "SAINTVINCENTANDTHEGRENADINES", "SAINTVINCENT", "STVINCENTANDTHEGRENADINES", "STVINCENT", "WV":
 		return VCT
 	case "KN", "KNA", "SAINTKITTSANDNEVIS", "SAINTKITTSNEVIS", "SAINTKITTS", "STKITTSANDNEVIS", "STKITTSNEVIS", "STKITTS":
 		return KNA
-	case "LC", "LCA", "SAINTLUCIA", "STLUCIA", "LUCIA":
+	case "LC", "LCA", "SAINTLUCIA", "STLUCIA", "LUCIA", "WL":
 		return LCA
 	case "SG", "SGP", "SINGAPORE", "SINGPAORE", "SINGAPORECITY", "SINGAPOUR", "SINGAPURA", "SINGAPUR":
 		return SGP
 	case "SY", "SYR", "SYRIA":
 		return SYR
-	case "SK", "SVK", "SLOVAKIA", "SLOVAK", "SLOVAKIYA", "SLOVACIA", "SLOVAC", "SLOVACIYA":
+	case "SK", "SVK", "CSHH", "SLOVAKIA", "SLOVAK", "SLOVAKIYA", "SLOVACIA", "SLOVAC", "SLOVACIYA":
 		return SVK
-	case "SI", "SVN", "SLOVENIA":
+	case "SI", "SVN", "SLO", "SLOVENIA", "SLOVENIYA":
 		return SVN
-	case "US", "USA", "UNITEDSTATES", "UNITEDSTATESOFAMERICA":
+	case "US", "USA", "UNITEDSTATES", "UNITEDSTATESOFAMERICA", "USOFAMERICA", "USAMERICA":
 		return USA
 	case "SB", "SLB", "SOLOMONISLANDS", "SOLOMON":
 		return SLB
@@ -5700,17 +5896,17 @@ func ByName(name string) CountryCode {
 		return SOM
 	case "SD", "SDN", "SUDAN":
 		return SDN
-	case "SR", "SUR", "SURINAME":
+	case "SR", "SUR", "SME", "SURINAME", "SURINAM":
 		return SUR
-	case "SL", "SLE", "SIERRALEONE":
+	case "SL", "SLE", "WAL", "SIERRALEONE", "SIERRALEON", "SIERALEONE", "SIERALEON":
 		return SLE
 	case "TJ", "TJK", "TAJIKISTAN", "TADJIKISTAN":
 		return TJK
-	case "TW", "TWN", "TAIWAN":
+	case "TW", "TWN", "TPE", "TAIWAN":
 		return TWN
 	case "TH", "THA", "THAILAND", "TAILAND", "THAI":
 		return THA
-	case "TZ", "TZA", "TANZANIA", "TANZANIYA":
+	case "TZ", "TZA", "EAT", "EAZ", "TANZANIA", "TANZANIYA":
 		return TZA
 	case "TG", "TGO", "TOGO":
 		return TGO
@@ -5724,11 +5920,11 @@ func ByName(name string) CountryCode {
 		return TUV
 	case "TN", "TUN", "TUNISIA":
 		return TUN
-	case "TM", "TKM", "TURKMENISTAN", "TURKMENISTON":
+	case "TM", "TKM", "TMN", "TURKMENISTAN", "TURKMENISTON", "TURKMENI", "TURKMENIA", "TURKMENIYA":
 		return TKM
 	case "TR", "TUR", "TURKEY", "TURCIA", "TURKISH":
 		return TUR
-	case "UG", "UGA", "UGANDA":
+	case "UG", "UGA", "EAU", "UGANDA":
 		return UGA
 	case "UZ", "UZB", "UZBEKISTAN", "UZBEKISTON":
 		return UZB
@@ -5742,13 +5938,13 @@ func ByName(name string) CountryCode {
 		return FRO
 	case "FJ", "FJI", "FIJI":
 		return FJI
-	case "PH", "PHL", "PHILIPPINES", "PHILIPINES":
+	case "PH", "PHL", "PHI", "PHILIPPINES", "PHILIPINES", "PI", "RP":
 		return PHL
-	case "FI", "FIN", "FINLAND", "FINNISH":
+	case "FI", "SF", "FIN", "FINLAND", "FINNISH":
 		return FIN
 	case "FK", "FLK", "FALKLANDISLANDSMALVINAS", "MALVINAS", "FALKLANDISLANDS", "FALKLAND":
 		return FLK
-	case "FR", "FRA", "FRANCE", "FRENCH":
+	case "FR", "CP", "FX", "FRA", "FXX", "CPT", "FXFR", "FRANCE", "FRENCH":
 		return FRA
 	case "GF", "GUF", "FRENCHGUIANA", "GUIANA":
 		return GUF
@@ -5756,15 +5952,15 @@ func ByName(name string) CountryCode {
 		return PYF
 	case "TF", "ATF", "FRENCHSOUTHERNTERRITORIES", "SOUTHERNTERRITORIESFRENCH":
 		return ATF
-	case "HR", "HRV", "CROATIA":
+	case "HR", "HRV", "CRO", "CROATIA", "KROATIA":
 		return HRV
-	case "CF", "CAF", "CENTRALAFRICANREPUBLIC", "CENTRALAFRICANREP", "CENTRALAFRICAN":
+	case "CF", "CAF", "CTA", "RCA", "CENTRALAFRICANREPUBLIC", "CENTRALAFRICANREP", "CENTRALAFRICAN":
 		return CAF
 	case "TD", "TCD", "CHAD":
 		return TCD
 	case "CZ", "CZE", "CZECHREPUBLIC", "CZECH":
 		return CZE
-	case "CL", "CHL", "CHILE":
+	case "CL", "CHL", "RCH", "CHILE":
 		return CHL
 	case "CH", "CHE", "SWITZERLAND", "SWISS":
 		return CHE
@@ -5776,21 +5972,21 @@ func ByName(name string) CountryCode {
 		return LKA
 	case "EC", "ECU", "ECUADOR":
 		return ECU
-	case "GQ", "GNQ", "EQUATORIALGUINEA":
+	case "GQ", "GNQ", "EQG", "GEQ", "EQUATORIALGUINEA":
 		return GNQ
 	case "ER", "ERI", "ERITREA":
 		return ERI
-	case "EE", "EST", "ESTONIA":
+	case "EE", "EST", "ESTONIA", "EW":
 		return EST
 	case "ET", "ETH", "ETHIOPIA":
 		return ETH
 	case "ZA", "ZAF", "SOUTHAFRICA":
 		return ZAF
-	case "YU", "YUG", "YUGOSLAVIA", "UGOSLAVIA", "YUGOSLAVIYA", "UGOSLAVIYA":
+	case "YU", "YUG", "YUGOSLAVIA", "UGOSLAVIA", "YUGOSLAVIYA", "UGOSLAVIYA", "SERBIAANDMONTENEGRO", "CS", "SCG":
 		return YUG
 	case "GS", "SGS", "SOUTHGEORGIAANDTHESOUTHSANDWICHISLANDS", "SOUTHGEORGIAANDTHESOUTHSANDWICH", "SOUTHGEORGIATHESOUTHSWICHISLANDS", "SOUTHGEORGIA":
 		return SGS
-	case "JM", "JAM", "JAMAICA", "JAMAIKA", "YAMAICA", "YAMAIKA":
+	case "JM", "JAM", "JAMAICA", "JAMAIKA", "YAMAICA", "YAMAIKA", "JA":
 		return JAM
 	case "ME", "MNE", "MONTENEGRO":
 		return MNE
@@ -5798,17 +5994,17 @@ func ByName(name string) CountryCode {
 		return BLM
 	case "SX", "SXM", "SINTMAARTENDUTCH", "SAINTMAARTEN", "SINTMAARTEN", "STMAARTEN":
 		return SXM
-	case "RS", "SRB", "SERBIA", "SERBIYA":
+	case "RS", "SRB", "CSXX", "SERBIA", "SERBIYA":
 		return SRB
 	case "AX", "ALA", "ALANDISLANDS", "ALAND":
 		return ALA
-	case "BQ", "BES", "BONAIRE", "BONAIRESINTEUSTATIUSANDSABA", "BONAIRESINTEUSTATIUSSABA", "BONAIRESTEUSTANDSABA", "BONAIRESTEUSTSABA":
+	case "BQ", "BES", "BONAIRE", "BONAIR", "BONEIRU", "BONAIRESINTEUSTATIUSANDSABA", "BONAIRESINTEUSTATIUSSABA", "BONAIRESTEUSTANDSABA", "BONAIRESTEUSTSABA", "SINTEUSTATIUSANDSABA", "SINTEUSTATIUS":
 		return BES
-	case "GG", "GGY", "GUERNSEY":
+	case "GG", "GGY", "GBA", "GBG", "GUERNSEY":
 		return GGY
-	case "JE", "JEY", "JERSEY", "JERSIEY":
+	case "JE", "JEY", "GBJ", "JERSEY", "JERSIEY":
 		return JEY
-	case "CW", "CUW", "CURACAO", "CURAÇAO", "CURAKAO", "KURACAO", "KURAKAO":
+	case "CW", "CUW", "CURACAO", "CURAÇAO", "CURAQAO", "CURAKAO", "KURACAO", "KURAKAO":
 		return CUW
 	case "MF", "MAF", "SAINTMARTINFRENCH", "STMARTINFRENCH":
 		return MAF
@@ -5816,6 +6012,26 @@ func ByName(name string) CountryCode {
 		return SSD
 	case "JP", "JPN", "JAPAN":
 		return JPN
+	case "UIFN", "INTERNATIONALFREEPHONE", "TOLLFREEPHONE":
+		return NonCountryInternationalFreephone
+	case "INMARSAT":
+		return NonCountryInmarsat
+	case "MMS", "MARITIMEMOBILESERVICE", "MARITIMEMOBILESERVICES", "MARITIMEMOBILE", "MARITIME":
+		return NonCountryMaritimeMobileService
+	case "UNIVERSALPERSONALTELECOMMUNICATIONSSERVICES", "UNIVERSALPERSONALTELECOMMUNICATIONSSERVICE", "UNIVERSALPERSONALTELECOMMUNICATIONS", "UNIVERSALPERSONALTELECOMMUNICATION":
+		return NonCountryUniversalPersonalTelecommunicationsServices
+	case "NCP", "NATIONALNONCOMMERCIALPURPOSES", "NONCOMMERCIALPURPOSES", "NATIONALNONCOMMERCIAL", "NONCOMMERCIAL":
+		return NonCountryNationalNonCommercialPurposes
+	case "GMSS", "GLOBALMOBILESATELLITESYSTEM", "GLOBALMOBILESATELITESYSTEM", "GLOBALMOBILESATELLITE", "GLOBALMOBILESATELITE":
+		return NonCountryGlobalMobileSatelliteSystem
+	case "INTERNATIONNETWORKS", "INTERNATIONNETWORKSSERVICE", "INTERNATIONNETWORKSSERVICES":
+		return NonCountryInternationalNetworks
+	case "DISASTERRELIEF", "DISASTER":
+		return NonCountryDisasterRelief
+	case "IPRS", "INTERNATIONALPREMIUMRATESERVICE", "PREMIUMRATESERVICE", "INTERNATIONALPREMIUMRATESERVICES", "PREMIUMRATESERVICES":
+		return NonCountryInternationalPremiumRateService
+	case "ITPCS", "INTERNATIONALTELECOMMUNICATIONSPUBLICCORRESPONDENCESERVICETRIAL", "INTERNATIONALTELECOMMUNICATIONSPUBLICCORRESPONDENCESERVICE", "INTERNATIONALTELECOMMUNICATIONSPUBLICCORRESPONDENCESERVICES", "INTERNATIONALTELECOMMUNICATIONSCORRESPONDENCESERVICE", "INTERNATIONALTELECOMMUNICATIONSCORRESPONDENCESERVICES":
+		return NonCountryInternationalTelecommunicationsCorrespondenceService
 	}
 	return Unknown
 }

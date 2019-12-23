@@ -1,9 +1,9 @@
 countries
 =======
 
-Countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 countries codes and names (on eng and rus), currency designators, calling phone codes (ITU-T E.164), countries capitals and regions (UN M.49 code), countries domains (IANA ccTLD), Very FAST, NO maps[], NO slices[], NO init() func, NO external files and data, NO interface{}, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1, ISO-4217, Unicode CLDR, IANA ccTLD, ITU-T E.164 and UN M.49 standarts.
+Countries - ISO 3166 (ISO3166-1, ISO3166, Digit code, Alpha-2 and Alpha-3), ISO 4217 countries codes and names (on eng and rus), currency designators, calling phone codes, countries capitals and regions (UN M.49 code), countries domains (ccTLD), Very FAST, NO maps[], NO slices[], NO init() func, NO external files and data, NO interface{}, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1, ISO-4217, Unicode CLDR and ccTLD standarts.
 
-Full support ISO-3166-1, ISO-4217, Unicode CLDR, IANA ccTLD, ITU-T E.164 and UN M.49 standarts.
+Full support ISO-3166-1, ISO-4217, Unicode CLDR and ccTLD standarts.
 
 [![GoDoc](http://godoc.org/github.com/biter777/countries?status.svg)](http://godoc.org/github.com/biter777/countries)
 

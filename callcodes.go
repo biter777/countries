@@ -199,15 +199,24 @@ const (
 	CallCode690     CallCode = 690
 	CallCode691     CallCode = 691
 	CallCode692     CallCode = 692
-	CallCode721     CallCode = 721
+	CallCode800     CallCode = 800
 	CallCode850     CallCode = 850
 	CallCode852     CallCode = 852
 	CallCode853     CallCode = 853
 	CallCode855     CallCode = 855
 	CallCode856     CallCode = 856
 	CallCode870     CallCode = 870
+	CallCode875     CallCode = 875
+	CallCode876     CallCode = 876
+	CallCode877     CallCode = 877
+	CallCode878     CallCode = 878
+	CallCode879     CallCode = 879
 	CallCode880     CallCode = 880
+	CallCode881     CallCode = 881
+	CallCode882     CallCode = 882
+	CallCode883     CallCode = 883
 	CallCode886     CallCode = 886
+	CallCode888     CallCode = 888
 	CallCode960     CallCode = 960
 	CallCode961     CallCode = 961
 	CallCode962     CallCode = 962
@@ -224,6 +233,7 @@ const (
 	CallCode975     CallCode = 975
 	CallCode976     CallCode = 976
 	CallCode977     CallCode = 977
+	CallCode979     CallCode = 979
 	CallCode992     CallCode = 992
 	CallCode994     CallCode = 994
 	CallCode995     CallCode = 995
@@ -239,20 +249,41 @@ const (
 	CallCode1441    CallCode = 1441
 	CallCode1473    CallCode = 1473
 	CallCode1649    CallCode = 1649
+	CallCode1658    CallCode = 1658
 	CallCode1664    CallCode = 1664
 	CallCode1670    CallCode = 1670
 	CallCode1671    CallCode = 1671
 	CallCode1684    CallCode = 1684
+	CallCode1721    CallCode = 1721
 	CallCode1758    CallCode = 1758
 	CallCode1767    CallCode = 1767
 	CallCode1784    CallCode = 1784
 	CallCode1787    CallCode = 1787
 	CallCode1808    CallCode = 1808
 	CallCode1809    CallCode = 1809
+	CallCode1829    CallCode = 1829
+	CallCode1849    CallCode = 1849
 	CallCode1868    CallCode = 1868
 	CallCode1869    CallCode = 1869
 	CallCode1876    CallCode = 1876
+	CallCode1939    CallCode = 1939
+	CallCode4779    CallCode = 4779
+	CallCode5993    CallCode = 5993
+	CallCode5994    CallCode = 5994
+	CallCode5995    CallCode = 5995
+	CallCode5997    CallCode = 5997
+	CallCode5998    CallCode = 5998
+	CallCode5999    CallCode = 5999
 	CallCode7370    CallCode = 7370
+	CallCode35818   CallCode = 35818
+	CallCode262269  CallCode = 262269
+	CallCode262639  CallCode = 262639
+	CallCode441481  CallCode = 441481
+	CallCode441534  CallCode = 441534
+	CallCode441624  CallCode = 441624
+	CallCode3906698 CallCode = 3906698
+	CallCode6189162 CallCode = 6189162
+	CallCode6189164 CallCode = 6189164
 )
 
 // String - implements fmt.Stringer, returns a calling phone code in string, example for UK: "+44"
@@ -457,15 +488,24 @@ func AllCallCodes() []CallCode {
 		CallCode690,
 		CallCode691,
 		CallCode692,
-		CallCode721,
+		CallCode800,
 		CallCode850,
 		CallCode852,
 		CallCode853,
 		CallCode855,
 		CallCode856,
 		CallCode870,
+		CallCode875,
+		CallCode876,
+		CallCode877,
+		CallCode878,
+		CallCode879,
 		CallCode880,
+		CallCode881,
+		CallCode882,
+		CallCode883,
 		CallCode886,
+		CallCode888,
 		CallCode960,
 		CallCode961,
 		CallCode962,
@@ -482,6 +522,7 @@ func AllCallCodes() []CallCode {
 		CallCode975,
 		CallCode976,
 		CallCode977,
+		CallCode979,
 		CallCode992,
 		CallCode994,
 		CallCode995,
@@ -497,20 +538,41 @@ func AllCallCodes() []CallCode {
 		CallCode1441,
 		CallCode1473,
 		CallCode1649,
+		CallCode1658,
 		CallCode1664,
 		CallCode1670,
 		CallCode1671,
 		CallCode1684,
+		CallCode1721,
 		CallCode1758,
 		CallCode1767,
 		CallCode1784,
 		CallCode1787,
 		CallCode1808,
 		CallCode1809,
+		CallCode1829,
+		CallCode1849,
 		CallCode1868,
 		CallCode1869,
 		CallCode1876,
+		CallCode1939,
+		CallCode4779,
+		CallCode5993,
+		CallCode5994,
+		CallCode5995,
+		CallCode5997,
+		CallCode5998,
+		CallCode5999,
 		CallCode7370,
+		CallCode35818,
+		CallCode262269,
+		CallCode262639,
+		CallCode441481,
+		CallCode441534,
+		CallCode441624,
+		CallCode3906698,
+		CallCode6189162,
+		CallCode6189164,
 	}
 }
 
@@ -563,15 +625,15 @@ func (c CallCode) Countries() []CountryCode {
 		return []CountryCode{DMA}
 	case CallCode1784:
 		return []CountryCode{VCT}
-	case CallCode1787:
+	case CallCode1787, CallCode1939:
 		return []CountryCode{PRI}
-	case CallCode1809:
+	case CallCode1809, CallCode1829, CallCode1849:
 		return []CountryCode{DOM}
 	case CallCode1868:
 		return []CountryCode{TTO}
 	case CallCode1869:
 		return []CountryCode{KNA}
-	case CallCode1876:
+	case CallCode1876, CallCode1658:
 		return []CountryCode{JAM}
 	case CallCode20:
 		return []CountryCode{EGY}
@@ -667,6 +729,8 @@ func (c CallCode) Countries() []CountryCode {
 		return []CountryCode{MDG}
 	case CallCode262:
 		return []CountryCode{MYT, REU}
+	case CallCode262269, CallCode262639:
+		return []CountryCode{MYT}
 	case CallCode263:
 		return []CountryCode{ZWE}
 	case CallCode264:
@@ -687,7 +751,7 @@ func (c CallCode) Countries() []CountryCode {
 		return []CountryCode{SHN}
 	case CallCode291:
 		return []CountryCode{ERI}
-	case CallCode297:
+	case CallCode297, CallCode5998:
 		return []CountryCode{ABW}
 	case CallCode298:
 		return []CountryCode{FRO}
@@ -844,13 +908,13 @@ func (c CallCode) Countries() []CountryCode {
 	case CallCode60:
 		return []CountryCode{MYS}
 	case CallCode61:
-		return []CountryCode{AUS, CXR}
+		return []CountryCode{AUS, CXR, CCK}
 	case CallCode62:
 		return []CountryCode{IDN}
 	case CallCode63:
 		return []CountryCode{PHL}
 	case CallCode64:
-		return []CountryCode{NZL}
+		return []CountryCode{NZL, PCN}
 	case CallCode65:
 		return []CountryCode{SGP}
 	case CallCode66:
@@ -899,8 +963,12 @@ func (c CallCode) Countries() []CountryCode {
 		return []CountryCode{MHL}
 	case CallCode7:
 		return []CountryCode{KAZ, RUS}
-	case CallCode721:
+	case CallCode1721, CallCode5995:
 		return []CountryCode{SXM}
+	case CallCode4779:
+		return []CountryCode{SJM}
+	case CallCode5993, CallCode5994, CallCode5997:
+		return []CountryCode{BES}
 	case CallCode7370:
 		return []CountryCode{TKM}
 	case CallCode81:
@@ -921,10 +989,22 @@ func (c CallCode) Countries() []CountryCode {
 		return []CountryCode{LAO}
 	case CallCode86:
 		return []CountryCode{CHN}
+	case CallCode800:
+		return []CountryCode{NonCountryInternationalFreephone}
 	case CallCode870:
-		return []CountryCode{PCN}
+		return []CountryCode{NonCountryInmarsat}
+	case CallCode875, CallCode876, CallCode877:
+		return []CountryCode{NonCountryMaritimeMobileService}
+	case CallCode878:
+		return []CountryCode{NonCountryUniversalPersonalTelecommunicationsServices}
+	case CallCode879:
+		return []CountryCode{NonCountryNationalNonCommercialPurposes}
 	case CallCode880:
 		return []CountryCode{BGD}
+	case CallCode881:
+		return []CountryCode{NonCountryGlobalMobileSatelliteSystem}
+	case CallCode882, CallCode883:
+		return []CountryCode{NonCountryInternationalNetworks}
 	case CallCode886:
 		return []CountryCode{TWN}
 	case CallCode90:
@@ -939,6 +1019,8 @@ func (c CallCode) Countries() []CountryCode {
 		return []CountryCode{LKA}
 	case CallCode95:
 		return []CountryCode{MMR}
+	case CallCode888:
+		return []CountryCode{NonCountryDisasterRelief}
 	case CallCode960:
 		return []CountryCode{MDV}
 	case CallCode961:
@@ -973,6 +1055,8 @@ func (c CallCode) Countries() []CountryCode {
 		return []CountryCode{NPL}
 	case CallCode98:
 		return []CountryCode{IRN}
+	case CallCode979:
+		return []CountryCode{NonCountryInternationalPremiumRateService}
 	case CallCode992:
 		return []CountryCode{TJK}
 	case CallCode994:
@@ -983,6 +1067,22 @@ func (c CallCode) Countries() []CountryCode {
 		return []CountryCode{KGZ}
 	case CallCode998:
 		return []CountryCode{UZB}
+	case CallCode5999:
+		return []CountryCode{CUW}
+	case CallCode35818:
+		return []CountryCode{ALA}
+	case CallCode441481:
+		return []CountryCode{GGY}
+	case CallCode441534:
+		return []CountryCode{JEY}
+	case CallCode441624:
+		return []CountryCode{IMN}
+	case CallCode3906698:
+		return []CountryCode{VAT}
+	case CallCode6189162:
+		return []CountryCode{CCK}
+	case CallCode6189164:
+		return []CountryCode{CXR}
 	}
 	return []CountryCode{Unknown}
 }
