@@ -1,6 +1,6 @@
 v 1.1
 + Сhanged CallCode() to CallCodes() for multicodes support
-+ Add MOK three-letter abbreviation country codes
++ Add IOC three-letter abbreviation country codes
 + Add FIFA three-letter country codes
 + Add "Ascension and Tristan da Cunha"
 + Add multi callcodes (Dominicana, Jamaica, Puerto Rico and others)
