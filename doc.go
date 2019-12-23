@@ -10,7 +10,7 @@ Usage
 	fmt.Printf("Country digit code: %d\n", countryJapan)
 	fmt.Printf("Country Alpha-2 code: %v\n", countryJapan.Alpha2())
 	fmt.Printf("Country Alpha-3 code: %v\n", countryJapan.Alpha3())
-	fmt.Printf("Country MOK code: %v\n", countryJapan.MOK())
+	fmt.Printf("Country IOC code: %v\n", countryJapan.IOC())
 	fmt.Printf("Country FIFA code: %v\n", countryJapan.FIFA())
 	fmt.Printf("Country Capital: %v\n", countryJapan.Capital())
 	fmt.Printf("Country call code: %v\n", countryJapan.CallCodes())

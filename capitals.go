@@ -22,8 +22,8 @@ const TypeCapitalCode = "countries.CapitalCode"
 // TypeCapital for Typer interface
 const TypeCapital = "countries.Capital"
 
-const ( 
-	CapitalUnknown CapitalCode = 0 
+const (
+	CapitalUnknown CapitalCode = 0
 	CapitalAU      CapitalCode = CapitalCode(AU)
 	CapitalAT      CapitalCode = CapitalCode(AT)
 	CapitalAZ      CapitalCode = CapitalCode(AZ)
@@ -275,6 +275,7 @@ const (
 	CapitalCW      CapitalCode = CapitalCode(CW)
 	CapitalMF      CapitalCode = CapitalCode(MF)
 	CapitalSS      CapitalCode = CapitalCode(SS)
+	CapitalXK      CapitalCode = CapitalCode(XK)
 	CapitalJP      CapitalCode = CapitalCode(JP)
 )
 
@@ -786,6 +787,8 @@ func (c CapitalCode) String() string {
 		return "Marigot"
 	case CapitalSS:
 		return "Juba"
+	case CapitalXK:
+		return "Pristina"
 	case CapitalJP:
 		return "Tokyo"
 	}
@@ -1295,6 +1298,8 @@ func (c CapitalCode) Country() CountryCode {
 		return MF
 	case CapitalSS:
 		return SS
+	case CapitalXK:
+		return XK
 	case CapitalJP:
 		return JP
 	}
@@ -1597,6 +1602,7 @@ func AllCapitals() []CapitalCode {
 		CapitalCW,
 		CapitalMF,
 		CapitalSS,
+		CapitalXK,
 		CapitalJP,
 	}
 }
@@ -1944,6 +1950,8 @@ func CapitalCodeByName(name string) CapitalCode {
 		return CapitalNZ
 	case "JUBA":
 		return CapitalSS
+	case "PRISTINA", "PRISHTINA", "PRIHTINA", "ПРИШТИНА", "PRISHTINË", "PRIŠTINA":
+		return CapitalXK
 	case "ASUNCION":
 		return CapitalPY
 	case "ADAMSTOWN":

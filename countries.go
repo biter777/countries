@@ -10,7 +10,7 @@ Usage
 	fmt.Printf("Country digit code: %d\n", countryJapan)
 	fmt.Printf("Country Alpha-2 code: %v\n", countryJapan.Alpha2())
 	fmt.Printf("Country Alpha-3 code: %v\n", countryJapan.Alpha3())
-	fmt.Printf("Country MOK code: %v\n", countryJapan.MOK())
+	fmt.Printf("Country MOK code: %v\n", countryJapan.IOC())
 	fmt.Printf("Country FIFA code: %v\n", countryJapan.FIFA())
 	fmt.Printf("Country Capital: %v\n", countryJapan.Capital())
 	fmt.Printf("Country call code: %v\n", countryJapan.CallCodes())
@@ -87,7 +87,7 @@ type Country struct {
 	Name      string       `json:"name"`
 	Alpha2    string       `json:"cca2"`
 	Alpha3    string       `json:"cca3"`
-	MOK       string       `json:"mok"`
+	IOC       string       `json:"ioc"`
 	FIFA      string       `json:"fifa"`
 	Emoji     string       `json:"emoji"`
 	Code      CountryCode  `json:"code"`
@@ -374,6 +374,7 @@ const (
 	SintMaartenDutch                       CountryCode = 534
 	Montenegro                             CountryCode = 499
 	SouthSudan                             CountryCode = 728
+	Kosovo                                 CountryCode = 900
 )
 
 // Non-countries codes
@@ -644,6 +645,7 @@ const (
 	SX CountryCode = 534
 	ME CountryCode = 499
 	SS CountryCode = 728
+	XK CountryCode = 900
 )
 
 // Alpha-3 digit ISO 3166-1. Three codes present, for example Russia == RU == RUS == 643.
@@ -901,13 +903,14 @@ const (
 	SXM CountryCode = 534
 	MNE CountryCode = 499
 	SSD CountryCode = 728
+	XKX CountryCode = 900
 )
 
 // rePrepare - for func textPrepare()
 var rePrepare *regexp.Regexp
 
 func init() {
-	rePrepare = regexp.MustCompile("\n|\t|\r|\f|\v|!|[|]|{|}|\\|'|`|;|:|,|«|»| |-|‐|‑|‒|―|—|–| |_|\"")
+	rePrepare = regexp.MustCompile("\n|\t|\r|\f|\v|!|[|]|{|}|\\|`|`|;|:|,|«|»| |-|‐|‑|‒|―|—|–| |_|\"")
 }
 
 // Total - returns number of codes in the package, countries.Total() == len(countries.All()) but static value for perfomance
@@ -1045,7 +1048,7 @@ func (c CountryCode) String() string {
 	case 188:
 		return "Costa Rica"
 	case 384:
-		return "Cote d'Ivoire" // Ivory Coast
+		return "Cote d`Ivoire" // Ivory Coast
 	case 191:
 		return "Croatia"
 	case 192:
@@ -1163,13 +1166,13 @@ func (c CountryCode) String() string {
 	case 410:
 		return "Korea (Republic of)"
 	case 408:
-		return "Korea (Democratic People's Republic of)"
+		return "Korea (Democratic People`s Republic of)"
 	case 414:
 		return "Kuwait"
 	case 417:
 		return "Kyrgyzstan"
 	case 418:
-		return "Lao People's Democratic Republic"
+		return "Lao People`s Democratic Republic"
 	case 428:
 		return "Latvia"
 	case 422:
@@ -1574,7 +1577,7 @@ func (c CountryCode) StringRus() string {
 	case 188:
 		return "Коста Рика"
 	case 384:
-		return "Кот-д'Ивуар"
+		return "Кот-д`Ивуар"
 	case 191:
 		return "Хорватия"
 	case 192:
@@ -3033,6 +3036,8 @@ func (c CountryCode) Alpha3() string {
 		return "MNE"
 	case 728:
 		return "SSD"
+	case 900:
+		return "XKX"
 	case 999800:
 		return "International Freephone"
 	case 999870:
@@ -3078,57 +3083,187 @@ func (c CountryCode) FIFA() string {
 	return c.Alpha3()
 }
 
-// MOK - returns The International Olympic Committee (IOC) three-letter abbreviation country codes
-func (c CountryCode) MOK() string {
+// IOC - returns The International Olympic Committee (IOC) three-letter abbreviation country codes
+func (c CountryCode) IOC() string {
 	switch c {
+	case DZA:
+		return `ALG`
+	case ASM:
+		return `ASA`
 	case VIR:
-		return "ISV"
+		return `ISV`
+	case AGO:
+		return `ANG`
 	case ATG:
-		return "ANT"
-	case BRB:
-		return "BAR"
-	case BHR:
-		return "BRN"
-	case BLZ:
-		return "BIZ"
-	case VGB:
-		return "IVB"
-	case BFA:
-		return "BUR"
-	case VNM:
-		return "VIE"
-	case GNB:
-		return "GBS"
-	case DEU:
-		return "GER"
-	case IDN:
-		return "INA"
-	case IRN:
-		return "IRI"
-	case LVA:
-		return "LAT"
-	case LBY:
-		return "LBA"
-	case MWI:
-		return "MAW"
-	case NGA:
-		return "NGR"
-	case ANT:
-		return "AHO"
-	case NLD:
-		return "NED"
-	case PSE:
-		return "PLE"
-	case SLV:
-		return "ESA"
-	case SVN:
-		return "SLO"
-	case TWN:
-		return "TPE"
-	case HRV:
-		return "CRO"
+		return `ANT`
 	case GNQ:
-		return "GEQ"
+		return `GEQ`
+	case ABW:
+		return `ARU`
+	case BHS:
+		return `BAH`
+	case BHR:
+		return `BRN`
+	case BGD:
+		return `BAN`
+	case BRB:
+		return `BAR`
+	case BLZ:
+		return `BIZ`
+	case BMU:
+		return `BER`
+	case BTN:
+		return `BHU`
+	case BWA:
+		return `BOT`
+	case VGB:
+		return `IVB`
+	case BRN:
+		return `BRU`
+	case BGR:
+		return `BUL`
+	case BFA:
+		return `BUR`
+	case CHL:
+		return `CHI`
+	case CRI:
+		return `CRC`
+	case DNK:
+		return `DEN`
+	case DEU:
+		return `GER`
+	case SLV:
+		return `ESA`
+	case FJI:
+		return `FIJ`
+	case GMB:
+		return `GAM`
+	case GRD:
+		return `GRN`
+	case GRC:
+		return `GRE`
+	case GTM:
+		return `GUA`
+	case GIN:
+		return `GUI`
+	case GNB:
+		return `GBS`
+	case HTI:
+		return `HAI`
+	case HND:
+		return `HON`
+	case IDN:
+		return `INA`
+	case IRN:
+		return `IRI`
+	case CYM:
+		return `CAY`
+	case KHM:
+		return `CAM`
+	case COG:
+		return `CGO`
+	case XKX:
+		return `KOS`
+	case HRV:
+		return `CRO`
+	case KWT:
+		return `KUW`
+	case LSO:
+		return `LES`
+	case LVA:
+		return `LAT`
+	case LBN:
+		return `LIB`
+	case LBY:
+		return `LBA`
+	case MDG:
+		return `MAD`
+	case MWI:
+		return `MAW`
+	case MYS:
+		return `MAS`
+	case MRT:
+		return `MTN`
+	case MUS:
+		return `MRI`
+	case MCO:
+		return `MON`
+	case MNG:
+		return `MGL`
+	case MMR:
+		return `MYA`
+	case NPL:
+		return `NEP`
+	case NIC:
+		return `NCA`
+	case NLD:
+		return `NED`
+	case ANT:
+		return `AHO`
+	case NER:
+		return `NIG`
+	case NGA:
+		return `NGR`
+	case OMN:
+		return `OMA`
+	case PSE:
+		return `PLE`
+	case PRY:
+		return `PAR`
+	case PHL:
+		return `PHI`
+	case PRT:
+		return `POR`
+	case PRI:
+		return `PUR`
+	case TWN:
+		return `TPE`
+	case ROU:
+		return `ROU`
+	case SLB:
+		return `SOL`
+	case ZMB:
+		return `ZAM`
+	case WSM:
+		return `SAM`
+	case SAU:
+		return `KSA`
+	case CHE:
+		return `SUI`
+	case SYC:
+		return `SEY`
+	case ZWE:
+		return `ZIM`
+	case SVN:
+		return `SLO`
+	case LKA:
+		return `SRI`
+	case KNA:
+		return `SKN`
+	case VCT:
+		return `VIN`
+	case ZAF:
+		return `RSA`
+	case SDN:
+		return `SUD`
+	case TZA:
+		return `TAN`
+	case TGO:
+		return `TOG`
+	case TON:
+		return `TGA`
+	case TTO:
+		return `TRI`
+	case TCD:
+		return `CHA`
+	case URY:
+		return `URU`
+	case VUT:
+		return `VAN`
+	case ARE:
+		return `UAE`
+	case VNM:
+		return `VIE`
 	}
 	return c.Alpha3()
 }
@@ -3618,8 +3753,8 @@ func (c CountryCode) Currency() CurrencyCode {
 		return CurrencyANG
 	case SRB:
 		return CurrencyRSD
-	case SSD:
-		return CurrencySSP
+	case XKX:
+		return CurrencyEUR
 	}
 	return CurrencyUnknown
 }
@@ -3880,6 +4015,7 @@ func All() []CountryCode {
 		MAF,
 		SSD,
 		JPN,
+		XKX,
 	}
 }
 
@@ -4386,6 +4522,8 @@ func (c CountryCode) CallCodes() []CallCode {
 		return []CallCode{CallCode(590)}
 	case SSD:
 		return []CallCode{CallCode(211)}
+	case XKX:
+		return []CallCode{CallCode(383)}
 	case JPN:
 		return []CallCode{CallCode(81)}
 	case NonCountryInternationalFreephone:
@@ -4924,6 +5062,8 @@ func (c CountryCode) Region() RegionCode {
 		return RegionNA
 	case SSD:
 		return RegionAF
+	case XKX:
+		return RegionEU
 	case JPN:
 		return RegionAS
 	}
@@ -5433,6 +5573,8 @@ func (c CountryCode) Capital() CapitalCode {
 		return CapitalMF
 	case SSD:
 		return CapitalSS
+	case XKX:
+		return CapitalXK
 	case JPN:
 		return CapitalJP
 	}
@@ -5445,7 +5587,7 @@ func (c CountryCode) Info() *Country {
 		Name:      c.String(),
 		Alpha2:    c.Alpha2(),
 		Alpha3:    c.Alpha3(),
-		MOK:       c.MOK(),
+		IOC:       c.IOC(),
 		FIFA:      c.FIFA(),
 		Emoji:     c.Emoji(),
 		Code:      c,

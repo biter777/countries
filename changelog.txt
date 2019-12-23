@@ -8,3 +8,4 @@ v 1.1
 + Add indeterminate reservations ISO 3166 codes 
 + Add transitional reservations ISO 3166 codes 
 + Add non-countries call codes (Inmarsat, International Freephone and others)
++ Add Kosovo codes and values
