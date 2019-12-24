@@ -35,3 +35,49 @@ func TestCount(t *testing.T) {
 		t.Errorf("Test AllRegions() err, want %v, got %v", want, out)
 	}
 }
+
+func TestInfo(t *testing.T) {
+	all := All()
+	for i := 0; i < len(all); i++ {
+		c := all[i].Info()
+		if c == nil {
+			t.Errorf("Test Info() err: c == nil, i: %v", i)
+		}
+		if c.Name == "" || c.Name == UnknownMsg {
+			t.Errorf("Test c.Name err, c: %v", *c)
+		}
+		if c.Alpha2 == "" || c.Alpha2 == UnknownMsg {
+			t.Errorf("Test c.Alpha2 err, c: %v", *c)
+		}
+		if c.Alpha3 == "" || c.Alpha3 == UnknownMsg {
+			t.Errorf("Test c.Alpha3 err, c: %v", *c)
+		}
+		if c.IOC == "" || c.IOC == UnknownMsg {
+			t.Errorf("Test c.IOC err, c: %v", *c)
+		}
+		if c.FIFA == "" || c.FIFA == UnknownMsg {
+			t.Errorf("Test c.FIFA err, c: %v", *c)
+		}
+		if c.Emoji == "" || c.Emoji == UnknownMsg {
+			t.Errorf("Test c.Emoji err, c: %v", *c)
+		}
+		if c.Code == Unknown {
+			t.Errorf("Test c.Code err, c: %v", *c)
+		}
+		if c.Currency == CurrencyUnknown && c.Code != ATA {
+			t.Errorf("Test c.Currency err, c: %v", *c)
+		}
+		if c.Capital == CapitalUnknown {
+			t.Errorf("Test c.Capital err, c: %v", *c)
+		}
+		if len(c.CallCodes) < 1 {
+			t.Errorf("Test c.CallCodes err, c: %v", *c)
+		}
+		if c.Domain == DomainUnknown && c.Code != XKX {
+			t.Errorf("Test c.Domain err, c: %v", *c)
+		}
+		if c.Region == RegionUnknown {
+			t.Errorf("Test c.Region err, c: %v", *c)
+		}
+	}
+}

@@ -1,3 +1,8 @@
+v 1.2
++ Add Kosovo missing funcs
++ Add South Sudan currency
++ Add Egypt domain
+
 v 1.1
 + Сhanged CallCode() to CallCodes() for multicodes support
 + Add IOC three-letter abbreviation country codes

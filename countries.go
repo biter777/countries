@@ -3761,6 +3761,8 @@ func (c CountryCode) Currency() CurrencyCode {
 		return CurrencyANG
 	case SRB:
 		return CurrencyRSD
+	case SSD:
+		return CurrencySSP
 	case XKX:
 		return CurrencyEUR
 	}
@@ -6052,7 +6054,7 @@ func ByName(name string) CountryCode {
 		return SLB
 	case "SO", "SOM", "SOMALIA", "SOMALI":
 		return SOM
-	case "SD", "SDN", "SUDAN":
+	case "SD", "SDN", "SUDAN", "SUDANE", "UMHŪRIYYATASSŪDĀN", "SŪDĀN", "جمهوريةالسودان", "السودان":
 		return SDN
 	case "SR", "SUR", "SME", "SURINAME", "SURINAM":
 		return SUR
@@ -6166,11 +6168,11 @@ func ByName(name string) CountryCode {
 		return CUW
 	case "MF", "MAF", "SAINTMARTINFRENCH", "STMARTINFRENCH":
 		return MAF
-	case "SS", "SSD", "SOUTHSUDAN":
+	case "SS", "SSD", "SOUTHSUDAN", "SOUTHSUDANE", "REPUBLICOFSOUTHSUDAN", "SOUTHSUDANREPUBLICOF", "PAGUOTTHUDÄN":
 		return SSD
 	case "JP", "JPN", "JAPAN":
 		return JPN
-	case "XK", "XKX", "KOS", "KOSOVO":
+	case "XK", "XKX", "KOS", "KOSOVO", "COSOVO", "КОСОВО", "KOSOVËS", "РЕПУБЛИКАКОСОВО", "REPUBLIKAKOSOVO", "REPUBLIKACOSOVO", "REPUBLIKAKOSOVËS", "REPUBLICAKOSOVO", "REPUBLICACOSOVO", "REPUBLICAKOSOVËS", "KOSOVOREPUBLIC", "COSOVOREPUBLIC", "KOSOVËSREPUBLIC":
 		return XKX
 	case "UIFN", "INTERNATIONALFREEPHONE", "TOLLFREEPHONE":
 		return NonCountryInternationalFreephone

@@ -303,8 +303,6 @@ func (c DomainCode) String() string {
 		return ".no"
 	case DomainGB:
 		return ".uk"
-	case DomainEG:
-		return UnknownMsg
 	}
 
 	if c >= 999 {
