@@ -48,9 +48,26 @@ func main() {
 	// Detection usage
 	// Detect by name
 	country := countries.ByName("angola")
-	fmt.Printf("Country digit code: %d\n", country)            // 24
-	fmt.Printf("Country Alpha-2 code: %v\n", country.Alpha2()) // AO
-	fmt.Printf("Country Alpha-3 code: %v\n", country.Alpha3()) // AGO
+	fmt.Printf("Country name in english: %v\n", country)                // Angola
+	fmt.Printf("Country ISO-3166 digit code: %d\n", country)            // 24
+	fmt.Printf("Country ISO-3166 Alpha-2 code: %v\n", country.Alpha2()) // AO
+	fmt.Printf("Country ISO-3166 Alpha-3 code: %v\n", country.Alpha3()) // AGO
+	// Detect by code/numeric
+	country = countries.ByNumeric(24)
+	fmt.Printf("Country name in english: %v\n", country)                // Angola
+	fmt.Printf("Country ISO-3166 digit code: %d\n", country)            // 24
+	fmt.Printf("Country ISO-3166 Alpha-2 code: %v\n", country.Alpha2()) // AO
+	fmt.Printf("Country ISO-3166 Alpha-3 code: %v\n", country.Alpha3()) // AGO
+
+	// Comparing usage
+	// Compare by code/numeric
+	if countries.ByName("angola") == countries.AGO {
+		fmt.Println("Yes! It's Angola!") // Yes! It's Angola!
+	}
+	// Compare by name
+	if strings.EqualFold("angola", countries.AGO.String()) {
+		fmt.Println("Yes! It's Angola!") // Yes! It's Angola!
+	}
 
 	// Database usage
 	type User struct {
