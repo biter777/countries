@@ -30,13 +30,13 @@ const (
 	DomainCom     DomainCode = DomainCode(Internation + 1)
 	DomainOrg     DomainCode = DomainCode(Internation + 2)
 	DomainNet     DomainCode = DomainCode(Internation + 3)
-	DomainEdu     DomainCode = DomainCode(Internation + 3)
-	DomainGov     DomainCode = DomainCode(Internation + 4)
-	DomainMil     DomainCode = DomainCode(Internation + 5)
-	DomainTest    DomainCode = DomainCode(Internation + 6)
-	DomainBiz     DomainCode = DomainCode(Internation + 7)
-	DomainInfo    DomainCode = DomainCode(Internation + 8)
-	DomainName    DomainCode = DomainCode(Internation + 9)
+	DomainEdu     DomainCode = DomainCode(Internation + 4)
+	DomainGov     DomainCode = DomainCode(Internation + 5)
+	DomainMil     DomainCode = DomainCode(Internation + 6)
+	DomainTest    DomainCode = DomainCode(Internation + 7)
+	DomainBiz     DomainCode = DomainCode(Internation + 8)
+	DomainInfo    DomainCode = DomainCode(Internation + 9)
+	DomainName    DomainCode = DomainCode(Internation + 10)
 	DomainAU      DomainCode = DomainCode(AU)
 	DomainAT      DomainCode = DomainCode(AT)
 	DomainAZ      DomainCode = DomainCode(AZ)
@@ -299,6 +299,28 @@ func (c DomainCode) Type() string {
 // String - implements fmt.Stringer, returns a domain (internet ccTDL)
 func (c DomainCode) String() string {
 	switch c {
+	case 	DomainArpa:
+		return ".arpa"
+	case DomainCom:
+		return ".com"
+	case DomainOrg:
+		return ".org"
+	case DomainNet:
+		return ".net"
+	case DomainEdu:
+		return ".edu"
+	case DomainGov:
+		return ".gov"
+	case DomainMil:
+		return ".mil"
+	case DomainTest:
+		return ".test"
+	case DomainBiz:
+		return ".biz"
+	case DomainInfo:
+		return ".info"
+	case DomainName:
+		return ".name"
 	case DomainBV, DomainSJ:
 		return ".no"
 	case DomainGB:

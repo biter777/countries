@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestCount(t *testing.T) {
+func TestCountriesCount(t *testing.T) {
 	out := Total()
 	want := len(All())
 	if out != want {
@@ -36,7 +36,7 @@ func TestCount(t *testing.T) {
 	}
 }
 
-func TestInfo(t *testing.T) {
+func TestCountriesInfo(t *testing.T) {
 	all := All()
 	for i := 0; i < len(all); i++ {
 		c := all[i].Info()
@@ -78,6 +78,69 @@ func TestInfo(t *testing.T) {
 		}
 		if c.Region == RegionUnknown {
 			t.Errorf("Test c.Region err, c: %v", *c)
+		}
+	}
+}
+
+func TestCurrenciesInfo(t *testing.T) {
+	all := AllCurrencies()
+	for i := 0; i < len(all); i++ {
+		c := all[i].Info()
+		if c == nil {
+			t.Errorf("Test Info() err: c == nil, i: %v", i)
+		}
+		if c.Name == "" || c.Name == UnknownMsg {
+			t.Errorf("Test c.Name err, c: %v", *c)
+		}
+		if c.Alpha == "" || c.Alpha == UnknownMsg {
+			t.Errorf("Test c.Alpha err, c: %v", *c)
+		}
+		if c.Digits < 0 || c.Digits > 4 {
+			t.Errorf("Test c.Digits err, c: %v", *c)
+		}
+		if c.Code == CurrencyUnknown {
+			t.Errorf("Test c.Code err, c: %v", *c)
+		}
+		if len(c.Countries) < 1 {
+			t.Errorf("Test c.Countries err, c: %v", *c)
+		}
+	}
+}
+
+func TestCapitalsInfo(t *testing.T) {
+	all := AllCapitals()
+	for i := 0; i < len(all); i++ {
+		c := all[i].Info()
+		if c == nil {
+			t.Errorf("Test Info() err: c == nil, i: %v", i)
+		}
+		if c.Name == "" || c.Name == UnknownMsg {
+			t.Errorf("Test c.Name err, c: %v", *c)
+		}
+		if c.Country == Unknown {
+			t.Errorf("Test c.Country err, c: %v", *c)
+		}
+		if c.Code == CapitalUnknown {
+			t.Errorf("Test c.Code err, c: %v", *c)
+		}
+	}
+}
+
+func TestDomainsInfo(t *testing.T) {
+	all := AllDomains()
+	for i := 0; i < len(all); i++ {
+		c := all[i].Info()
+		if c == nil {
+			t.Errorf("Test Info() err: c == nil, i: %v", i)
+		}
+		if c.Name == "" || c.Name == UnknownMsg {
+			t.Errorf("Test c.Name err, c: %v", *c)
+		}
+		if c.Country == Unknown {
+			t.Errorf("Test c.Country err, c: %v", *c)
+		}
+		if c.Code == DomainUnknown {
+			t.Errorf("Test c.Code err, c: %v", *c)
 		}
 	}
 }
