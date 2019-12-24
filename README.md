@@ -20,6 +20,7 @@ usage
 import "fmt"
 import "github.com/biter777/countries"
 
+func main() {
 	countryJapan := countries.Japan
 	fmt.Printf("Country name in english: %v\n", countryJapan)                   // Japan
 	fmt.Printf("Country name in russian: %v\n", countryJapan.StringRus())       // Япония
