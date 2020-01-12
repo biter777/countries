@@ -1,0 +1,10 @@
+language: go
+
+install:
+  - go get github.com/biter777/countries
+
+script:
+ - go test -v
+
+notifications:
+  email: false
