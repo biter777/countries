@@ -127,6 +127,6 @@ Welcome pull requests, bug fixes and issue reports.
 Before proposing a change, please discuss it first by raising an issue.
 
 Contributors list:
-@biter777 (https://github.com/biter777) 
-@gavincarr (https://github.com/gavincarr) 
+@biter777 (https://github.com/biter777), 
+@gavincarr (https://github.com/gavincarr), 
 @benja-M-1 (https://github.com/benja-M-1) 
