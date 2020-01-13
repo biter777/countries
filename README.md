@@ -12,7 +12,7 @@ Full support ISO-3166-1, ISO-4217, ITU-T E.164, Unicode CLDR and IANA ccTLD stan
 [![IANA](https://img.shields.io/badge/powered%20by-IANA-brightgreen)](http://www.iana.org/)
 [![Build Status](https://travis-ci.org/biter777/countries.svg?branch=master)](https://travis-ci.org/biter777/countries)
 [![Codeship Status](https://codeship.com/projects/00db4400-1803-0138-1132-7ab932dd1523/status?branch=master)](https://app.codeship.com/projects/381056)
-[![Stars](https://img.shields.io/github/stars/biter777/countries?label=Please%20like%20us&style=social)]
+[![Stars](https://img.shields.io/github/stars/biter777/countries?label=Please%20like%20us&style=social)]()
 
 installation
 ------------
