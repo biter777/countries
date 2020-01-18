@@ -1,3 +1,4 @@
+//nolint:gocyclo
 package countries
 
 import (
