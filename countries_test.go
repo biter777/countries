@@ -206,26 +206,33 @@ func TestCountriesCount(t *testing.T) {
 	if out != want {
 		t.Errorf("Test AllRegionsInfo() err, want %v, got %v", want, out)
 	}
-	_, err = regionsInfo[0].Value()
-	_, err2 = json.Marshal(regionsInfo[0])
-	if err != nil || err2 != nil {
-		t.Errorf("Test regionsInfo.Value() err")
-	}
-	if regionsInfo[0].Type() != TypeRegion {
-		t.Errorf("Test regionsInfo.Type() err")
-	}
-	err = regionsInfo[0].Scan(regionsInfo[0])
-	if err != nil {
-		t.Errorf("Test regionsInfo.Scan() err")
-	}
-	err = regionsInfo[0].Scan(nil)
-	if err == nil {
-		t.Errorf("Test regionsInfo.Scan() err")
-	}
-	regionsInfo[0] = nil
-	err = regionsInfo[0].Scan(regionsInfo[0])
-	if err == nil {
-		t.Errorf("Test regionsInfo.Scan() err")
+	for _, r := range regionsInfo {
+		regionCodeOut := RegionCodeByName(r.Name)
+		regionCodeWant := r.Code
+		if regionCodeOut != regionCodeWant {
+			t.Errorf("Test AllCapitalsInfo() err, want %v, got %v", regionCodeWant, regionCodeOut)
+		}
+		_, err = r.Value()
+		_, err2 = json.Marshal(r)
+		if err != nil || err2 != nil {
+			t.Errorf("Test regionsInfo.Value() err")
+		}
+		if r.Type() != TypeRegion {
+			t.Errorf("Test regionsInfo.Type() err")
+		}
+		err = r.Scan(r)
+		if err != nil {
+			t.Errorf("Test regionsInfo.Scan() err")
+		}
+		err = r.Scan(nil)
+		if err == nil {
+			t.Errorf("Test regionsInfo.Scan() err")
+		}
+		r = nil
+		err = r.Scan(r)
+		if err == nil {
+			t.Errorf("Test regionsInfo.Scan() err")
+		}
 	}
 
 	out = TotalCapitals()
@@ -306,7 +313,7 @@ func TestCountriesInfo(t *testing.T) {
 			t.Errorf("Test Country.String() err: all[%v]: %v", i, all[i])
 		}
 		if (all[i].StringRus() == "" || all[i].StringRus() == UnknownMsg) && all[i] != Unknown {
-			all[i].StringRus() 
+			all[i].StringRus()
 			t.Errorf("Test Country.StringRus() err: all[%v]: %v", i, all[i])
 		}
 		if all[i].Emoji3() == "" {
