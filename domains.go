@@ -1,3 +1,4 @@
+// Package countries - ISO 3166 (ISO3166-1, ISO3166, Digit, Alpha-2 and Alpha-3) countries codes and names (on eng and rus), ISO 4217 currency designators, ITU-T E.164 IDD calling phone codes, countries capitals, UN M.49 regions codes, ccTLD countries domains, IOC/NOC and FIFA letters codes, VERY FAST, NO maps[], NO slices[], NO external links/files/data, NO interface{}, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1, ISO-4217, ITU-T E.164, Unicode CLDR and ccTLD standarts. Full support ISO-3166-1, ISO-4217, ITU-T E.164, Unicode CLDR and ccTLD standarts.
 package countries
 
 import (
@@ -381,8 +382,6 @@ func (c *Domain) Scan(src interface{}) error {
 		*c = *src
 	case Domain:
 		*c = src
-	case nil:
-		c = nil //nolint
 	default:
 		return fmt.Errorf("countries::Scan: domain scan err: unexpected value of type %T for %T", src, *c)
 	}
@@ -677,7 +676,7 @@ func AllDomainsInfo() []*Domain {
 	return domains
 }
 
-// TotalDomains - returns number of domains in the package, countries.TotalDomains() == len(countries.AllDomains()) but static value for perfomance
+// TotalDomains - returns number of domains in the package, countries.TotalDomains() == len(countries.AllDomains()) but static value for performance
 func TotalDomains() int {
 	return 263
 }
