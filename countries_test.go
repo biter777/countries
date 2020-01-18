@@ -53,6 +53,10 @@ func TestCountriesCount(t *testing.T) {
 		if err != nil {
 			t.Errorf("Test allCountriesInfo.Scan() err")
 		}
+		err = c.Scan(Country{})
+		if err != nil {
+			t.Errorf("Test allCountriesInfo.Scan() err")
+		}
 		err = c.Scan(nil)
 		if err == nil {
 			t.Errorf("Test allCountriesInfo.Scan() err")
@@ -89,6 +93,10 @@ func TestCountriesCount(t *testing.T) {
 		t.Errorf("Test callCodesInfo.Type() err")
 	}
 	err = callCodesInfo[0].Scan(callCodesInfo[0])
+	if err != nil {
+		t.Errorf("Test callCodesInfo.Scan() err")
+	}
+	err = callCodesInfo[0].Scan(CallCodeInfo{})
 	if err != nil {
 		t.Errorf("Test callCodesInfo.Scan() err")
 	}
@@ -135,6 +143,10 @@ func TestCountriesCount(t *testing.T) {
 	if err != nil {
 		t.Errorf("Test currenciesInfo.Scan() err")
 	}
+	err = currenciesInfo[0].Scan(Currency{})
+	if err != nil {
+		t.Errorf("Test currenciesInfo.Scan() err")
+	}
 	err = currenciesInfo[0].Scan(nil)
 	if err == nil {
 		t.Errorf("Test currenciesInfo.Scan() err")
@@ -175,6 +187,10 @@ func TestCountriesCount(t *testing.T) {
 	if err != nil {
 		t.Errorf("Test domainsInfo.Scan() err")
 	}
+	err = domainsInfo[0].Scan(Domain{})
+	if err != nil {
+		t.Errorf("Test domainsInfo.Scan() err")
+	}
 	err = domainsInfo[0].Scan(nil)
 	if err == nil {
 		t.Errorf("Test domainsInfo.Scan() err")
@@ -210,7 +226,13 @@ func TestCountriesCount(t *testing.T) {
 		regionCodeOut := RegionCodeByName(r.Name)
 		regionCodeWant := r.Code
 		if regionCodeOut != regionCodeWant {
-			t.Errorf("Test AllCapitalsInfo() err, want %v, got %v", regionCodeWant, regionCodeOut)
+			t.Errorf("Test RegionCodeByName() err, want %v, got %v", regionCodeWant, regionCodeOut)
+		}
+		if r.Code.String() == "" {
+			t.Errorf("Test regionsInfo.String() err")
+		}
+		if r.Code.StringRus() == "" {
+			t.Errorf("Test regionsInfo.StringRus() err")
 		}
 		_, err = r.Value()
 		_, err2 = json.Marshal(r)
@@ -224,6 +246,10 @@ func TestCountriesCount(t *testing.T) {
 		if err != nil {
 			t.Errorf("Test regionsInfo.Scan() err")
 		}
+		err = r.Scan(Region{})
+		if err != nil {
+			t.Errorf("Test regionsInfo.Scan() err")
+		}
 		err = r.Scan(nil)
 		if err == nil {
 			t.Errorf("Test regionsInfo.Scan() err")
@@ -233,6 +259,16 @@ func TestCountriesCount(t *testing.T) {
 		if err == nil {
 			t.Errorf("Test regionsInfo.Scan() err")
 		}
+	}
+	regionCodeOut := RegionCodeByName(None.String())
+	regionCodeWant := None.Region()
+	if regionCodeOut != regionCodeWant {
+		t.Errorf("Test RegionCodeByName() err, want %v, got %v", regionCodeWant, regionCodeOut)
+	}
+	regionCodeOut = RegionCodeByName("pupok")
+	regionCodeWant = RegionUnknown
+	if regionCodeOut != regionCodeWant {
+		t.Errorf("Test RegionCodeByName() err, want %v, got %v", regionCodeWant, regionCodeOut)
 	}
 
 	out = TotalCapitals()
@@ -263,6 +299,10 @@ func TestCountriesCount(t *testing.T) {
 		t.Errorf("Test capitalsInfo.Type() err")
 	}
 	err = capitalsInfo[0].Scan(capitalsInfo[0])
+	if err != nil {
+		t.Errorf("Test capitalsInfo.Scan() err")
+	}
+	err = capitalsInfo[0].Scan(Capital{})
 	if err != nil {
 		t.Errorf("Test capitalsInfo.Scan() err")
 	}
