@@ -659,6 +659,8 @@ const (
 	SouthSudan CountryCode = 728
 	// Kosovo                                 CountryCode = 900
 	Kosovo CountryCode = 900
+	// None									  CountryCode = 998
+	None CountryCode = 998
 )
 
 // Non-countries codes
@@ -1193,6 +1195,8 @@ const (
 	SS CountryCode = 728
 	// XK CountryCode = 900
 	XK CountryCode = 900
+	// XX CountryCode = 998
+	XX CountryCode = 998
 )
 
 // Alpha-3 digit ISO 3166-1. Three codes present, for example Russia == RU == RUS == 643.
@@ -1705,13 +1709,15 @@ const (
 	SSD CountryCode = 728
 	// XKX CountryCode = 900
 	XKX CountryCode = 900
+	// NON CountryCode = 999
+	NON CountryCode = 998
 )
 
 // rePrepare - for func textPrepare()
 var rePrepare *regexp.Regexp
 
 func init() {
-	rePrepare = regexp.MustCompile("\n|\t|\r|\f|\v|!|[|]|{|}|\\|`|`|;|:|,|«|»| |-|‐|‑|‒|―|—|–| |_|\"")
+	rePrepare = regexp.MustCompile("\n|\t|\r|\f|\v|!|[|]|{|}|\\|`|'|`|;|:|,|«|»| |-|‐|‑|‒|―|—|–| |_|\"")
 }
 
 // Total - returns number of codes in the package, countries.Total() == len(countries.All()) but static value for performance
@@ -1844,7 +1850,7 @@ func (c CountryCode) String() string { //nolint:gocyclo
 	case 178:
 		return "Congo"
 	case 180:
-		return "Congo (Democratic Republic of the)"
+		return "Democratic Republic of the Congo"
 	case 184:
 		return "Cook Islands"
 	case 188:
@@ -1966,9 +1972,9 @@ func (c CountryCode) String() string { //nolint:gocyclo
 	case 296:
 		return "Kiribati"
 	case 410:
-		return "Korea (Republic of)"
+		return "Republic of Korea"
 	case 408:
-		return "Korea (Democratic People`s Republic of)"
+		return "Democratic People`s Republic of Korea"
 	case 414:
 		return "Kuwait"
 	case 417:
@@ -2208,9 +2214,9 @@ func (c CountryCode) String() string { //nolint:gocyclo
 	case 704:
 		return "Viet Nam"
 	case 92:
-		return "Virgin Islands (British)"
+		return "Virgin Islands British"
 	case 850:
-		return "Virgin Islands (US)"
+		return "Virgin Islands US"
 	case 876:
 		return "Wallis and Futuna Islands"
 	case 732:
@@ -2242,15 +2248,19 @@ func (c CountryCode) String() string { //nolint:gocyclo
 	case 652:
 		return "Saint Barthelemy"
 	case 663:
-		return "Saint Martin (French)"
+		return "Saint Martin French"
 	case 534:
-		return "Sint Maarten (Dutch)"
+		return "Sint Maarten Dutch"
 	case 499:
 		return "Montenegro"
 	case 728:
 		return "South Sudan"
 	case 900:
 		return "Kosovo"
+	case 998:
+		return "None"
+	case 999:
+		return "International"
 	case 999800:
 		return "International Freephone"
 	case 999870:
@@ -2783,6 +2793,8 @@ func (c CountryCode) StringRus() string { //nolint:gocyclo
 		return "Южный Судан"
 	case 900:
 		return "Косово"
+	case None:
+		return "Отсутствует"
 	case International:
 		return "International"
 	case 999800:
@@ -3317,6 +3329,10 @@ func (c CountryCode) Alpha2() string { //nolint:gocyclo
 		return "SS"
 	case 900:
 		return "XK"
+	case 998:
+		return "None"
+	case 999:
+		return "International"
 	case 999800:
 		return "International Freephone"
 	case 999870:
@@ -3849,6 +3865,10 @@ func (c CountryCode) Alpha3() string { //nolint:gocyclo
 		return "SSD"
 	case 900:
 		return "XKX"
+	case 998:
+		return "None"
+	case 999:
+		return "International"
 	case 999800:
 		return "International Freephone"
 	case 999870:
@@ -3978,6 +3998,8 @@ func (c CountryCode) IOC() string { //nolint:gocyclo
 		return `CGO`
 	case XKX:
 		return `KOS`
+	case NON:
+		return `NONE`
 	case HRV:
 		return `CRO`
 	case KWT:
@@ -4572,6 +4594,11 @@ func (c CountryCode) Currency() CurrencyCode { //nolint:gocyclo
 		return CurrencySSP
 	case XKX:
 		return CurrencyEUR
+	case NON, International, NonCountryInternationalFreephone, NonCountryInmarsat, NonCountryMaritimeMobileService,
+		NonCountryUniversalPersonalTelecommunicationsServices, NonCountryNationalNonCommercialPurposes, NonCountryGlobalMobileSatelliteSystem,
+		NonCountryInternationalNetworks, NonCountryDisasterRelief, NonCountryInternationalPremiumRateService,
+		NonCountryInternationalTelecommunicationsCorrespondenceService:
+		return CurrencyNone
 	}
 	return CurrencyUnknown
 }
@@ -4833,6 +4860,22 @@ func All() []CountryCode {
 		SSD,
 		JPN,
 		XKX,
+	}
+}
+
+// AllNonCountries - return all non-country codes
+func AllNonCountries() []CountryCode {
+	return []CountryCode{
+		NonCountryInternationalFreephone,
+		NonCountryInmarsat,
+		NonCountryMaritimeMobileService,
+		NonCountryUniversalPersonalTelecommunicationsServices,
+		NonCountryNationalNonCommercialPurposes,
+		NonCountryGlobalMobileSatelliteSystem,
+		NonCountryInternationalNetworks,
+		NonCountryDisasterRelief,
+		NonCountryInternationalPremiumRateService,
+		NonCountryInternationalTelecommunicationsCorrespondenceService,
 	}
 }
 
@@ -5342,6 +5385,11 @@ func (c CountryCode) CallCodes() []CallCode { //nolint:gocyclo
 		return []CallCode{CallCode(211)}
 	case XKX:
 		return []CallCode{CallCode(383)}
+	case NON:
+		return []CallCode{}
+	case International:
+		return []CallCode{CallCode(800), CallCode(870), CallCode(875), CallCode(876), CallCode(877), CallCode(878), CallCode(879), CallCode(881),
+			CallCode(882), CallCode(883), CallCode(888), CallCode(979), CallCode(991)}
 	case JPN:
 		return []CallCode{CallCode(81)}
 	case NonCountryInternationalFreephone:
@@ -5883,6 +5931,8 @@ func (c CountryCode) Region() RegionCode { //nolint:gocyclo
 		return RegionAF
 	case XKX:
 		return RegionEU
+	case NON:
+		return RegionNone
 	case JPN:
 		return RegionAS
 	}
@@ -6397,6 +6447,11 @@ func (c CountryCode) Capital() CapitalCode { //nolint:gocyclo
 		return CapitalXK
 	case JPN:
 		return CapitalJP
+	case NON, International, NonCountryInternationalFreephone, NonCountryInmarsat, NonCountryMaritimeMobileService,
+		NonCountryUniversalPersonalTelecommunicationsServices, NonCountryNationalNonCommercialPurposes, NonCountryGlobalMobileSatelliteSystem,
+		NonCountryInternationalNetworks, NonCountryDisasterRelief, NonCountryInternationalPremiumRateService,
+		NonCountryInternationalTelecommunicationsCorrespondenceService:
+		return CapitalXX
 	}
 	return CapitalUnknown
 }
@@ -6458,6 +6513,10 @@ func AllInfo() []*Country {
 
 func textPrepare(text string) string {
 	text = rePrepare.ReplaceAllString(text, "")
+	indx := strings.Index(text, "(")
+	if indx > -1 {
+		text = text[:indx]
+	}
 	text = strings.Replace(text, "&", "AND", -1)
 	text = strings.Replace(text, "(", "", -1)
 	text = strings.Replace(text, ")", "", -1)
@@ -6539,7 +6598,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return BRA
 	case "IO", "IOT", "BRITISHINDIANOCEANTERRITORY", "BRITISHINDIANTERRITORY":
 		return IOT
-	case "BN", "BRN", "BRU", "BRUNEI", "BRUNEY":
+	case "BN", "BRN", "BRU", "BRUNEI", "BRUNEY", "BRUNEIDARUSSALAM":
 		return BRN
 	case "BF", "BFA", "HV", "HVO", "BURKINAFASO", "BURKINAANDFASO", "BURCINAFASO", "BURCINAANDFASO", "HVBF":
 		return BFA
@@ -6549,7 +6608,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return BTN
 	case "VU", "VUT", "NHB", "VANUATU", "NH", "NHVU":
 		return VUT
-	case "VA", "VAT", "HOLYSEEVATICAN", "HOLYSEE", "VATICAN", "VATICANCITYSTATE", "VATICANSTATE", "HOLYSEEVATIKAN", "VATIKAN", "VATIKANCITYSTATE", "VATIKANSTATE":
+	case "VA", "VAT", "HOLYSEEVATICAN", "HOLYSEE", "VATICAN", "VATICANCITYSTATE", "VATICANSTATE", "HOLYSEEVATIKAN", "VATIKAN", "VATIKANCITYSTATE", "VATIKANSTATE", "HOLYSEEVATIKANCITYSTATE":
 		return VAT
 	case "GB", "DG", "GBR", "ADN", "DGA", "UNITEDKINGDOM", "UNITEDKINDOM", "UK", "GREATBRITAN", "GREATBRITAIN", "NORTHERNIRELAND", "BRITAN", "BRITAIN": //nolint
 		return GBR
@@ -6561,7 +6620,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return VGB
 	case "VI", "VIR", "ISV", "VIRGINISLANDSUS", "USVIRGINISLANDS", "USVI":
 		return VIR
-	case "TL", "TP", "TLS", "TMP", "TPTL", "TIMORLESTE", "EASTTIMOR", "TIMOR", "TIMORELESTE", "EASTTIMORE", "TIMORE":
+	case "TL", "TP", "TLS", "TMP", "TPTL", "TIMORLESTE", "EASTTIMOR", "TIMOR", "TIMORELESTE", "EASTTIMORE", "TIMORE", "TIMORLESTEEASTTIMORE":
 		return TLS
 	case "VN", "VNM", "VIE", "VDR", "VD", "VIETNAM", "VETNAM", "VIETNAME", "VETNAME", "VDVN":
 		return VNM
@@ -6603,7 +6662,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return GUM
 	case "DK", "DNK", "DENMARK":
 		return DNK
-	case "CD", "COD", "ZRE", "ZAR", "ZR", "ZRCD", "CONGODEMOCRACTICREPUBLIC", "CONGODEMOCRATICREP", "CONGODEMOCRATIC", "CONGOTHEDEMOCRATICREPUBLICOF", "KONGODEMOCRACTICREPUBLIC", "KONGODEMOCRATICREP", "KONGODEMOCRATIC", "KONGOTHEDEMOCRATICREPUBLICOF", "ZAIRE", "ZAIR":
+	case "CD", "COD", "ZRE", "ZAR", "ZR", "ZRCD", "CONGODEMOCRATICREPUBLIC", "DEMOCRATICREPUBLICOFTHECONGO", "CONGODEMOCRATICREP", "CONGODEMOCRATIC", "CONGOTHEDEMOCRATICREPUBLICOF", "KONGODEMOCRACTICREPUBLIC", "KONGODEMOCRATICREP", "KONGODEMOCRATIC", "KONGOTHEDEMOCRATICREPUBLICOF", "ZAIRE", "ZAIR":
 		return COD
 	case "DJ", "DJI", "AFI", "DJIBOUTI", "AIDJ":
 		return DJI
@@ -6661,7 +6720,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return KIR
 	case "CN", "CHN", "CHINA", "CHINESE", "RC", "KITAY":
 		return CHN
-	case "CC", "CCK", "KEELING", "COCOSKEELINGISLANDS", "COCOSISLANDS", "KOKOSISLANDS":
+	case "CC", "CCK", "KEELING", "COCOS", "COCOSKEELINGISLANDS", "COCOSISLANDS", "KOKOSISLANDS":
 		return CCK
 	case "CO", "COL", "COLOMBIA":
 		return COL
@@ -6669,9 +6728,9 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return COM
 	case "CG", "COG", "RCB", "CONGO", "KONGO":
 		return COG
-	case "KP", "PRK", "KOREADEMOCRATICPEOPLESREPUBLICOF", "KOREANORTH", "NORTHKOREA":
+	case "KP", "PRK", "DEMOCRATICPEOPLESREPUBLICOFKOREA", "KOREADEMOCRATICPEOPLESREPUBLICOF", "KOREADEMOCRATICPEOPLESREPUBLIC", "KOREANORTH", "NORTHKOREA":
 		return PRK
-	case "KR", "KOR", "ROK", "KOREA", "KOREYA", "SOUTHKOREA", "KOREAREPUBLICOF", "KOREAREPOF":
+	case "KR", "KOR", "ROK", "KOREA", "KOREYA", "SOUTHKOREA", "KOREAREPUBLICOF", "REPUBLICOFKOREA", "KOREAREPOF":
 		return KOR
 	case "CR", "CRI", "COSTARICA", "KOSTARIKA", "KOSTARICA", "COSTARIKA":
 		return CRI
@@ -6683,7 +6742,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return KWT
 	case "KG", "KGZ", "KYRGYZSTAN", "KIRGISISTAN":
 		return KGZ
-	case "LA", "LAO", "LAOS":
+	case "LA", "LAO", "LAOS", "LAODEMOCRATICPEOPLESREPUBLIC", "LAOSDEMOCRATICPEOPLESREPUBLIC", "LAOPEOPLESDEMOCRATICREPUBLIC":
 		return LAO
 	case "LV", "LVA", "LAT", "LATVIA", "LATVIYA", "LETTLAND":
 		return LVA
@@ -6693,7 +6752,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return LBR
 	case "LB", "LBN", "LEBANON", "RL":
 		return LBN
-	case "LY", "LBY", "LBA", "LIBYA", "LIVIA", "LIVIYA", "LF":
+	case "LY", "LBY", "LBA", "LIBYA", "LIVIA", "LIVIYA", "LIBYAN", "LIBYANARABJAMAHIRIYA", "LF":
 		return LBY
 	case "LT", "LTU", "LITHUANIA", "LITAUEN", "LITVA":
 		return LTU
@@ -6771,7 +6830,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return NOR
 	case "OM", "OMN", "OMAN":
 		return OMN
-	case "BV", "BVT", "BOUVET":
+	case "BV", "BVT", "BOUVET", "BOUVETE", "BOUVETISLAND", "ISLANDOFBOUVET":
 		return BVT
 	case "IM", "IMN", "GBM", "ISLEOFMAN":
 		return IMN
@@ -6803,7 +6862,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return PAK
 	case "PW", "PLW", "PALAU":
 		return PLW
-	case "PS", "PSE", "PLE", "PALESTINE":
+	case "PS", "PSE", "PLE", "PALESTINE", "PALESTINIAN", "PALESTINIANTERRITORY":
 		return PSE
 	case "PA", "PAN", "PCZ", "PANAMA", "PANAMIAN", "PANAM", "PZ", "PZPA":
 		return PAN
@@ -6851,7 +6910,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return LCA
 	case "SG", "SGP", "SINGAPORE", "SINGPAORE", "SINGAPORECITY", "SINGAPOUR", "SINGAPURA", "SINGAPUR": //nolint
 		return SGP
-	case "SY", "SYR", "SYRIA":
+	case "SY", "SYR", "SYRIA", "SYRIAN", "SYRIANARABREPUBLIC":
 		return SYR
 	case "SK", "SVK", "CSHH", "SLOVAKIA", "SLOVAK", "SLOVAKIYA", "SLOVACIA", "SLOVAC", "SLOVACIYA":
 		return SVK
@@ -6983,7 +7042,11 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return JPN
 	case "XK", "XKX", "KOS", "KOSOVO", "COSOVO", "КОСОВО", "KOSOVËS", "РЕПУБЛИКАКОСОВО", "REPUBLIKAKOSOVO", "REPUBLIKACOSOVO", "REPUBLIKAKOSOVËS", "REPUBLICAKOSOVO", "REPUBLICACOSOVO", "REPUBLICAKOSOVËS", "KOSOVOREPUBLIC", "COSOVOREPUBLIC", "KOSOVËSREPUBLIC":
 		return XKX
-	case "UIFN", "InternationalFREEPHONE", "TOLLFREEPHONE":
+	case "XX", "NONE", "NON":
+		return None
+	case "INTERNATIONAL":
+		return International
+	case "UIFN", "INTERNATIONALFREEPHONE", "TOLLFREEPHONE":
 		return NonCountryInternationalFreephone
 	case "INMARSAT":
 		return NonCountryInmarsat
@@ -6995,13 +7058,13 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return NonCountryNationalNonCommercialPurposes
 	case "GMSS", "GLOBALMOBILESATELLITESYSTEM", "GLOBALMOBILESATELITESYSTEM", "GLOBALMOBILESATELLITE", "GLOBALMOBILESATELITE":
 		return NonCountryGlobalMobileSatelliteSystem
-	case "InternationalNETWORKS", "InternationalNETWORKSSERVICE", "InternationalNETWORKSSERVICES":
+	case "INTERNATIONALNETWORKS", "INTERNATIONALNETWORKSSERVICE", "INTERNATIONALNETWORKSSERVICES":
 		return NonCountryInternationalNetworks
 	case "DISASTERRELIEF", "DISASTER":
 		return NonCountryDisasterRelief
-	case "IPRS", "InternationalPREMIUMRATESERVICE", "PREMIUMRATESERVICE", "InternationalPREMIUMRATESERVICES", "PREMIUMRATESERVICES":
+	case "IPRS", "INTERNATIONALPREMIUMRATESERVICE", "PREMIUMRATESERVICE", "INTERNATIONALPREMIUMRATESERVICES", "PREMIUMRATESERVICES":
 		return NonCountryInternationalPremiumRateService
-	case "ITPCS", "InternationalTELECOMMUNICATIONSPUBLICCORRESPONDENCESERVICETRIAL", "InternationalTELECOMMUNICATIONSPUBLICCORRESPONDENCESERVICE", "InternationalTELECOMMUNICATIONSPUBLICCORRESPONDENCESERVICES", "InternationalTELECOMMUNICATIONSCORRESPONDENCESERVICE", "InternationalTELECOMMUNICATIONSCORRESPONDENCESERVICES":
+	case "ITPCS", "INTERNATIONALTELECOMMUNICATIONSPUBLICCORRESPONDENCESERVICETRIAL", "INTERNATIONALTELECOMMUNICATIONSPUBLICCORRESPONDENCESERVICE", "InternationalTELECOMMUNICATIONSPUBLICCORRESPONDENCESERVICES", "InternationalTELECOMMUNICATIONSCORRESPONDENCESERVICE", "InternationalTELECOMMUNICATIONSCORRESPONDENCESERVICES":
 		return NonCountryInternationalTelecommunicationsCorrespondenceService
 	}
 	return Unknown

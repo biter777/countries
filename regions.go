@@ -33,12 +33,14 @@ const (
 	RegionSA RegionCode = 5
 	// RegionOC      RegionCode = 9
 	RegionOC RegionCode = 9
-	// RegionAN      RegionCode = 999
-	RegionAN RegionCode = 999
+	// RegionAN      RegionCode = 998
+	RegionAN RegionCode = 998
 	// RegionAS      RegionCode = 142
 	RegionAS RegionCode = 142
 	// RegionEU      RegionCode = 150
 	RegionEU RegionCode = 150
+	// RegionNone    RegionCode = 999
+	RegionNone RegionCode = 999
 )
 
 const (
@@ -66,6 +68,8 @@ func (c RegionCode) Type() string {
 // String - implements fmt.Stringer, returns a Region name in english
 func (c RegionCode) String() string {
 	switch c {
+	case RegionNone:
+		return "None"
 	case RegionAF:
 		return "Africa"
 	case RegionNA:
@@ -87,6 +91,8 @@ func (c RegionCode) String() string {
 // StringRus - returns a Region name in russian
 func (c RegionCode) StringRus() string {
 	switch c {
+	case RegionNone:
+		return "Отсутствует"
 	case RegionAF:
 		return "Африка"
 	case RegionNA:
@@ -189,6 +195,8 @@ func RegionCodeByName(name string) RegionCode {
 		return RegionAS
 	case "EU", "EUROPE", "EUROPA", "EVROPA":
 		return RegionEU
+	case "NONE", "XX", "NON":
+		return RegionNone
 	}
 	return RegionUnknown
 }

@@ -448,6 +448,8 @@ const (
 	CallCode977 CallCode = 977
 	// CallCode979     CallCode = 979
 	CallCode979 CallCode = 979
+	// CallCode991     CallCode = 991
+	CallCode991 CallCode = 991
 	// CallCode992     CallCode = 992
 	CallCode992 CallCode = 992
 	// CallCode994     CallCode = 994
@@ -570,7 +572,7 @@ func (c CallCode) Info() *CallCodeInfo {
 
 // TotalCallCodes - returns number of call codes in the package, countries.TotalCallCodes() == len(countries.AllCallCodes()) but static value for performance
 func TotalCallCodes() int {
-	return 262
+	return 263
 }
 
 // AllCallCodes - return all countries call phone codes
@@ -788,6 +790,7 @@ func AllCallCodes() []CallCode {
 		CallCode976,
 		CallCode977,
 		CallCode979,
+		CallCode991,
 		CallCode992,
 		CallCode994,
 		CallCode995,
@@ -1325,6 +1328,8 @@ func (c CallCode) Countries() []CountryCode { //nolint:gocyclo
 		return []CountryCode{IRN}
 	case CallCode979:
 		return []CountryCode{NonCountryInternationalPremiumRateService}
+	case CallCode991:
+		return []CountryCode{NonCountryInternationalTelecommunicationsCorrespondenceService}
 	case CallCode992:
 		return []CountryCode{TJK}
 	case CallCode994:

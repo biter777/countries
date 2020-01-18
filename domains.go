@@ -290,6 +290,7 @@ const (
 	DomainMF      DomainCode = DomainCode(MF)
 	DomainSS      DomainCode = DomainCode(SS)
 	DomainJP      DomainCode = DomainCode(JP)
+	DomainXX      DomainCode = DomainCode(XX)
 )
 
 // Type implements Typer interface
@@ -327,6 +328,8 @@ func (c DomainCode) String() string { //nolint:gocyclo
 		return ".no"
 	case DomainGB:
 		return ".uk"
+	case DomainXX:
+		return ""
 	}
 
 	if c >= 999 {

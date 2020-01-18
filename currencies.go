@@ -200,6 +200,7 @@ const (
 	CurrencyZambianKwacha                  CurrencyCode = 967
 	CurrencyZimbabweDollar                 CurrencyCode = 932
 	CurrencyYugoslavianDinar               CurrencyCode = 891
+	CurrencyNone                           CurrencyCode = 998
 )
 
 // Currencies by ISO 4217. Two codes present, for example CurrencyUSDollar == CurrencyUSD == 840.
@@ -372,6 +373,7 @@ const (
 	CurrencyZMW CurrencyCode = 967
 	CurrencyZWL CurrencyCode = 932
 	CurrencyYUD CurrencyCode = 891
+	CurrencyNON CurrencyCode = 998
 )
 
 // Emoji - return a currency as Emoji (only for USD, EUR, JPY and GBP)
@@ -718,7 +720,7 @@ func (c CurrencyCode) String() string { //nolint:gocyclo
 	case 784:
 		return "UAE Dirham"
 	case 997:
-		return "US Dollar (Next day)"
+		return "US Dollar Next day"
 	case 940:
 		return "Uruguay Peso en Unidades Indexadas (URUIURUI)"
 	case 858:
@@ -739,6 +741,8 @@ func (c CurrencyCode) String() string { //nolint:gocyclo
 		return "Zimbabwe Dollar"
 	case 891:
 		return "Yugoslavian Dinar"
+	case 998:
+		return "None"
 	}
 	return UnknownMsg
 }
@@ -1083,6 +1087,8 @@ func (c CurrencyCode) Alpha() string { //nolint:gocyclo
 		return "ZWL"
 	case 891:
 		return "YUD"
+	case 998:
+		return "None"
 	}
 	return UnknownMsg
 }
@@ -1426,6 +1432,8 @@ func (c CurrencyCode) Countries() []CountryCode { //nolint:gocyclo
 		return []CountryCode{ZWE}
 	case CurrencyPLN:
 		return []CountryCode{POL}
+	case CurrencyNON:
+		return []CountryCode{NON}
 	}
 	return []CountryCode{Unknown}
 }
@@ -1944,6 +1952,8 @@ func (c CurrencyCode) Digits() int { //nolint:gocyclo
 		return 2
 	case CurrencyZWL:
 		return 2
+	case CurrencyNON:
+		return 0
 	}
 	return -1 // never gone here
 }
@@ -2155,7 +2165,7 @@ func CurrencyCodeByName(name string) CurrencyCode { //nolint:gocyclo
 		return CurrencyISK
 	case "IDR", "RUPIAH":
 		return CurrencyIDR
-	case "XDR", "SDR(SPECIALDRAWINGRIGHT)":
+	case "XDR", "SDR", "SDRSPECIALDRAWINGRIGHT":
 		return CurrencyXDR
 	case "IRR", "IRANIANRIAL":
 		return CurrencyIRR
@@ -2217,7 +2227,7 @@ func CurrencyCodeByName(name string) CurrencyCode { //nolint:gocyclo
 		return CurrencyXUA
 	case "MXN", "MEXICANPESO":
 		return CurrencyMXN
-	case "MXV", "MEXICANUNIDADDEINVERSION(UDI)":
+	case "MXV", "UDI", "MEXICANUNIDADDEINVERSIONUDI", "MEXICANUNIDADDEINVERSION":
 		return CurrencyMXV
 	case "MDL", "MOLDOVANLEU":
 		return CurrencyMDL
@@ -2325,9 +2335,9 @@ func CurrencyCodeByName(name string) CurrencyCode { //nolint:gocyclo
 		return CurrencyUAH
 	case "AED", "UAEDIRHAM":
 		return CurrencyAED
-	case "USN", "USDOLLAR(NEXTDAY)":
+	case "USN", "USDOLLARNEXTDAY", "NEXTDAY":
 		return CurrencyUSN
-	case "UYI", "URUGUAYPESOENUNIDADESINDEXADAS(URUIURUI)":
+	case "UYI", "URUIURUI", "URUGUAYPESOENUNIDADESINDEXADASURUIURUI", "URUGUAYPESOENUNIDADESINDEXADAS":
 		return CurrencyUYI
 	case "UYU", "PESOURUGUAYO":
 		return CurrencyUYU
@@ -2347,6 +2357,8 @@ func CurrencyCodeByName(name string) CurrencyCode { //nolint:gocyclo
 		return CurrencyYUD
 	case "ZWL", "ZIMBABWEDOLLAR":
 		return CurrencyZWL
+	case "XX", "NON", "NONE":
+		return CurrencyNON
 	}
 	return CurrencyUnknown
 }

@@ -532,6 +532,8 @@ const (
 	CapitalXK CapitalCode = CapitalCode(XK)
 	// CapitalJP      CapitalCode = CapitalCode(JP)
 	CapitalJP CapitalCode = CapitalCode(JP)
+	// CapitalXX CapitalCode = CapitalCode(XX)
+	CapitalXX CapitalCode = CapitalCode(XX)
 )
 
 // Type implements Typer interface
@@ -638,13 +640,13 @@ func (c CapitalCode) String() string { //nolint:gocyclo
 	case CapitalHT:
 		return "Port-au-Prince"
 	case CapitalGY:
-		return "Georgetown"
+		return "Georgetown Guyana"
 	case CapitalGM:
 		return "Banjul"
 	case CapitalGH:
 		return "Accra"
 	case CapitalGP:
-		return "Basse-Terre"
+		return "Basse-Terre Guadeloupe"
 	case CapitalGT:
 		return "Guatemala City"
 	case CapitalGN:
@@ -844,7 +846,7 @@ func (c CapitalCode) String() string { //nolint:gocyclo
 	case CapitalIM:
 		return "Douglas"
 	case CapitalNF:
-		return "Kingston"
+		return "Kingston Norfolk Island"
 	case CapitalPN:
 		return "Adamstown"
 	case CapitalCX:
@@ -1015,8 +1017,6 @@ func (c CapitalCode) String() string { //nolint:gocyclo
 		return "Addis Ababa"
 	case CapitalZA:
 		return "Pretoria"
-	case CapitalYU:
-		return "Belgrade"
 	case CapitalGS:
 		return "Grytviken"
 	case CapitalJM:
@@ -1027,7 +1027,7 @@ func (c CapitalCode) String() string { //nolint:gocyclo
 		return "Gustavia"
 	case CapitalSX:
 		return "Philipsburg"
-	case CapitalRS:
+	case CapitalRS, CapitalYU:
 		return "Belgrade"
 	case CapitalAX:
 		return "Mariehamn"
@@ -1038,7 +1038,7 @@ func (c CapitalCode) String() string { //nolint:gocyclo
 	case CapitalJE:
 		return "Saint Helier"
 	case CapitalCW:
-		return "Willemstad"
+		return "Willemstad Curacao"
 	case CapitalMF:
 		return "Marigot"
 	case CapitalSS:
@@ -1047,6 +1047,8 @@ func (c CapitalCode) String() string { //nolint:gocyclo
 		return "Pristina"
 	case CapitalJP:
 		return "Tokyo"
+	case CapitalXX:
+		return "None"
 	}
 	return UnknownMsg
 }
@@ -1928,7 +1930,7 @@ func CapitalCodeByName(name string) CapitalCode { //nolint:gocyclo
 		return CapitalBO
 	case "NAYPYITAW":
 		return CapitalMM
-	case "PORTO-NOVO":
+	case "PORTONOVO":
 		return CapitalBJ
 	case "MINSK":
 		return CapitalBY
@@ -1960,7 +1962,7 @@ func CapitalCodeByName(name string) CapitalCode { //nolint:gocyclo
 		return CapitalCN
 	case "SANTIAGO":
 		return CapitalCL
-	case "GEORGETOWNCAYMANISLANDS", "CAYMANISLANDSGEORGETOWN":
+	case "GEORGETOWN", "GEORGETOWNCAYMANISLANDS", "CAYMANISLANDSGEORGETOWN":
 		return CapitalKY
 	case "WESTISLAND":
 		return CapitalCC
@@ -2026,7 +2028,7 @@ func CapitalCodeByName(name string) CapitalCode { //nolint:gocyclo
 		return CapitalPF
 	case "PARIS":
 		return CapitalFR
-	case "PORT-AUX-FRANCAIS":
+	case "PORTAUXFRANCAIS":
 		return CapitalTF
 	case "BANJUL":
 		return CapitalGM
@@ -2046,7 +2048,7 @@ func CapitalCodeByName(name string) CapitalCode { //nolint:gocyclo
 		return CapitalGL
 	case "BERLIN":
 		return CapitalDE
-	case "BASSE-TERRE":
+	case "BASSETERREGUADELOUPE":
 		return CapitalGP
 	case "HAGATNA":
 		return CapitalGU
@@ -2058,7 +2060,7 @@ func CapitalCodeByName(name string) CapitalCode { //nolint:gocyclo
 		return CapitalGN
 	case "GEORGETOWNGUYANA", "GUYANAGEORGETOWN":
 		return CapitalGY
-	case "PORT-AU-PRINCE":
+	case "PORTAUPRINCE":
 		return CapitalHT
 	case "HONGKONG":
 		return CapitalHK
@@ -2110,7 +2112,7 @@ func CapitalCodeByName(name string) CapitalCode { //nolint:gocyclo
 		return CapitalCX
 	case "KUWAITCITY":
 		return CapitalKW
-	case "NUR-SULTAN":
+	case "NURSULTAN":
 		return CapitalKZ
 	case "VIENTIANE":
 		return CapitalLA
@@ -2134,7 +2136,7 @@ func CapitalCodeByName(name string) CapitalCode { //nolint:gocyclo
 		return CapitalLY
 	case "ANTANANARIVO":
 		return CapitalMG
-	case "FORT-DE-FRANCE":
+	case "FORTDEFRANCE":
 		return CapitalMQ
 	case "MACAO":
 		return CapitalMO
@@ -2198,7 +2200,7 @@ func CapitalCodeByName(name string) CapitalCode { //nolint:gocyclo
 		return CapitalNR
 	case "PARAMARIBO":
 		return CapitalSR
-	case "WILLEMSTADNETHERLANDSANTILLES", "WILLEMSTADNETHERLANDS", "NETHERLANDSWILLEMSTAD", "NETHERLANDSANTILLESWILLEMSTAD":
+	case "WILLEMSTAD", "WILLEMSTADNETHERLANDSANTILLES", "WILLEMSTADNETHERLANDS", "NETHERLANDSWILLEMSTAD", "NETHERLANDSANTILLESWILLEMSTAD":
 		return CapitalAN
 	case "MANAGUA":
 		return CapitalNI
@@ -2230,10 +2232,12 @@ func CapitalCodeByName(name string) CapitalCode { //nolint:gocyclo
 		return CapitalGW
 	case "DOHA":
 		return CapitalQA
-	case "SAINT-DENIS":
+	case "SAINTDENIS":
 		return CapitalRE
 	case "BELGRADE":
 		return CapitalRS
+	case "MARIEHAMN":
+		return CapitalAX
 	case "MAJURO":
 		return CapitalMH
 	case "MARIGOT":
@@ -2250,7 +2254,7 @@ func CapitalCodeByName(name string) CapitalCode { //nolint:gocyclo
 		return CapitalRW
 	case "RIYADH":
 		return CapitalSA
-	case "SAINT-PIERRE":
+	case "SAINTPIERRE":
 		return CapitalPM
 	case "BASSETERRE":
 		return CapitalKN
@@ -2352,7 +2356,7 @@ func CapitalCodeByName(name string) CapitalCode { //nolint:gocyclo
 		return CapitalPS
 	case "MATAUTU":
 		return CapitalWF
-	case "EL-AAIUN":
+	case "ELAAIUN", "AAIUN":
 		return CapitalEH
 	case "APIA":
 		return CapitalWS
@@ -2366,4 +2370,9 @@ func CapitalCodeByName(name string) CapitalCode { //nolint:gocyclo
 		return CapitalZW
 	}
 	return CapitalUnknown
+}
+
+// TotalCapitals - returns number of capitals in the package
+func TotalCapitals() int {
+	return 253
 }
