@@ -18,25 +18,25 @@ type Domain struct {
 }
 
 // TypeDomain for Typer interface
-const TypeDomain = "countries.Domain"
+const TypeDomain string = "countries.Domain"
 
 // TypeDomainCode for Typer interface
-const TypeDomainCode = "countries.DomainCode"
+const TypeDomainCode string = "countries.DomainCode"
 
 // Domains codes
 const (
 	DomainUnknown DomainCode = 0
-	DomainArpa    DomainCode = DomainCode(Internation)
-	DomainCom     DomainCode = DomainCode(Internation + 1)
-	DomainOrg     DomainCode = DomainCode(Internation + 2)
-	DomainNet     DomainCode = DomainCode(Internation + 3)
-	DomainEdu     DomainCode = DomainCode(Internation + 4)
-	DomainGov     DomainCode = DomainCode(Internation + 5)
-	DomainMil     DomainCode = DomainCode(Internation + 6)
-	DomainTest    DomainCode = DomainCode(Internation + 7)
-	DomainBiz     DomainCode = DomainCode(Internation + 8)
-	DomainInfo    DomainCode = DomainCode(Internation + 9)
-	DomainName    DomainCode = DomainCode(Internation + 10)
+	DomainArpa    DomainCode = DomainCode(International)
+	DomainCom     DomainCode = DomainCode(International + 1)
+	DomainOrg     DomainCode = DomainCode(International + 2)
+	DomainNet     DomainCode = DomainCode(International + 3)
+	DomainEdu     DomainCode = DomainCode(International + 4)
+	DomainGov     DomainCode = DomainCode(International + 5)
+	DomainMil     DomainCode = DomainCode(International + 6)
+	DomainTest    DomainCode = DomainCode(International + 7)
+	DomainBiz     DomainCode = DomainCode(International + 8)
+	DomainInfo    DomainCode = DomainCode(International + 9)
+	DomainName    DomainCode = DomainCode(International + 10)
 	DomainAU      DomainCode = DomainCode(AU)
 	DomainAT      DomainCode = DomainCode(AT)
 	DomainAZ      DomainCode = DomainCode(AZ)
@@ -299,7 +299,7 @@ func (c DomainCode) Type() string {
 // String - implements fmt.Stringer, returns a domain (internet ccTDL)
 func (c DomainCode) String() string {
 	switch c {
-	case 	DomainArpa:
+	case DomainArpa:
 		return ".arpa"
 	case DomainCom:
 		return ".com"
@@ -382,7 +382,7 @@ func (c *Domain) Scan(src interface{}) error {
 	case Domain:
 		*c = src
 	case nil:
-		c = nil
+		c = nil //nolint
 	default:
 		return fmt.Errorf("countries::Scan: domain scan err: unexpected value of type %T for %T", src, *c)
 	}

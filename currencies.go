@@ -20,10 +20,10 @@ type Currency struct {
 }
 
 // TypeCurrencyCode for Typer interface
-const TypeCurrencyCode = "countries.CurrencyCode"
+const TypeCurrencyCode string = "countries.CurrencyCode"
 
 // TypeCurrency for Typer interface
-const TypeCurrency = "countries.Currency"
+const TypeCurrency string = "countries.Currency"
 
 // Currencies. Two codes present, for example CurrencyUSDollar == CurrencyUSD == 840.
 const (
@@ -1985,7 +1985,7 @@ func (currency *Currency) Scan(src interface{}) error {
 	case Currency:
 		*currency = src
 	case nil:
-		currency = nil
+		currency = nil //nolint
 	default:
 		return fmt.Errorf("countries::Scan: Currency scan err: unexpected value of type %T for %T", src, *currency)
 	}
@@ -2346,4 +2346,3 @@ func CurrencyCodeByName(name string) CurrencyCode {
 	}
 	return CurrencyUnknown
 }
-
