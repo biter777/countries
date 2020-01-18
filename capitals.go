@@ -540,7 +540,8 @@ func (c CapitalCode) Type() string {
 }
 
 // String - implements fmt.Stringer, returns a english name the capital of country
-func (c CapitalCode) String() string {
+//nolint:gocyclo
+func (c CapitalCode) String() string { //nolint:gocyclo
 	switch c {
 	case CapitalAU:
 		return "Canberra"
@@ -1051,7 +1052,8 @@ func (c CapitalCode) String() string {
 }
 
 // Country - returns a country of capital
-func (c CapitalCode) Country() CountryCode {
+//nolint:gocyclo
+func (c CapitalCode) Country() CountryCode { //nolint:gocyclo
 	switch c {
 	case CapitalAU:
 		return AU
@@ -1871,7 +1873,8 @@ func AllCapitalsInfo() []*Capital {
 }
 
 // CapitalCodeByName - return CapitalCode by name, case-insensitive, example: capitalAE := CapitalCodeByName("Abu-Dhabi") OR capitalAE := CapitalCodeByName("abu-dhabi")
-func CapitalCodeByName(name string) CapitalCode {
+//nolint:gocyclo
+func CapitalCodeByName(name string) CapitalCode { //nolint:gocyclo
 	switch textPrepare(name) {
 	case "ORANJESTAD":
 		return CapitalAW

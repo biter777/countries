@@ -852,7 +852,8 @@ func AllCallCodesInfo() []*CallCodeInfo {
 }
 
 // Countries - returns CountryCodes of CallCode
-func (c CallCode) Countries() []CountryCode {
+//nolint:gocyclo
+func (c CallCode) Countries() []CountryCode { //nolint:gocyclo
 	switch c {
 	case CallCode1:
 		return []CountryCode{ATF, CAN, UMI, USA}

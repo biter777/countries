@@ -91,7 +91,8 @@ Contributing
  Welcome pull requests, bug fixes and issue reports.
  Before proposing a change, please discuss it first by raising an issue. */
 // Package countries - ISO 3166 (ISO3166-1, ISO3166, Digit, Alpha-2 and Alpha-3) countries codes and names (on eng and rus), ISO 4217 currency designators, ITU-T E.164 IDD calling phone codes, countries capitals, UN M.49 regions codes, ccTLD countries domains, IOC/NOC and FIFA letters codes, VERY FAST, NO maps[], NO slices[], NO external links/files/data, NO interface{}, NO specific dependencies, Databases compatible, Emoji countries flags and currencies support, full support ISO-3166-1, ISO-4217, ITU-T E.164, Unicode CLDR and ccTLD standarts. Full support ISO-3166-1, ISO-4217, ITU-T E.164, Unicode CLDR and ccTLD standarts.
-package countries
+//nolint:misspell
+package countries //nolint:misspell
 
 import (
 	"database/sql/driver"
@@ -1743,7 +1744,8 @@ func (c CountryCode) Type() string {
 }
 
 // String - implements fmt.Stringer, returns a english name of country
-func (c CountryCode) String() string {
+//nolint:gocyclo
+func (c CountryCode) String() string { //nolint:gocyclo
 	switch c {
 	case 8:
 		return "Albania"
@@ -2274,7 +2276,8 @@ func (c CountryCode) String() string {
 }
 
 // StringRus - returns a russian name of country
-func (c CountryCode) StringRus() string {
+//nolint:gocyclo
+func (c CountryCode) StringRus() string { //nolint:gocyclo
 	switch c {
 	case 8:
 		return "Албания"
@@ -2807,7 +2810,8 @@ func (c CountryCode) StringRus() string {
 }
 
 // Alpha2 - returns a default Alpha (Alpha-2/ISO2, 2 chars) code of country
-func (c CountryCode) Alpha2() string {
+//nolint:gocyclo
+func (c CountryCode) Alpha2() string { //nolint:gocyclo
 	switch c {
 	case 8:
 		return "AL"
@@ -3338,7 +3342,8 @@ func (c CountryCode) Alpha2() string {
 }
 
 // Alpha3 - returns a Alpha-3 (ISO3, 3 chars) code of country
-func (c CountryCode) Alpha3() string {
+//nolint:gocyclo
+func (c CountryCode) Alpha3() string { //nolint:gocyclo
 	switch c {
 	case 8:
 		return "ALB"
@@ -3892,7 +3897,8 @@ func (c CountryCode) FIFA() string {
 }
 
 // IOC - returns The International Olympic Committee (IOC) three-letter abbreviation country codes
-func (c CountryCode) IOC() string {
+//nolint:gocyclo
+func (c CountryCode) IOC() string { //nolint:gocyclo
 	switch c {
 	case DZA:
 		return `ALG`
@@ -4077,7 +4083,8 @@ func (c CountryCode) IOC() string {
 }
 
 // Currency - returns a currency of the country
-func (c CountryCode) Currency() CurrencyCode {
+//nolint:gocyclo
+func (c CountryCode) Currency() CurrencyCode { //nolint:gocyclo
 	switch c {
 	case AUS:
 		return CurrencyAUD
@@ -4830,7 +4837,8 @@ func All() []CountryCode {
 }
 
 // CallCodes - return calling code of country
-func (c CountryCode) CallCodes() []CallCode {
+//nolint:gocyclo
+func (c CountryCode) CallCodes() []CallCode { //nolint:gocyclo
 	switch c {
 	case AUS:
 		return []CallCode{CallCode(61)}
@@ -5370,7 +5378,8 @@ func (c CountryCode) Domain() DomainCode {
 }
 
 // Region - return Region code ot the country
-func (c CountryCode) Region() RegionCode {
+//nolint:gocyclo
+func (c CountryCode) Region() RegionCode { //nolint:gocyclo
 	switch c {
 	case AUS:
 		return RegionOC
@@ -5881,7 +5890,8 @@ func (c CountryCode) Region() RegionCode {
 }
 
 // Capital - return a capital of country
-func (c CountryCode) Capital() CapitalCode {
+//nolint:gocyclo
+func (c CountryCode) Capital() CapitalCode { //nolint:gocyclo
 	switch c {
 	case AUS:
 		return CapitalAU
@@ -6460,7 +6470,8 @@ func textPrepare(text string) string {
 
 // ByName - return CountryCode by country Alpha-2 / Alpha-3 / name, case-insensitive, example: rus := ByName("Ru") OR rus := ByName("russia"),
 // returns countries.Unknown, if country name not found or not valid
-func ByName(name string) CountryCode {
+//nolint:misspell,gocyclo
+func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 	switch textPrepare(name) {
 	case "AU", "AUS", "AUSTRALIA", "AVSTRALIA", "AVSTRALIYA", "AUSTRALIYA":
 		return AUS
@@ -6540,11 +6551,11 @@ func ByName(name string) CountryCode {
 		return VUT
 	case "VA", "VAT", "HOLYSEEVATICAN", "HOLYSEE", "VATICAN", "VATICANCITYSTATE", "VATICANSTATE", "HOLYSEEVATIKAN", "VATIKAN", "VATIKANCITYSTATE", "VATIKANSTATE":
 		return VAT
-	case "GB", "DG", "GBR", "ADN", "DGA", "UNITEDKINGDOM", "UNITEDKINDOM", "UK", "GREATBRITAN", "GREATBRITAIN", "NORTHERNIRELAND", "BRITAN", "BRITAIN":
+	case "GB", "DG", "GBR", "ADN", "DGA", "UNITEDKINGDOM", "UNITEDKINDOM", "UK", "GREATBRITAN", "GREATBRITAIN", "NORTHERNIRELAND", "BRITAN", "BRITAIN": //nolint
 		return GBR
 	case "HU", "HUN", "HUNGARY", "HUNGAR", "HUNGARI", "VENGRIYA", "VENGRIA":
 		return HUN
-	case "VE", "VEN", "VENEZUELA", "VENEZUELLA", "VENECUELA", "VENECUELLA", "YV":
+	case "VE", "VEN", "VENEZUELA", "VENEZUELLA", "VENECUELA", "VENECUELLA", "YV": //nolint
 		return VEN
 	case "VG", "VGB", "IVB", "VIRGINISLANDSBRITISH", "VIRGINISLANDSBRITIH", "VIRGINISLSBRITIH", "VIRGINISLSBRITISH", "VIRGINISLANDSGB", "VIRGINISLANDSUK":
 		return VGB
@@ -6838,7 +6849,7 @@ func ByName(name string) CountryCode {
 		return KNA
 	case "LC", "LCA", "SAINTLUCIA", "STLUCIA", "LUCIA", "WL":
 		return LCA
-	case "SG", "SGP", "SINGAPORE", "SINGPAORE", "SINGAPORECITY", "SINGAPOUR", "SINGAPURA", "SINGAPUR":
+	case "SG", "SGP", "SINGAPORE", "SINGPAORE", "SINGAPORECITY", "SINGAPOUR", "SINGAPURA", "SINGAPUR": //nolint
 		return SGP
 	case "SY", "SYR", "SYRIA":
 		return SYR
@@ -6886,7 +6897,7 @@ func ByName(name string) CountryCode {
 		return UGA
 	case "UZ", "UZB", "UZBEKISTAN", "UZBEKISTON":
 		return UZB
-	case "UA", "UKR", "UKRAINE", "UKRAINA":
+	case "UA", "UKR", "UKRAINE", "UKRAINA": //nolint
 		return UKR
 	case "UY", "URY", "URUGUAY":
 		return URY

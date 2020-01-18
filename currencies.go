@@ -400,7 +400,8 @@ func (c CurrencyCode) Type() string {
 }
 
 // String - implements fmt.Stringer, returns a english name of currency
-func (c CurrencyCode) String() string {
+//nolint:gocyclo
+func (c CurrencyCode) String() string { //nolint:gocyclo
 	switch c {
 	case 840:
 		return "US Dollar"
@@ -743,7 +744,8 @@ func (c CurrencyCode) String() string {
 }
 
 // Alpha - returns a default Alpha (3 chars) code of currency
-func (c CurrencyCode) Alpha() string {
+//nolint:gocyclo
+func (c CurrencyCode) Alpha() string { //nolint:gocyclo
 	switch c {
 	case 840:
 		return "USD"
@@ -1091,7 +1093,8 @@ func (c CurrencyCode) IsValid() bool {
 }
 
 // Countries - returns a country codes of currency using
-func (c CurrencyCode) Countries() []CountryCode {
+//nolint:gocyclo
+func (c CurrencyCode) Countries() []CountryCode { //nolint:gocyclo
 	switch c {
 	case CurrencyAFN:
 		return []CountryCode{AFG}
@@ -1602,7 +1605,8 @@ func AllCurrencies() []CurrencyCode {
 }
 
 // Digits - returns a number of digits used for each currency
-func (c CurrencyCode) Digits() int {
+//nolint:gocyclo
+func (c CurrencyCode) Digits() int { //nolint:gocyclo
 	switch c {
 	case CurrencyAFN:
 		return 0
@@ -2002,7 +2006,8 @@ func AllCurrenciesInfo() []*Currency {
 }
 
 // CurrencyCodeByName - return CurrencyCode by currencyCode Alph name, case-insensitive, example: currencyUSD := CurrencyCodeByName("usd") OR currencyUSD := CurrencyCodeByName("USD")
-func CurrencyCodeByName(name string) CurrencyCode {
+//nolint:gocyclo
+func CurrencyCodeByName(name string) CurrencyCode { //nolint:gocyclo
 	switch textPrepare(name) {
 	case "AFN", "AFGHANI":
 		return CurrencyAFN

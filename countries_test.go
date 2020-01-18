@@ -82,7 +82,8 @@ func TestCountriesInfo(t *testing.T) {
 	}
 }
 
-func TestCurrenciesInfo(t *testing.T) {
+//nolint:gocyclo
+func TestCurrenciesInfo(t *testing.T) { //nolint:gocyclo
 	all := AllCurrencies()
 	for i := 0; i < len(all); i++ {
 		c := all[i].Info()

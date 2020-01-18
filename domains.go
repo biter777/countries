@@ -298,7 +298,8 @@ func (c DomainCode) Type() string {
 }
 
 // String - implements fmt.Stringer, returns a domain (internet ccTDL)
-func (c DomainCode) String() string {
+//nolint:gocyclo
+func (c DomainCode) String() string { //nolint:gocyclo
 	switch c {
 	case DomainArpa:
 		return ".arpa"
