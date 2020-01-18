@@ -102,7 +102,7 @@ import (
 	"strings"
 )
 
-// CountryCode - country code (250 countries). Three codes present, for example Russia == RU == RUS == 643.
+// CountryCode - country code (254 countries). Three codes present, for example Russia == RU == RUS == 643.
 type CountryCode int64 // int64 for database/sql/driver.Valuer compatibility
 
 // Country - all info about country
