@@ -24,7 +24,7 @@ jobs:
 
       # specify any bash command here prefixed with `run: `
       - run: go get -v -t -d ./...
-      - run: bash gofmt.sh
+#      - run: bash gofmt.sh
       - run: go vet
       - run: go test -v ./...
 
@@ -59,11 +59,11 @@ jobs:
       - image: circleci/golang:1.13
     steps:
         - checkout
-        - run: sudo apt-get install python-requests
+#        - run: sudo apt-get install python-requests
         - run: go get -t -d -v ./...
         - run: go install ./...
         - run:
-            command: system_test/full_system_test.py
+#            command: system_test/full_system_test.py
 #            environment:
 
 workflows:
