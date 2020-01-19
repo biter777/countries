@@ -34,13 +34,13 @@ const (
 	// RegionOC      RegionCode = 9
 	RegionOC RegionCode = 9
 	// RegionAN      RegionCode = 998
-	RegionAN RegionCode = 998
+	RegionAN RegionCode = RegionCode(AN)
 	// RegionAS      RegionCode = 142
 	RegionAS RegionCode = 142
 	// RegionEU      RegionCode = 150
 	RegionEU RegionCode = 150
-	// RegionNone    RegionCode = 999
-	RegionNone RegionCode = 999
+	// RegionNone    RegionCode = RegionCode(None)
+	RegionNone RegionCode = RegionCode(None)
 )
 
 const (

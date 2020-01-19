@@ -6,55 +6,76 @@ import (
 	"testing"
 )
 
-func TestCountriesCount(t *testing.T) {
-	out := Total()
-	allCountries := All()
-	want := len(allCountries)
-	if out != want {
-		t.Errorf("Test All() err, want %v, got %v", want, out)
-	}
-	allCountriesInfo := AllInfo()
-	want = len(allCountriesInfo)
-	if out != want {
-		t.Errorf("Test AllInfo() err, want %v, got %v", want, out)
-	}
-	allNonCountries := AllNonCountries()
-	if len(allNonCountries) < 10 {
-		t.Errorf("Test allNonCountries() err")
-	}
-	allCountries = append(allCountries, Unknown, International, None)
-	allCountries = append(allCountries, allNonCountries...)
-	for _, c := range allCountries {
+func getAllCountries() []CountryCode {
+	allCountries := append(All(), Unknown, International, None)
+	return append(allCountries, AllNonCountries()...)
+}
+
+//nolint:gocyclo
+func TestCountriesByName(t *testing.T) {
+	for _, c := range getAllCountries() {
 		countryCodeOut := ByName(c.String())
-		countryCodeWant := c
-		if countryCodeOut != countryCodeWant {
-			t.Errorf("Test ByName() err, want %v, got %v", countryCodeWant, countryCodeOut)
-		}
-		countryCodeOut = ByNumeric(int(c))
-		countryCodeWant = c
-		if countryCodeOut != countryCodeWant {
-			t.Errorf("Test ByNumeric() err, want %v, got %v", countryCodeWant, countryCodeOut)
-		}
-		countryCodeOut = c.Info().Code
-		if countryCodeOut != countryCodeWant {
-			t.Errorf("Test Info() err, want %v, got %v", countryCodeWant, countryCodeOut)
+		if countryCodeOut != c {
+			t.Errorf("Test ByName() err, want %v, got %v", c, countryCodeOut)
 		}
 	}
-	for _, c := range allCountriesInfo {
+}
+
+//nolint:gocyclo
+func TestCountriesByNumeric(t *testing.T) {
+	for _, c := range getAllCountries() {
+		countryCodeOut := ByNumeric(int(c))
+		if countryCodeOut != c {
+			t.Errorf("Test ByNumeric() err, want %v, got %v", c, countryCodeOut)
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCountriesInfo(t *testing.T) {
+	for _, c := range getAllCountries() {
+		countryCodeOut := c.Info().Code
+		if countryCodeOut != c {
+			t.Errorf("Test Info() err, want %v, got %v", c, countryCodeOut)
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCountriesInfoValue(t *testing.T) {
+	for _, c := range AllInfo() {
 		_, err := c.Value()
 		_, err2 := json.Marshal(c)
 		if err != nil || err2 != nil {
 			t.Errorf("Test allCountriesInfo.Value() err")
 		}
-		if c.Type() != TypeCountry {
-			t.Errorf("Test allCountriesInfo.Type() err")
+	}
+}
+
+//nolint:gocyclo
+func TestCountriesInfoType(t *testing.T) {
+	for _, c := range AllInfo() {
+		out := c.Type()
+		if out != TypeCountry {
+			t.Errorf("Test allCountriesInfo.Type() err, want %v, got %v", TypeCountry, out)
 		}
-		err = c.Scan(c)
+	}
+}
+
+//nolint:gocyclo
+func TestCountriesInfoScan(t *testing.T) {
+	for _, c := range AllInfo() {
+		err := c.Scan(c)
 		if err != nil {
 			t.Errorf("Test allCountriesInfo.Scan() err")
 		}
-		err = c.Scan(Country{})
+		var c2 Country
+		c2 = *c
+		err = c.Scan(c2)
 		if err != nil {
+			t.Errorf("Test allCountriesInfo.Scan() err")
+		}
+		if c.Name != c2.Name || c.Alpha2 != c2.Alpha2 || c.Alpha3 != c2.Alpha3 || c.IOC != c2.IOC || c.Code != c2.Code {
 			t.Errorf("Test allCountriesInfo.Scan() err")
 		}
 		err = c.Scan(nil)
@@ -67,197 +88,565 @@ func TestCountriesCount(t *testing.T) {
 			t.Errorf("Test allCountriesInfo.Scan() err")
 		}
 	}
+}
 
-	out = TotalCallCodes()
-	callCodes := AllCallCodes()
-	want = len(callCodes)
+//nolint:gocyclo
+func TestCountriesCountInfo(t *testing.T) {
+	out := Total()
+	want := len(AllInfo())
+	if out != want {
+		t.Errorf("Test AllInfo() err, want %v, got %v", want, out)
+	}
+}
+
+// Test CallCodes
+
+//nolint:gocyclo
+func TestCallCodesCount(t *testing.T) {
+	out := TotalCallCodes()
+	want := len(AllCallCodes())
 	if out != want {
 		t.Errorf("Test AllCallCodes() err, want %v, got %v", want, out)
 	}
-	callCodesInfo := AllCallCodesInfo()
-	want = len(callCodesInfo)
+	want = len(AllCallCodesInfo())
 	if out != want {
 		t.Errorf("Test AllCallCodesInfo() err, want %v, got %v", want, out)
 	}
-	for _, c := range callCodes {
-		if c.Info().Code != c {
-			t.Errorf("Test callCodes.Info() err")
+}
+
+//nolint:gocyclo
+func TestCallCodesCode(t *testing.T) {
+	for _, c := range AllCallCodes() {
+		info := c.Info()
+		if info == nil {
+			t.Errorf("Test Info() err: c == nil")
+		}
+		if info.Code != CallCodeUnknown && info.Code != c {
+			t.Errorf("Test info.Code err, c: %v", *info)
+		}
+		if len(info.Countries) < 1 {
+			t.Errorf("Test info.Countries err, c: %v", *info)
 		}
 	}
-	_, err := callCodesInfo[0].Value()
-	_, err2 := json.Marshal(callCodesInfo[0])
-	if err != nil || err2 != nil {
-		t.Errorf("Test callCodesInfo.Value() err")
-	}
-	if callCodesInfo[0].Type() != TypeCallCodeInfo {
-		t.Errorf("Test callCodesInfo.Type() err")
-	}
-	err = callCodesInfo[0].Scan(callCodesInfo[0])
-	if err != nil {
-		t.Errorf("Test callCodesInfo.Scan() err")
-	}
-	err = callCodesInfo[0].Scan(CallCodeInfo{})
-	if err != nil {
-		t.Errorf("Test callCodesInfo.Scan() err")
-	}
-	err = callCodesInfo[0].Scan(nil)
-	if err == nil {
-		t.Errorf("Test callCodesInfo.Scan() err")
-	}
-	callCodesInfo[0] = nil
-	err = callCodesInfo[0].Scan(callCodesInfo[0])
-	if err == nil {
-		t.Errorf("Test callCodesInfo.Scan() err")
-	}
+}
 
-	out = TotalCurrencies()
-	currencies := AllCurrencies()
-	want = len(currencies)
+//nolint:gocyclo
+func TestCallCodesIsValid(t *testing.T) {
+	for _, c := range AllCallCodes() {
+		if !c.IsValid() && c != CallCodeUnknown {
+			t.Errorf("Test CallCodes.IsValid() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCallCodesString(t *testing.T) {
+	for _, c := range AllCallCodes() {
+		if c.String() == "" || c.String() == UnknownMsg {
+			t.Errorf("Test CallCodes.String() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCallCodesType(t *testing.T) {
+	for _, c := range AllCallCodes() {
+		if c.Type() != TypeCallCode {
+			t.Errorf("Test CallCodes.Type() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCallCodes(t *testing.T) {
+	for _, c := range AllCallCodes() {
+		out := c.Type()
+		if out != TypeCallCode {
+			t.Errorf("Test AllCallCodes.Type() err, want %v, got %v", TypeCallCodeInfo, out)
+		}
+		out2 := c.Info().Code
+		if out2 != c {
+			t.Errorf("Test AllCallCodes.Info().Code err, want %v, got %v", c, out2)
+		}
+		if len(c.Countries()) < 1 {
+			t.Errorf("Test AllCallCodes.Countries() err")
+		}
+		if !c.IsValid() && c != CallCodeUnknown {
+			t.Errorf("Test AllCallCodes.IsValid() err")
+		}
+		if c.String() == "" {
+			t.Errorf("Test AllCallCodes.String() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCallCodesInfo(t *testing.T) {
+	for _, c := range AllCallCodes() {
+		if c.Info().Code != c {
+			t.Errorf("Test AllCallCodes() err, want %v, got %v", c, c.Info().Code)
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCallCodesInfoValue(t *testing.T) {
+	for _, c := range AllCallCodesInfo() {
+		_, err := c.Value()
+		_, err2 := json.Marshal(c)
+		if err != nil || err2 != nil {
+			t.Errorf("Test allCallCodesInfo.Value() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCallCodesInfoType(t *testing.T) {
+	for _, c := range AllCallCodesInfo() {
+		out := c.Type()
+		if out != TypeCallCodeInfo {
+			t.Errorf("Test allCallCodesInfo.Type() err, want %v, got %v", TypeCallCodeInfo, out)
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCallCodesInfoScan(t *testing.T) {
+	for _, c := range AllCallCodesInfo() {
+		err := c.Scan(c)
+		if err != nil {
+			t.Errorf("Test allCallCodesInfo.Scan() err")
+		}
+		var c2 CallCodeInfo
+		c2 = *c
+		err = c.Scan(c2)
+		if err != nil {
+			t.Errorf("Test allCallCodesInfo.Scan() err")
+		}
+		if len(c.Countries) != len(c2.Countries) || c.Code != c2.Code {
+			t.Errorf("Test allCallCodesInfo.Scan() err")
+		}
+		if len(c.Countries) > 0 && c.Countries[0] != c2.Countries[0] {
+			t.Errorf("Test allCallCodesInfo.Scan() err")
+		}
+		if len(c.Countries) > 1 && c.Countries[1] != c2.Countries[1] {
+			t.Errorf("Test allCallCodesInfo.Scan() err")
+		}
+		if len(c.Countries) > 2 && c.Countries[2] != c2.Countries[2] {
+			t.Errorf("Test allCallCodesInfo.Scan() err")
+		}
+		err = c.Scan(nil)
+		if err == nil {
+			t.Errorf("Test allCallCodesInfo.Scan() err")
+		}
+		c = nil
+		err = c.Scan(c)
+		if err == nil {
+			t.Errorf("Test allCallCodesInfo.Scan() err")
+		}
+	}
+}
+
+// Test Currencies
+func TestCurrenciesCount(t *testing.T) {
+	out := TotalCurrencies()
+	want := len(AllCurrencies())
 	if out != want {
 		t.Errorf("Test AllCurrencies() err, want %v, got %v", want, out)
 	}
-	for _, c := range currencies {
-		currencyCodeOut := CurrencyCodeByName(c.String())
-		currencyCodeWant := c
-		if currencyCodeOut != currencyCodeWant {
-			t.Errorf("Test CurrencyCodeByName() err, want %v, got %v", currencyCodeWant, currencyCodeOut)
-		}
-		if c.NickelRounding() != false && c != CurrencyCAD && c != CurrencyDKK && c != CurrencyCHF {
-			t.Errorf("Test NickelRounding() err, want %v, got %v", false, c.NickelRounding())
-		}
-	}
-	currenciesInfo := AllCurrenciesInfo()
-	want = len(currenciesInfo)
+	want = len(AllCurrenciesInfo())
 	if out != want {
 		t.Errorf("Test AllCurrenciesInfo() err, want %v, got %v", want, out)
 	}
-	_, err = currenciesInfo[0].Value()
-	_, err2 = json.Marshal(currenciesInfo[0])
-	if err != nil || err2 != nil {
-		t.Errorf("Test currenciesInfo.Value() err")
-	}
-	if currenciesInfo[0].Type() != TypeCurrency {
-		t.Errorf("Test currenciesInfo.Type() err")
-	}
-	err = currenciesInfo[0].Scan(currenciesInfo[0])
-	if err != nil {
-		t.Errorf("Test currenciesInfo.Scan() err")
-	}
-	err = currenciesInfo[0].Scan(Currency{})
-	if err != nil {
-		t.Errorf("Test currenciesInfo.Scan() err")
-	}
-	err = currenciesInfo[0].Scan(nil)
-	if err == nil {
-		t.Errorf("Test currenciesInfo.Scan() err")
-	}
-	currenciesInfo[0] = nil
-	err = currenciesInfo[0].Scan(currenciesInfo[0])
-	if err == nil {
-		t.Errorf("Test currenciesInfo.Scan() err")
-	}
+}
 
-	out = TotalDomains()
-	domains := AllDomains()
-	want = len(domains)
+//nolint:gocyclo
+func TestCurrenciesCode(t *testing.T) {
+	for _, c := range AllCurrencies() {
+		info := c.Info()
+		if info == nil {
+			t.Errorf("Test Info() err: c == nil")
+		}
+		if info.Name == "" || info.Name == UnknownMsg {
+			t.Errorf("Test info.Name err, c: %v", *info)
+		}
+		if info.Alpha == "" || info.Alpha == UnknownMsg {
+			t.Errorf("Test info.Alpha err, c: %v", *info)
+		}
+		if info.Code == CurrencyUnknown || info.Code != c {
+			t.Errorf("Test info.Code err, c: %v", *info)
+		}
+		if len(info.Countries) < 1 {
+			t.Errorf("Test info.Countries err, c: %v", *info)
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCurrenciesIsValid(t *testing.T) {
+	for _, c := range AllCurrencies() {
+		if !c.IsValid() {
+			t.Errorf("Test urrencyCode.IsValid() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCurrenciesString(t *testing.T) {
+	for _, c := range AllCurrencies() {
+		if c.String() == "" || c.String() == UnknownMsg {
+			t.Errorf("Test urrencyCode.String() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCurrenciesType(t *testing.T) {
+	for _, c := range AllCurrencies() {
+		if c.Type() != TypeCurrencyCode {
+			t.Errorf("Test urrencyCode.Type() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCurrenciesInfo(t *testing.T) {
+	for _, c := range AllCurrencies() {
+		info := c.Info()
+		if info == nil {
+			t.Errorf("Test Info() err: c == nil")
+		}
+		if info.Name == "" || info.Name == UnknownMsg {
+			t.Errorf("Test info.Name err, c: %v", *info)
+		}
+		if info.Alpha == "" || info.Alpha == UnknownMsg {
+			t.Errorf("Test info.Alpha err, c: %v", *info)
+		}
+		if info.Digits < 0 || info.Digits > 4 {
+			t.Errorf("Test info.Digits err, c: %v", *info)
+		}
+		if info.Code == CurrencyUnknown || info.Code != c {
+			t.Errorf("Test info.Code err, c: %v", *info)
+		}
+		if len(info.Countries) < 1 {
+			t.Errorf("Test info.Countries err, c: %v", *info)
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCurrenciesInfoValue(t *testing.T) {
+	for _, c := range AllCurrenciesInfo() {
+		_, err := c.Value()
+		_, err2 := json.Marshal(c)
+		if err != nil || err2 != nil {
+			t.Errorf("Test allCurrenciesInfo.Value() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCurrenciesInfoType(t *testing.T) {
+	for _, c := range AllCurrenciesInfo() {
+		out := c.Type()
+		if out != TypeCurrency {
+			t.Errorf("Test allCallCodesInfo.Type() err, want %v, got %v", TypeCurrency, out)
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCurrenciesInfoScan(t *testing.T) {
+	for _, c := range AllCurrenciesInfo() {
+		err := c.Scan(c)
+		if err != nil {
+			t.Errorf("Test allCurrenciesInfo.Scan() err")
+		}
+		var c2 Currency
+		c2 = *c
+		err = c.Scan(c2)
+		if err != nil {
+			t.Errorf("Test allCurrenciesInfo.Scan() err")
+		}
+		if len(c.Countries) != len(c2.Countries) || c.Code != c2.Code {
+			t.Errorf("Test allCurrenciesInfo.Scan() err")
+		}
+		if len(c.Countries) > 0 && c.Countries[0] != c2.Countries[0] {
+			t.Errorf("Test allCurrenciesInfo.Scan() err")
+		}
+		if len(c.Countries) > 1 && c.Countries[1] != c2.Countries[1] {
+			t.Errorf("Test allCurrenciesInfo.Scan() err")
+		}
+		if len(c.Countries) > 2 && c.Countries[2] != c2.Countries[2] {
+			t.Errorf("Test allCurrenciesInfo.Scan() err")
+		}
+		err = c.Scan(nil)
+		if err == nil {
+			t.Errorf("Test allCurrenciesInfo.Scan() err")
+		}
+		c = nil
+		err = c.Scan(c)
+		if err == nil {
+			t.Errorf("Test allCurrenciesInfo.Scan() err")
+		}
+	}
+}
+
+// Test Domains
+func TestDomainsCount(t *testing.T) {
+	out := TotalDomains()
+	want := len(AllDomains())
 	if out != want {
 		t.Errorf("Test AllDomains() err, want %v, got %v", want, out)
 	}
-	for _, c := range allCountries {
-		domainCodeOut := DomainCodeByName(c.String())
-		domainCodeWant := DomainCode(c)
-		if domainCodeOut != domainCodeWant {
-			t.Errorf("Test DomainCodeByName() err, want %v, got %v", domainCodeWant, domainCodeOut)
+	want = len(AllDomainsInfo())
+	if out != want {
+		t.Errorf("Test AllDomains() err, want %v, got %v", want, out)
+	}
+}
+
+//nolint:gocyclo
+func TestDomainsCode(t *testing.T) {
+	for _, c := range AllDomains() {
+		info := c.Info()
+		if info == nil {
+			t.Errorf("Test Info() err: c == nil")
+		}
+		if info.Name == "" || info.Name == UnknownMsg {
+			t.Errorf("Test info.Name err, c: %v", *info)
+		}
+		if info.Code == DomainUnknown || info.Code != c {
+			t.Errorf("Test info.Code err, c: %v", *info)
+		}
+		if info.Country == Unknown {
+			t.Errorf("Test info.Code err, c: %v", *info)
 		}
 	}
-	domainsInfo := AllDomainsInfo()
-	want = len(domainsInfo)
-	if out != want {
-		t.Errorf("Test AllDomainsInfo() err, want %v, got %v", want, out)
-	}
-	_, err = domainsInfo[0].Value()
-	_, err2 = json.Marshal(domainsInfo[0])
-	if err != nil || err2 != nil {
-		t.Errorf("Test domainsInfo.Value() err")
-	}
-	if domainsInfo[0].Type() != TypeDomain {
-		t.Errorf("Test domainsInfo.Type() err")
-	}
-	err = domainsInfo[0].Scan(domainsInfo[0])
-	if err != nil {
-		t.Errorf("Test domainsInfo.Scan() err")
-	}
-	err = domainsInfo[0].Scan(Domain{})
-	if err != nil {
-		t.Errorf("Test domainsInfo.Scan() err")
-	}
-	err = domainsInfo[0].Scan(nil)
-	if err == nil {
-		t.Errorf("Test domainsInfo.Scan() err")
-	}
-	domainsInfo[0] = nil
-	err = domainsInfo[0].Scan(domainsInfo[0])
-	if err == nil {
-		t.Errorf("Test domainsInfo.Scan() err")
-	}
+}
 
-	out = TotalRegions()
-	regions := AllRegions()
-	want = len(regions)
+//nolint:gocyclo
+func TestDomainsIsValid(t *testing.T) {
+	for _, c := range AllDomains() {
+		if !c.IsValid() {
+			t.Errorf("Test DomainCode.IsValid() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestDomainsString(t *testing.T) {
+	for _, c := range AllDomains() {
+		if c.String() == "" || c.String() == UnknownMsg {
+			t.Errorf("Test DomainCode.String() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestDomainsType(t *testing.T) {
+	for _, c := range AllDomains() {
+		if c.Type() != TypeDomainCode {
+			t.Errorf("Test DomainCode.Type() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestDomainsInfo(t *testing.T) {
+	for _, c := range AllDomains() {
+		info := c.Info()
+		if info == nil {
+			t.Errorf("Test Info() err: c == nil")
+		}
+		if info.Name == "" || info.Name == UnknownMsg {
+			t.Errorf("Test info.Name err, c: %v", *info)
+		}
+		if info.Country == Unknown {
+			t.Errorf("Test info.Country err, c: %v", *info)
+		}
+		if info.Code == DomainUnknown || info.Code != c {
+			t.Errorf("Test info.Code err, c: %v", *info)
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestDomainsInfoValue(t *testing.T) {
+	for _, c := range AllDomainsInfo() {
+		_, err := c.Value()
+		_, err2 := json.Marshal(c)
+		if err != nil || err2 != nil {
+			t.Errorf("Test allDomainsInfo.Value() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestDomainsInfoType(t *testing.T) {
+	for _, c := range AllDomainsInfo() {
+		out := c.Type()
+		if out != TypeDomain {
+			t.Errorf("Test allDomainsInfo.Type() err, want %v, got %v", TypeDomain, out)
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestDomainsInfoScan(t *testing.T) {
+	for _, c := range AllDomainsInfo() {
+		err := c.Scan(c)
+		if err != nil {
+			t.Errorf("Test allDomainsInfo.Scan() err")
+		}
+		var c2 Domain
+		c2 = *c
+		err = c.Scan(c2)
+		if err != nil {
+			t.Errorf("Test allDomainsInfo.Scan() err")
+		}
+		if c.Name != c2.Name || c.Code != c2.Code || c.Country != c2.Country {
+			t.Errorf("Test allDomainsInfo.Scan() err")
+		}
+		err = c.Scan(nil)
+		if err == nil {
+			t.Errorf("Test allDomainsInfo.Scan() err")
+		}
+		c = nil
+		err = c.Scan(c)
+		if err == nil {
+			t.Errorf("Test allDomainsInfo.Scan() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestDomainCodeByName(t *testing.T) {
+	for _, c := range getAllCountries() {
+		out := DomainCodeByName(c.String())
+		want := DomainCode(c)
+		if out != want {
+			t.Errorf("Test DomainCodeByName() err, want %v, got %v", want, out)
+		}
+	}
+}
+
+// Test Regions
+
+//nolint:gocyclo
+func TestRegionsCount(t *testing.T) {
+	out := TotalRegions()
+	want := len(AllRegions())
 	if out != want {
 		t.Errorf("Test AllRegions() err, want %v, got %v", want, out)
 	}
-	for _, r := range regions {
-		if !r.IsValid() {
-			t.Errorf("Test r.IsValid() err")
-		}
-		regionCodeOut := RegionCodeByName(r.String())
-		regionCodeWant := r
-		if regionCodeOut != regionCodeWant {
-			t.Errorf("Test RegionCodeByName() err, want %v, got %v", regionCodeWant, regionCodeOut)
-		}
-	}
-	regionsInfo := AllRegionsInfo()
-	want = len(regionsInfo)
+	want = len(AllRegionsInfo())
 	if out != want {
 		t.Errorf("Test AllRegionsInfo() err, want %v, got %v", want, out)
 	}
-	for _, r := range regionsInfo {
-		regionCodeOut := RegionCodeByName(r.Name)
-		regionCodeWant := r.Code
-		if regionCodeOut != regionCodeWant {
-			t.Errorf("Test RegionCodeByName() err, want %v, got %v", regionCodeWant, regionCodeOut)
+}
+
+//nolint:gocyclo
+func TestRegionsCode(t *testing.T) {
+	for _, c := range AllRegions() {
+		info := c.Info()
+		if info == nil {
+			t.Errorf("Test Info() err: c == nil")
 		}
-		if r.Code.String() == "" {
-			t.Errorf("Test regionsInfo.String() err")
+		if info.Name == "" || info.Name == UnknownMsg {
+			t.Errorf("Test info.Name err, c: %v", *info)
 		}
-		if r.Code.StringRus() == "" {
-			t.Errorf("Test regionsInfo.StringRus() err")
+		if info.Code == RegionUnknown || info.Code != c {
+			t.Errorf("Test info.Code err, c: %v", *info)
 		}
-		_, err = r.Value()
-		_, err2 = json.Marshal(r)
+	}
+}
+
+//nolint:gocyclo
+func TestRegionsIsValid(t *testing.T) {
+	for _, c := range AllRegions() {
+		if !c.IsValid() {
+			t.Errorf("Test RegionCode.IsValid() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestRegionsString(t *testing.T) {
+	for _, c := range AllRegions() {
+		if c.String() == "" || c.String() == UnknownMsg {
+			t.Errorf("Test RegionCode.String() err")
+		}
+		if c.StringRus() == "" || c.StringRus() == UnknownMsg {
+			t.Errorf("Test RegionCode.StringRus() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestRegionsType(t *testing.T) {
+	for _, c := range AllRegions() {
+		if c.Type() != TypeRegionCode {
+			t.Errorf("Test RegionCode.Type() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestRegionsInfoValue(t *testing.T) {
+	for _, c := range AllRegionsInfo() {
+		_, err := c.Value()
+		_, err2 := json.Marshal(c)
 		if err != nil || err2 != nil {
-			t.Errorf("Test regionsInfo.Value() err")
+			t.Errorf("Test AllRegionsInfo.Value() err")
 		}
-		if r.Type() != TypeRegion {
-			t.Errorf("Test regionsInfo.Type() err")
+	}
+}
+
+//nolint:gocyclo
+func TestRegionsInfoType(t *testing.T) {
+	for _, c := range AllRegionsInfo() {
+		out := c.Type()
+		if out != TypeRegion {
+			t.Errorf("Test AllRegionsInfo.Type() err, want %v, got %v", TypeRegion, out)
 		}
-		err = r.Scan(r)
+	}
+}
+
+//nolint:gocyclo
+func TestRegionsInfoScan(t *testing.T) {
+	for _, c := range AllRegionsInfo() {
+		err := c.Scan(c)
 		if err != nil {
-			t.Errorf("Test regionsInfo.Scan() err")
+			t.Errorf("Test AllRegionsInfo.Scan() err")
 		}
-		err = r.Scan(Region{})
+		var c2 Region
+		c2 = *c
+		err = c.Scan(c2)
 		if err != nil {
-			t.Errorf("Test regionsInfo.Scan() err")
+			t.Errorf("Test AllRegionsInfo.Scan() err")
 		}
-		err = r.Scan(nil)
-		if err == nil {
-			t.Errorf("Test regionsInfo.Scan() err")
+		if c.Name != c2.Name || c.Code != c2.Code {
+			t.Errorf("Test AllRegionsInfo.Scan() err")
 		}
-		r = nil
-		err = r.Scan(r)
+		err = c.Scan(nil)
 		if err == nil {
-			t.Errorf("Test regionsInfo.Scan() err")
+			t.Errorf("Test AllRegionsInfo.Scan() err")
+		}
+		c = nil
+		err = c.Scan(c)
+		if err == nil {
+			t.Errorf("Test AllRegionsInfo.Scan() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestRegionCodeByName(t *testing.T) {
+	for _, c := range AllRegions() {
+		out := RegionCodeByName(c.String())
+		want := RegionCode(c)
+		if out != want {
+			t.Errorf("Test RegionCodeByName() err, want %v, got %v", want, out)
 		}
 	}
 	regionCodeOut := RegionCodeByName(None.String())
@@ -270,78 +659,164 @@ func TestCountriesCount(t *testing.T) {
 	if regionCodeOut != regionCodeWant {
 		t.Errorf("Test RegionCodeByName() err, want %v, got %v", regionCodeWant, regionCodeOut)
 	}
+}
 
-	out = TotalCapitals()
-	capitals := AllCapitals()
-	want = len(capitals)
-	if out != want {
-		t.Errorf("Test AllCapitals() err, want %v, got %v", want, out)
-	}
-	capitalsInfo := AllCapitalsInfo()
-	want = len(capitalsInfo)
-	if out != want {
-		t.Errorf("Test AllCapitalsInfo() err, want %v, got %v", want, out)
-	}
-	for _, c := range capitals {
+//nolint:gocyclo
+func TestCapitalCodeByName(t *testing.T) {
+	for _, c := range AllCapitals() {
 		capitalCodeOut := CapitalCodeByName(c.String())
-		capitalCodeWant := c
-		if capitalCodeOut != capitalCodeWant && c != CapitalYU && c != CapitalAQ && c != CapitalBV && c != CapitalHM &&
+		if capitalCodeOut != c && c != CapitalYU && c != CapitalAQ && c != CapitalBV && c != CapitalHM &&
 			c != CapitalUM && c != CapitalTK && c != CapitalBQ {
-			t.Errorf("Test CapitalCodeByName() err, want %v, got %v", capitalCodeWant, capitalCodeOut)
+			t.Errorf("Test CapitalCodeByName() err, want %v, got %v", c, capitalCodeOut)
 		}
 	}
-	_, err = capitalsInfo[0].Value()
-	_, err2 = json.Marshal(capitals[0])
-	if err != nil || err2 != nil {
-		t.Errorf("Test capitalsInfo.Value() err")
-	}
-	if capitalsInfo[0].Type() != TypeCapital {
-		t.Errorf("Test capitalsInfo.Type() err")
-	}
-	err = capitalsInfo[0].Scan(capitalsInfo[0])
-	if err != nil {
-		t.Errorf("Test capitalsInfo.Scan() err")
-	}
-	err = capitalsInfo[0].Scan(Capital{})
-	if err != nil {
-		t.Errorf("Test capitalsInfo.Scan() err")
-	}
-	err = capitalsInfo[0].Scan(nil)
-	if err == nil {
-		t.Errorf("Test capitalsInfo.Scan() err")
-	}
-	capitalsInfo[0] = nil
-	err = capitalsInfo[0].Scan(capitalsInfo[0])
-	if err == nil {
-		t.Errorf("Test capitalsInfo.Scan() err")
-	}
 }
 
-func TestTypes(t *testing.T) {
-	allCapitals := AllCapitals()
-	typeOut := allCapitals[0].Type()
-	typeWant := TypeCapitalCode
-	if typeOut != typeWant {
-		t.Errorf("Test capitals type err, want %v, got %v", typeWant, typeOut)
-	}
+// Test Countries
 
-	allRegions := AllRegions()
-	typeOut = allRegions[0].Type()
-	typeWant = TypeRegionCode
-	if typeOut != typeWant {
-		t.Errorf("Test regions type err, want %v, got %v", typeWant, typeOut)
+//nolint:gocyclo
+func TestCountriesCount(t *testing.T) {
+	out := Total()
+	want := len(All())
+	if out != want {
+		t.Errorf("Test All() err, want %v, got %v", want, out)
 	}
-}
-
-func TestCountriesInfo(t *testing.T) {
-	all := All()
-	allNonCountries := AllNonCountries()
-	if len(allNonCountries) < 10 {
+	if len(AllNonCountries()) < 10 {
 		t.Errorf("Test allNonCountries() err")
 	}
-	all = append(all, Unknown, International, None)
-	all = append(all, allNonCountries...)
+}
 
+//nolint:gocyclo
+func TestCountriesType(t *testing.T) {
+	for _, c := range getAllCountries() {
+		out := c.Type()
+		if out != TypeCountryCode {
+			t.Errorf("Test All.Type() err, want %v, got %v", TypeCallCodeInfo, out)
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCountriesCode(t *testing.T) {
+	for _, c := range getAllCountries() {
+		out2 := c.Info().Code
+		if out2 != c {
+			t.Errorf("Test All.Info().Code err, want %v, got %v", c, out2)
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCountriesIsValid(t *testing.T) {
+	for _, c := range getAllCountries() {
+		if !c.IsValid() && c != Unknown {
+			t.Errorf("Test All.IsValid() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCountriesAlpha(t *testing.T) {
+	for _, c := range getAllCountries() {
+		if c.Alpha2() == "" || c.Alpha2() == UnknownMsg && c != Unknown {
+			t.Errorf("Test All.Alpha2() err")
+		}
+		if c.Alpha3() == "" || c.Alpha3() == UnknownMsg && c != Unknown {
+			t.Errorf("Test All.Alpha2() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCountriesString(t *testing.T) {
+	for _, c := range getAllCountries() {
+		if (c.String() == "" || c.String() == UnknownMsg) && c != Unknown {
+			t.Errorf("Test All.String() err")
+		}
+		if (c.StringRus() == "" || c.StringRus() == UnknownMsg) && c != Unknown {
+			t.Errorf("Test All.StringRus() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCountriesEmoji(t *testing.T) {
+	for _, c := range getAllCountries() {
+		if c.Emoji() == "" || c.Emoji() == UnknownMsg {
+			t.Errorf("Test All.Emoji() err")
+		}
+		if c.Emoji3() == "" || c.Emoji3() == UnknownMsg {
+			t.Errorf("Test All.Emoji3() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCountriesFIFA(t *testing.T) {
+	for _, c := range getAllCountries() {
+		if (c.FIFA() == "" || c.FIFA() == UnknownMsg) && c != Unknown {
+			t.Errorf("Test All.FIFA() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCountriesIOC(t *testing.T) {
+	for _, c := range getAllCountries() {
+		if (c.IOC() == "" || c.IOC() == UnknownMsg) && c != Unknown {
+			t.Errorf("Test All.IOC() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCountriesCapital(t *testing.T) {
+	for _, c := range getAllCountries() {
+		if (c.Capital() == CapitalUnknown) && c != Unknown {
+			t.Errorf("Test All.Capital() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCountriesCurrency(t *testing.T) {
+	for _, c := range getAllCountries() {
+		if c.Currency() == CurrencyUnknown && c != ATA && c != Unknown {
+			t.Errorf("Test All.Currency() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCountriesDomain(t *testing.T) {
+	for _, c := range getAllCountries() {
+		if c.Domain() == DomainUnknown && c != Unknown {
+			t.Errorf("Test All.Domain() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCountriesRegion(t *testing.T) {
+	for _, c := range getAllCountries() {
+		if c.Region() == RegionUnknown && c != Unknown {
+			t.Errorf("Test All.Region() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCountriesCallCodes(t *testing.T) {
+	for _, c := range getAllCountries() {
+		if len(c.CallCodes()) < 1 && c != None {
+			t.Errorf("Test All.CallCodes() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCountriesAllInfo(t *testing.T) {
+	all := getAllCountries()
 	for i := 0; i < len(all); i++ {
 		if !all[i].IsValid() && all[i] != Unknown {
 			t.Errorf("Test Country.IsValid() err: c == nil, i: %v", i)
@@ -471,66 +946,121 @@ func TestCountriesInfo(t *testing.T) {
 	}
 }
 
+// Test Capitals
+
 //nolint:gocyclo
-func TestCurrenciesInfo(t *testing.T) { //nolint:gocyclo
-	all := AllCurrencies()
-	for i := 0; i < len(all); i++ {
-		c := all[i].Info()
-		if c == nil {
-			t.Errorf("Test Info() err: c == nil, i: %v", i)
+func TestCapitalsCount(t *testing.T) {
+	out := TotalCapitals()
+	want := len(AllCapitals())
+	if out != want {
+		t.Errorf("Test AllCapitals() err, want %v, got %v", want, out)
+	}
+	want = len(AllCapitalsInfo())
+	if out != want {
+		t.Errorf("Test AllCapitalsInfo() err, want %v, got %v", want, out)
+	}
+}
+
+//nolint:gocyclo
+func TestCapitalsCode(t *testing.T) {
+	for _, c := range AllCapitals() {
+		info := c.Info()
+		if info == nil {
+			t.Errorf("Test Info() err: c == nil")
 		}
-		if c.Name == "" || c.Name == UnknownMsg {
-			t.Errorf("Test c.Name err, c: %v", *c)
+		if info.Name == "" || info.Name == UnknownMsg {
+			t.Errorf("Test info.Name err, c: %v", *info)
 		}
-		if c.Alpha == "" || c.Alpha == UnknownMsg {
-			t.Errorf("Test c.Alpha err, c: %v", *c)
+		if info.Code != CapitalUnknown && info.Code != c {
+			t.Errorf("Test info.Code err, c: %v", *info)
 		}
-		if c.Digits < 0 || c.Digits > 4 {
-			t.Errorf("Test c.Digits err, c: %v", *c)
-		}
-		if c.Code == CurrencyUnknown {
-			t.Errorf("Test c.Code err, c: %v", *c)
-		}
-		if len(c.Countries) < 1 {
-			t.Errorf("Test c.Countries err, c: %v", *c)
+		if info.Country == Unknown {
+			t.Errorf("Test info.Country err, c: %v", *info)
 		}
 	}
 }
 
+//nolint:gocyclo
+func TestCapitalsIsValid(t *testing.T) {
+	for _, c := range AllCapitals() {
+		if !c.IsValid() && c != CapitalUnknown {
+			t.Errorf("Test CapitalCode.IsValid() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCapitalsString(t *testing.T) {
+	for _, c := range AllCapitals() {
+		if c.String() == "" || c.String() == UnknownMsg {
+			t.Errorf("Test CapitalCode.String() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCapitalsType(t *testing.T) {
+	for _, c := range AllCapitals() {
+		if c.Type() != TypeCapitalCode {
+			t.Errorf("Test CapitalsCode.Type() err")
+		}
+	}
+}
+
+//nolint:gocyclo
 func TestCapitalsInfo(t *testing.T) {
-	all := AllCapitals()
-	for i := 0; i < len(all); i++ {
-		c := all[i].Info()
-		if c == nil {
-			t.Errorf("Test Info() err: c == nil, i: %v", i)
-		}
-		if c.Name == "" || c.Name == UnknownMsg {
-			t.Errorf("Test c.Name err, c: %v", *c)
-		}
-		if c.Country == Unknown {
-			t.Errorf("Test c.Country err, c: %v", *c)
-		}
-		if c.Code == CapitalUnknown {
-			t.Errorf("Test c.Code err, c: %v", *c)
+	for _, c := range AllCapitals() {
+		if c.Info().Code != c {
+			t.Errorf("Test AllCapitals() err, want %v, got %v", c, c.Info().Code)
 		}
 	}
 }
 
-func TestDomainsInfo(t *testing.T) {
-	all := AllDomains()
-	for i := 0; i < len(all); i++ {
-		c := all[i].Info()
-		if c == nil {
-			t.Errorf("Test Info() err: c == nil, i: %v", i)
+//nolint:gocyclo
+func TestCapitalsInfoValue(t *testing.T) {
+	for _, c := range AllCapitalsInfo() {
+		_, err := c.Value()
+		_, err2 := json.Marshal(c)
+		if err != nil || err2 != nil {
+			t.Errorf("Test AllCapitalsInfo.Value() err")
 		}
-		if c.Name == "" || c.Name == UnknownMsg {
-			t.Errorf("Test c.Name err, c: %v", *c)
+	}
+}
+
+//nolint:gocyclo
+func TestCapitalsInfoType(t *testing.T) {
+	for _, c := range AllCapitalsInfo() {
+		out := c.Type()
+		if out != TypeCapital {
+			t.Errorf("Test AllCapitalsInfo.Type() err, want %v, got %v", TypeCallCodeInfo, out)
 		}
-		if c.Country == Unknown {
-			t.Errorf("Test c.Country err, c: %v", *c)
+	}
+}
+
+//nolint:gocyclo
+func TestCapitalsInfoScan(t *testing.T) {
+	for _, c := range AllCapitalsInfo() {
+		err := c.Scan(c)
+		if err != nil {
+			t.Errorf("Test AllCapitalsInfo.Scan() err")
 		}
-		if c.Code == DomainUnknown {
-			t.Errorf("Test c.Code err, c: %v", *c)
+		var c2 Capital
+		c2 = *c
+		err = c.Scan(c2)
+		if err != nil {
+			t.Errorf("Test AllCapitalsInfo.Scan() err")
+		}
+		if c.Name != c2.Name || c.Code != c2.Code || c.Country != c2.Country {
+			t.Errorf("Test AllCapitalsInfo.Scan() err")
+		}
+		err = c.Scan(nil)
+		if err == nil {
+			t.Errorf("Test AllCapitalsInfo.Scan() err")
+		}
+		c = nil
+		err = c.Scan(c)
+		if err == nil {
+			t.Errorf("Test AllCapitalsInfo.Scan() err")
 		}
 	}
 }

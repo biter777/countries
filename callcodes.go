@@ -860,6 +860,8 @@ func (c CallCode) Countries() []CountryCode { //nolint:gocyclo
 	switch c {
 	case CallCode1:
 		return []CountryCode{ATF, CAN, UMI, USA}
+	case CallCode1808:
+		return []CountryCode{USA}
 	case CallCode1242:
 		return []CountryCode{BHS}
 	case CallCode1246:

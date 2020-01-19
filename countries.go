@@ -5931,7 +5931,10 @@ func (c CountryCode) Region() RegionCode { //nolint:gocyclo
 		return RegionAF
 	case XKX:
 		return RegionEU
-	case NON:
+	case NON, International, NonCountryInternationalFreephone, NonCountryInmarsat, NonCountryMaritimeMobileService,
+		NonCountryUniversalPersonalTelecommunicationsServices, NonCountryNationalNonCommercialPurposes, NonCountryGlobalMobileSatelliteSystem,
+		NonCountryInternationalNetworks, NonCountryDisasterRelief, NonCountryInternationalPremiumRateService,
+		NonCountryInternationalTelecommunicationsCorrespondenceService:
 		return RegionNone
 	case JPN:
 		return RegionAS
