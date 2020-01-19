@@ -5,7 +5,8 @@ Countries - ISO 3166 (ISO3166-1, ISO3166, Digit, Alpha-2, Alpha-3) countries cod
 
 Full support ISO-3166-1, ISO-4217, ITU-T E.164, Unicode CLDR and IANA ccTLD standarts. 
 
-[![GoDoc](http://godoc.org/github.com/biter777/countries?status.svg)](http://godoc.org/github.com/biter777/countries)
+[![GoDoc](http://godoc.org/github.com/biter777/countries?status.svg)](http://godoc.org/github.com/biter777/countries)[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbiter777%2Fcountries.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbiter777%2Fcountries?ref=badge_shield)
+
 [![Go Walker](http://gowalker.org/api/v1/badge)](https://gowalker.org/github.com/biter777/countries)
 [![GolangCI](https://golangci.com/badges/github.com/biter777/countries.svg?style=flat-square)](https://golangci.com/r/github.com/biter777/countries)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/08eb1d2ff62e465091b3a288ae078a96)](https://www.codacy.com/manual/biter777/countries?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=biter777/countries&amp;utm_campaign=Badge_Grade)
@@ -140,3 +141,7 @@ Before proposing a change, please discuss it first by raising an issue.<br/>
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/I2I61D1XZ) <a href="https://www.buymeacoffee.com/CAhuDKg" target="_blank"><img width = "127" height = "30" src = "https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg" alt="Buy us a beer"></a><br/>
 
 3) <b>Star us</b>. Give us a star, please, if it's not against your religion :)
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbiter777%2Fcountries.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbiter777%2Fcountries?ref=badge_large)
