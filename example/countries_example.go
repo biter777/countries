@@ -51,17 +51,17 @@ func main() {
 
 	// Detection usage
 	// Detect by name
-	country := countries.ByName("angola")
-	fmt.Printf("Country name in english: %v\n", country)                // Angola
-	fmt.Printf("Country ISO-3166 digit code: %d\n", country)            // 24
-	fmt.Printf("Country ISO-3166 Alpha-2 code: %v\n", country.Alpha2()) // AO
-	fmt.Printf("Country ISO-3166 Alpha-3 code: %v\n", country.Alpha3()) // AGO
+	angola := countries.ByName("angola")
+	fmt.Printf("Country name in english: %v\n", angola)                // Angola
+	fmt.Printf("Country ISO-3166 digit code: %d\n", angola)            // 24
+	fmt.Printf("Country ISO-3166 Alpha-2 code: %v\n", angola.Alpha2()) // AO
+	fmt.Printf("Country ISO-3166 Alpha-3 code: %v\n", angola.Alpha3()) // AGO
 	// Detect by code/numeric
-	country = countries.ByNumeric(24)
-	fmt.Printf("Country name in english: %v\n", country)                // Angola
-	fmt.Printf("Country ISO-3166 digit code: %d\n", country)            // 24
-	fmt.Printf("Country ISO-3166 Alpha-2 code: %v\n", country.Alpha2()) // AO
-	fmt.Printf("Country ISO-3166 Alpha-3 code: %v\n", country.Alpha3()) // AGO
+	country := countries.ByNumeric(40)
+	fmt.Printf("Country name in english: %v\n", country)                // Austria
+	fmt.Printf("Country ISO-3166 digit code: %d\n", country)            // 40
+	fmt.Printf("Country ISO-3166 Alpha-2 code: %v\n", country.Alpha2()) // AT
+	fmt.Printf("Country ISO-3166 Alpha-3 code: %v\n", country.Alpha3()) // AUT
 
 	// Comparing usage
 	// Compare by code/numeric
