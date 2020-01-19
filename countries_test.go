@@ -814,6 +814,7 @@ func TestCountriesCallCodes(t *testing.T) {
 	}
 }
 
+/*
 //nolint:gocyclo
 func TestCountriesAllInfo(t *testing.T) {
 	all := getAllCountries()
@@ -945,6 +946,7 @@ func TestCountriesAllInfo(t *testing.T) {
 		}
 	}
 }
+*/
 
 // Test Capitals
 
@@ -1003,6 +1005,15 @@ func TestCapitalsType(t *testing.T) {
 	for _, c := range AllCapitals() {
 		if c.Type() != TypeCapitalCode {
 			t.Errorf("Test CapitalsCode.Type() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCapitalsCountry(t *testing.T) {
+	for _, c := range AllCapitals() {
+		if c.Country() == Unknown {
+			t.Errorf("Test CapitalsCode.Country() err")
 		}
 	}
 }
