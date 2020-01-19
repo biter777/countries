@@ -18,7 +18,7 @@ jobs:
     #### expecting it in the form of
     ####   /go/src/github.com/circleci/go-tool
     ####   /go/src/bitbucket.org/circleci/go-tool
-    working_directory: /go/src/github.com/rqlite/rqlite
+    working_directory: /go/src/github.com/biter777/countries
     steps:
       - checkout
 
@@ -42,7 +42,7 @@ jobs:
     #### expecting it in the form of
     ####   /go/src/github.com/circleci/go-tool
     ####   /go/src/bitbucket.org/circleci/go-tool
-    working_directory: /go/src/github.com/rqlite/rqlite
+    working_directory: /go/src/github.com/biter777/countries
     steps:
       - checkout
 
@@ -64,8 +64,7 @@ jobs:
         - run: go install ./...
         - run:
             command: system_test/full_system_test.py
-            environment:
-                RQLITED_PATH: /go/bin/rqlited
+#            environment:
 
 workflows:
   version: 2
