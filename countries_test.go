@@ -149,6 +149,12 @@ func TestCallCodesIsValid(t *testing.T) {
 			t.Errorf("Test CallCodes.IsValid() err")
 		}
 	}
+	for _, c := range getAllCountries() {
+		callCodes := c.Info().CallCodes
+		if len(callCodes) > 0 && !callCodes[0].IsValid() && c != Unknown {
+			t.Errorf("Test CallCodes.IsValid() err")
+		}
+	}
 }
 
 //nolint:gocyclo
@@ -301,6 +307,11 @@ func TestCurrenciesIsValid(t *testing.T) {
 			t.Errorf("Test CurrencyCode.IsValid() err")
 		}
 	}
+	for _, c := range getAllCountries() {
+		if !c.Info().Currency.IsValid() && c != ATA && c != Unknown {
+			t.Errorf("Test CurrencyCode.IsValid() err")
+		}
+	}
 }
 
 //nolint:gocyclo
@@ -308,6 +319,12 @@ func TestCurrenciesString(t *testing.T) {
 	for _, c := range AllCurrencies() {
 		if c.String() == "" || c.String() == UnknownMsg {
 			t.Errorf("Test CurrencyCode.String() err")
+		}
+	}
+	for _, c := range getAllCountries() {
+		currency := c.Info().Currency
+		if (currency.String() == "" || currency.String() == UnknownMsg) && c != ATA && c != Unknown {
+			t.Errorf("Test CurrencyCode.String() err, c: %v", c)
 		}
 	}
 }
@@ -512,6 +529,11 @@ func TestDomainsIsValid(t *testing.T) {
 			t.Errorf("Test DomainCode.IsValid() err")
 		}
 	}
+	for _, c := range getAllCountries() {
+		if !c.Info().Domain.IsValid() && c != Unknown && int(c) < 999 {
+			t.Errorf("Test DomainCode.IsValid() err")
+		}
+	}
 }
 
 //nolint:gocyclo
@@ -654,6 +676,11 @@ func TestRegionsCode(t *testing.T) {
 func TestRegionsIsValid(t *testing.T) {
 	for _, c := range AllRegions() {
 		if !c.IsValid() {
+			t.Errorf("Test RegionCode.IsValid() err")
+		}
+	}
+	for _, c := range getAllCountries() {
+		if !c.Info().Region.IsValid() && c != Unknown && int(c) < 999 {
 			t.Errorf("Test RegionCode.IsValid() err")
 		}
 	}
@@ -911,140 +938,6 @@ func TestCountriesCallCodes(t *testing.T) {
 	}
 }
 
-/*
-//nolint:gocyclo
-func TestCountriesAllInfo(t *testing.T) {
-	all := getAllCountries()
-	for i := 0; i < len(all); i++ {
-		if !all[i].IsValid() && all[i] != Unknown {
-			t.Errorf("Test Country.IsValid() err: c == nil, i: %v", i)
-		}
-		if all[i].Type() != TypeCountryCode {
-			t.Errorf("Test Country.Type() err: all[%v]: %v", i, all[i])
-		}
-		if (all[i].String() == "" || all[i].String() == UnknownMsg) && all[i] != Unknown {
-			t.Errorf("Test Country.String() err: all[%v]: %v", i, all[i])
-		}
-		if (all[i].StringRus() == "" || all[i].StringRus() == UnknownMsg) && all[i] != Unknown {
-			all[i].StringRus()
-			t.Errorf("Test Country.StringRus() err: all[%v]: %v", i, all[i])
-		}
-		if all[i].Emoji3() == "" {
-			t.Errorf("Test Country.Emoji3() err: all[%v]: %v", i, all[i])
-		}
-
-		c := all[i].Info()
-		if c == nil {
-			t.Errorf("Test Info() err: c == nil, i: %v", i)
-		}
-		if (c.Name == "" || c.Name == UnknownMsg || c.Name != all[i].String()) && c.Code != Unknown {
-			t.Errorf("Test c.Name err, c: %v", *c)
-		}
-		if (c.Alpha2 == "" || c.Alpha2 == UnknownMsg || c.Alpha2 != all[i].Alpha2()) && c.Code != Unknown {
-			t.Errorf("Test c.Alpha2 err, c: %v", *c)
-		}
-		if (c.Alpha3 == "" || c.Alpha3 == UnknownMsg || c.Alpha3 != all[i].Alpha3()) && c.Code != Unknown {
-			t.Errorf("Test c.Alpha3 err, c: %v", *c)
-		}
-		if (c.IOC == "" || c.IOC == UnknownMsg || c.IOC != all[i].IOC()) && c.Code != Unknown {
-			t.Errorf("Test c.IOC err, c: %v", *c)
-		}
-		if (c.FIFA == "" || c.FIFA == UnknownMsg || c.FIFA != all[i].FIFA()) && c.Code != Unknown {
-			t.Errorf("Test c.FIFA err, c: %v", *c)
-		}
-		if c.Emoji == "" || c.Emoji == UnknownMsg || c.Emoji != all[i].Emoji() {
-			t.Errorf("Test c.Emoji err, c: %v", *c)
-		}
-		if c.Code != Unknown && c.Code != all[i] {
-			t.Errorf("Test c.Code err, c: %v", *c)
-		}
-		if !c.Code.IsValid() && c.Code != Unknown {
-			t.Errorf("Test c.Code.IsValid() err, c: %v", *c)
-		}
-		if c.Code.Type() != TypeCountryCode {
-			t.Errorf("Test c.Code.Type() err, c: %v", *c)
-		}
-		if (c.Code.String() == "" || c.Code.String() == UnknownMsg) && c.Code != Unknown {
-			t.Errorf("Test c.Code.String() err, c: %v", *c)
-		}
-		if (c.Currency == CurrencyUnknown || c.Currency != all[i].Currency()) && c.Code != ATA && c.Code != Unknown {
-			t.Errorf("Test c.Currency err, c: %v", *c)
-		}
-		if (!c.Currency.IsValid() && c.Code != ATA) && c.Code != Unknown {
-			t.Errorf("Test c.Currency.IsValid() err, c: %v", *c)
-		}
-		if c.Currency.Type() != TypeCurrencyCode {
-			t.Errorf("Test c.Currency.Type() err, c: %v", *c)
-		}
-		if (c.Currency.String() == "" || c.Currency.String() == UnknownMsg) && c.Code != ATA && c.Code != Unknown {
-			t.Errorf("Test c.Currency.String() err, c: %v", *c)
-		}
-		if c.Capital != CapitalUnknown && c.Capital != all[i].Capital() {
-			t.Errorf("Test c.Capital err, c: %v", *c)
-		}
-		if c.Capital.Country() != all[i] && c.Code != None && c.Code < 999 {
-			t.Errorf("Test c.Capital.Country() err, c: %v", *c)
-		}
-		if c.Capital.Info().Code != c.Capital {
-			t.Errorf("Test c.Capital.Info() err, c: %v", *c)
-		}
-		if !c.Capital.IsValid() && c.Code != Unknown {
-			t.Errorf("Test c.Capital.IsValid() err, c: %v", *c)
-		}
-		if c.Capital.Type() != TypeCapitalCode {
-			t.Errorf("Test c.Capital.Type() err, c: %v", *c)
-		}
-		if (c.Capital.String() == "" || c.Capital.String() == UnknownMsg) && c.Code != Unknown {
-			t.Errorf("Test c.Capital.String() err, c: %v", *c)
-		}
-		if (len(c.CallCodes) < 1 || len(c.CallCodes) != len(all[i].CallCodes())) && c.Code != None {
-			t.Errorf("Test c.CallCodes err, c: %v", *c)
-		}
-		if len(c.CallCodes) > 0 {
-			if c.CallCodes[0].Info().Code != c.CallCodes[0] {
-				t.Errorf("Test c.CallCodes.Info() err, c: %v", *c)
-			}
-			if len(c.CallCodes[0].Countries()) < 1 {
-				t.Errorf("Test c.CallCodes.Countries() err, c: %v", *c)
-			}
-			if !c.CallCodes[0].IsValid() && c.Code != ATA && c.Code != HMD && c.Code != Unknown {
-				t.Errorf("Test c.CallCodes.IsValid() err, c: %v", *c)
-			}
-			if c.CallCodes[0].Type() != TypeCallCode {
-				t.Errorf("Test c.CallCodes.Type() err, c: %v", *c)
-			}
-			if c.CallCodes[0].String() == "" || c.CallCodes[0].String() == UnknownMsg {
-				t.Errorf("Test c.CallCodes[0].String() err, c: %v", *c)
-			}
-		}
-		if c.Domain != DomainUnknown && c.Domain != all[i].Domain() && c.Code != XKX {
-			t.Errorf("Test c.Domain err, c: %v", *c)
-		}
-		if !c.Domain.IsValid() && c.Code != Unknown {
-			t.Errorf("Test c.Domain.IsValid() err, c: %v", *c)
-		}
-		if c.Domain.Type() != TypeDomainCode {
-			t.Errorf("Test c.Domain.Type() err, c: %v", *c)
-		}
-		if (c.Domain.String() == "" || c.Domain.String() == UnknownMsg) && c.Code != Unknown && c.Code != None {
-			t.Errorf("Test c.Domain.String() err, c: %v", *c)
-		}
-		if (c.Region == RegionUnknown || c.Region != all[i].Region()) && c.Code != Unknown && int(c.Code) < 999 {
-			t.Errorf("Test c.Region err, c: %v", *c)
-		}
-		if !c.Region.IsValid() && c.Code != Unknown && int(c.Code) < 999 {
-			t.Errorf("Test c.Region.IsValid() err, c: %v", *c)
-		}
-		if c.Region.Type() != TypeRegionCode {
-			t.Errorf("Test c.Region.Type() err, c: %v", *c)
-		}
-		if (c.Region.String() == "" || c.Region.String() == UnknownMsg) && c.Code != Unknown && int(c.Code) < 999 {
-			t.Errorf("Test c.Region.String() err, c: %v", *c)
-		}
-	}
-}
-*/
-
 // Test Capitals
 
 //nolint:gocyclo
@@ -1120,6 +1013,11 @@ func TestCapitalsInfo(t *testing.T) {
 	for _, c := range AllCapitals() {
 		if c.Info().Code != c {
 			t.Errorf("Test AllCapitals() err, want %v, got %v", c, c.Info().Code)
+		}
+	}
+	for _, c := range getAllCountries() {
+		if c.Info().Capital.Info().Code != c.Info().Capital {
+			t.Errorf("Test c.Capital.Info() err, c: %v", c)
 		}
 	}
 }

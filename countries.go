@@ -5194,7 +5194,7 @@ func (c CountryCode) CallCodes() []CallCode { //nolint:gocyclo
 	case WLF:
 		return []CallCode{CallCode(681)}
 	case HMD:
-		return []CallCode{CallCode(0)}
+		return []CallCode{CallCode(61)}
 	case CPV:
 		return []CallCode{CallCode(238)}
 	case COK:
