@@ -23,7 +23,7 @@ func TestCountriesByName(t *testing.T) {
 	if countryCodeOut != GBR {
 		t.Errorf("Test ByName() err, want %v, got %v", GBR, countryCodeOut)
 	}
-	countryCodeOut = ByName(XWA.String())
+	countryCodeOut = ByName("WALES")
 	if countryCodeOut != XWA {
 		t.Errorf("Test ByName() err, want %v, got %v", XWA, countryCodeOut)
 	}
