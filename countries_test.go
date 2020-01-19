@@ -573,8 +573,7 @@ func TestDomainsInfoScan(t *testing.T) {
 		if err != nil {
 			t.Errorf("Test allDomainsInfo.Scan() err")
 		}
-		var c2 Domain
-		c2 = *c
+		c2 := *c
 		err = c.Scan(c2)
 		if err != nil {
 			t.Errorf("Test allDomainsInfo.Scan() err")
@@ -722,8 +721,7 @@ func TestRegionsInfoScan(t *testing.T) {
 		if err != nil {
 			t.Errorf("Test AllRegionsInfo.Scan() err")
 		}
-		var c2 Region
-		c2 = *c
+		c2 := *c
 		err = c.Scan(c2)
 		if err != nil {
 			t.Errorf("Test AllRegionsInfo.Scan() err")
@@ -1031,8 +1029,7 @@ func TestCapitalsInfoScan(t *testing.T) {
 		if err != nil {
 			t.Errorf("Test AllCapitalsInfo.Scan() err")
 		}
-		var c2 Capital
-		c2 = *c
+		c2 := *c
 		err = c.Scan(c2)
 		if err != nil {
 			t.Errorf("Test AllCapitalsInfo.Scan() err")
