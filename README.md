@@ -124,17 +124,12 @@ For more complex options, consult the [documentation](http://godoc.org/github.co
 contributing
 ------------
 
-1) Welcome pull requests, bug fixes and issue reports.<br/>
+1) <b>Welcome pull requests, bug fixes and issue reports.</b><br/>
 Before proposing a change, please discuss it first by raising an issue.<br/>
 <br/>
-Contributors list: <a href="https://github.com/biter777">@biter777</a>
-@biter777 (https://github.com/biter777), 
-@gavincarr (https://github.com/gavincarr), 
-@benja-M-1 (https://github.com/benja-M-1) <br/>
+Contributors list: <a href="https://github.com/biter777">@biter777</a>, <a href="https://github.com/gavincarr">@gavincarr</a>, <a href="https://github.com/benja-M-1">@benja-M-1</a>.<br/>
 
-2) Donate<br/>
-A donation isn't necessary, but it's welcome.<br/>
+2) <b>Donate</b>. A donation isn't necessary, but it's welcome.<br/>
 <noscript><a href="https://liberapay.com/biter777/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript><br/>
 
-3) Star us<br/>
-Give us a star, if it's not against your religion. :)
+3) <b>Star us</b>. Give us a star, if it's not against your religion. :)
