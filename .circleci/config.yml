@@ -62,7 +62,7 @@ jobs:
 #        - run: sudo apt-get install python-requests
         - run: go get -t -d -v ./...
         - run: go install ./...
-        - run:
+#        - run:
 #            command: system_test/full_system_test.py
 #            environment:
 
