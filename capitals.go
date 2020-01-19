@@ -2368,6 +2368,8 @@ func CapitalCodeByName(name string) CapitalCode { //nolint:gocyclo
 		return CapitalZM
 	case "HARARE":
 		return CapitalZW
+	case "XX", "NON", "NONE":
+		return CapitalXX
 	}
 	return CapitalUnknown
 }

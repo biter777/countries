@@ -19,6 +19,14 @@ func TestCountriesByName(t *testing.T) {
 			t.Errorf("Test ByName() err, want %v, got %v", c, countryCodeOut)
 		}
 	}
+	countryCodeOut := ByName("pupok")
+	if countryCodeOut != Unknown {
+		t.Errorf("Test ByName() err, want %v, got %v", Unknown, countryCodeOut)
+	}
+	countryCodeOut = ByName(None.String())
+	if countryCodeOut != None {
+		t.Errorf("Test ByName() err, want %v, got %v", None, countryCodeOut)
+	}
 }
 
 //nolint:gocyclo
@@ -28,6 +36,10 @@ func TestCountriesByNumeric(t *testing.T) {
 		if countryCodeOut != c {
 			t.Errorf("Test ByNumeric() err, want %v, got %v", c, countryCodeOut)
 		}
+	}
+	countryCodeOut := ByNumeric(100500999)
+	if countryCodeOut != Unknown {
+		t.Errorf("Test ByNumeric() err, want %v, got %v", Unknown, countryCodeOut)
 	}
 }
 
@@ -286,7 +298,7 @@ func TestCurrenciesCode(t *testing.T) {
 func TestCurrenciesIsValid(t *testing.T) {
 	for _, c := range AllCurrencies() {
 		if !c.IsValid() {
-			t.Errorf("Test urrencyCode.IsValid() err")
+			t.Errorf("Test CurrencyCode.IsValid() err")
 		}
 	}
 }
@@ -295,7 +307,7 @@ func TestCurrenciesIsValid(t *testing.T) {
 func TestCurrenciesString(t *testing.T) {
 	for _, c := range AllCurrencies() {
 		if c.String() == "" || c.String() == UnknownMsg {
-			t.Errorf("Test urrencyCode.String() err")
+			t.Errorf("Test CurrencyCode.String() err")
 		}
 	}
 }
@@ -304,7 +316,58 @@ func TestCurrenciesString(t *testing.T) {
 func TestCurrenciesType(t *testing.T) {
 	for _, c := range AllCurrencies() {
 		if c.Type() != TypeCurrencyCode {
-			t.Errorf("Test urrencyCode.Type() err")
+			t.Errorf("Test CurrencyCode.Type() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCurrenciesAlpha(t *testing.T) {
+	for _, c := range AllCurrencies() {
+		if c.Alpha() == "" || c.Alpha() == UnknownMsg {
+			t.Errorf("Test CurrencyCode.Alpha() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCurrenciesCountries(t *testing.T) {
+	for _, c := range AllCurrencies() {
+		if len(c.Countries()) < 1 {
+			t.Errorf("Test CurrencyCode.Countries() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCurrenciesDigits(t *testing.T) {
+	for _, c := range AllCurrencies() {
+		digits := c.Digits()
+		if digits != 0 && digits != 2 && digits != 3 && digits != 4 {
+			t.Errorf("Test CurrencyCode.Digits() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCurrenciesEmoji(t *testing.T) {
+	for _, c := range AllCurrencies() {
+		emoji := c.Emoji()
+		if emoji == "" || emoji == UnknownMsg {
+			t.Errorf("Test CurrencyCode.Emoji() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestCurrenciesNickelRounding(t *testing.T) {
+	for _, c := range AllCurrencies() {
+		nr := c.NickelRounding()
+		if nr != false && c != CurrencyCAD && c != CurrencyDKK && c != CurrencyCHF {
+			t.Errorf("Test CurrencyCode.NickelRounding() err")
+		}
+		if nr != true && (c == CurrencyCAD || c == CurrencyDKK || c == CurrencyCHF) {
+			t.Errorf("Test CurrencyCode.NickelRounding() err")
 		}
 	}
 }
@@ -389,6 +452,24 @@ func TestCurrenciesInfoScan(t *testing.T) {
 		if err == nil {
 			t.Errorf("Test allCurrenciesInfo.Scan() err")
 		}
+	}
+}
+
+//nolint:gocyclo
+func TestCurrencyCodeByName(t *testing.T) {
+	for _, c := range AllCurrencies() {
+		out := CurrencyCodeByName(c.Alpha())
+		if out != c {
+			t.Errorf("Test CurrencyCodeByName() err, want %v, got %v", c, out)
+		}
+	}
+	out := CurrencyCodeByName("pupok")
+	if out != CurrencyUnknown {
+		t.Errorf("Test CurrencyCodeByName() err, want %v, got %v", CurrencyUnknown, out)
+	}
+	out = CurrencyCodeByName(None.Alpha2())
+	if out != CurrencyNON {
+		t.Errorf("Test CurrencyCodeByName() err, want %v, got %v", CurrencyNON, out)
 	}
 }
 
@@ -527,6 +608,14 @@ func TestDomainCodeByName(t *testing.T) {
 		if out != want {
 			t.Errorf("Test DomainCodeByName() err, want %v, got %v", want, out)
 		}
+	}
+	out := DomainCodeByName("pupok")
+	if out != DomainUnknown {
+		t.Errorf("Test DomainCodeByName() err, want %v, got %v", DomainUnknown, out)
+	}
+	out = DomainCodeByName(None.String())
+	if out != DomainXX {
+		t.Errorf("Test DomainCodeByName() err, want %v, got %v", DomainXX, out)
 	}
 }
 
@@ -669,6 +758,14 @@ func TestCapitalCodeByName(t *testing.T) {
 			c != CapitalUM && c != CapitalTK && c != CapitalBQ {
 			t.Errorf("Test CapitalCodeByName() err, want %v, got %v", c, capitalCodeOut)
 		}
+	}
+	capitalCodeOut := CapitalCodeByName("pupok")
+	if capitalCodeOut != CapitalUnknown {
+		t.Errorf("Test CapitalCodeByName() err, want %v, got %v", CapitalUnknown, capitalCodeOut)
+	}
+	capitalCodeOut = CapitalCodeByName(None.Alpha2())
+	if capitalCodeOut != CapitalXX {
+		t.Errorf("Test CapitalCodeByName() err, want %v, got %v", CapitalXX, capitalCodeOut)
 	}
 }
 

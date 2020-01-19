@@ -2015,7 +2015,7 @@ func AllCurrenciesInfo() []*Currency {
 	return currencies
 }
 
-// CurrencyCodeByName - return CurrencyCode by currencyCode Alph name, case-insensitive, example: currencyUSD := CurrencyCodeByName("usd") OR currencyUSD := CurrencyCodeByName("USD")
+// CurrencyCodeByName - return CurrencyCode by currencyCode Alpha name, case-insensitive, example: currencyUSD := CurrencyCodeByName("usd") OR currencyUSD := CurrencyCodeByName("USD")
 //nolint:gocyclo
 func CurrencyCodeByName(name string) CurrencyCode { //nolint:gocyclo
 	switch textPrepare(name) {
