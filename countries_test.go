@@ -27,7 +27,7 @@ func TestCountriesByName(t *testing.T) {
 	if countryCodeOut != XWA {
 		t.Errorf("Test ByName() err, want %v, got %v", XWA, countryCodeOut)
 	}
-	countryCodeOut = ByName(XSC.String())
+	countryCodeOut = ByName("SCOTLAND")
 	if countryCodeOut != XSC {
 		t.Errorf("Test ByName() err, want %v, got %v", XSC, countryCodeOut)
 	}
