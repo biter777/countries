@@ -6,8 +6,8 @@ Countries - ISO 3166 (ISO3166-1, ISO3166, Digit, Alpha-2, Alpha-3) countries cod
 Full support ISO-3166-1, ISO-4217, ITU-T E.164, Unicode CLDR and IANA ccTLD standarts. 
 
 [![GoDoc](http://godoc.org/github.com/biter777/countries?status.svg)](http://godoc.org/github.com/biter777/countries)
-[![GoReport](https://goreportcard.com/badge/github.com/biter777/countries)](https://goreportcard.com/report/github.com/biter777/countries)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/08eb1d2ff62e465091b3a288ae078a96)](https://www.codacy.com/manual/biter777/countries?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=biter777/countries&amp;utm_campaign=Badge_Grade)
+[![GoReport](https://goreportcard.com/badge/github.com/biter777/countries)](https://goreportcard.com/report/github.com/biter777/countries)
 [![Coverage Status](https://coveralls.io/repos/github/biter777/countries/badge.svg?branch=master)](https://coveralls.io/github/biter777/countries?branch=master)
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-brightgreen.svg)](https://opensource.org/licenses/BSD-2-Clause)
 [![ISO](https://img.shields.io/badge/powered%20by-ISO-brightgreen)](https://www.iso.org/)
