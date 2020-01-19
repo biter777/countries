@@ -126,8 +126,7 @@ contributing
 
 1) <b>Welcome pull requests, bug fixes and issue reports.</b><br/>
 Before proposing a change, please discuss it first by raising an issue.<br/>
-<br/>
-Contributors list: <a href="https://github.com/biter777">@biter777</a>, <a href="https://github.com/gavincarr">@gavincarr</a>, <a href="https://github.com/benja-M-1">@benja-M-1</a>.<br/>
+<small>Contributors list: <a href="https://github.com/biter777">@biter777</a>, <a href="https://github.com/gavincarr">@gavincarr</a>, <a href="https://github.com/benja-M-1">@benja-M-1</a>.</small><br/>
 
 2) <b>Donate</b>. A donation isn't necessary, but it's welcome.<br/>
 <noscript><a href="https://liberapay.com/biter777/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript><br/>
