@@ -16,6 +16,7 @@ Full support ISO-3166-1, ISO-4217, ITU-T E.164, Unicode CLDR and IANA ccTLD stan
 [![Build Status](https://travis-ci.org/biter777/countries.svg?branch=master)](https://travis-ci.org/biter777/countries)
 [![Build status](https://ci.appveyor.com/api/projects/status/t9lpor9o8tpacpmr/branch/master?svg=true)](https://ci.appveyor.com/project/biter777/countries/branch/master)
 [![Codeship Status](https://codeship.com/projects/00db4400-1803-0138-1132-7ab932dd1523/status?branch=master)](https://app.codeship.com/projects/381056)
+[![Circle CI](https://circleci.com/gh/biter777/countries/tree/master.svg?style=svg)](https://circleci.com/gh/biter777/countries/tree/master)
 [![Stars](https://img.shields.io/github/stars/biter777/countries?label=Please%20like%20us&style=social)](https://github.com/biter777/countries/stargazers)
 
 installation
