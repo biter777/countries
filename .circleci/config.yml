@@ -53,15 +53,15 @@ jobs:
           environment:
                 GORACE: "halt_on_error=1"
 
-  end_to_end:
-    working_directory: /go/src/github.com/biter777/countries
-    docker:
-      - image: circleci/golang:1.13
-    steps:
-        - checkout
+#  end_to_end:
+#    working_directory: /go/src/github.com/biter777/countries
+#    docker:
+#      - image: circleci/golang:1.13
+#    steps:
+#        - checkout
 #        - run: sudo apt-get install python-requests
-        - run: go get -t -d -v ./...
-        - run: go install ./...
+#        - run: go get -t -d -v ./...
+#        - run: go install ./...
 #        - run:
 #            command: system_test/full_system_test.py
 #            environment:
@@ -72,4 +72,4 @@ workflows:
     jobs:
       - test
       - race
-      - end_to_end
+#      - end_to_end
