@@ -354,6 +354,9 @@ func TestCurrenciesCountries(t *testing.T) {
 			t.Errorf("Test CurrencyCode.Countries() err")
 		}
 	}
+	if len(CurrencyNone.Countries()) != 1 || CurrencyNone.Countries()[0] != None {
+		t.Errorf("Test CurrencyCode.Countries() err")
+	}
 }
 
 //nolint:gocyclo
@@ -363,6 +366,15 @@ func TestCurrenciesDigits(t *testing.T) {
 		if digits != 0 && digits != 2 && digits != 3 && digits != 4 {
 			t.Errorf("Test CurrencyCode.Digits() err")
 		}
+	}
+	digits := CurrencyNone.Digits()
+	if digits != 0 {
+		t.Errorf("Test CurrencyCode.Digits() err")
+	}
+	unknown := CurrencyCode(100500999)
+	digits = unknown.Digits()
+	if digits != -1 {
+		t.Errorf("Test CurrencyCode.Digits() err")
 	}
 }
 
@@ -488,6 +500,9 @@ func TestCurrencyCodeByName(t *testing.T) {
 	if out != CurrencyNON {
 		t.Errorf("Test CurrencyCodeByName() err, want %v, got %v", CurrencyNON, out)
 	}
+	if CurrencyCodeByName(Palestine.String()) != CurrencyILS {
+		t.Errorf("Test CurrencyCodeByName() err, want %v, got %v", CurrencyILS, out)
+	}
 }
 
 // Test Domains
@@ -533,6 +548,19 @@ func TestDomainsIsValid(t *testing.T) {
 		if !c.Info().Domain.IsValid() && c != Unknown && int(c) < 999 {
 			t.Errorf("Test DomainCode.IsValid() err")
 		}
+	}
+}
+
+//nolint:gocyclo
+func TestDomainsCountry(t *testing.T) {
+	for _, c := range AllDomains() {
+		if c.Country() != CountryCode(c) {
+			t.Errorf("Test DomainCode.Country() err")
+		}
+	}
+	unknown := DomainCode(990)
+	if unknown.Country() != Unknown {
+		t.Errorf("Test DomainCode.Country() err")
 	}
 }
 
@@ -695,6 +723,19 @@ func TestRegionsString(t *testing.T) {
 		if c.StringRus() == "" || c.StringRus() == UnknownMsg {
 			t.Errorf("Test RegionCode.StringRus() err")
 		}
+	}
+	unknown := RegionCode(100500999)
+	if unknown.String() != UnknownMsg {
+		t.Errorf("Test RegionCode.String() err")
+	}
+	if unknown.StringRus() != UnknownMsg {
+		t.Errorf("Test RegionCode.StringRus() err")
+	}
+	if RegionNone.String() == "" || RegionNone.String() == UnknownMsg {
+		t.Errorf("Test RegionCode.String() err")
+	}
+	if RegionNone.StringRus() == "" || RegionNone.StringRus() == UnknownMsg {
+		t.Errorf("Test RegionCode.StringRus() err")
 	}
 }
 
@@ -908,6 +949,9 @@ func TestCountriesCurrency(t *testing.T) {
 		if c.Currency() == CurrencyUnknown && c != ATA && c != Unknown {
 			t.Errorf("Test All.Currency() err")
 		}
+	}
+	if ChannelIslands.Currency() != CurrencyEUR {
+		t.Errorf("Test All.Currency() err")
 	}
 }
 

@@ -6969,7 +6969,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return FRO
 	case "FJ", "FJI", "FIJI":
 		return FJI
-	case "PH", "PHL", "PHI", "PHILIPPINES", "PHILIPINES", "PI", "RP":
+	case "PH", "PHL", "PHI", "PHILIPPINES", "PHILIPINES", "PI", "RP": //nolint
 		return PHL
 	case "FI", "SF", "FIN", "FINLAND", "FINNISH":
 		return FIN

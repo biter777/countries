@@ -2019,13 +2019,13 @@ func AllCurrenciesInfo() []*Currency {
 //nolint:gocyclo
 func CurrencyCodeByName(name string) CurrencyCode { //nolint:gocyclo
 	switch textPrepare(name) {
-	case "AFN", "AFGHANI":
+	case "AFN", "AFGHANI", "AFHANI":
 		return CurrencyAFN
 	case "ALL", "LEK":
 		return CurrencyALL
 	case "DZD", "ALGERIANDINAR":
 		return CurrencyDZD
-	case "USD", "USDOLLAR":
+	case "USD", "USDOLLAR", "USADOLLAR", "AMERICANDOLLAR":
 		return CurrencyUSD
 	case "EUR", "EURO":
 		return CurrencyEUR
@@ -2061,9 +2061,9 @@ func CurrencyCodeByName(name string) CurrencyCode { //nolint:gocyclo
 		return CurrencyBMD
 	case "BTN", "NGULTRUM":
 		return CurrencyBTN
-	case "INR", "INDIANRUPEE":
+	case "INR", "INDIANRUPEE", "INDIANRUPE", "INDIARUPEE", "INDIARUPE":
 		return CurrencyINR
-	case "BOB", "BOLIVIANO":
+	case "BOB", "BOLIVIANO", "BOLIVIAN", "BOLIVIA":
 		return CurrencyBOB
 	case "BAM", "CONVERTIBLEMARK":
 		return CurrencyBAM
@@ -2169,19 +2169,19 @@ func CurrencyCodeByName(name string) CurrencyCode { //nolint:gocyclo
 		return CurrencyXDR
 	case "IRR", "IRANIANRIAL":
 		return CurrencyIRR
-	case "IQD", "IRAQIDINAR":
+	case "IQD", "IRAQIDINAR", "IRAQDINAR":
 		return CurrencyIQD
-	case "ILS", "NEWISRAELISHEQEL":
+	case "ILS", "SHEQEL", "NEWISRAELISHEQEL":
 		return CurrencyILS
-	case "PALESTINE":
+	case "PLS", "PSE", "PALESTINE", "PALESTINA", "PALAISTINE", "PALAESTINA", "PALESTINIAN", "PALESTINIANTERRITORY":
 		return CurrencyILS
-	case "JMD", "JAMAICANDOLLAR":
+	case "JMD", "JAMAICANDOLLAR", "JAMAICADOLLAR":
 		return CurrencyJMD
-	case "JPY", "YEN":
+	case "JPY", "YEN", "YENA":
 		return CurrencyJPY
-	case "JOD", "JORDANIANDINAR":
+	case "JOD", "JORDANIANDINAR", "JORDANDINAR":
 		return CurrencyJOD
-	case "KZT", "TENGE":
+	case "KZT", "TENGE", "TANGE":
 		return CurrencyKZT
 	case "KES", "KENYANSHILLING":
 		return CurrencyKES
@@ -2309,19 +2309,19 @@ func CurrencyCodeByName(name string) CurrencyCode { //nolint:gocyclo
 		return CurrencyCHE
 	case "CHW", "WIRFRANC":
 		return CurrencyCHW
-	case "SYP", "SYRIANPOUND":
+	case "SYP", "SYRIANPOUND", "SYRIAPOUND":
 		return CurrencySYP
 	case "TWD", "NEWTAIWANDOLLAR":
 		return CurrencyTWD
 	case "TJS", "SOMONI":
 		return CurrencyTJS
-	case "TZS", "TANZANIANSHILLING":
+	case "TZS", "TANZANIANSHILLING", "TANZANSHILLING":
 		return CurrencyTZS
 	case "THB", "BAHT":
 		return CurrencyTHB
 	case "TOP", "PA’ANGA":
 		return CurrencyTOP
-	case "TTD", "TRINIDADANDTOBAGODOLLAR":
+	case "TTD", "TRINIDADANDTOBAGODOLLAR", "TRINIDADDOLLAR":
 		return CurrencyTTD
 	case "TND", "TUNISIANDINAR":
 		return CurrencyTND
