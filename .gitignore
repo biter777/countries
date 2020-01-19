@@ -30,6 +30,8 @@
 *.*~
 *.git
 .git
+.gitignore
+.github
 
 # arch
 *.rar
