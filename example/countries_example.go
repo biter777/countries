@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/biter777/countries"
-	"github.com/jinzhu/gorm"
+	// "github.com/jinzhu/gorm"
 )
 
 func main() {
@@ -74,17 +74,19 @@ func main() {
 	}
 
 	// Database usage
-	type User struct {
-		gorm.Model
-		Name     string
-		Country  countries.CountryCode
-		Currency countries.CurrencyCode
-	}
-	user := &User{Name: "Helen", Country: countries.Slovenia, Currency: countries.CurrencyEUR}
-	db, err := gorm.Open("postgres", 500, "host=127.0.0.2 port=5432 user=usr password=1234567 dbname=db")
-	if err != nil {
-		panic(err)
-	}
-	defer db.Close()
-	db.Create(user)
+	/*
+		type User struct {
+			gorm.Model
+			Name     string
+			Country  countries.CountryCode
+			Currency countries.CurrencyCode
+		}
+		user := &User{Name: "Helen", Country: countries.Slovenia, Currency: countries.CurrencyEUR}
+		db, err := gorm.Open("postgres", 500, "host=127.0.0.2 port=5432 user=usr password=1234567 dbname=db")
+		if err != nil {
+			panic(err)
+		}
+		defer db.Close()
+		db.Create(user)
+	*/
 }
