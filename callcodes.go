@@ -911,7 +911,7 @@ func (c CallCode) Countries() []CountryCode { //nolint:gocyclo
 	case CallCode211:
 		return []CountryCode{SSD}
 	case CallCode212:
-		return []CountryCode{MAR, ESH}
+		return []CountryCode{ESH, MAR}
 	case CallCode213:
 		return []CountryCode{DZA}
 	case CallCode216:
