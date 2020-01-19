@@ -124,14 +124,17 @@ For more complex options, consult the [documentation](http://godoc.org/github.co
 contributing
 ------------
 
-(c) Biter
-
-Welcome pull requests, bug fixes and issue reports.
-Before proposing a change, please discuss it first by raising an issue.
-
-Contributors list:
+1) Welcome pull requests, bug fixes and issue reports.<br/>
+Before proposing a change, please discuss it first by raising an issue.<br/>
+<br/>
+Contributors list:<br/>
 @biter777 (https://github.com/biter777), 
 @gavincarr (https://github.com/gavincarr), 
-@benja-M-1 (https://github.com/benja-M-1) 
+@benja-M-1 (https://github.com/benja-M-1) <br/>
 
-p.s. Please star us, if you can :)
+2) Donate<br/>
+A donation isn't necessary, but it's welcome.<br/>
+<noscript><a href="https://liberapay.com/biter777/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript><br/>
+
+3) Star us<br/>
+Give us a star, if it's not against your religion. :)
