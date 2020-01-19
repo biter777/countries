@@ -136,7 +136,7 @@ Before proposing a change, please discuss it first by raising an issue.<br/>
 <noscript><a href="https://liberapay.com/biter777/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript> 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/I2I61D1XZ) 
 <a href="https://www.buymeacoffee.com/CAhuDKg" target="_blank">
-	<img src="https://cdn.buymeacoffee.com/buttons/default-green.png" alt="Buy Ua A Beer" style="height: 30px !important;width: 127px !important;" >
+	<img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy us a beer" style="height: 30px !important;width: 127px !important;" >
 </a><br/>
 
 3) <b>Star us</b>. Give us a star, please, if it's not against your religion :)
