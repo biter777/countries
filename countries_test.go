@@ -1010,7 +1010,7 @@ func TestCapitalsType(t *testing.T) {
 }
 
 //nolint:gocyclo
-func TestCapitalsCountry(t *testing.T) {
+func TestCapitalsCountry(t *testing.T) { //nolint:gocyclo
 	for _, c := range AllCapitals() {
 		if c.Country() == Unknown {
 			t.Errorf("Test CapitalsCode.Country() err")
