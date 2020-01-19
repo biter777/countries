@@ -19,7 +19,19 @@ func TestCountriesByName(t *testing.T) {
 			t.Errorf("Test ByName() err, want %v, got %v", c, countryCodeOut)
 		}
 	}
-	countryCodeOut := ByName("pupok")
+	countryCodeOut := ByName("ENGLAND")
+	if countryCodeOut != GBR {
+		t.Errorf("Test ByName() err, want %v, got %v", GBR, countryCodeOut)
+	}
+	countryCodeOut = ByName(XWA.String())
+	if countryCodeOut != XWA {
+		t.Errorf("Test ByName() err, want %v, got %v", XWA, countryCodeOut)
+	}
+	countryCodeOut = ByName(XSC.String())
+	if countryCodeOut != XSC {
+		t.Errorf("Test ByName() err, want %v, got %v", XSC, countryCodeOut)
+	}
+	countryCodeOut = ByName("pupok")
 	if countryCodeOut != Unknown {
 		t.Errorf("Test ByName() err, want %v, got %v", Unknown, countryCodeOut)
 	}
