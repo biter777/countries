@@ -93,8 +93,7 @@ func TestCountriesInfoScan(t *testing.T) {
 		if err != nil {
 			t.Errorf("Test allCountriesInfo.Scan() err")
 		}
-		var c2 Country
-		c2 = *c
+		c2 := *c
 		err = c.Scan(c2)
 		if err != nil {
 			t.Errorf("Test allCountriesInfo.Scan() err")
@@ -247,8 +246,7 @@ func TestCallCodesInfoScan(t *testing.T) {
 		if err != nil {
 			t.Errorf("Test allCallCodesInfo.Scan() err")
 		}
-		var c2 CallCodeInfo
-		c2 = *c
+		c2 := *c
 		err = c.Scan(c2)
 		if err != nil {
 			t.Errorf("Test allCallCodesInfo.Scan() err")
@@ -419,8 +417,7 @@ func TestCurrenciesInfoScan(t *testing.T) {
 		if err != nil {
 			t.Errorf("Test allCurrenciesInfo.Scan() err")
 		}
-		var c2 Currency
-		c2 = *c
+		c2 := *c
 		err = c.Scan(c2)
 		if err != nil {
 			t.Errorf("Test allCurrenciesInfo.Scan() err")
