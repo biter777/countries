@@ -279,28 +279,6 @@ func TestCurrenciesCount(t *testing.T) {
 }
 
 //nolint:gocyclo
-func TestCurrenciesCode(t *testing.T) {
-	for _, c := range AllCurrencies() {
-		info := c.Info()
-		if info == nil {
-			t.Errorf("Test Info() err: c == nil")
-		}
-		if info.Name == "" || info.Name == UnknownMsg {
-			t.Errorf("Test info.Name err, c: %v", *info)
-		}
-		if info.Alpha == "" || info.Alpha == UnknownMsg {
-			t.Errorf("Test info.Alpha err, c: %v", *info)
-		}
-		if info.Code == CurrencyUnknown || info.Code != c {
-			t.Errorf("Test info.Code err, c: %v", *info)
-		}
-		if len(info.Countries) < 1 {
-			t.Errorf("Test info.Countries err, c: %v", *info)
-		}
-	}
-}
-
-//nolint:gocyclo
 func TestCurrenciesIsValid(t *testing.T) {
 	for _, c := range AllCurrencies() {
 		if !c.IsValid() {
@@ -402,31 +380,6 @@ func TestCurrenciesNickelRounding(t *testing.T) {
 }
 
 //nolint:gocyclo
-func TestCurrenciesInfo(t *testing.T) {
-	for _, c := range AllCurrencies() {
-		info := c.Info()
-		if info == nil {
-			t.Errorf("Test Info() err: c == nil")
-		}
-		if info.Name == "" || info.Name == UnknownMsg {
-			t.Errorf("Test info.Name err, c: %v", *info)
-		}
-		if info.Alpha == "" || info.Alpha == UnknownMsg {
-			t.Errorf("Test info.Alpha err, c: %v", *info)
-		}
-		if info.Digits < 0 || info.Digits > 4 {
-			t.Errorf("Test info.Digits err, c: %v", *info)
-		}
-		if info.Code == CurrencyUnknown || info.Code != c {
-			t.Errorf("Test info.Code err, c: %v", *info)
-		}
-		if len(info.Countries) < 1 {
-			t.Errorf("Test info.Countries err, c: %v", *info)
-		}
-	}
-}
-
-//nolint:gocyclo
 func TestCurrenciesInfoValue(t *testing.T) {
 	for _, c := range AllCurrenciesInfo() {
 		_, err := c.Value()
@@ -522,15 +475,6 @@ func TestDomainsCount(t *testing.T) {
 func TestDomainsCode(t *testing.T) {
 	for _, c := range AllDomains() {
 		info := c.Info()
-		if info == nil {
-			t.Errorf("Test Info() err: c == nil")
-		}
-		if info.Name == "" || info.Name == UnknownMsg {
-			t.Errorf("Test info.Name err, c: %v", *info)
-		}
-		if info.Code == DomainUnknown || info.Code != c {
-			t.Errorf("Test info.Code err, c: %v", *info)
-		}
 		if info.Country == Unknown {
 			t.Errorf("Test info.Code err, c: %v", *info)
 		}
@@ -586,15 +530,6 @@ func TestDomainsType(t *testing.T) {
 func TestDomainsInfo(t *testing.T) {
 	for _, c := range AllDomains() {
 		info := c.Info()
-		if info == nil {
-			t.Errorf("Test Info() err: c == nil")
-		}
-		if info.Name == "" || info.Name == UnknownMsg {
-			t.Errorf("Test info.Name err, c: %v", *info)
-		}
-		if info.Country == Unknown {
-			t.Errorf("Test info.Country err, c: %v", *info)
-		}
 		if info.Code == DomainUnknown || info.Code != c {
 			t.Errorf("Test info.Code err, c: %v", *info)
 		}
@@ -684,6 +619,7 @@ func TestRegionsCount(t *testing.T) {
 	}
 }
 
+/*
 //nolint:gocyclo
 func TestRegionsCode(t *testing.T) {
 	for _, c := range AllRegions() {
@@ -699,6 +635,7 @@ func TestRegionsCode(t *testing.T) {
 		}
 	}
 }
+*/
 
 //nolint:gocyclo
 func TestRegionsIsValid(t *testing.T) {
@@ -1001,15 +938,6 @@ func TestCapitalsCount(t *testing.T) {
 func TestCapitalsCode(t *testing.T) {
 	for _, c := range AllCapitals() {
 		info := c.Info()
-		if info == nil {
-			t.Errorf("Test Info() err: c == nil")
-		}
-		if info.Name == "" || info.Name == UnknownMsg {
-			t.Errorf("Test info.Name err, c: %v", *info)
-		}
-		if info.Code != CapitalUnknown && info.Code != c {
-			t.Errorf("Test info.Code err, c: %v", *info)
-		}
 		if info.Country == Unknown {
 			t.Errorf("Test info.Country err, c: %v", *info)
 		}
