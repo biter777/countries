@@ -142,6 +142,6 @@ Before proposing a change, please discuss it first by raising an issue.<br/>
 
 2) <b>Donate</b>. A donation isn't necessary, but it's welcome.<br/>
 <noscript><a href="https://liberapay.com/biter777/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript> 
-[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/I2I61D1XZ) <a href="https://www.buymeacoffee.com/CAhuDKg" target="_blank"><img width = "127" height = "30" src = "https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg" alt="Buy us a beer"></a><br/>
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/I2I61D1XZ) <a href="https://www.buymeacoffee.com/CAhuDKg" target="_blank"><img width="127" height="30" src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg" alt="Buy us a beer"></a> <a href="https://money.yandex.ru/to/4100164702007" target="_blank"><img width="125" height="25" src="https://yastatic.net/q/logoaas/v1/Yandex%20Money.svg" alt="Buy us a beer"></a><br/>
 
 3) <b>Star us</b>. Give us a star, please, if it's not against your religion :)
