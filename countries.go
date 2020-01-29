@@ -98,8 +98,6 @@ import (
 	"database/sql/driver"
 	"encoding/json"
 	"fmt"
-	"regexp"
-	"strings"
 )
 
 // CountryCode - country code (254 countries). Three codes present, for example Russia == RU == RUS == 643.
@@ -124,17 +122,6 @@ type Country struct {
 // Typer - typer interface, provide a name of type
 type Typer interface {
 	Type() string
-}
-
-// rePrepare - for func textPrepare()
-var rePrepare *regexp.Regexp
-
-// stPrepare - for func textPrepare()
-var stPrepare *strings.Replacer
-
-func init() {
-	rePrepare = regexp.MustCompile("\n|\t|\r|\f|\v|\"|`|'|’|′|´|῾|᾿|″|˝|̏ |̏‴|“|”|‘| ҃|‹|›|«|»|^|ˆ|!|¡|¿|؟|#|№|÷|[|]|{|}|⟨|⟩|\\|/|⁄|¦|;|:|,|·|•|°|º|ﾟ|˚|˳|%|‰|‱|¨|…| | | |-|‐|‑|‒|―|—|–|~|_|¯|@|¶|§|©|®|℠|™|℗")
-	stPrepare = strings.NewReplacer("&", "AND", ")", "", "?", "", ".", "", "|", "", "+", "", "*", "")
 }
 
 // Total - returns number of codes in the package, countries.Total() == len(countries.All()) but static value for performance
@@ -4929,16 +4916,6 @@ func AllInfo() []*Country {
 		countries = append(countries, v.Info())
 	}
 	return countries
-}
-
-func textPrepare(text string) string {
-	text = rePrepare.ReplaceAllString(text, "")
-	indx := strings.Index(text, "(")
-	if indx > -1 {
-		text = text[:indx]
-	}
-	text = stPrepare.Replace(text)
-	return strings.ToUpper(text)
 }
 
 // ByName - return CountryCode by country Alpha-2 / Alpha-3 / name, case-insensitive, example: rus := ByName("Ru") OR rus := ByName("russia"),
