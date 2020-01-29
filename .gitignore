@@ -32,6 +32,7 @@
 .git
 .gitignore
 .github
+*todo*
 
 # arch
 *.rar

@@ -127,7 +127,7 @@ func (c CurrencyCode) String() string { //nolint:gocyclo
 	case 170:
 		return "Colombian Peso"
 	case 970:
-		return "Unidad de Valor Real"
+		return "Unidad de Valor Real (UVR)"
 	case 174:
 		return "Comoro Franc"
 	case 976:
@@ -390,7 +390,7 @@ func (c CurrencyCode) String() string { //nolint:gocyclo
 	return UnknownMsg
 }
 
-// Alpha - returns a default Alpha (3 chars) code of currency
+// Alpha - returns a default ISO 3166-1 Alpha (3 chars) code of currency
 //nolint:gocyclo
 func (c CurrencyCode) Alpha() string { //nolint:gocyclo
 	switch c {
@@ -1732,7 +1732,7 @@ func CurrencyCodeByName(name string) CurrencyCode { //nolint:gocyclo
 		return CurrencyCAD
 	case "KYD", "CAYMANISLANDSDOLLAR":
 		return CurrencyKYD
-	case "CLF", "UNIDADDEFOMENTO":
+	case "CLF", "UNIDADDEFOMENTO", "CHILE", "CHILI":
 		return CurrencyCLF
 	case "CLP", "CHILEANPESO":
 		return CurrencyCLP
@@ -1740,7 +1740,7 @@ func CurrencyCodeByName(name string) CurrencyCode { //nolint:gocyclo
 		return CurrencyCNY
 	case "COP", "COLOMBIANPESO":
 		return CurrencyCOP
-	case "COU", "UNIDADDEVALORREAL":
+	case "COU", "UNIDADDEVALORREAL", "UVR", "COLOMBIA":
 		return CurrencyCOU
 	case "KMF", "COMOROFRANC":
 		return CurrencyKMF
@@ -1870,7 +1870,7 @@ func CurrencyCodeByName(name string) CurrencyCode { //nolint:gocyclo
 		return CurrencyXUA
 	case "MXN", "MEXICANPESO":
 		return CurrencyMXN
-	case "MXV", "UDI", "MEXICANUNIDADDEINVERSIONUDI", "MEXICANUNIDADDEINVERSION":
+	case "MXV", "UDI", "MEXICANUNIDADDEINVERSIONUDI", "MEXICANUNIDADDEINVERSION", "MEXICO":
 		return CurrencyMXV
 	case "MDL", "MOLDOVANLEU":
 		return CurrencyMDL

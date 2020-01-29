@@ -129,8 +129,12 @@ type Typer interface {
 // rePrepare - for func textPrepare()
 var rePrepare *regexp.Regexp
 
+// stPrepare - for func textPrepare()
+var stPrepare *strings.Replacer
+
 func init() {
-	rePrepare = regexp.MustCompile("\n|\t|\r|\f|\v|!|[|]|{|}|\\|`|'|`|;|:|,|«|»| |-|‐|‑|‒|―|—|–| |_|\"")
+	rePrepare = regexp.MustCompile("\n|\t|\r|\f|\v|\"|`|'|’|′|´|῾|᾿|″|˝|̏ |̏‴|“|”|‘| ҃|‹|›|«|»|^|ˆ|!|¡|¿|؟|#|№|÷|[|]|{|}|⟨|⟩|\\|/|⁄|¦|;|:|,|·|•|°|º|ﾟ|˚|˳|%|‰|‱|¨|…| | | |-|‐|‑|‒|―|—|–|~|_|¯|@|¶|§|©|®|℠|™|℗")
+	stPrepare = strings.NewReplacer("&", "AND", ")", "", "?", "", ".", "", "|", "", "+", "", "*", "")
 }
 
 // Total - returns number of codes in the package, countries.Total() == len(countries.All()) but static value for performance
@@ -4933,13 +4937,7 @@ func textPrepare(text string) string {
 	if indx > -1 {
 		text = text[:indx]
 	}
-	text = strings.Replace(text, "&", "AND", -1)
-	text = strings.Replace(text, "(", "", -1)
-	text = strings.Replace(text, ")", "", -1)
-	text = strings.Replace(text, "?", "", -1)
-	text = strings.Replace(text, ".", "", -1)
-	text = strings.Replace(text, "|", "", -1)
-	text = strings.Replace(text, "+", "", -1)
+	text = stPrepare.Replace(text)
 	return strings.ToUpper(text)
 }
 
