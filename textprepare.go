@@ -13,11 +13,13 @@ func textPrepare(text string) string {
 		text = text[:indx]
 	}
 
+	var r rune
+	var err error
 	reader := strings.NewReader(text)
 	text = ""
 
 	for {
-		r, _, err := reader.ReadRune()
+		r, _, err = reader.ReadRune()
 		if err == io.EOF {
 			break
 		}
