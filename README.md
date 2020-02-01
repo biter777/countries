@@ -1,5 +1,4 @@
-countries
-=======
+# countries
 
 Countries - ISO 3166 (ISO3166-1, ISO3166, Digit, Alpha-2, Alpha-3) countries codes and names (on eng and rus), ISO 4217 currency designators, ITU-T E.164 IDD calling phone codes, countries capitals, UN M.49 regions codes, IANA ccTLD countries domains, IOC/NOC and FIFA codes, VERY FAST, NO maps[], NO slices[], NO init() funcs, NO external links/files/data, NO interface{}, NO specific dependencies, Databases/JSON/GOB/XML/CSV compatible, Emoji countries flags and currencies support, full support ISO-3166-1, ISO-4217, ITU-T E.164, Unicode CLDR and IANA ccTLD standarts. 
 
@@ -28,13 +27,11 @@ Full support ISO-3166-1, ISO-4217, ITU-T E.164, Unicode CLDR and IANA ccTLD stan
 [![DepShield Badge](https://depshield.sonatype.org/badges/biter777/countries/depshield.svg)](https://depshield.github.io)
 [![Stars](https://img.shields.io/github/stars/biter777/countries?label=Please%20like%20us&style=social)](https://github.com/biter777/countries/stargazers)
 
-installation
-------------
+### installation
 
     go get github.com/biter777/countries
 
-usage
------
+### usage
 
 ```go
 import "fmt"
@@ -122,8 +119,7 @@ func main() {
 }
 ```
 
-options
--------
+### options
 
 You can take a counties names in russian language, use StringRus(). For Emoji use Emoji(). Enjoy!
 
@@ -133,8 +129,7 @@ import "github.com/biter777/countries"
 
 For more complex options, consult the [documentation](http://godoc.org/github.com/biter777/countries).
 
-contributing
-------------
+### contributing
 
 1) <b>Welcome pull requests, bug fixes and issue reports.</b><br/>
 Before proposing a change, please discuss it first by raising an issue.<br/>
