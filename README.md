@@ -4,6 +4,7 @@ Countries - ISO 3166 (ISO3166-1, ISO3166, Digit, Alpha-2, Alpha-3) countries cod
 [![GoDoc](https://godoc.org/github.com/biter777/countries?status.svg)](https://godoc.org/github.com/biter777/countries)
 [![GoDev](https://img.shields.io/badge/godev-reference-5b77b3)](https://pkg.go.dev/github.com/biter777/countries?tab=doc)
 [![Go Walker](https://img.shields.io/badge/Go%20Walker-API%20Documentation-5b77b3)](https://gowalker.org/github.com/biter777/countries)
+[![DOI](https://zenodo.org/badge/182808313.svg)](https://zenodo.org/badge/latestdoi/182808313)
 [![codeclimate](https://codeclimate.com/github/biter777/countries/badges/gpa.svg)](https://codeclimate.com/github/biter777/countries)
 [![GolangCI](https://golangci.com/badges/github.com/biter777/countries.svg?style=flat)](https://golangci.com/r/github.com/biter777/countries)
 [![GoReport](https://goreportcard.com/badge/github.com/biter777/countries)](https://goreportcard.com/report/github.com/biter777/countries)
