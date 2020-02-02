@@ -37,10 +37,6 @@ Countries - ISO 3166 (ISO3166-1, ISO3166, Digit, Alpha-2, Alpha-3) countries cod
 ### usage
 
 ```go
-import "fmt"
-import "github.com/biter777/countries"
-
-func main() {
 	countryJapan := countries.Japan
 	fmt.Printf("Country name in english: %v\n", countryJapan)                   // Japan
 	fmt.Printf("Country name in russian: %v\n", countryJapan.StringRus())       // Япония
@@ -119,7 +115,6 @@ func main() {
 	}
 	defer db.Close()
 	db.Create(user)
-}
 ```
 
 ### options
