@@ -1,7 +1,6 @@
 package countries
 
 import (
-	"database/sql/driver"
 	"encoding/json"
 	"fmt"
 )
@@ -90,7 +89,7 @@ func (r *Region) Type() string {
 }
 
 // Value implements database/sql/driver.Valuer
-func (r Region) Value() (driver.Value, error) {
+func (r Region) Value() (Value, error) {
 	return json.Marshal(r)
 }
 

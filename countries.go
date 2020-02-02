@@ -95,7 +95,6 @@ Contributing
 package countries //nolint:misspell
 
 import (
-	"database/sql/driver"
 	"encoding/json"
 	"fmt"
 )
@@ -4887,7 +4886,7 @@ func (country *Country) Type() string {
 }
 
 // Value implements database/sql/driver.Valuer
-func (country Country) Value() (driver.Value, error) {
+func (country Country) Value() (Value, error) {
 	return json.Marshal(country)
 }
 

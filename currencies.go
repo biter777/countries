@@ -1,7 +1,6 @@
 package countries
 
 import (
-	"database/sql/driver"
 	"encoding/json"
 	"fmt"
 )
@@ -1628,7 +1627,7 @@ func (currency *Currency) Type() string {
 }
 
 // Value implements database/sql/driver.Valuer
-func (currency Currency) Value() (driver.Value, error) {
+func (currency Currency) Value() (Value, error) {
 	return json.Marshal(currency)
 }
 

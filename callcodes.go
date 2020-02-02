@@ -1,7 +1,6 @@
 package countries
 
 import (
-	"database/sql/driver"
 	"encoding/json"
 	"fmt"
 	"strconv"
@@ -837,7 +836,7 @@ func (c *CallCodeInfo) Type() string {
 }
 
 // Value implements database/sql/driver.Valuer
-func (c CallCodeInfo) Value() (driver.Value, error) {
+func (c CallCodeInfo) Value() (Value, error) {
 	return json.Marshal(c)
 }
 
