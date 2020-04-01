@@ -4936,7 +4936,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return ASM
 	case "AI", "AIA", "ANGUILLA", "ANGUILA":
 		return AIA
-	case "XEN", "ENGLAND", "INGLAND":
+	case "XEN", "ENG", "ENGLAND", "INGLAND":
 		return GBR
 	case "AO", "AGO", "ANGOLA", "ANGOLIA":
 		return AGO
