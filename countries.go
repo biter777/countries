@@ -403,7 +403,7 @@ func (c CountryCode) String() string { //nolint:gocyclo
 	case 446:
 		return "Macau (Special Administrative Region of China)"
 	case 807:
-		return "Macedonia (The former Yugoslav Republic of)"
+		return "North Macedonia (Republic of North Macedonia)"
 	case 450:
 		return "Madagascar"
 	case 454:
@@ -3222,7 +3222,7 @@ func All() []CountryCode {
 		UZB,
 		UKR,
 		URY,
-		XWA,
+		// XWA, // ignored for All(), part of GB
 		FRO,
 		FJI,
 		PHL,
@@ -3239,7 +3239,7 @@ func All() []CountryCode {
 		CHL,
 		CHE,
 		SWE,
-		XSC,
+		// XSC, // ignored for All(), part of GB
 		LKA,
 		ECU,
 		GNQ,
@@ -5160,7 +5160,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return MYT
 	case "MO", "MAC", "MACAUCHINA", "MACAU", "MACAO", "MACAUSAR", "MACAOSAR":
 		return MAC
-	case "MK", "MKD", "MACEDONIA", "MACEDONIAFYRO", "MACEDONIATHEFORMERYUGOSLAVREPUBLICOF":
+	case "MK", "MKD", "MACEDONIA", "MACEDONIAFYRO", "MACEDONIATHEFORMERYUGOSLAVREPUBLICOF", "REPUBLICOFNORTHMACEDONIA", "REPUBLICOFMACEDONIA", "NORTHMACEDONIA", "MACEDONIANORTH":
 		return MKD
 	case "MW", "MWI", "MAW", "MALAWI", "MALAVI":
 		return MWI

@@ -7,6 +7,7 @@ Countries - ISO 3166 (ISO3166-1, ISO3166, Digit, Alpha-2, Alpha-3) countries cod
 [![Documentation Status](https://readthedocs.org/projects/countries/badge/?version=latest)](https://countries.readthedocs.io/en/latest/?badge=latest)
 [![DOI](https://zenodo.org/badge/182808313.svg)](https://zenodo.org/badge/latestdoi/182808313)
 [![codeclimate](https://codeclimate.com/github/biter777/countries/badges/gpa.svg)](https://codeclimate.com/github/biter777/countries)
+[![GolangCI](https://golangci.com/badges/github.com/biter777/countries.svg?style=flat)](https://golangci.com/r/github.com/biter777/countries)
 [![GoReport](https://goreportcard.com/badge/github.com/biter777/countries)](https://goreportcard.com/report/github.com/biter777/countries)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/08eb1d2ff62e465091b3a288ae078a96)](https://www.codacy.com/manual/biter777/countries?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=biter777/countries&amp;utm_campaign=Badge_Grade)
 [![codecov](https://codecov.io/gh/biter777/countries/branch/master/graph/badge.svg)](https://codecov.io/gh/biter777/countries)
@@ -26,7 +27,6 @@ Countries - ISO 3166 (ISO3166-1, ISO3166, Digit, Alpha-2, Alpha-3) countries cod
 <a href="//www.dmca.com/Protection/Status.aspx?ID=7a019cc5-ec73-464b-9707-4b33726f348f" title="DMCA.com Protection Status" class="dmca-badge"> <img src ="https://img.shields.io/badge/DMCA-protected-brightgreen"  alt="DMCA.com Protection Status" /></a> 
 [![Dependencies Free](https://img.shields.io/badge/dependencies-free-brightgreen)](https://pkg.go.dev/github.com/biter777/countries?tab=imports)
 [![Gluten Free](https://img.shields.io/badge/gluten-free-brightgreen)](https://www.scsglobalservices.com/services/gluten-free-certification)
-[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 [![DepShield Badge](https://depshield.sonatype.org/badges/biter777/countries/depshield.svg)](https://depshield.github.io)
 [![Stars](https://img.shields.io/github/stars/biter777/countries?label=Please%20like%20us&style=social)](https://github.com/biter777/countries/stargazers)
 <br/>
