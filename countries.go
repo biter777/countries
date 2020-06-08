@@ -125,7 +125,7 @@ type Typer interface {
 
 // Total - returns number of codes in the package, countries.Total() == len(countries.All()) but static value for performance
 func Total() int {
-	return 254
+	return 252
 }
 
 // Emoji - return a country Alpha-2 (ISO2) as Emoji flag (example "RU" as "🇷🇺")
