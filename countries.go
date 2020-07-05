@@ -130,7 +130,7 @@ func Total() int {
 
 // Emoji - return a country Alpha-2 (ISO2) as Emoji flag (example "RU" as "🇷🇺")
 func (c CountryCode) Emoji() string {
-	iso2 := c.Alpha3()
+	iso2 := c.Alpha2()
 	buf := [...]byte{240, 159, 135, 0, 240, 159, 135, 0}
 	buf[3] = iso2[0] + (166 - 'A')
 	buf[7] = iso2[1] + (166 - 'A')
