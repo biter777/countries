@@ -3603,7 +3603,7 @@ func (c CountryCode) CallCodes() []CallCode { //nolint:gocyclo
 	case COK:
 		return []CallCode{CallCode(682)}
 	case WSM:
-		return []CallCode{CallCode(684)}
+		return []CallCode{CallCode(685)}
 	case SJM:
 		return []CallCode{CallCode(4779)}
 	case TCA:
@@ -3615,7 +3615,7 @@ func (c CountryCode) CallCodes() []CallCode { //nolint:gocyclo
 	case PLW:
 		return []CallCode{CallCode(680)}
 	case PSE:
-		return []CallCode{CallCode(972)}
+		return []CallCode{CallCode(970)}
 	case PAN:
 		return []CallCode{CallCode(507)}
 	case PNG:
@@ -3701,7 +3701,7 @@ func (c CountryCode) CallCodes() []CallCode { //nolint:gocyclo
 	case TUN:
 		return []CallCode{CallCode(216)}
 	case TKM:
-		return []CallCode{CallCode(7370)}
+		return []CallCode{CallCode(993)}
 	case TUR:
 		return []CallCode{CallCode(90)}
 	case UGA:
@@ -5252,11 +5252,11 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return PAK
 	case "PW", "PLW", "PALAU":
 		return PLW
-	case "PS", "PSE", "PLE", "PALESTINE", "PALESTINIAN", "PALESTINIANTERRITORY", "PALÄSTINA", "PALAESTINA":
+	case "PS", "PSE", "PLE", "PALESTINE", "PALESTINA", "PALESTINIAN", "PALESTINIANTERRITORY", "PALÄSTINA", "PALAESTINA":
 		return PSE
 	case "PA", "PAN", "PCZ", "PANAMA", "PANAMIAN", "PANAM", "PZ", "PZPA":
 		return PAN
-	case "PG", "PNG", "PAPUANEWGUINEA", "PAPUA", "PAPUANEUGUINEA":
+	case "PG", "PNG", "PAPUANEWGUINEA", "PAPUA", "PAPUANEUGUINEA", "NEWGUINEA", "NEUGUINEA":
 		return PNG
 	case "PY", "PRY", "PARAGUAY":
 		return PRY
@@ -5264,17 +5264,17 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return PER
 	case "PL", "POL", "POLAND", "POLSKI", "POLSHA", "POLEN":
 		return POL
-	case "PT", "PRT", "PORTUGAL":
+	case "PT", "PRT", "PORTUGAL", "PORTUGALIAN", "PORTUGALIYA":
 		return PRT
-	case "PR", "PRI", "PUERTORICO":
+	case "PR", "PRI", "PUERTORICO", "PUERTORIKO":
 		return PRI
 	case "RE", "REU", "REUNION", "RÉUNION":
 		return REU
-	case "RU", "RUS", "SUN", "RUSSIA", "RUSSO", "RUSSISH", "RUSSLAND", "RUSIA", "ROSSIA", "RUSSIAN", "RUSSIANFEDERATION", "USSR":
+	case "RU", "RUS", "SUN", "RUSSIA", "RUSSO", "RUSSISH", "RUSSLAND", "RUSLAND", "RUSIA", "ROSSIA", "ROSSIYA", "RUSSIAN", "RUSSIANFEDERATION", "USSR":
 		return RUS
-	case "RW", "RWA", "RWANDA", "RUANDA":
+	case "RW", "RWA", "RWANDA", "RUANDA", "RUWANDA":
 		return RWA
-	case "RO", "ROU", "ROM", "ROMANIA", "RUMINIA", "RUMÄNIEN", "RUMAENIEN":
+	case "RO", "ROU", "ROM", "ROMANIA", "RUMINIA", "RUMINIYA", "RUMÄNIEN", "RUMAENIEN":
 		return ROU
 	case "SV", "SLV", "ESA", "ELSALVADOR":
 		return SLV

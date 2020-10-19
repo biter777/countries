@@ -345,8 +345,8 @@ const (
 	CallCode682 CallCode = 682
 	// CallCode683     CallCode = 683
 	CallCode683 CallCode = 683
-	// CallCode684     CallCode = 684
-	CallCode684 CallCode = 684
+	// CallCode685     CallCode = 684
+	CallCode685 CallCode = 685
 	// CallCode686     CallCode = 686
 	CallCode686 CallCode = 686
 	// CallCode687     CallCode = 687
@@ -415,6 +415,8 @@ const (
 	CallCode967 CallCode = 967
 	// CallCode968     CallCode = 968
 	CallCode968 CallCode = 968
+	// CallCode970     CallCode = 970
+	CallCode970 CallCode = 970
 	// CallCode971     CallCode = 971
 	CallCode971 CallCode = 971
 	// CallCode972     CallCode = 972
@@ -513,8 +515,8 @@ const (
 	CallCode5998 CallCode = 5998
 	// CallCode5999    CallCode = 5999
 	CallCode5999 CallCode = 5999
-	// CallCode7370    CallCode = 7370
-	CallCode7370 CallCode = 7370
+	// CallCode993    CallCode = 993
+	CallCode993 CallCode = 993
 	// CallCode35818   CallCode = 35818
 	CallCode35818 CallCode = 35818
 	// CallCode262269  CallCode = 262269

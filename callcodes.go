@@ -33,9 +33,9 @@ func (c CallCode) Info() *CallCodeInfo {
 	}
 }
 
-// TotalCallCodes - returns number of call codes in the package, countries.TotalCallCodes() == len(countries.AllCallCodes()) but static value for performance
+// TotalCallCodes - returns number of call codes in the package, countries.TotalCallCodes() == len(countries.AllCallCodes()), but static value for performance
 func TotalCallCodes() int {
-	return 263
+	return 264
 }
 
 // AllCallCodes - return all countries call phone codes
@@ -210,7 +210,7 @@ func AllCallCodes() []CallCode {
 		CallCode681,
 		CallCode682,
 		CallCode683,
-		CallCode684,
+		CallCode685,
 		CallCode686,
 		CallCode687,
 		CallCode688,
@@ -245,6 +245,7 @@ func AllCallCodes() []CallCode {
 		CallCode966,
 		CallCode967,
 		CallCode968,
+		CallCode970,
 		CallCode971,
 		CallCode972,
 		CallCode973,
@@ -294,7 +295,7 @@ func AllCallCodes() []CallCode {
 		CallCode5997,
 		CallCode5998,
 		CallCode5999,
-		CallCode7370,
+		CallCode993,
 		CallCode35818,
 		CallCode262269,
 		CallCode262639,
@@ -681,7 +682,7 @@ func (c CallCode) Countries() []CountryCode { //nolint:gocyclo
 		return []CountryCode{COK}
 	case CallCode683:
 		return []CountryCode{NIU}
-	case CallCode684:
+	case CallCode685:
 		return []CountryCode{WSM}
 	case CallCode686:
 		return []CountryCode{KIR}
@@ -705,7 +706,7 @@ func (c CallCode) Countries() []CountryCode { //nolint:gocyclo
 		return []CountryCode{SJM}
 	case CallCode5993, CallCode5994, CallCode5997:
 		return []CountryCode{BES}
-	case CallCode7370:
+	case CallCode993:
 		return []CountryCode{TKM}
 	case CallCode81:
 		return []CountryCode{JPN}
@@ -775,10 +776,12 @@ func (c CallCode) Countries() []CountryCode { //nolint:gocyclo
 		return []CountryCode{YEM}
 	case CallCode968:
 		return []CountryCode{OMN}
+	case CallCode970:
+		return []CountryCode{PSE}
 	case CallCode971:
 		return []CountryCode{ARE}
 	case CallCode972:
-		return []CountryCode{ISR, PSE}
+		return []CountryCode{PSE}
 	case CallCode973:
 		return []CountryCode{BHR}
 	case CallCode974:
