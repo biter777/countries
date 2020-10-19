@@ -2890,7 +2890,7 @@ func (c CountryCode) Currency() CurrencyCode { //nolint:gocyclo
 	case SVN:
 		return CurrencyEUR
 	case USA:
-		return CurrencyUSN
+		return CurrencyUSD
 	case SLB:
 		return CurrencySBD
 	case SOM:
@@ -2962,7 +2962,7 @@ func (c CountryCode) Currency() CurrencyCode { //nolint:gocyclo
 	case CHL:
 		return CurrencyCLF
 	case CHE:
-		return CurrencyCHE
+		return CurrencyCHF
 	case SWE:
 		return CurrencySEK
 	case LKA:
