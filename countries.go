@@ -615,7 +615,7 @@ func (c CountryCode) String() string { //nolint:gocyclo
 	case 862:
 		return "Venezuela"
 	case 704:
-		return "Viet Nam"
+		return "Vietnam"
 	case 92:
 		return "Virgin Islands British"
 	case 850:
@@ -5012,7 +5012,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return VIR
 	case "TL", "TP", "TLS", "TMP", "TPTL", "TIMORLESTE", "EASTTIMOR", "TIMOR", "TIMORELESTE", "EASTTIMORE", "TIMORE", "TIMORLESTEEASTTIMORE", "OSTTIMOR":
 		return TLS
-	case "VN", "VNM", "VIE", "VDR", "VD", "VIETNAM", "VETNAM", "VIETNAME", "VETNAME", "VDVN":
+	case "VN", "VNM", "VIE", "VDR", "VD", "VIETNAM", "VETNAM", "VIETNAME", "VETNAME", "VDVN", "VIỆTNAM", "CỘNGHÒAXÃHỘICHỦNGHĨAVIỆTNAM", "CHỦNGHĨAVIỆTNAM", "NGHĨAVIỆTNAM":
 		return VNM
 	case "GA", "GAB", "GABON", "GABUN":
 		return GAB
@@ -5024,15 +5024,15 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return GMB
 	case "GH", "GHA", "GHANA", "HANA":
 		return GHA
-	case "GP", "GLP", "GUADELOUPE":
+	case "GP", "GLP", "GUADELOUPE", "GUADELUPE", "GUADELOOPE", "GUADELOUPA", "GUADELUPA", "GUADELOOPA":
 		return GLP
 	case "GT", "GTM", "GCA", "GUATEMALA":
 		return GTM
-	case "GN", "GIN", "GUINEA":
+	case "GN", "GIN", "GUINEA", "GUINEYA":
 		return GIN
 	case "GW", "GNB", "GBS", "GUINEABISSAU":
 		return GNB
-	case "DE", "DEU", "DD", "DDR", "GER", "GERMANY", "DEUTSCHLAND", "DEUTSCH", "DDDE":
+	case "DE", "DEU", "DD", "DDR", "GER", "GERMANY", "GERMANIYA", "DEUTSCHLAND", "DEUTSCH", "DDDE":
 		return DEU
 	case "GI", "GIB", "GBZ", "GIBRALTAR", "HIBRALTAR":
 		return GIB
@@ -5044,21 +5044,21 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return GRD
 	case "GL", "GRL", "GREENLAND", "GRÖNLAND", "GROENLAND":
 		return GRL
-	case "GR", "GRC", "GREECE", "GRECE", "GRIECHENLAND":
+	case "GR", "GRC", "GREECE", "GRECE", "GRIECHENLAND", "GRECIYA":
 		return GRC
-	case "GE", "GEO", "GEORGIA", "GEORGIEN":
+	case "GE", "GEO", "GEORGIA", "GEORGIYA", "GEORGIEN", "GRUZIYA":
 		return GEO
 	case "GU", "GUM", "GUAM":
 		return GUM
-	case "DK", "DNK", "DENMARK", "DÄNEMARK", "DAENEMARK":
+	case "DK", "DNK", "DENMARK", "DANMARK", "DÄNEMARK", "DAENEMARK", "KONGERIGETDANMARK", "DANMARKKONGERIGET", "DANIYA":
 		return DNK
-	case "CD", "COD", "ZRE", "ZAR", "ZR", "ZRCD", "CONGODEMOCRATICREPUBLIC", "DEMOCRATICREPUBLICOFTHECONGO", "CONGODEMOCRATICREP", "CONGODEMOCRATIC", "CONGOTHEDEMOCRATICREPUBLICOF", "KONGODEMOCRACTICREPUBLIC", "KONGODEMOCRATICREP", "KONGODEMOCRATIC", "KONGOTHEDEMOCRATICREPUBLICOF", "ZAIRE", "ZAIR", "DEMOKRATISCHEREPUBLIKKONGO":
+	case "CD", "COD", "ZRE", "ZAR", "ZR", "ZRCD", "CONGODEMOCRATICREPUBLIC", "DEMOCRATICREPUBLICOFTHECONGO", "CONGODEMOCRATICREP", "CONGODEMOCRATIC", "CONGOTHEDEMOCRATICREPUBLICOF", "KONGODEMOCRACTICREPUBLIC", "KONGODEMOCRATICREP", "KONGODEMOCRATIC", "KONGOTHEDEMOCRATICREPUBLICOF", "ZAIRE", "ZAIR", "DEMOKRATISCHEREPUBLIKKONGO", "CONGOREPUBLIC", "KONGOREPUBLIC", "REPUBLICOFCONGO", "REPUBLICOFKONGO":
 		return COD
 	case "DJ", "DJI", "AFI", "DJIBOUTI", "AIDJ", "DSCHIBUTI":
 		return DJI
 	case "DM", "DMA", "DOMINICA", "DOMINIKA":
 		return DMA
-	case "DO", "DOM", "DOMINICANREPUBLIC", "DOMINICANA", "DOMINIKANISCHEREPUBLIK":
+	case "DO", "DOM", "DOMINICANREPUBLIC", "DOMINICANA", "DOMINIKANA", "DOMINIKANISCHEREPUBLIK":
 		return DOM
 	case "EG", "EGY", "EGYPT", "ÄGYPTEN", "AEGYPTEN":
 		return EGY
@@ -5068,7 +5068,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return ESH
 	case "ZW", "ZWE", "ZIM", "RHO", "RSR", "ZIMBABWE", "ZIMBABVE", "RH", "RHZW", "SIMBABWE":
 		return ZWE
-	case "IL", "ISR", "ISRAEL":
+	case "IL", "ISR", "ISRAEL", "IZRAIL":
 		return ISR
 	case "IN", "IND", "INDIA", "INDIAN", "INDIYA", "SKM", "SKIN", "INDIEN":
 		return IND
@@ -5414,7 +5414,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return SXM
 	case "RS", "SRB", "CSXX", "SERBIA", "SERBIYA", "SERBIEN":
 		return SRB
-	case "AX", "ALA", "ALANDISLANDS", "ALAND":
+	case "AX", "ALA", "ALANDISLANDS", "ISLANDSALAND", "ALAND":
 		return ALA
 	case "BQ", "BES", "BONAIRE", "BONAIR", "BONEIRU", "BONAIRESINTEUSTATIUSANDSABA", "BONAIRESINTEUSTATIUSSABA", "BONAIRESTEUSTANDSABA", "BONAIRESTEUSTSABA", "SINTEUSTATIUSANDSABA", "SINTEUSTATIUS":
 		return BES
