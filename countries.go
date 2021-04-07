@@ -104,18 +104,19 @@ type CountryCode int64 // int64 for database/sql/driver.Valuer compatibility
 
 // Country - all info about country
 type Country struct {
-	Name      string       `json:"name"`
-	Alpha2    string       `json:"cca2"`
-	Alpha3    string       `json:"cca3"`
-	IOC       string       `json:"ioc"`
-	FIFA      string       `json:"fifa"`
-	Emoji     string       `json:"emoji"`
-	Code      CountryCode  `json:"code"`
-	Currency  CurrencyCode `json:"currency"`
-	Capital   CapitalCode  `json:"capital"`
-	CallCodes []CallCode   `json:"callingCode"`
-	Domain    DomainCode   `json:"domain"`
-	Region    RegionCode   `json:"region"`
+	Name         string            `json:"name"`
+	Alpha2       string            `json:"cca2"`
+	Alpha3       string            `json:"cca3"`
+	IOC          string            `json:"ioc"`
+	FIFA         string            `json:"fifa"`
+	Emoji        string            `json:"emoji"`
+	Code         CountryCode       `json:"code"`
+	Currency     CurrencyCode      `json:"currency"`
+	Capital      CapitalCode       `json:"capital"`
+	CallCodes    []CallCode        `json:"callingCode"`
+	Domain       DomainCode        `json:"domain"`
+	Region       RegionCode        `json:"region"`
+	Subdivisions []SubdivisionCode `json:"subdivisionCodes"`
 }
 
 // Typer - typer interface, provide a name of type
@@ -4865,19 +4866,25 @@ func (c CountryCode) Capital() CapitalCode { //nolint:gocyclo
 // Info - return all info about country as Country struct
 func (c CountryCode) Info() *Country {
 	return &Country{
-		Name:      c.String(),
-		Alpha2:    c.Alpha2(),
-		Alpha3:    c.Alpha3(),
-		IOC:       c.IOC(),
-		FIFA:      c.FIFA(),
-		Emoji:     c.Emoji(),
-		Code:      c,
-		Capital:   c.Capital(),
-		Currency:  c.Currency(),
-		CallCodes: c.CallCodes(),
-		Domain:    c.Domain(),
-		Region:    c.Region(),
+		Name:         c.String(),
+		Alpha2:       c.Alpha2(),
+		Alpha3:       c.Alpha3(),
+		IOC:          c.IOC(),
+		FIFA:         c.FIFA(),
+		Emoji:        c.Emoji(),
+		Code:         c,
+		Capital:      c.Capital(),
+		Currency:     c.Currency(),
+		CallCodes:    c.CallCodes(),
+		Domain:       c.Domain(),
+		Region:       c.Region(),
+		Subdivisions: c.Subdivisions(),
 	}
+}
+
+// Subdivisions - return all subdivisions for a country as a slice of SubdivisionCodes
+func (c CountryCode) Subdivisions() []SubdivisionCode {
+	return SubdivisionsByCountryCode(c)
 }
 
 // Type implements Typer interface.
