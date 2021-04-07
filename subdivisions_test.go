@@ -77,7 +77,7 @@ func TestSubdivisionsCountry(t *testing.T) { //nolint:gocyclo
 		}
 
 		if s.Country() == Unknown {
-			t.Errorf("Test SubdivisionCode.String() err, s: %v", s)
+			t.Errorf("Test SubdivisionCountry.String() err, s: %v", s)
 		}
 	}
 }
@@ -152,6 +152,19 @@ func TestSubdivisionsInfoScan(t *testing.T) {
 		err = s.Scan(s)
 		if err == nil {
 			t.Errorf("Test AllSubdivisionsInfo.Scan() err")
+		}
+	}
+}
+
+//nolint:gocyclo
+func TestSubdivisionSubdivisionType(t *testing.T) { //nolint:gocyclo
+	for _, s := range AllSubdivisions() {
+		if s == SubdivisionUnknown {
+			continue
+		}
+
+		if s.SubdivisionType() == SubdivisionTypeUnknown {
+			t.Errorf("Test SubdivisionType.String() err, s: %v", s)
 		}
 	}
 }
