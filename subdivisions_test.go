@@ -9,14 +9,16 @@ import (
 
 //nolint:gocyclo
 func TestSubdivisionsCount(t *testing.T) {
-	out := TotalSubdivisions()
+	got := TotalSubdivisions()
+
 	want := len(AllSubdivisions())
-	if out != want {
-		t.Errorf("Test AllSubdivisions() err, want %v, got %v", want, out)
+	if got != want {
+		t.Errorf("Test AllSubdivisions() err, want %v, got %v", want, got)
 	}
+
 	want = len(AllSubdivisionsInfo())
-	if out != want {
-		t.Errorf("Test AllSubdivisionsInfo() err, want %v, got %v", want, out)
+	if got != want {
+		t.Errorf("Test AllSubdivisionsInfo() err, want %v, got %v", want, got)
 	}
 }
 
@@ -91,6 +93,7 @@ func TestSubdivisionsInfo(t *testing.T) {
 			t.Errorf("Test AllSubdivisions() err, want %v, got %v", s, got)
 		}
 	}
+
 	for _, c := range getAllCountries(t) {
 		for _, s := range c.Subdivisions() {
 			if got := s.Info().Code; got != s {
