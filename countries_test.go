@@ -6,14 +6,16 @@ import (
 	"testing"
 )
 
-func getAllCountries() []CountryCode {
+func getAllCountries(t *testing.T) []CountryCode {
+	t.Helper()
+
 	allCountries := append(All(), Unknown, International, None)
 	return append(allCountries, AllNonCountries()...)
 }
 
 //nolint:gocyclo
 func TestCountriesByName(t *testing.T) {
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		countryCodeOut := ByName(c.String())
 		if countryCodeOut != c {
 			t.Errorf("Test ByName() err, want %v, got %v", c, countryCodeOut)
@@ -43,7 +45,7 @@ func TestCountriesByName(t *testing.T) {
 
 //nolint:gocyclo
 func TestCountriesByNumeric(t *testing.T) {
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		countryCodeOut := ByNumeric(int(c))
 		if countryCodeOut != c {
 			t.Errorf("Test ByNumeric() err, want %v, got %v", c, countryCodeOut)
@@ -57,7 +59,7 @@ func TestCountriesByNumeric(t *testing.T) {
 
 //nolint:gocyclo
 func TestCountriesInfo(t *testing.T) {
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		countryCodeOut := c.Info().Code
 		if countryCodeOut != c {
 			t.Errorf("Test Info() err, want %v, got %v", c, countryCodeOut)
@@ -160,7 +162,7 @@ func TestCallCodesIsValid(t *testing.T) {
 			t.Errorf("Test CallCodes.IsValid() err")
 		}
 	}
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		callCodes := c.Info().CallCodes
 		if len(callCodes) > 0 && !callCodes[0].IsValid() && c != Unknown {
 			t.Errorf("Test CallCodes.IsValid() err")
@@ -295,7 +297,7 @@ func TestCurrenciesIsValid(t *testing.T) {
 			t.Errorf("Test CurrencyCode.IsValid() err")
 		}
 	}
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		if !c.Info().Currency.IsValid() && c != ATA && c != Unknown {
 			t.Errorf("Test CurrencyCode.IsValid() err")
 		}
@@ -309,7 +311,7 @@ func TestCurrenciesString(t *testing.T) {
 			t.Errorf("Test CurrencyCode.String() err")
 		}
 	}
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		currency := c.Info().Currency
 		if (currency.String() == "" || currency.String() == UnknownMsg) && c != ATA && c != Unknown {
 			t.Errorf("Test CurrencyCode.String() err, c: %v", c)
@@ -497,7 +499,7 @@ func TestDomainsIsValid(t *testing.T) {
 			t.Errorf("Test DomainCode.IsValid() err")
 		}
 	}
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		if !c.Info().Domain.IsValid() && c != Unknown && int(c) < 999 {
 			t.Errorf("Test DomainCode.IsValid() err")
 		}
@@ -595,7 +597,7 @@ func TestDomainsInfoScan(t *testing.T) {
 
 //nolint:gocyclo
 func TestDomainCodeByName(t *testing.T) {
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		out := DomainCodeByName(c.String())
 		want := DomainCode(c)
 		if out != want {
@@ -652,7 +654,7 @@ func TestRegionsIsValid(t *testing.T) {
 			t.Errorf("Test RegionCode.IsValid() err")
 		}
 	}
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		if !c.Info().Region.IsValid() && c != Unknown && int(c) < 999 {
 			t.Errorf("Test RegionCode.IsValid() err")
 		}
@@ -797,7 +799,7 @@ func TestCountriesCount(t *testing.T) {
 
 //nolint:gocyclo
 func TestCountriesType(t *testing.T) {
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		out := c.Type()
 		if out != TypeCountryCode {
 			t.Errorf("Test All.Type() err, want %v, got %v", TypeCallCodeInfo, out)
@@ -807,7 +809,7 @@ func TestCountriesType(t *testing.T) {
 
 //nolint:gocyclo
 func TestCountriesCode(t *testing.T) {
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		out2 := c.Info().Code
 		if out2 != c {
 			t.Errorf("Test All.Info().Code err, want %v, got %v", c, out2)
@@ -817,7 +819,7 @@ func TestCountriesCode(t *testing.T) {
 
 //nolint:gocyclo
 func TestCountriesIsValid(t *testing.T) {
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		if !c.IsValid() && c != Unknown {
 			t.Errorf("Test All.IsValid() err")
 		}
@@ -826,7 +828,7 @@ func TestCountriesIsValid(t *testing.T) {
 
 //nolint:gocyclo
 func TestCountriesAlpha(t *testing.T) {
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		if c.Alpha2() == "" || c.Alpha2() == UnknownMsg && c != Unknown {
 			t.Errorf("Test All.Alpha2() err")
 		}
@@ -838,7 +840,7 @@ func TestCountriesAlpha(t *testing.T) {
 
 //nolint:gocyclo
 func TestCountriesString(t *testing.T) {
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		if (c.String() == "" || c.String() == UnknownMsg) && c != Unknown {
 			t.Errorf("Test All.String() err")
 		}
@@ -850,7 +852,7 @@ func TestCountriesString(t *testing.T) {
 
 //nolint:gocyclo
 func TestCountriesEmoji(t *testing.T) {
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		if c.Emoji() == "" || c.Emoji() == UnknownMsg {
 			t.Errorf("Test All.Emoji() err")
 		}
@@ -862,7 +864,7 @@ func TestCountriesEmoji(t *testing.T) {
 
 //nolint:gocyclo
 func TestCountriesFIFA(t *testing.T) {
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		if (c.FIFA() == "" || c.FIFA() == UnknownMsg) && c != Unknown {
 			t.Errorf("Test All.FIFA() err")
 		}
@@ -871,7 +873,7 @@ func TestCountriesFIFA(t *testing.T) {
 
 //nolint:gocyclo
 func TestCountriesIOC(t *testing.T) {
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		if (c.IOC() == "" || c.IOC() == UnknownMsg) && c != Unknown {
 			t.Errorf("Test All.IOC() err")
 		}
@@ -880,7 +882,7 @@ func TestCountriesIOC(t *testing.T) {
 
 //nolint:gocyclo
 func TestCountriesCapital(t *testing.T) {
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		if (c.Capital() == CapitalUnknown) && c != Unknown {
 			t.Errorf("Test All.Capital() err")
 		}
@@ -889,7 +891,7 @@ func TestCountriesCapital(t *testing.T) {
 
 //nolint:gocyclo
 func TestCountriesCurrency(t *testing.T) {
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		if c.Currency() == CurrencyUnknown && c != ATA && c != Unknown {
 			t.Errorf("Test All.Currency() err")
 		}
@@ -901,7 +903,7 @@ func TestCountriesCurrency(t *testing.T) {
 
 //nolint:gocyclo
 func TestCountriesDomain(t *testing.T) {
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		if c.Domain() == DomainUnknown && c != Unknown {
 			t.Errorf("Test All.Domain() err")
 		}
@@ -910,7 +912,7 @@ func TestCountriesDomain(t *testing.T) {
 
 //nolint:gocyclo
 func TestCountriesRegion(t *testing.T) {
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		if c.Region() == RegionUnknown && c != Unknown {
 			t.Errorf("Test All.Region() err")
 		}
@@ -919,7 +921,7 @@ func TestCountriesRegion(t *testing.T) {
 
 //nolint:gocyclo
 func TestCountriesCallCodes(t *testing.T) {
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		if len(c.CallCodes()) < 1 && c != None {
 			t.Errorf("Test All.CallCodes() err")
 		}
@@ -994,7 +996,7 @@ func TestCapitalsInfo(t *testing.T) {
 			t.Errorf("Test AllCapitals() err, want %v, got %v", c, c.Info().Code)
 		}
 	}
-	for _, c := range getAllCountries() {
+	for _, c := range getAllCountries(t) {
 		if c.Info().Capital.Info().Code != c.Info().Capital {
 			t.Errorf("Test c.Capital.Info() err, c: %v", c)
 		}
