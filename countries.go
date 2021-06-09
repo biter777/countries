@@ -5351,7 +5351,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 	case "UY", "URY", "URUGUAY":
 		return URY
 	case "XW", "XWA", "WALES":
-		return XWA
+		return WAL
 	case "FO", "FRO", "FAROEISLANDS", "FAROE", "FÄRÖER", "FAEROERER":
 		return FRO
 	case "FJ", "FJI", "FIJI", "FIDSCHI":
@@ -5385,7 +5385,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 	case "SE", "SWE", "SWEDEN", "SCHWEDEN":
 		return SWE
 	case "XS", "XSC", "SCOTLAND", "SCHOTTLAND":
-		return XSC
+		return SCO
 	case "LK", "LKA", "SRILANKA":
 		return LKA
 	case "EC", "ECU", "ECUADOR":
