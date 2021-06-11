@@ -1,3 +1,3 @@
-module github.com/biter777/countries
+module "github.com/Misnaged/countries"
 
-go 1.13
+go 1.15
