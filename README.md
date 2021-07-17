@@ -143,6 +143,7 @@ For more complex options, consult the [documentation](http://godoc.org/github.co
 	*	[@biter777](https://github.com/biter777)
 	*	[@gavincarr](https://github.com/gavincarr)
 	*	[@benja-M-1](https://github.com/benja-M-1)
+	*	[@jufemaiz](https://github.com/jufemaiz)
 
 2. **Donate** - a donation isn't necessary, but it's welcome.
 
