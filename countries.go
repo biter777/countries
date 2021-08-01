@@ -402,7 +402,7 @@ func (c CountryCode) String() string { //nolint:gocyclo
 	case 442:
 		return "Luxembourg"
 	case 446:
-		return "Macau (Special Administrative Region of China)"
+		return "Macau"
 	case 807:
 		return "North Macedonia (Republic of North Macedonia)"
 	case 450:
@@ -5125,9 +5125,9 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return COM
 	case "CG", "COG", "RCB", "CONGO", "KONGO":
 		return COG
-	case "KP", "PRK", "DEMOCRATICPEOPLESREPUBLICOFKOREA", "KOREADEMOCRATICPEOPLESREPUBLICOF", "KOREADEMOCRATICPEOPLESREPUBLIC", "KOREANORTH", "NORTHKOREA", "NORDKOREA":
+	case "KP", "PRK", "NORTH KOREA", "DEMOCRATICPEOPLESREPUBLICOFKOREA", "KOREADEMOCRATICPEOPLESREPUBLICOF", "KOREADEMOCRATICPEOPLESREPUBLIC", "KOREANORTH", "NORTHKOREA", "NORDKOREA":
 		return PRK
-	case "KR", "KOR", "ROK", "KOREA", "KOREYA", "SOUTHKOREA", "KOREAREPUBLICOF", "REPUBLICOFKOREA", "KOREAREPOF", "SÜDKOREA", "SUEDKOREA":
+	case "KR", "KOR", "ROK", "KOREA", "SOUTH KOREA", "KOREYA", "SOUTHKOREA", "KOREAREPUBLICOF", "REPUBLICOFKOREA", "KOREAREPOF", "SÜDKOREA", "SUEDKOREA":
 		return KOR
 	case "CR", "CRI", "COSTARICA", "KOSTARIKA", "KOSTARICA", "COSTARIKA":
 		return CRI
