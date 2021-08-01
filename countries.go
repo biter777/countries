@@ -344,7 +344,7 @@ func (c CountryCode) String() string { //nolint:gocyclo
 	case 340:
 		return "Honduras"
 	case 344:
-		return "Hong Kong (Special Administrative Region of China)"
+		return "Hong Kong"
 	case 348:
 		return "Hungary"
 	case 352:
@@ -566,7 +566,7 @@ func (c CountryCode) String() string { //nolint:gocyclo
 	case 760:
 		return "Syrian Arab Republic"
 	case 158:
-		return "Taiwan (Province of China)"
+		return "Taiwan"
 	case 762:
 		return "Tajikistan"
 	case 834:

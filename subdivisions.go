@@ -1483,8 +1483,6 @@ func (s SubdivisionCode) String() string { //nolint:cyclop,gocyclo
 		return "Hebei Sheng"
 	case SubdivisionCNHI:
 		return "Hainan Sheng"
-	case SubdivisionCNHK:
-		return "Hong Kong SAR (see also separate country code entry under HK)"
 	case SubdivisionCNHL:
 		return "Heilongjiang Sheng"
 	case SubdivisionCNHN:
@@ -1497,8 +1495,6 @@ func (s SubdivisionCode) String() string { //nolint:cyclop,gocyclo
 		return "Jiangxi Sheng"
 	case SubdivisionCNLN:
 		return "Liaoning Sheng"
-	case SubdivisionCNMO:
-		return "Macao SAR (see also separate country code entry under MO)"
 	case SubdivisionCNNM:
 		return "Nei Mongol Zizhiqu"
 	case SubdivisionCNNX:
@@ -1517,8 +1513,6 @@ func (s SubdivisionCode) String() string { //nolint:cyclop,gocyclo
 		return "Shanxi Sheng"
 	case SubdivisionCNTJ:
 		return "Tianjin Shi"
-	case SubdivisionCNTW:
-		return "Taiwan Sheng (see also separate country code entry under TW)"
 	case SubdivisionCNXJ:
 		return "Xinjiang Uygur Zizhiqu"
 	case SubdivisionCNXZ:
@@ -11257,8 +11251,6 @@ func (s SubdivisionCode) Country() CountryCode {
 		return CN
 	case SubdivisionCNHI:
 		return CN
-	case SubdivisionCNHK:
-		return CN
 	case SubdivisionCNHL:
 		return CN
 	case SubdivisionCNHN:
@@ -11270,8 +11262,6 @@ func (s SubdivisionCode) Country() CountryCode {
 	case SubdivisionCNJX:
 		return CN
 	case SubdivisionCNLN:
-		return CN
-	case SubdivisionCNMO:
 		return CN
 	case SubdivisionCNNM:
 		return CN
@@ -11290,8 +11280,6 @@ func (s SubdivisionCode) Country() CountryCode {
 	case SubdivisionCNSX:
 		return CN
 	case SubdivisionCNTJ:
-		return CN
-	case SubdivisionCNTW:
 		return CN
 	case SubdivisionCNXJ:
 		return CN
@@ -21046,8 +21034,6 @@ func (s SubdivisionCode) SubdivisionType() SubdivisionTypeCode {
 		return SubdivisionTypeProvince
 	case SubdivisionCNHI:
 		return SubdivisionTypeProvince
-	case SubdivisionCNHK:
-		return SubdivisionTypeSpecialAdministrativeRegion
 	case SubdivisionCNHL:
 		return SubdivisionTypeProvince
 	case SubdivisionCNHN:
@@ -21060,8 +21046,6 @@ func (s SubdivisionCode) SubdivisionType() SubdivisionTypeCode {
 		return SubdivisionTypeProvince
 	case SubdivisionCNLN:
 		return SubdivisionTypeProvince
-	case SubdivisionCNMO:
-		return SubdivisionTypeSpecialAdministrativeRegion
 	case SubdivisionCNNM:
 		return SubdivisionTypeAutonomousRegion
 	case SubdivisionCNNX:
@@ -21080,8 +21064,6 @@ func (s SubdivisionCode) SubdivisionType() SubdivisionTypeCode {
 		return SubdivisionTypeProvince
 	case SubdivisionCNTJ:
 		return SubdivisionTypeMunicipality
-	case SubdivisionCNTW:
-		return SubdivisionTypeProvince
 	case SubdivisionCNXJ:
 		return SubdivisionTypeAutonomousRegion
 	case SubdivisionCNXZ:
@@ -30118,14 +30100,12 @@ func AllSubdivisions() []SubdivisionCode {
 		SubdivisionCNHB,
 		SubdivisionCNHE,
 		SubdivisionCNHI,
-		SubdivisionCNHK,
 		SubdivisionCNHL,
 		SubdivisionCNHN,
 		SubdivisionCNJL,
 		SubdivisionCNJS,
 		SubdivisionCNJX,
 		SubdivisionCNLN,
-		SubdivisionCNMO,
 		SubdivisionCNNM,
 		SubdivisionCNNX,
 		SubdivisionCNQH,
@@ -30135,7 +30115,6 @@ func AllSubdivisions() []SubdivisionCode {
 		SubdivisionCNSN,
 		SubdivisionCNSX,
 		SubdivisionCNTJ,
-		SubdivisionCNTW,
 		SubdivisionCNXJ,
 		SubdivisionCNXZ,
 		SubdivisionCNYN,

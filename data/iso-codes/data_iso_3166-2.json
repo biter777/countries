@@ -3819,11 +3819,6 @@
       "type": "Province"
     },
     {
-      "code": "CN-HK",
-      "name": "Hong Kong SAR (see also separate country code entry under HK)",
-      "type": "Special administrative region"
-    },
-    {
       "code": "CN-HL",
       "name": "Heilongjiang Sheng",
       "type": "Province"
@@ -3902,11 +3897,6 @@
       "code": "CN-TJ",
       "name": "Tianjin Shi",
       "type": "Municipality"
-    },
-    {
-      "code": "CN-TW",
-      "name": "Taiwan Sheng (see also separate country code entry under TW)",
-      "type": "Province"
     },
     {
       "code": "CN-XJ",

@@ -643,7 +643,7 @@
       "alpha_3": "HKG",
       "name": "Hong Kong",
       "numeric": "344",
-      "official_name": "Hong Kong Special Administrative Region of China"
+      "official_name": "Hong Kong"
     },
     {
       "alpha_2": "HM",
@@ -905,7 +905,7 @@
       "alpha_3": "MAC",
       "name": "Macao",
       "numeric": "446",
-      "official_name": "Macao Special Administrative Region of China"
+      "official_name": "Macao"
     },
     {
       "alpha_2": "MF",
@@ -1531,9 +1531,9 @@
       "alpha_2": "TW",
       "alpha_3": "TWN",
       "common_name": "Taiwan",
-      "name": "Taiwan, Province of China",
+      "name": "Taiwan",
       "numeric": "158",
-      "official_name": "Taiwan, Province of China"
+      "official_name": "Taiwan"
     },
     {
       "alpha_2": "TZ",
