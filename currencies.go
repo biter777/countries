@@ -1661,6 +1661,9 @@ func AllCurrenciesInfo() []*Currency {
 //nolint:gocyclo
 func CurrencyCodeByName(name string) CurrencyCode { //nolint:gocyclo
 	switch textPrepare(name) {
+	// NonCountry: Outer Space for special currency code
+	case "OUTER SPACE CURRENCY", "SPACE CURRENCY", "STAR":
+		return CurrencySTAR
 	case "AFN", "AFGHANI", "AFHANI":
 		return CurrencyAFN
 	case "ALL", "LEK":

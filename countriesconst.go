@@ -539,6 +539,8 @@ const (
 
 // Non-countries codes
 const (
+	// NonCountry: Outer Space	  	  								  CountryCode = 000000
+	OuterSpace CountryCode = 999999
 	// NonCountryInternationalFreephone                               CountryCode = 999800
 	NonCountryInternationalFreephone CountryCode = 999800 // for callcode +800, International Freephone (UIFN)
 	// NonCountryInmarsat                                             CountryCode = 999870

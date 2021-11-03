@@ -157,6 +157,8 @@ func (c CountryCode) Type() string {
 //nolint:gocyclo
 func (c CountryCode) String() string { //nolint:gocyclo
 	switch c {
+	case 000000:
+		return "Outer Space"
 	case 8:
 		return "Albania"
 	case 12:
@@ -4929,6 +4931,9 @@ func AllInfo() []*Country {
 //nolint:misspell,gocyclo
 func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 	switch textPrepare(name) {
+	// NonCountry: Outer Space for special currency code
+	case "OUTER SPACE", "OUTERSPACE", "SPACE":
+		return OuterSpace
 	case "AU", "AUS", "AUSTRALIA", "AVSTRALIA", "AVSTRALIYA", "AUSTRALIYA", "AUSTRALIEN":
 		return AUS
 	case "AT", "AUT", "AUSTRIA", "AVSTRIA", "AUSTRIYA", "AVSTRIYA", "ÖSTERREICH", "OESTERREICH":
