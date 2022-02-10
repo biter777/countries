@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/biter777/countries"
+	"github.com/royshahaf/countries"
 	// "github.com/jinzhu/gorm"
 )
 
@@ -71,6 +71,10 @@ func main() {
 	// Compare by name
 	if strings.EqualFold("angola", countries.AGO.String()) {
 		fmt.Println("Yes! It's Angola!") // Yes! It's Angola!
+	}
+
+	if countries.ByName("Saint Martin") == countries.MAF {
+		fmt.Println("Yes! It's Saint Martin!") // Yes! It's Angola!
 	}
 
 	// Database usage
