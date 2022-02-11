@@ -77,6 +77,9 @@ func main() {
 		fmt.Println("Yes! It's Saint Martin!") // Yes! It's Angola!
 	}
 
+	if countries.ByName("Iran, Islamic Republic Of") == countries.IRN {
+		fmt.Println("Yes! It's Iran!") // Yes! It's Angola!
+	}
 	// Database usage
 	/*
 		type User struct {

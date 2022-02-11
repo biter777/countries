@@ -5085,7 +5085,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return JOR
 	case "IQ", "IRQ", "IRAQ", "IRAK":
 		return IRQ
-	case "IR", "IRN", "IRI", "IRAN":
+	case "IR", "IRN", "IRI", "IRAN", "IRANISLAMICREPUBLICOF":
 		return IRN
 	case "IE", "IRL", "IRELAND", "IRLAND":
 		return IRL
