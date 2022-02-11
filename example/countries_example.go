@@ -74,11 +74,11 @@ func main() {
 	}
 
 	if countries.ByName("Saint Martin") == countries.MAF {
-		fmt.Println("Yes! It's Saint Martin!") // Yes! It's Angola!
+		fmt.Println("Yes! It's Saint Martin!") // Yes! It's Saint Martin!
 	}
 
 	if countries.ByName("Iran, Islamic Republic Of") == countries.IRN {
-		fmt.Println("Yes! It's Iran!") // Yes! It's Angola!
+		fmt.Println("Yes! It's Iran!") // Yes! It's Iran!
 	}
 	// Database usage
 	/*
