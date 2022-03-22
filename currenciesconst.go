@@ -25,7 +25,7 @@ const (
 	CurrencyBahrainiDinar                  CurrencyCode = 48
 	CurrencyTaka                           CurrencyCode = 50
 	CurrencyBarbadosDollar                 CurrencyCode = 52
-	CurrencyBelarussianRuble               CurrencyCode = 974
+	CurrencyBelarussianRuble               CurrencyCode = 933
 	CurrencyBelizeDollar                   CurrencyCode = 84
 	CurrencyCFAFrancBCEAO                  CurrencyCode = 952
 	CurrencyBermudianDollar                CurrencyCode = 60
@@ -201,7 +201,7 @@ const (
 	CurrencyBHD CurrencyCode = 48
 	CurrencyBDT CurrencyCode = 50
 	CurrencyBBD CurrencyCode = 52
-	CurrencyBYR CurrencyCode = 974
+	CurrencyBYN CurrencyCode = 933
 	CurrencyBZD CurrencyCode = 84
 	CurrencyXOF CurrencyCode = 952
 	CurrencyBMD CurrencyCode = 60
