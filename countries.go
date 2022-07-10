@@ -551,7 +551,7 @@ func (c CountryCode) String() string { //nolint:gocyclo
 		return "Spain"
 	case 144:
 		return "Sri Lanka"
-	case 736:
+	case 729:
 		return "Sudan"
 	case 740:
 		return "Suriname"
@@ -1087,7 +1087,7 @@ func (c CountryCode) StringRus() string { //nolint:gocyclo
 		return "Испания"
 	case 144:
 		return "Шри Ланка"
-	case 736:
+	case 729:
 		return "Судан"
 	case 740:
 		return "Суринам"
@@ -1623,7 +1623,7 @@ func (c CountryCode) Alpha2() string { //nolint:gocyclo
 		return "ES"
 	case 144:
 		return "LK"
-	case 736:
+	case 729:
 		return "SD"
 	case 740:
 		return "SR"
@@ -2159,7 +2159,7 @@ func (c CountryCode) Alpha3() string { //nolint:gocyclo
 		return "ESP"
 	case 144:
 		return "LKA"
-	case 736:
+	case 729:
 		return "SDN"
 	case 740:
 		return "SUR"
