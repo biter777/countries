@@ -268,7 +268,7 @@ func (c CountryCode) String() string { //nolint:gocyclo
 	case 196:
 		return "Cyprus"
 	case 203:
-		return "Czech Republic"
+		return "Czechia"
 	case 208:
 		return "Denmark"
 	case 262:
