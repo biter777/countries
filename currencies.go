@@ -1731,9 +1731,9 @@ func CurrencyCodeByName(name string) CurrencyCode { //nolint:gocyclo
 		return CurrencyCAD
 	case "KYD", "CAYMANISLANDSDOLLAR":
 		return CurrencyKYD
-	case "CLF", "UNIDADDEFOMENTO", "CHILE", "CHILI":
+	case "CLF", "UNIDADDEFOMENTO", "UNIDADFOMENTO":
 		return CurrencyCLF
-	case "CLP", "CHILEANPESO":
+	case "CLP", "CHILEANPESO", "CHILE", "CHILI", "CHILLE", "CHILLI", "CHILEAN", "CHILLEAN":
 		return CurrencyCLP
 	case "CNY", "YUANRENMINBI":
 		return CurrencyCNY
