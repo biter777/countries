@@ -421,8 +421,8 @@ const (
 	Spain CountryCode = 724
 	// SriLanka                               CountryCode = 144
 	SriLanka CountryCode = 144
-	// Sudan                                  CountryCode = 736
-	Sudan CountryCode = 736
+	// Sudan                                  CountryCode = 729
+	Sudan CountryCode = 729
 	// Suriname                               CountryCode = 740
 	Suriname CountryCode = 740
 	// SvalbardAndJanMayenIslands             CountryCode = 744
@@ -957,8 +957,8 @@ const (
 	ES CountryCode = 724
 	// LK CountryCode = 144
 	LK CountryCode = 144
-	// SD CountryCode = 736
-	SD CountryCode = 736
+	// SD CountryCode = 729
+	SD CountryCode = 729
 	// SR CountryCode = 740
 	SR CountryCode = 740
 	// SJ CountryCode = 744
@@ -1469,8 +1469,8 @@ const (
 	ESP CountryCode = 724
 	// LKA CountryCode = 144
 	LKA CountryCode = 144
-	// SDN CountryCode = 736
-	SDN CountryCode = 736
+	// SDN CountryCode = 729
+	SDN CountryCode = 729
 	// SUR CountryCode = 740
 	SUR CountryCode = 740
 	// SJM CountryCode = 744
