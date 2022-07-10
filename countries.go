@@ -2551,7 +2551,7 @@ func (c CountryCode) Currency() CurrencyCode { //nolint:gocyclo
 	case BHR:
 		return CurrencyBHD
 	case BLR:
-		return CurrencyBYR
+		return CurrencyBYN
 	case BLZ:
 		return CurrencyBZD
 	case BEL:

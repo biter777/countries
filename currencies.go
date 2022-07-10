@@ -79,7 +79,7 @@ func (c CurrencyCode) String() string { //nolint:gocyclo
 		return "Taka"
 	case 52:
 		return "Barbados Dollar"
-	case 974:
+	case 933:
 		return "Belarussian Ruble"
 	case 84:
 		return "Belize Dollar"
@@ -425,8 +425,8 @@ func (c CurrencyCode) Alpha() string { //nolint:gocyclo
 		return "BDT"
 	case 52:
 		return "BBD"
-	case 974:
-		return "BYR"
+	case 933:
+		return "BYN"
 	case 84:
 		return "BZD"
 	case 952:
@@ -768,7 +768,7 @@ func (c CurrencyCode) Countries() []CountryCode { //nolint:gocyclo
 		return []CountryCode{PAN}
 	case CurrencyBBD:
 		return []CountryCode{BRB}
-	case CurrencyBYR:
+	case CurrencyBYN:
 		return []CountryCode{BLR}
 	case CurrencyBZD:
 		return []CountryCode{BLZ}
@@ -1099,7 +1099,7 @@ func AllCurrencies() []CurrencyCode {
 		CurrencyBHD,
 		CurrencyBDT,
 		CurrencyBBD,
-		CurrencyBYR,
+		CurrencyBYN,
 		CurrencyBZD,
 		CurrencyXOF,
 		CurrencyBMD,
@@ -1290,7 +1290,7 @@ func (c CurrencyCode) Digits() int { //nolint:gocyclo
 		return 2
 	case CurrencyBBD:
 		return 2
-	case CurrencyBYR:
+	case CurrencyBYN:
 		return 0
 	case CurrencyBZD:
 		return 2
@@ -1693,8 +1693,8 @@ func CurrencyCodeByName(name string) CurrencyCode { //nolint:gocyclo
 		return CurrencyBDT
 	case "BBD", "BARBADOSDOLLAR":
 		return CurrencyBBD
-	case "BYR", "BELARUSSIANRUBLE":
-		return CurrencyBYR
+	case "BYN", "BELARUSSIANRUBLE":
+		return CurrencyBYN
 	case "BZD", "BELIZEDOLLAR":
 		return CurrencyBZD
 	case "XOF", "CFAFRANCBCEAO":
