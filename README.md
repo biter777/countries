@@ -137,20 +137,16 @@ For more complex options, consult the [documentation](http://godoc.org/github.co
 
 1. **Welcome pull requests, bug fixes and issue reports**
 
-	Before proposing a change, please discuss it first by raising an issue.
-	Contributors list:
-
-	*	[@biter777](https://github.com/biter777)
-	*	[@gavincarr](https://github.com/gavincarr)
-	*	[@benja-M-1](https://github.com/benja-M-1)
-	*	[@jufemaiz](https://github.com/jufemaiz)
-
+	[Contributors list](https://github.com/biter777/countries/graphs/contributors)
+	
 2. **Donate** - a donation isn't necessary, but it's welcome.
 
 	<noscript><a href="https://liberapay.com/biter777/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
 	[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/I2I61D1XZ) <a href="https://pay.cloudtips.ru/p/94fc4268" target="_blank"><img height="30" src="https://usa.visa.com/dam/VCOM/regional/lac/ENG/Default/Partner%20With%20Us/Payment%20Technology/visapos/full-color-800x450.jpg"></a> <a href="https://pay.cloudtips.ru/p/94fc4268" target="_blank"><img height="30" src="https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_debit_sym_decal_web_105px.png"></a> <a href="https://pay.cloudtips.ru/p/94fc4268" target="_blank"><img height="30" src="https://developer.apple.com/assets/elements/icons/apple-pay/apple-pay.svg"></a> <a href="https://pay.cloudtips.ru/p/94fc4268" target="_blank"><img height="30" src="https://developers.google.com/pay/api/images/brand-guidelines/google-pay-mark.png"></a> <a href="https://money.yandex.ru/to/4100164702007" target="_blank"><img width="125" height="25" src="https://yastatic.net/q/logoaas/v1/Yandex%20Money.svg"></a><br/>
 
-3. **Star us** - give us a star, please, if it's not against your religion :)
+3. **Star us**
+
+	Give us a star, please, if it's not against your religion :)
 
 ## Updating ISO 3166
 
