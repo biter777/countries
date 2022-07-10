@@ -757,8 +757,6 @@ func (c CountryCode) StringRus() string { //nolint:gocyclo
 		return "Бруней"
 	case 100:
 		return "Болгария"
-	case 854:
-		return "Буркина Фасо"
 	case 108:
 		return "Бурунди"
 	case 116:
@@ -773,6 +771,8 @@ func (c CountryCode) StringRus() string { //nolint:gocyclo
 		return "Каймановы острова"
 	case 140:
 		return "Центральная Африканская Республика"
+	case 144:
+		return "Шри Ланка"
 	case 148:
 		return "Чад"
 	case 152:
@@ -1085,8 +1085,6 @@ func (c CountryCode) StringRus() string { //nolint:gocyclo
 		return "Южная Георгия и Южные Сандвичевы острова"
 	case 724:
 		return "Испания"
-	case 144:
-		return "Шри Ланка"
 	case 729:
 		return "Судан"
 	case 740:
@@ -1141,6 +1139,8 @@ func (c CountryCode) StringRus() string { //nolint:gocyclo
 		return "Соединенные Штаты Америки"
 	case 581:
 		return "Отдаленные Острова США"
+	case 854:
+		return "Буркина Фасо"
 	case 858:
 		return "Уругвай"
 	case 860:
