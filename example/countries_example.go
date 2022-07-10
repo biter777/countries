@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/biter777/countries"
+	"github.com/royshahaf/countries"
 	// "github.com/jinzhu/gorm"
 )
 
@@ -73,6 +73,13 @@ func main() {
 		fmt.Println("Yes! It's Angola!") // Yes! It's Angola!
 	}
 
+	if countries.ByName("Saint Martin") == countries.MAF {
+		fmt.Println("Yes! It's Saint Martin!") // Yes! It's Saint Martin!
+	}
+
+	if countries.ByName("Iran, Islamic Republic Of") == countries.IRN {
+		fmt.Println("Yes! It's Iran!") // Yes! It's Iran!
+	}
 	// Database usage
 	/*
 		type User struct {
