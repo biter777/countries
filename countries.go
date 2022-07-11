@@ -5383,7 +5383,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return CAF
 	case "TD", "TCD", "CHAD", "TSCHAD":
 		return TCD
-	case "CZ", "CZE", "CZECHREPUBLIC", "CZECH", "TSCHECHIEN":
+	case "CZ", "CZE",  "CZECHIA","CZECHIYA", "CZECHREPUBLIC", "REPUBLICOFCZECH", "CZECH", "TSCHECHIEN", "CZECHIA", "CHEHIA", "CHEHIYA":
 		return CZE
 	case "CL", "CHL", "RCH", "CHILE":
 		return CHL
