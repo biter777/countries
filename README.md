@@ -1,6 +1,6 @@
 # countries
 
-Countries - ISO 3166 (ISO3166-1, ISO3166, Digit, Alpha-2, Alpha-3) countries codes with subdivisions and names (on eng and rus), ISO4217 currency designators, ITU-T E.164 IDD calling phone codes, countries capitals, UN M.49 regions codes, IANA ccTLD countries domains, IOC/NOC and FIFA codes, **VERY FAST**, NO maps[], NO slices[], NO init() funcs, NO external links/files/data, NO interface{}, NO specific dependencies, Databases/JSON/GOB/XML/CSV compatible, Emoji countries flags and currencies support, full support ISO 3166-1,ISO 3166-2, ISO 4217, ITU-T E.164, Unicode CLDR and IANA ccTLD standarts.
+Countries - ISO 3166 (ISO3166-1, ISO3166, Digit, Alpha-2, Alpha-3) countries codes with subdivisions and names (on eng and rus), ISO4217 currency designators, ITU-T E.164 IDD calling phone codes, countries capitals, UN M.49 regions codes, IANA ccTLD countries domains, IOC/NOC and FIFA codes, **VERY VERY FAST**, NO maps[], NO slices[], NO init() funcs, NO external links/files/data, NO interface{}, NO specific dependencies, Databases/JSON/GOB/XML/CSV compatible, Emoji countries flags and currencies support, full support ISO 3166-1,ISO 3166-2, ISO 4217, ITU-T E.164, Unicode CLDR and IANA ccTLD standarts.
 
 Full support ISO 3166-1, ISO 3166-2, ISO 4217, ITU-T E.164, Unicode CLDR and IANA ccTLD standarts!
 
@@ -19,6 +19,9 @@ Full support ISO 3166-1, ISO 3166-2, ISO 4217, ITU-T E.164, Unicode CLDR and IAN
 [![ISO](https://img.shields.io/badge/powered%20by-ISO-brightgreen)](https://www.iso.org/)
 [![ITU](https://img.shields.io/badge/powered%20by-ITU-brightgreen)](https://www.itu.int/)
 [![IANA](https://img.shields.io/badge/powered%20by-IANA-brightgreen)](http://www.iana.org/)
+[![ICANN](https://img.shields.io/badge/powered%20by-ICANN-brightgreen)](https://www.icann.org/)
+[![M49](https://img.shields.io/badge/powered%20by-UN%20M49-brightgreen)](https://unstats.un.org/unsd/methodology/m49/)
+[![CLDR](https://img.shields.io/badge/powered%20by-CLDR-brightgreen)](https://cldr.unicode.org/)
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-brightgreen.svg)](https://opensource.org/licenses/BSD-2-Clause)
 [![Build Status](https://travis-ci.org/biter777/countries.svg?branch=master)](https://travis-ci.org/biter777/countries)
 [![Build status](https://ci.appveyor.com/api/projects/status/t9lpor9o8tpacpmr/branch/master?svg=true)](https://ci.appveyor.com/project/biter777/countries/branch/master)
