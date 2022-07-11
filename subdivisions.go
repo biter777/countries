@@ -29359,7 +29359,7 @@ func (s SubdivisionCode) SubdivisionType() SubdivisionTypeCode {
 }
 
 // Type implements Typer interface
-func (s Subdivision) Type() string {
+func (_ Subdivision) Type() string {
 	return TypeSubdivision
 }
 
