@@ -1,5 +1,9 @@
 # countries changelog
 
+## v1.5.5 (2022-11-06)
+
+* BYR/BYN updated, updates codes, fix module name error, fix some linters warnings
+
 ## v1.4.0 (TBA)
 
 *   Add: subdivisions as per ISO 3166-2.
