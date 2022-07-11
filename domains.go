@@ -17,7 +17,7 @@ type Domain struct {
 }
 
 // Type implements Typer interface
-func (c DomainCode) Type() string {
+func (_ DomainCode) Type() string {
 	return TypeDomainCode
 }
 
@@ -90,7 +90,7 @@ func (c DomainCode) Info() *Domain {
 }
 
 // Type implements Typer interface
-func (c Domain) Type() string {
+func (_ Domain) Type() string {
 	return TypeDomain
 }
 
