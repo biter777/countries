@@ -17,7 +17,7 @@ type Subdivision struct {
 }
 
 // Type implements Typer interface
-func (s SubdivisionCode) Type() string {
+func (_ SubdivisionCode) Type() string {
 	return TypeSubdivisionCode
 }
 
