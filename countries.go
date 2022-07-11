@@ -149,7 +149,7 @@ func (c CountryCode) Emoji3() string {
 }
 
 // Type implements Typer interface.
-func (c CountryCode) Type() string {
+func (_ CountryCode) Type() string {
 	return TypeCountryCode
 }
 
@@ -4888,7 +4888,7 @@ func (c CountryCode) Subdivisions() []SubdivisionCode {
 }
 
 // Type implements Typer interface.
-func (country *Country) Type() string {
+func (_ *Country) Type() string {
 	return TypeCountry
 }
 
