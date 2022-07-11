@@ -15,7 +15,7 @@ type Region struct {
 }
 
 // Type implements Typer interface
-func (c RegionCode) Type() string {
+func (_ RegionCode) Type() string {
 	return TypeRegionCode
 }
 
@@ -84,7 +84,7 @@ func (c RegionCode) Info() *Region {
 }
 
 // Type implements Typer interface
-func (r *Region) Type() string {
+func (_ *Region) Type() string {
 	return TypeRegion
 }
 
