@@ -16,7 +16,7 @@ type Capital struct {
 }
 
 // Type implements Typer interface
-func (c CapitalCode) Type() string {
+func (_ CapitalCode) Type() string {
 	return TypeCapitalCode
 }
 
@@ -1059,7 +1059,7 @@ func (c CapitalCode) Info() *Capital {
 }
 
 // Type implements Typer interface
-func (c Capital) Type() string {
+func (_ Capital) Type() string {
 	return TypeCapital
 }
 
