@@ -21,7 +21,7 @@ func (c CallCode) String() string {
 }
 
 // Type implements Typer interface
-func (c CallCode) Type() string {
+func (_ CallCode) Type() string {
 	return TypeCallCode
 }
 
@@ -834,7 +834,7 @@ func (c CallCode) IsValid() bool {
 }
 
 // Type implements Typer interface
-func (c *CallCodeInfo) Type() string {
+func (_ *CallCodeInfo) Type() string {
 	return TypeCallCodeInfo
 }
 
