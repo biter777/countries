@@ -131,7 +131,7 @@ db.Create(user)
 
 ## Options
 
-You can take a counties names in russian language, use StringRus(). For Emoji use Emoji(). Enjoy!
+For Emoji use Emoji(). Enjoy!
 
 ```go
 import "github.com/biter777/countries"
