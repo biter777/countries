@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/royshahaf/countries"
+	"github.com/biter777/countries"
 	// "github.com/jinzhu/gorm"
 )
 
