@@ -20,7 +20,6 @@ Full support ISO 3166-1, ISO 3166-2, ISO 4217, ITU-T E.164, Unicode CLDR and IAN
 [![ITU](https://img.shields.io/badge/powered%20by-ITU-brightgreen)](https://www.itu.int/)
 [![IANA](https://img.shields.io/badge/powered%20by-IANA-brightgreen)](http://www.iana.org/)
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-brightgreen.svg)](https://opensource.org/licenses/BSD-2-Clause)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fbiter777%2Fcountries.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fbiter777%2Fcountries?ref=badge_shield)
 [![Build Status](https://travis-ci.org/biter777/countries.svg?branch=master)](https://travis-ci.org/biter777/countries)
 [![Build status](https://ci.appveyor.com/api/projects/status/t9lpor9o8tpacpmr/branch/master?svg=true)](https://ci.appveyor.com/project/biter777/countries/branch/master)
 [![Semaphore Status](https://biter777.semaphoreci.com/badges/countries.svg?style=shields)](https://biter777.semaphoreci.com/projects/countries)
