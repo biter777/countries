@@ -145,6 +145,7 @@ func TestCallCodesCode(t *testing.T) {
 		info := c.Info()
 		if info == nil {
 			t.Errorf("Test Info() err: c == nil")
+			continue
 		}
 		if info.Code != CallCodeUnknown && info.Code != c {
 			t.Errorf("Test info.Code err, c: %v", *info)
