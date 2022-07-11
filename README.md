@@ -27,7 +27,7 @@ Full support ISO 3166-1, ISO 3166-2, ISO 4217, ITU-T E.164, Unicode CLDR and IAN
 [![Build Status](https://travis-ci.org/biter777/countries.svg?branch=master)](https://travis-ci.org/biter777/countries)
 [![Build status](https://ci.appveyor.com/api/projects/status/t9lpor9o8tpacpmr/branch/master?svg=true)](https://ci.appveyor.com/project/biter777/countries/branch/master)
 [![Semaphore Status](https://biter777.semaphoreci.com/badges/countries.svg?style=shields)](https://biter777.semaphoreci.com/projects/countries)
-[![Build Status](https://github.com/go-vgo/robotgo/workflows/Go/badge.svg)](https://github.com/go-vgo/robotgo/commits/master)
+[![Build Status](https://github.com/biter777/countries/actions/workflows/go.yml/badge.svg)](https://github.com/biter777/countries/actions/workflows/go.yml)
 [![Codeship Status](https://codeship.com/projects/ac73624a-4038-4f6a-9f0c-ab48d3c2c6d0/status?branch=master)](https://app.codeship.com/projects/ac73624a-4038-4f6a-9f0c-ab48d3c2c6d0)
 <a href="//www.dmca.com/Protection/Status.aspx?ID=7a019cc5-ec73-464b-9707-4b33726f348f" title="DMCA.com Protection Status" class="dmca-badge"> <img src ="https://img.shields.io/badge/DMCA-protected-brightgreen" alt="DMCA.com Protection Status" /></a>
 [![Dependencies Free](https://img.shields.io/badge/dependencies-free-brightgreen)](https://pkg.go.dev/github.com/biter777/countries?tab=imports)
