@@ -1409,7 +1409,7 @@ func (c CurrencyCode) Digits() int { //nolint:gocyclo
 	case CurrencyIRR:
 		return 0
 	case CurrencyIQD:
-		return 0
+		return 3
 	case CurrencyILS:
 		return 2
 	case CurrencyJMD:
