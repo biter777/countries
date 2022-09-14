@@ -154,6 +154,7 @@ func (_ CountryCode) Type() string {
 }
 
 // String - implements fmt.Stringer, returns a english name of country
+//
 //nolint:gocyclo
 func (c CountryCode) String() string { //nolint:gocyclo
 	switch c {
@@ -213,7 +214,7 @@ func (c CountryCode) String() string { //nolint:gocyclo
 		return "Botswana"
 	case 74:
 		return "Bouvet Island"
-	case 76:
+	case 986:
 		return "Brazil"
 	case 86:
 		return "British Indian Ocean Territory"
@@ -690,6 +691,7 @@ func (c CountryCode) String() string { //nolint:gocyclo
 }
 
 // StringRus - returns a russian name of country
+//
 //nolint:gocyclo
 func (c CountryCode) StringRus() string { //nolint:gocyclo
 	switch c {
@@ -749,7 +751,7 @@ func (c CountryCode) StringRus() string { //nolint:gocyclo
 		return "Ботсвана"
 	case 74:
 		return "остров Буве"
-	case 76:
+	case 986:
 		return "Бразилия"
 	case 86:
 		return "Британские территории Индийского океана"
@@ -1226,6 +1228,7 @@ func (c CountryCode) StringRus() string { //nolint:gocyclo
 }
 
 // Alpha2 - returns a default Alpha (Alpha-2/ISO2, 2 chars) code of country
+//
 //nolint:gocyclo
 func (c CountryCode) Alpha2() string { //nolint:gocyclo
 	switch c {
@@ -1285,7 +1288,7 @@ func (c CountryCode) Alpha2() string { //nolint:gocyclo
 		return "BW"
 	case 74:
 		return "BV"
-	case 76:
+	case 986:
 		return "BR"
 	case 86:
 		return "IO"
@@ -1762,6 +1765,7 @@ func (c CountryCode) Alpha2() string { //nolint:gocyclo
 }
 
 // Alpha3 - returns a Alpha-3 (ISO3, 3 chars) code of country
+//
 //nolint:gocyclo
 func (c CountryCode) Alpha3() string { //nolint:gocyclo
 	switch c {
@@ -1821,7 +1825,7 @@ func (c CountryCode) Alpha3() string { //nolint:gocyclo
 		return "BWA"
 	case 74:
 		return "BVT"
-	case 76:
+	case 986:
 		return "BRA"
 	case 86:
 		return "IOT"
@@ -2321,6 +2325,7 @@ func (c CountryCode) FIFA() string {
 }
 
 // IOC - returns The International Olympic Committee (IOC) three-letter abbreviation country codes
+//
 //nolint:gocyclo
 func (c CountryCode) IOC() string { //nolint:gocyclo
 	switch c {
@@ -2509,6 +2514,7 @@ func (c CountryCode) IOC() string { //nolint:gocyclo
 }
 
 // Currency - returns a currency of the country
+//
 //nolint:gocyclo
 func (c CountryCode) Currency() CurrencyCode { //nolint:gocyclo
 	switch c {
@@ -3284,6 +3290,7 @@ func AllNonCountries() []CountryCode {
 }
 
 // CallCodes - return calling code of country
+//
 //nolint:gocyclo
 func (c CountryCode) CallCodes() []CallCode { //nolint:gocyclo
 	switch c {
@@ -3830,6 +3837,7 @@ func (c CountryCode) Domain() DomainCode {
 }
 
 // Region - return Region code ot the country
+//
 //nolint:gocyclo
 func (c CountryCode) Region() RegionCode { //nolint:gocyclo
 	switch c {
@@ -4347,6 +4355,7 @@ func (c CountryCode) Region() RegionCode { //nolint:gocyclo
 }
 
 // Capital - return a capital of country
+//
 //nolint:gocyclo
 func (c CountryCode) Capital() CapitalCode { //nolint:gocyclo
 	switch c {
@@ -4913,7 +4922,6 @@ func (country *Country) Scan(src interface{}) error {
 	return nil
 }
 
-//
 // AllInfo - return all currencies as []Currency
 func AllInfo() []*Country {
 	all := All()
@@ -4926,6 +4934,7 @@ func AllInfo() []*Country {
 
 // ByName - return CountryCode by country Alpha-2 / Alpha-3 / name, case-insensitive, example: rus := ByName("Ru") OR rus := ByName("russia"),
 // returns countries.Unknown, if country name not found or not valid
+//
 //nolint:misspell,gocyclo
 func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 	switch textPrepare(name) {
@@ -5383,7 +5392,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return CAF
 	case "TD", "TCD", "CHAD", "TSCHAD":
 		return TCD
-	case "CZ", "CZE",  "CZECHIA", "CZECHIYA", "CZECHREPUBLIC", "REPUBLICOFCZECH", "CZECH", "TSCHECHIEN", "CHEHIA", "CHEHIYA":
+	case "CZ", "CZE", "CZECHIA", "CZECHIYA", "CZECHREPUBLIC", "REPUBLICOFCZECH", "CZECH", "TSCHECHIEN", "CHEHIA", "CHEHIYA":
 		return CZE
 	case "CL", "CHL", "RCH", "CHILE":
 		return CHL
