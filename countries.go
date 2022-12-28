@@ -5291,7 +5291,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return STP
 	case "SA", "SAU", "SAUDIARABIA", "SAUDI", "SAUDIARABIEN":
 		return SAU
-	case "SZ", "SWZ", "SWAZILAND", "SWASILAND":
+	case "SZ", "SWZ", "SWAZILAND", "SWASILAND", "ESWATINI", "KINGDOMOFESWATINI":
 		return SWZ
 	case "SC", "SYC", "SEYCHELLES", "SEYCHELLEN":
 		return SYC
