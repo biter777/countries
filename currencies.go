@@ -371,7 +371,7 @@ func (c CurrencyCode) String() string { //nolint:gocyclo
 		return "Uzbekistan Sum"
 	case 548:
 		return "Vatu"
-	case 937:
+	case 928:
 		return "Bolivar"
 	case 704:
 		return "Dong"
@@ -717,8 +717,8 @@ func (c CurrencyCode) Alpha() string { //nolint:gocyclo
 		return "UZS"
 	case 548:
 		return "VUV"
-	case 937:
-		return "VEF"
+	case 928:
+		return "VES"
 	case 704:
 		return "VND"
 	case 886:
@@ -774,7 +774,7 @@ func (c CurrencyCode) Countries() []CountryCode { //nolint:gocyclo
 		return []CountryCode{BLZ}
 	case CurrencyBMD:
 		return []CountryCode{BMU}
-	case CurrencyVEF:
+	case CurrencyVES:
 		return []CountryCode{VEN}
 	case CurrencyBOB:
 		return []CountryCode{BOL}
@@ -1245,7 +1245,7 @@ func AllCurrencies() []CurrencyCode {
 		CurrencyUYU,
 		CurrencyUZS,
 		CurrencyVUV,
-		CurrencyVEF,
+		CurrencyVES,
 		CurrencyVND,
 		CurrencyYER,
 		CurrencyZMW,
@@ -1582,7 +1582,7 @@ func (c CurrencyCode) Digits() int { //nolint:gocyclo
 		return 0
 	case CurrencyVUV:
 		return 0
-	case CurrencyVEF:
+	case CurrencyVES:
 		return 2
 	case CurrencyVND:
 		return 0
@@ -1987,8 +1987,8 @@ func CurrencyCodeByName(name string) CurrencyCode { //nolint:gocyclo
 		return CurrencyUZS
 	case "VUV", "VATU":
 		return CurrencyVUV
-	case "VEF", "BOLIVAR":
-		return CurrencyVEF
+	case "VES", "BOLIVAR":
+		return CurrencyVES
 	case "VND", "DONG":
 		return CurrencyVND
 	case "YER", "YEMENIRIAL":
