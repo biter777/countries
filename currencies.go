@@ -30,7 +30,7 @@ func (c CurrencyCode) Emoji() string {
 	case CurrencyGBP:
 		return "💷"
 	}
-	return c.Alpha()
+	return c.Alpha() 
 }
 
 // TotalCurrencies - returns number of currencies in the package, countries.TotalCurrencies() == len(countries.AllCurrencies()) but static value for performance
