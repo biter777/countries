@@ -35,7 +35,7 @@ func (c CurrencyCode) Emoji() string {
 
 // TotalCurrencies - returns number of currencies in the package, countries.TotalCurrencies() == len(countries.AllCurrencies()) but static value for performance
 func TotalCurrencies() int {
-	return 168
+	return 169
 }
 
 // Type implements Typer interface
@@ -1593,7 +1593,7 @@ func (c CurrencyCode) Digits() int { //nolint:gocyclo
 		return 0
 	case CurrencyVUV:
 		return 0
-	case CurrencyVEF:
+	case CurrencyVES, CurrencyVEF:
 		return 2
 	case CurrencyVND:
 		return 0
