@@ -33,6 +33,10 @@ func TestCountriesByName(t *testing.T) {
 	if countryCodeOut != XSC {
 		t.Errorf("Test ByName() err, want %v, got %v", XSC, countryCodeOut)
 	}
+	countryCodeOut = ByName("BRAZIL")
+	if countryCodeOut != BRA {
+		t.Errorf("Test ByName() err, want %v, got %v", BRA, countryCodeOut)
+	}
 	countryCodeOut = ByName("pupok")
 	if countryCodeOut != Unknown {
 		t.Errorf("Test ByName() err, want %v, got %v", Unknown, countryCodeOut)
@@ -50,6 +54,10 @@ func TestCountriesByNumeric(t *testing.T) {
 		if countryCodeOut != c {
 			t.Errorf("Test ByNumeric() err, want %v, got %v", c, countryCodeOut)
 		}
+	}
+	countryCodeBRA := ByNumeric(986)
+	if countryCodeBRA != Brazil {
+		t.Errorf("Test ByNumeric() err, want %v, got %v", Brazil, countryCodeBRA)
 	}
 	countryCodeOut := ByNumeric(100500999)
 	if countryCodeOut != Unknown {
