@@ -174,7 +174,8 @@ const (
 	CurrencyPesoUruguayo                   CurrencyCode = 858
 	CurrencyUzbekistanSum                  CurrencyCode = 860
 	CurrencyVatu                           CurrencyCode = 548
-	CurrencyBolivar                        CurrencyCode = 937
+	CurrencyBolivar                        CurrencyCode = 928
+	CurrencyBolivarDeprecated              CurrencyCode = 937
 	CurrencyDong                           CurrencyCode = 704
 	CurrencyYemeniRial                     CurrencyCode = 886
 	CurrencyZambianKwacha                  CurrencyCode = 967
@@ -347,6 +348,7 @@ const (
 	CurrencyUYU CurrencyCode = 858
 	CurrencyUZS CurrencyCode = 860
 	CurrencyVUV CurrencyCode = 548
+	CurrencyVES CurrencyCode = 928
 	CurrencyVEF CurrencyCode = 937
 	CurrencyVND CurrencyCode = 704
 	CurrencyYER CurrencyCode = 886
