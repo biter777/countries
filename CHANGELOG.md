@@ -1,5 +1,8 @@
 # countries changelog
 
+## v1.6.0 (2023-01-16)
+Add and fix codes (VES, 986), add counties names
+
 ## v1.5.5 (2022-11-06)
 
 * BYR/BYN updated, updates codes, fix module name error, fix some linters warnings
