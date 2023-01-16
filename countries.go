@@ -214,7 +214,7 @@ func (c CountryCode) String() string { //nolint:gocyclo
 	case 74:
 		return "Bouvet Island"
 	case 76:
-		return "Brazil"
+		return "Brazil (deprecated)"
 	case 86:
 		return "British Indian Ocean Territory"
 	case 96:
@@ -661,6 +661,8 @@ func (c CountryCode) String() string { //nolint:gocyclo
 		return "South Sudan"
 	case 900:
 		return "Kosovo"
+	case 986:
+		return "Brazil"
 	case 998:
 		return "None"
 	case 999:
@@ -750,7 +752,7 @@ func (c CountryCode) StringRus() string { //nolint:gocyclo
 	case 74:
 		return "остров Буве"
 	case 76:
-		return "Бразилия"
+		return "Бразилия (устарело)"
 	case 86:
 		return "Британские территории Индийского океана"
 	case 96:
@@ -1197,6 +1199,8 @@ func (c CountryCode) StringRus() string { //nolint:gocyclo
 		return "Южный Судан"
 	case 900:
 		return "Косово"
+	case 986:
+		return "Бразилия"
 	case None:
 		return "Отсутствует"
 	case International:
@@ -1285,7 +1289,7 @@ func (c CountryCode) Alpha2() string { //nolint:gocyclo
 		return "BW"
 	case 74:
 		return "BV"
-	case 76:
+	case 76, 986:
 		return "BR"
 	case 86:
 		return "IO"
@@ -1821,7 +1825,7 @@ func (c CountryCode) Alpha3() string { //nolint:gocyclo
 		return "BWA"
 	case 74:
 		return "BVT"
-	case 76:
+	case 76, 986:
 		return "BRA"
 	case 86:
 		return "IOT"
@@ -4991,7 +4995,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return BIH
 	case "BW", "BWA", "BOTSWANA", "BOTSWANNA", "BOTSVANA", "BOTSVANNA":
 		return BWA
-	case "BR", "BRA", "BRAZIL", "BRAZILIA", "BRAZILIAN", "BRASILIEN":
+	case "BR", "BRA", "BRAZIL", "BRAZILIA", "BRAZILIYA", "BRAZILIAN", "BRASILIEN":
 		return BRA
 	case "IO", "IOT", "BRITISHINDIANOCEANTERRITORY", "BRITISHINDIANTERRITORY", "BRITISCHESTERRITORIUM", "BRITISCHESTERRITORIUMIMINDISCHENOZEAN":
 		return IOT
@@ -5383,7 +5387,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return CAF
 	case "TD", "TCD", "CHAD", "TSCHAD":
 		return TCD
-	case "CZ", "CZE",  "CZECHIA", "CZECHIYA", "CZECHREPUBLIC", "REPUBLICOFCZECH", "CZECH", "TSCHECHIEN", "CHEHIA", "CHEHIYA":
+	case "CZ", "CZE", "CZECHIA", "CZECHIYA", "CZECHREPUBLIC", "REPUBLICOFCZECH", "CZECH", "TSCHECHIEN", "CHEHIA", "CHEHIYA":
 		return CZE
 	case "CL", "CHL", "RCH", "CHILE":
 		return CHL
