@@ -61,7 +61,8 @@ fmt.Printf("Country ITU-T E.164 call code: %v\n", countryJapan.CallCodes()) // +
 fmt.Printf("Country ccTLD domain: %v\n", countryJapan.Domain())             // .jp
 fmt.Printf("Country UN M.49 region name: %v\n", countryJapan.Region())      // Asia
 fmt.Printf("Country UN M.49 region code: %d\n", countryJapan.Region())      // 142
-fmt.Printf("Country emoji/flag: %v\n\n", countryJapan.Emoji())              // 🇯🇵
+fmt.Printf("Country emoji/flag: %v\n", countryJapan.Emoji())                // 🇯🇵
+fmt.Printf("Country Subdivisions: %v\n", countryJapan.Subdivisions())       // Hokkaido Aomori Iwate Miyagi Akita Yamagata Fukushima Ibaraki Tochigi Gunma Saitama Chiba Tokyo Kanagawa Niigata Toyama Ishikawa Fukui Yamanashi Nagano Gifu Shizuoka Aichi Mie Shiga Kyoto Osaka Hyogo Nara Wakayama Tottori Shimane Okayama Hiroshima Yamaguchi Tokushima Kagawa Ehime Kochi Fukuoka Saga Nagasaki Kumamoto Oita Miyazaki Kagoshima Okinawa
 
 currencyJapan := countryJapan.Currency()
 fmt.Printf("Country ISO-4217 Currency name in english: %v\n", currencyJapan)           // Yen
@@ -87,6 +88,7 @@ fmt.Printf("Country emoji/flag: %v\n", japanInfo.Emoji)                         
 fmt.Printf("Country ISO-4217 Currency name in english: %v\n", japanInfo.Currency)    // Yen
 fmt.Printf("Country ISO-4217 Currency digit code: %d\n", japanInfo.Currency)         // 392
 fmt.Printf("Country ISO-4217 Currency Alpha code: %v\n", japanInfo.Currency.Alpha()) // JPY
+fmt.Printf("Country Subdivisions: %v\n", japanInfo.Subdivisions)                     // Hokkaido Aomori Iwate Miyagi Akita Yamagata Fukushima Ibaraki Tochigi Gunma Saitama Chiba Tokyo Kanagawa Niigata Toyama Ishikawa Fukui Yamanashi Nagano Gifu Shizuoka Aichi Mie Shiga Kyoto Osaka Hyogo Nara Wakayama Tottori Shimane Okayama Hiroshima Yamaguchi Tokushima Kagawa Ehime Kochi Fukuoka Saga Nagasaki Kumamoto Oita Miyazaki Kagoshima Okinawa
 
 // Detection usage
 // Detect by name
