@@ -30,7 +30,7 @@ func (c CurrencyCode) Emoji() string {
 	case CurrencyGBP:
 		return "💷"
 	}
-	return c.Alpha() 
+	return c.Alpha()
 }
 
 // TotalCurrencies - returns number of currencies in the package, countries.TotalCurrencies() == len(countries.AllCurrencies()) but static value for performance
@@ -44,6 +44,7 @@ func (c CurrencyCode) Type() string {
 }
 
 // String - implements fmt.Stringer, returns a english name of currency
+//
 //nolint:gocyclo
 func (c CurrencyCode) String() string { //nolint:gocyclo
 	switch c {
@@ -392,6 +393,7 @@ func (c CurrencyCode) String() string { //nolint:gocyclo
 }
 
 // Alpha - returns a default ISO 3166-1 Alpha (3 chars) code of currency
+//
 //nolint:gocyclo
 func (c CurrencyCode) Alpha() string { //nolint:gocyclo
 	switch c {
@@ -745,6 +747,7 @@ func (c CurrencyCode) IsValid() bool {
 }
 
 // Countries - returns a country codes of currency using
+//
 //nolint:gocyclo
 func (c CurrencyCode) Countries() []CountryCode { //nolint:gocyclo
 	switch c {
@@ -1262,6 +1265,7 @@ func AllCurrencies() []CurrencyCode {
 }
 
 // Digits - returns a number of digits used for each currency
+//
 //nolint:gocyclo
 func (c CurrencyCode) Digits() int { //nolint:gocyclo
 	switch c {
@@ -1665,6 +1669,7 @@ func AllCurrenciesInfo() []*Currency {
 }
 
 // CurrencyCodeByName - return CurrencyCode by currencyCode Alpha name, case-insensitive, example: currencyUSD := CurrencyCodeByName("usd") OR currencyUSD := CurrencyCodeByName("USD")
+//
 //nolint:gocyclo
 func CurrencyCodeByName(name string) CurrencyCode { //nolint:gocyclo
 	switch textPrepare(name) {

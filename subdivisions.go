@@ -22,6 +22,7 @@ func (_ SubdivisionCode) Type() string {
 }
 
 // String - implements fmt.Stringer, returns an english name of the subdivision
+//
 //nolint:cyclop,funlen,gocyclo
 func (s SubdivisionCode) String() string { //nolint:cyclop,gocyclo
 	switch s {
@@ -9796,6 +9797,7 @@ func (s SubdivisionCode) String() string { //nolint:cyclop,gocyclo
 }
 
 // Country - returns a country of the subdivision
+//
 //nolint:cyclop,funlen,gocyclo
 func (s SubdivisionCode) Country() CountryCode {
 	switch s {
@@ -19585,6 +19587,7 @@ func (s SubdivisionCode) IsValid() bool {
 }
 
 // SubdivisionType - returns the subdivision type code
+//
 //nolint:cyclop,funlen,gocyclo
 func (s SubdivisionCode) SubdivisionType() SubdivisionTypeCode {
 	switch s {
@@ -29385,6 +29388,7 @@ func (s *Subdivision) Scan(src interface{}) error {
 }
 
 // AllSubdivisions - return all subdivision codes
+//
 //nolint:funlen
 func AllSubdivisions() []SubdivisionCode {
 	return []SubdivisionCode{
