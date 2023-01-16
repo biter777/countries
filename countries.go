@@ -2589,7 +2589,7 @@ func (c CountryCode) Currency() CurrencyCode { //nolint:gocyclo
 	case HUN:
 		return CurrencyHUF
 	case VEN:
-		return CurrencyVEF
+		return CurrencyVES
 	case VGB:
 		return CurrencyUSD
 	case VIR:
