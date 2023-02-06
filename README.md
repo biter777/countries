@@ -2,7 +2,17 @@
 
 Countries - ISO 3166 (ISO3166-1, ISO3166, Digit, Alpha-2, Alpha-3) countries codes with subdivisions and names (on eng and rus), ISO4217 currency designators, ITU-T E.164 IDD calling phone codes, countries capitals, UN M.49 regions codes, IANA ccTLD countries domains, IOC/NOC and FIFA codes, **VERY VERY FAST**, NO maps[], NO slices[], NO init() funcs, NO external links/files/data, NO interface{}, NO specific dependencies, compatible with Databases/JSON/BSON/GOB/XML/CSV, Emoji countries flags and currencies support, UN M.49, FIFA codes, full support ISO 3166-1, ISO 3166-2, ISO 4217, ITU-T E.164, Unicode CLDR and IANA ccTLD standarts.
 
-Full support ISO 3166-1, ISO 3166-2, ISO 4217, ITU-T E.164, Unicode CLDR and IANA ccTLD standarts!
+**Supported standarts:**
+   - ISO 3166-1
+   - ISO 3166-2
+   - ISO 4217
+   - ITU-T E.164
+   - Unicode CLDR 
+   - IANA ccTLD
+   - UN M.49
+   - IOC
+   - NOC
+   - FIFA
 
 [![GoDev](https://img.shields.io/badge/godev-reference-5b77b3)](https://pkg.go.dev/github.com/biter777/countries?tab=doc)
 [![GoAwesome](https://img.shields.io/badge/awesome%20go-reference-5b77b3)](https://awesome-go.com/utilities/)
