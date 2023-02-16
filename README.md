@@ -7,12 +7,14 @@ Countries - ISO 3166 (ISO3166-1, ISO3166, Digit, Alpha-2, Alpha-3) countries cod
    - ISO 3166-2
    - ISO 4217
    - ITU-T E.164
-   - Unicode CLDR 
    - IANA ccTLD
    - UN M.49
    - IOC
    - NOC
    - FIFA
+   - Unicode CLDR 
+   - Unicode Emoticons Flags
+   - Unicode Emoticons Currencies 
 
 [![GoDev](https://img.shields.io/badge/godev-reference-5b77b3)](https://pkg.go.dev/github.com/biter777/countries?tab=doc)
 [![GoAwesome](https://img.shields.io/badge/awesome%20go-reference-5b77b3)](https://awesome-go.com/utilities/)
