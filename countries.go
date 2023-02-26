@@ -5342,11 +5342,11 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return SLE
 	case "TJ", "TJK", "TAJIKISTAN", "TADJIKISTAN", "TADSCHIKISTAN":
 		return TJK
-	case "TW", "TWN", "TPE", "TAIWAN", "PROVINCEOFCHINA", "PROVINCECHINA":
+	case "TW", "TWN", "TPE", "TAIWAN", "TAIWANIAN", "PROVINCEOFCHINA", "PROVINCECHINA":
 		return TWN
-	case "TH", "THA", "THAILAND", "TAILAND", "THAI":
+	case "TH", "THA", "THAILAND", "TAILAND", "THAI", "THAYLAND", "TAYLAND":
 		return THA
-	case "TZ", "TZA", "EAT", "EAZ", "TANZANIA", "TANZANIYA", "TANSANIA", "TANZANIAUNITEDREPUBLICOF", "TANZANIAUNITEDREPUBLIC":
+	case "TZ", "TZA", "EAT", "EAZ", "TANZANIA", "TANZANIYA", "TANSANIA", "TANZANIAUNITEDREPUBLICOF", "TANZANIAUNITEDREPUBLIC", "REPUBLICOFTANZANIA", "TANZANIAREPUBLIC":
 		return TZA
 	case "TG", "TGO", "TOGO":
 		return TGO
@@ -5362,7 +5362,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return TUN
 	case "TM", "TKM", "TMN", "TURKMENISTAN", "TURKMENISTON", "TURKMENI", "TURKMENIA", "TURKMENIYA":
 		return TKM
-	case "TR", "TUR", "TURKEY", "TURCIA", "TURKISH", "TÜRKEI", "TUERKEI":
+	case "TR", "TUR", "TURKEY", "TURCIA", "TURKISH", "TÜRKEI", "TUERKEI", "TÜRKIYE", "REPUBLICOFTÜRKIYE", "TÜRKIYEREPUBLICOF", "TÜRKIYEREPUBLIC", "REPUBLICTÜRKIYE":
 		return TUR
 	case "UG", "UGA", "EAU", "UGANDA":
 		return UGA
@@ -5370,7 +5370,7 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return UZB
 	case "UA", "UKR", "UKRAINE", "UKRAINA": //nolint
 		return UKR
-	case "UY", "URY", "URUGUAY":
+	case "UY", "URY", "URUGUAY", "URUGWAY":
 		return URY
 	case "XW", "XWA", "WALES":
 		return XWA
@@ -5400,11 +5400,11 @@ func ByName(name string) CountryCode { //nolint:misspell,gocyclo
 		return TCD
 	case "CZ", "CZE", "CZECHIA", "CZECHIYA", "CZECHREPUBLIC", "REPUBLICOFCZECH", "CZECH", "TSCHECHIEN", "CHEHIA", "CHEHIYA":
 		return CZE
-	case "CL", "CHL", "RCH", "CHILE":
+	case "CL", "CHL", "RCH", "CHILE", "CHILI", "CHILLE":
 		return CHL
-	case "CH", "CHE", "SWITZERLAND", "SWISS", "SCHWEIZ", "SUISSE", "SVIZZERA", "SVIZRA", "HELVETIA":
+	case "CH", "CHE", "SWITZERLAND", "SWISS", "SCHWEIZ", "SUISSE", "SVIZZERA", "SVIZRA", "HELVETIA", "SHVEYCARIA", "SHVEYCARIYA":
 		return CHE
-	case "SE", "SWE", "SWEDEN", "SCHWEDEN":
+	case "SE", "SWE", "SWEDEN", "SCHWEDEN", "SHWEDEN", "SHVECIA", "SHVECIYA":
 		return SWE
 	case "XS", "XSC", "SCOTLAND", "SCHOTTLAND":
 		return XSC
