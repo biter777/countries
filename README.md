@@ -6,12 +6,13 @@ Countries - ISO 3166 (ISO3166-1, ISO3166, Digit, Alpha-2, Alpha-3) countries cod
    - ISO 3166-1
    - ISO 3166-2
    - ISO 4217
-   - ITU-T E.164
+   - ICANN
    - IANA ccTLD
-   - UN M.49
+   - ITU-T E.164
    - IOC
    - NOC
    - FIFA
+   - UN M.49
    - Unicode CLDR 
    - Unicode Emoticons Flags
    - Unicode Emoticons Currencies 
