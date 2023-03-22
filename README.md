@@ -105,14 +105,20 @@ fmt.Printf("Country ISO-4217 Currency digit code: %d\n", japanInfo.Currency)    
 fmt.Printf("Country ISO-4217 Currency Alpha code: %v\n", japanInfo.Currency.Alpha()) // JPY
 fmt.Printf("Country Subdivisions: %v\n", japanInfo.Subdivisions)                     // Hokkaido Aomori Iwate Miyagi Akita Yamagata Fukushima Ibaraki Tochigi Gunma Saitama Chiba Tokyo Kanagawa Niigata Toyama Ishikawa Fukui Yamanashi Nagano Gifu Shizuoka Aichi Mie Shiga Kyoto Osaka Hyogo Nara Wakayama Tottori Shimane Okayama Hiroshima Yamaguchi Tokushima Kagawa Ehime Kochi Fukuoka Saga Nagasaki Kumamoto Oita Miyazaki Kagoshima Okinawa
 
-// Detection usage
-// Detect by name
+// Detection/Lookup usage
+// Detect/Lookup by country name
 country := countries.ByName("angola")
 fmt.Printf("Country name in english: %v\n", country)                // Angola
 fmt.Printf("Country ISO-3166 digit code: %d\n", country)            // 24
 fmt.Printf("Country ISO-3166 Alpha-2 code: %v\n", country.Alpha2()) // AO
 fmt.Printf("Country ISO-3166 Alpha-3 code: %v\n", country.Alpha3()) // AGO
-// Detect by code/numeric
+// Detect/Lookup by country code
+country = countries.ByName("AO")
+fmt.Printf("Country name in english: %v\n", country.String())       // Angola
+fmt.Printf("Country ISO-3166 digit code: %d\n", country)            // 24
+fmt.Printf("Country ISO-3166 Alpha-2 code: %v\n", country.Alpha2()) // AO
+fmt.Printf("Country ISO-3166 Alpha-3 code: %v\n", country.Alpha3()) // AGO
+// Detect/Lookup by code/numeric
 country = countries.ByNumeric(24)
 fmt.Printf("Country name in english: %v\n", country)                // Angola
 fmt.Printf("Country ISO-3166 digit code: %d\n", country)            // 24
