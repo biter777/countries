@@ -217,7 +217,7 @@ func (c CountryCode) String() string { //nolint:gocyclo
 	case 74:
 		return "Bouvet Island"
 	case 76:
-		return "Brazil (deprecated)"
+		return "Brazil"
 	case 86:
 		return "British Indian Ocean Territory"
 	case 96:
@@ -664,8 +664,6 @@ func (c CountryCode) String() string { //nolint:gocyclo
 		return "South Sudan"
 	case 900:
 		return "Kosovo"
-	case 986:
-		return "Brazil"
 	case 998:
 		return "None"
 	case 999:
@@ -756,7 +754,7 @@ func (c CountryCode) StringRus() string { //nolint:gocyclo
 	case 74:
 		return "остров Буве"
 	case 76:
-		return "Бразилия (устарело)"
+		return "Бразилия"
 	case 86:
 		return "Британские территории Индийского океана"
 	case 96:
@@ -1203,8 +1201,6 @@ func (c CountryCode) StringRus() string { //nolint:gocyclo
 		return "Южный Судан"
 	case 900:
 		return "Косово"
-	case 986:
-		return "Бразилия"
 	case None:
 		return "Отсутствует"
 	case International:
@@ -1294,7 +1290,7 @@ func (c CountryCode) Alpha2() string { //nolint:gocyclo
 		return "BW"
 	case 74:
 		return "BV"
-	case 76, 986:
+	case 76:
 		return "BR"
 	case 86:
 		return "IO"
@@ -1831,7 +1827,7 @@ func (c CountryCode) Alpha3() string { //nolint:gocyclo
 		return "BWA"
 	case 74:
 		return "BVT"
-	case 76, 986:
+	case 76:
 		return "BRA"
 	case 86:
 		return "IOT"

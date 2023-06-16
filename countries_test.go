@@ -55,7 +55,7 @@ func TestCountriesByNumeric(t *testing.T) {
 			t.Errorf("Test ByNumeric() err, want %v, got %v", c, countryCodeOut)
 		}
 	}
-	countryCodeBRA := ByNumeric(986)
+	countryCodeBRA := ByNumeric(76)
 	if countryCodeBRA != Brazil {
 		t.Errorf("Test ByNumeric() err, want %v, got %v", Brazil, countryCodeBRA)
 	}

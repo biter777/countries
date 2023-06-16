@@ -71,10 +71,8 @@ const (
 	Botswana CountryCode = 72
 	// Bouvet                                 CountryCode = 74
 	Bouvet CountryCode = 74
-	// Brazil (deprecated)                    CountryCode = 76
-	BrazilDeprecated CountryCode = 76
-	// Brazil                                 CountryCode = 986
-	Brazil CountryCode = 986
+	// Brazil                                 CountryCode = 76
+	Brazil CountryCode = 76
 	// BritishIndianOceanTerritory            CountryCode = 86
 	BritishIndianOceanTerritory CountryCode = 86
 	// Brunei                                 CountryCode = 96
@@ -621,8 +619,8 @@ const (
 	BW CountryCode = 72
 	// BV CountryCode = 74
 	BV CountryCode = 74
-	// BR CountryCode = 986
-	BR CountryCode = 986
+	// BR CountryCode = 76
+	BR CountryCode = 76
 	// IO CountryCode = 86
 	IO CountryCode = 86
 	// BN CountryCode = 96
@@ -1133,8 +1131,8 @@ const (
 	BWA CountryCode = 72
 	// BVT CountryCode = 74
 	BVT CountryCode = 74
-	// BRA CountryCode = 986
-	BRA CountryCode = 986
+	// BRA CountryCode = 76
+	BRA CountryCode = 76
 	// IOT CountryCode = 86
 	IOT CountryCode = 86
 	// BRN CountryCode = 96
