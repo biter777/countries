@@ -45,7 +45,6 @@ Countries - ISO 639, ISO 3166 (ISO3166-1, ISO3166, Digit, Alpha-2, Alpha-3) coun
 [![Semaphore Status](https://biter777.semaphoreci.com/badges/countries.svg?style=shields)](https://biter777.semaphoreci.com/projects/countries)
 [![Build Status](https://github.com/biter777/countries/actions/workflows/go.yml/badge.svg)](https://github.com/biter777/countries/actions/workflows/go.yml)
 [![CLDR](https://img.shields.io/badge/deepsource-passing-brightgreen)]([https://cldr.unicode.org/](https://deepsource.io/gh/biter777/countries))
-[![Codeship Status](https://codeship.com/projects/ac73624a-4038-4f6a-9f0c-ab48d3c2c6d0/status?branch=master)](https://app.codeship.com/projects/ac73624a-4038-4f6a-9f0c-ab48d3c2c6d0)
 <a href="//www.dmca.com/Protection/Status.aspx?ID=7a019cc5-ec73-464b-9707-4b33726f348f" title="DMCA.com Protection Status" class="dmca-badge"> <img src ="https://img.shields.io/badge/DMCA-protected-brightgreen" alt="DMCA.com Protection Status" /></a>
 [![Dependencies Free](https://img.shields.io/badge/dependencies-free-brightgreen)](https://pkg.go.dev/github.com/biter777/countries?tab=imports)
 [![Gluten Free](https://img.shields.io/badge/gluten-free-brightgreen)](https://www.scsglobalservices.com/services/gluten-free-certification)
