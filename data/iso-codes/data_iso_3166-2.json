@@ -1849,6 +1849,11 @@
       "type": "Division"
     },
     {
+      "code": "BD-H",
+      "name": "Mymensingh",
+      "type": "Division"
+    },
+    {
       "code": "BE-BRU",
       "name": "Bruxelles-Capitale, Région de;Brussels Hoofdstedelijk Gewest",
       "type": "Region"

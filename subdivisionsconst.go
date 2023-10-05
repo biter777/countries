@@ -706,6 +706,8 @@ const (
 	SubdivisionBDF SubdivisionCode = "BD-F"
 	// SubdivisionBDG       SubdivisionCode = "BD-G"
 	SubdivisionBDG SubdivisionCode = "BD-G"
+	// SubdivisionBDH       SubdivisionCode = "BD-H"
+	SubdivisionBDH SubdivisionCode = "BD-H"
 	// SubdivisionBEBRU     SubdivisionCode = "BE-BRU"
 	SubdivisionBEBRU SubdivisionCode = "BE-BRU"
 	// SubdivisionBEVAN     SubdivisionCode = "BE-VAN"
