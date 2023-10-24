@@ -263,7 +263,7 @@ func (c CountryCode) String() string { //nolint:gocyclo
 	case 188:
 		return "Costa Rica"
 	case 384:
-		return "Cote d`Ivoire" // Ivory Coast
+		return "Cote d'Ivoire" // Ivory Coast
 	case 191:
 		return "Croatia"
 	case 192:
@@ -381,13 +381,13 @@ func (c CountryCode) String() string { //nolint:gocyclo
 	case 410:
 		return "Republic of Korea"
 	case 408:
-		return "Democratic People`s Republic of Korea"
+		return "Democratic People's Republic of Korea"
 	case 414:
 		return "Kuwait"
 	case 417:
 		return "Kyrgyzstan"
 	case 418:
-		return "Lao People`s Democratic Republic"
+		return "Lao People's Democratic Republic"
 	case 428:
 		return "Latvia"
 	case 422:
@@ -800,7 +800,7 @@ func (c CountryCode) StringRus() string { //nolint:gocyclo
 	case 188:
 		return "Коста Рика"
 	case 384:
-		return "Кот-д`Ивуар"
+		return "Кот-д'Ивуар"
 	case 191:
 		return "Хорватия"
 	case 192:
