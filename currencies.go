@@ -848,7 +848,7 @@ func (c CurrencyCode) Countries() []CountryCode { //nolint:gocyclo
 	case CurrencyETB:
 		return []CountryCode{ETH}
 	case CurrencyEUR:
-		return []CountryCode{AND, AUT, BEL, CYP, EST, FIN, FRA, GUF, ATF, DEU, GRC, GLP, VAT, IRL, ITA, LVA, LTU, LUX, MLT, MTQ, MYT, MCO, MNE, NLD, PRT, REU, BLM, MAF, SPM, SMR, SVK, SVN, ESP, ALA}
+		return []CountryCode{AND, AUT, BEL, CYP, EST, FIN, FRA, GUF, ATF, DEU, GRC, GLP, VAT, IRL, ITA, LVA, LTU, LUX, MLT, MTQ, MYT, MCO, MNE, NLD, PRT, REU, BLM, MAF, SPM, SMR, SVK, SVN, ESP, ALA, HRV}
 	case CurrencyFKP:
 		return []CountryCode{FLK}
 	case CurrencyFJD:
