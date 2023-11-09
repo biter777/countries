@@ -718,6 +718,8 @@ func (s SubdivisionCode) String() string { //nolint:cyclop,gocyclo
 		return "Rangpur"
 	case SubdivisionBDG:
 		return "Sylhet"
+	case SubdivisionBDH:
+		return "Mymensingh"
 	case SubdivisionBEBRU:
 		return "Bruxelles-Capitale, Région de;Brussels Hoofdstedelijk Gewest"
 	case SubdivisionBEVAN:
@@ -10492,6 +10494,8 @@ func (s SubdivisionCode) Country() CountryCode {
 	case SubdivisionBDF:
 		return BD
 	case SubdivisionBDG:
+		return BD
+	case SubdivisionBDH:
 		return BD
 	case SubdivisionBEBRU:
 		return BE
@@ -20283,6 +20287,8 @@ func (s SubdivisionCode) SubdivisionType() SubdivisionTypeCode {
 		return SubdivisionTypeDivision
 	case SubdivisionBDG:
 		return SubdivisionTypeDivision
+	case SubdivisionBDH:
+		return SubdivisionTypeDivision
 	case SubdivisionBEBRU:
 		return SubdivisionTypeRegion
 	case SubdivisionBEVAN:
@@ -29739,6 +29745,7 @@ func AllSubdivisions() []SubdivisionCode {
 		SubdivisionBDE,
 		SubdivisionBDF,
 		SubdivisionBDG,
+		SubdivisionBDH,
 		SubdivisionBEBRU,
 		SubdivisionBEVAN,
 		SubdivisionBEVBR,
