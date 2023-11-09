@@ -71,6 +71,7 @@ fmt.Printf("Country ISO-3166 Alpha-2 code: %v\n", countryJapan.Alpha2())    // J
 fmt.Printf("Country ISO-3166 Alpha-3 code: %v\n", countryJapan.Alpha3())    // JPN
 fmt.Printf("Country IOC/NOC code: %v\n", countryJapan.IOC())                // JPN
 fmt.Printf("Country FIFA code: %v\n", countryJapan.FIFA())                  // JPN
+fmt.Printf("Country FIPS code: %v\n", countryJapan.FIPS())                  // JA
 fmt.Printf("Country Capital: %v\n", countryJapan.Capital())                 // Tokyo
 fmt.Printf("Country ITU-T E.164 call code: %v\n", countryJapan.CallCodes()) // +81
 fmt.Printf("Country ccTLD domain: %v\n", countryJapan.Domain())             // .jp
@@ -94,6 +95,7 @@ fmt.Printf("Country ISO-3166 Alpha-2 code: %v\n", japanInfo.Alpha2)             
 fmt.Printf("Country ISO-3166 Alpha-3 code: %v\n", japanInfo.Alpha3)                  // JPN
 fmt.Printf("Country IOC/NOC code: %v\n", japanInfo.IOC)                              // JPN
 fmt.Printf("Country FIFA code: %v\n", japanInfo.FIFA)                                // JPN
+fmt.Printf("Country FIPS code: %v\n", japanInfo.FIPS)                                // JPN
 fmt.Printf("Country Capital: %v\n", japanInfo.Capital)                               // Tokyo
 fmt.Printf("Country ITU-T E.164 call code: %v\n", japanInfo.CallCodes)               // +81
 fmt.Printf("Country ccTLD domain: %v\n", japanInfo.Domain)                           // .jp
