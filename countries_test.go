@@ -881,6 +881,15 @@ func TestCountriesFIFA(t *testing.T) {
 }
 
 //nolint:gocyclo
+func TestCountriesFIPS(t *testing.T) {
+	for _, c := range getAllCountries(t) {
+		if (c.FIPS() == "" || c.FIPS() == UnknownMsg) && c != Unknown {
+			t.Errorf("Test All.FIPS() err")
+		}
+	}
+}
+
+//nolint:gocyclo
 func TestCountriesIOC(t *testing.T) {
 	for _, c := range getAllCountries(t) {
 		if (c.IOC() == "" || c.IOC() == UnknownMsg) && c != Unknown {
