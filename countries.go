@@ -3499,7 +3499,7 @@ func (c CountryCode) Currency() CurrencyCode { //nolint:gocyclo
 	case ATF:
 		return CurrencyEUR
 	case HRV:
-		return CurrencyHRK
+		return CurrencyEUR
 	case CAF:
 		return CurrencyXAF
 	case TCD:

@@ -230,6 +230,7 @@ const (
 	CurrencyCDF CurrencyCode = 976
 	CurrencyNZD CurrencyCode = 554
 	CurrencyCRC CurrencyCode = 188
+	// Deprecated: Croatian Kuna is no longer in circulation, use CurrencyEUR instead.
 	CurrencyHRK CurrencyCode = 191
 	CurrencyCUC CurrencyCode = 931
 	CurrencyCUP CurrencyCode = 192
