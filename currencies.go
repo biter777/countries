@@ -1498,7 +1498,7 @@ func (c CurrencyCode) Digits() int { //nolint:gocyclo
 	case CurrencyOMR:
 		return 3
 	case CurrencyPKR:
-		return 0
+		return 2
 	case CurrencyPAB:
 		return 2
 	case CurrencyPGK:
