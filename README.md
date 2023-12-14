@@ -25,7 +25,6 @@ Countries - ISO 639, ISO 3166 (ISO3166-1, ISO3166, Digit, Alpha-2, Alpha-3) coun
 [![Coder](https://img.shields.io/badge/coder-reference-5b77b3)](https://coder.social/biter777/countries)
 [![Documentation Status](https://readthedocs.org/projects/countries/badge/?version=latest)](https://countries.readthedocs.io/en/latest/?badge=latest)
 [![DOI](https://zenodo.org/badge/182808313.svg)](https://zenodo.org/badge/latestdoi/182808313)
-[![GolangCI](https://lift.sonatype.com/api/badge/github.com/biter777/countries)](https://lift.sonatype.com/results/github.com/biter777/countries)
 [![codeclimate](https://codeclimate.com/github/biter777/countries/badges/gpa.svg)](https://codeclimate.com/github/biter777/countries)
 [![GolangCI](https://golangci.com/badges/github.com/biter777/countries.svg?style=flat)](https://golangci.com/r/github.com/biter777/countries)
 [![GoReport](https://goreportcard.com/badge/github.com/biter777/countries)](https://goreportcard.com/report/github.com/biter777/countries)
