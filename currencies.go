@@ -1528,7 +1528,7 @@ func (c CurrencyCode) Digits() int { //nolint:gocyclo
 	case CurrencySAR:
 		return 2
 	case CurrencyRSD:
-		return 0
+		return 2
 	case CurrencySCR:
 		return 2
 	case CurrencySLL:
