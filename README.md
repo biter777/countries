@@ -40,7 +40,6 @@ Countries - ISO 639, ISO 3166 (ISO3166-1, ISO3166, Digit, Alpha-2, Alpha-3) coun
 [![M49](https://img.shields.io/badge/powered%20by-UN%20M49-brightgreen)](https://unstats.un.org/unsd/methodology/m49/)
 [![CLDR](https://img.shields.io/badge/powered%20by-CLDR-brightgreen)](https://cldr.unicode.org/)
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-brightgreen.svg)](https://opensource.org/licenses/BSD-2-Clause)
-[![Build Status](https://travis-ci.org/biter777/countries.svg?branch=master)](https://travis-ci.org/biter777/countries)
 [![Build status](https://ci.appveyor.com/api/projects/status/t9lpor9o8tpacpmr/branch/master?svg=true)](https://ci.appveyor.com/project/biter777/countries/branch/master)
 [![Semaphore Status](https://biter777.semaphoreci.com/badges/countries.svg?style=shields)](https://biter777.semaphoreci.com/projects/countries)
 [![Build Status](https://github.com/biter777/countries/actions/workflows/go.yml/badge.svg)](https://github.com/biter777/countries/actions/workflows/go.yml)
