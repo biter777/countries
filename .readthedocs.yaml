@@ -17,7 +17,7 @@ build:
 sphinx:
   configuration: docs/conf.py
   # You can configure Sphinx to use a different builder, for instance use the dirhtml builder for simpler URLs
-  builder: "dirhtml"
+  # builder: "dirhtml"
   # Fail on all warnings to avoid broken references
   # fail_on_warning: true
 
