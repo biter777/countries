@@ -34318,5 +34318,5 @@ func SubdivisionsByCountryCode(c CountryCode) []SubdivisionCode {
 
 // TotalSubdivisions - returns number of subdivisions in the package
 func TotalSubdivisions() int {
-	return 4884
+	return 4885
 }
