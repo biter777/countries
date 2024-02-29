@@ -1,0 +1,261 @@
+### General information
+
+## Authoring
+
+# Displayed site name
+site_name: Material for MkDocs setup and reference
+# ?
+site_author: Flag Hunter
+# Site description (overridden by page descriptions)
+site_description: Quick reference page that helps setting up  Material for MkDocs and using advanced markdown functionnalities
+# Site URL needed by the social plugin
+site_url: https://FlagHuner01.github.io/mkdocs-yml/
+# Copyright notice in footer
+copyright: Copyright &copy; Flag Hunter
+
+## Git
+
+# Git repository
+repo_url: https://github.com/FlagHunter01/mkdocs-yml
+# Name of the repository
+repo_name: FlagHunter01/mkdocs-yml
+# Enables page modification
+edit_uri: edit/main/docs
+
+
+### Site layout
+
+nav:
+  - Home: index.md
+
+
+
+### Theme customization
+
+theme:
+  # Enable Material theme
+  name: material
+
+  # Font options
+  font: 
+    text: Roboto
+    code: Roboto Mono
+  
+  # Language selection.
+  # For multiple languages, create multiple projects and link them with the language selector
+  language: en
+
+  # Logo as an image
+  #logo: assets/logo.png
+  # logo as an icon
+  # Find 'em here: https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/#search
+  icon:
+    logo: material/rocket
+
+  # Favicon can be set as an image
+  #favicon:
+
+  ## Color palette
+  palette:
+
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default 
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+      #primary:
+      #accent:
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+      #primary:
+      #accent:
+  
+  features:
+    ## Site navigation
+
+    # Single Page Application
+    - navigation.instant
+    # Automatic anchor update in URL
+    - navigation.tracking
+    # Tabs in the top menu
+    - navigation.tabs
+    # Breadcrumbs at the top of pages
+    - navigation.path
+    # Option to make overview pages for subfolders
+    # This page must be subfoler/index.md
+    - navigation.indexes
+    # Sidebar following / opening as you read
+    - toc.follow
+    # Back-to-top button
+    - navigation.top
+    # Previous/Next links in footer
+    - navigation.footer
+
+    ## Site search
+
+    # Auto completion
+    - search.suggest
+    # Match highlight
+    - search.highlight
+
+    ## Announcement bars
+
+    # Option to mark the announcement as read
+    - announce.dismiss
+
+    ## Git page info
+    
+    # Button for page edition
+    - content.action.edit
+
+    ## Code
+
+    # Copy code
+    - content.code.copy
+    # Line selection
+    - content.code.select
+    # Add annotations to code
+    - content.code.annotate
+
+    ## Content tabs
+
+    # Linked content tabs
+    - content.tabs.link
+
+    ## Tooltips
+    - content.tooltips  
+
+
+
+
+
+
+### Plugins
+plugins:
+  # Downloads everything localy
+  #- privacy
+  # Search bar
+  - search
+  # Social cards and image formating
+  - social:
+      cards_layout: default/variant
+  # Blog. 
+  # Setup info here: https://squidfunk.github.io/mkdocs-material/setup/setting-up-a-blog/#setting-up-a-blog
+  #- blog
+  # Creation and modofication dates
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: timeago
+      fallback_to_build_date: true
+  # GutHub contributors
+  - git-committers:
+      repository: FlagHunter01/material-yml
+      branch: main
+  # Loading optimization
+  #- optimize
+  # Make search work offline and other offline ajustments
+  #- offline
+  # Formatting persists in titles
+  #- typeset
+  # Image zoom
+  - glightbox
+
+
+
+### Advanced markdown
+
+
+
+markdown_extensions:
+
+  ## Table of contents
+
+  - toc:
+      permalink: ⚓︎
+      permalink_title: Link to this specific section
+
+  ## Admonitions
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+
+  ## Annotations and grids
+
+  - attr_list
+  - md_in_html
+
+  ## Code blocks
+
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+
+  ## Content tabs
+
+  - pymdownx.tabbed:
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+
+  ## Tables
+
+  - tables
+
+  ## Footnotes
+
+  - footnotes
+
+  ## Emojis
+
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+  ## Formatting
+
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+
+  ## Lists
+
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+  ## Tooltips
+  - abbr
+
+
+
+
+### Random stuff
+extra:
+  # Overriding the URL of the logo button
+  #homepage: 
+  # Links to social networks
+  #social:
+    #- icon: 
+      #link:
+      #name:
+  # Page status
+  status:
+    new: New
+    deprecated: Deprecated
