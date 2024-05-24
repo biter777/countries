@@ -115,8 +115,8 @@ const (
 	Comoros CountryCode = 174
 	// Congo                                  CountryCode = 178
 	Congo CountryCode = 178
-	// CongoDemocracticRepublic               CountryCode = 180
-	CongoDemocracticRepublic CountryCode = 180
+	// CongoDemocraticRepublic                CountryCode = 180
+	CongoDemocraticRepublic CountryCode = 180
 	// CookIslands                            CountryCode = 184
 	CookIslands CountryCode = 184
 	// CostaRica                              CountryCode = 188
@@ -203,8 +203,8 @@ const (
 	Guyana CountryCode = 328
 	// Haiti                                  CountryCode = 332
 	Haiti CountryCode = 332
-	// HeardIslandandMcDonaldIslands          CountryCode = 334
-	HeardIslandandMcDonaldIslands CountryCode = 334
+	// HeardIslandAndMcDonaldIslands          CountryCode = 334
+	HeardIslandAndMcDonaldIslands CountryCode = 334
 	// Honduras                               CountryCode = 340
 	Honduras CountryCode = 340
 	// HongKong                               CountryCode = 344
