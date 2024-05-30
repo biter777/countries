@@ -1129,7 +1129,7 @@ func (c CountryCode) StringRus() string { //nolint:gocyclo
 	case 795:
 		return "Туркменистан"
 	case 796:
-		return "острова Туркс и Кайкос"
+		return "острова Теркс и Кайкос"
 	case 798:
 		return "Тувалу"
 	case 800:
