@@ -117,6 +117,8 @@ const (
 	Congo CountryCode = 178
 	// CongoDemocraticRepublic                CountryCode = 180
 	CongoDemocraticRepublic CountryCode = 180
+	// CongoDemocracticRepublic - deprecated
+	CongoDemocracticRepublic CountryCode = CongoDemocraticRepublic
 	// CookIslands                            CountryCode = 184
 	CookIslands CountryCode = 184
 	// CostaRica                              CountryCode = 188
@@ -205,6 +207,8 @@ const (
 	Haiti CountryCode = 332
 	// HeardIslandAndMcDonaldIslands          CountryCode = 334
 	HeardIslandAndMcDonaldIslands CountryCode = 334
+	// HeardIslandandMcDonaldIslands - deprecated
+	HeardIslandandMcDonaldIslands CountryCode = HeardIslandAndMcDonaldIslands
 	// Honduras                               CountryCode = 340
 	Honduras CountryCode = 340
 	// HongKong                               CountryCode = 344
